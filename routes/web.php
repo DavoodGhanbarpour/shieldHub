@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login.login');
 });
+
+Route::middleware('auth')->name('auth.')->group(function(){
+    include_once __DIR__.'sections'.DIRECTORY_SEPARATOR."auth.php";
+});
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
+    include_once __DIR__.'sections'.DIRECTORY_SEPARATOR."admin.php";
+});
+
+Route::middleware('auth')->prefix('customer')->name('customer.')->group(function(){
+    include_once __DIR__.'sections'.DIRECTORY_SEPARATOR."customer.php";
+});
