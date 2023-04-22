@@ -10,11 +10,12 @@ Customers in other hand, have there own panel which can sign in and copy links o
 
 #### Requirement & Platform
 
-- ##### Back-End
+- ##### Back-end
    - Laravel v10.8.0
    - PHP v8.2.3
 - ##### Front-end
    - Tabler v1.0.0 ( Beta 5 )
+   
 
 
 #### Installation
