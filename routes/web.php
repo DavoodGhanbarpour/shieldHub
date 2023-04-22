@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+    die('working on it');
 });
 
 Route::name('auth.')->group(function(){
