@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AuthenticateRequest;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function authenticate(AuthenticateRequest $request)
     {
-        return view('login.login');
+        dd($request->all());
     }
 }
