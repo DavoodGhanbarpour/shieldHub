@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa-IR">
-  
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,22 +10,22 @@
   <meta name="author" content="" />
   <title>داشبورد | صفحه اصلی</title>
     <!-- Favicon icon-->
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
     <!-- Google font-->
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com/"> -->
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet"> -->
     <!-- Iconly icon css-->
-    <link rel="stylesheet" href="../../assets/css/vendors/iconly.css">
+    <link rel="stylesheet" href="{{asset('css/vendors/iconly.css')}}">
     <!-- App css-->
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/style-rtl.css" />
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style-rtl.css')}}" />
 </head>
 
 <body class="" dir="rtl">
-  <main class="page-wrapper">    
+  <main class="page-wrapper">
     <!-- Page Header start-->
     <header class="sticky top-0 z-[4]">
       <div class="page-header">
@@ -83,7 +83,7 @@
           <!-- Message dropdown end-->
           <li class="relative dropdown">
             <div class="flex items-center gap-4 sm:w-auto lg:gap-3">
-              <img class="w-10 h-10 rounded object-cover md:w-[39px] md:h-[39px] md:min-w-[39px] sm:min-w-[27px] sm:w-[27px] sm:h-[27px]" src="../../assets/images/user_image.svg" alt="user image">
+              <img class="w-10 h-10 rounded object-cover md:w-[39px] md:h-[39px] md:min-w-[39px] sm:min-w-[27px] sm:w-[27px] sm:h-[27px]" src="{{asset('images/user_image.svg')}}" alt="user image">
               <div class="md:hidden w-[128px]">
                 <h6 class="text-xs font-medium">کاربر سیستم</h6><span class="text-2xs text-gray-500">ادمین</span>
               </div>
@@ -107,17 +107,17 @@
       </div>
     </header>
     <!-- Page Header end -->
-    <div class="page-body-wrapper">    
+    <div class="page-body-wrapper">
       <!-- Page sidebar start -->
       <aside class="page-sidebar">
         <div class="logo-wrapper">
-          <a href="index.html">
-            <img class="logo-full" src="../../assets/images/logo/logo.svg" alt="logo">
-            <img class="mx-auto logo-icon" src="../../assets/images/logo/logo-1.svg" alt="logo">
+          <a href="">
+            <img class="logo-full" src="{{asset('images/logo/logo.svg')}}" alt="logo">
+            <img class="mx-auto logo-icon" src="{{asset('images/logo/logo-1.svg')}}" alt="logo">
           </a>
           <button class="sidebar-close-icon"><i class="stroke-white w-24px h-[24px]" data-feather="x"></i></button>
         </div>
-        <nav class="sidebar-main"> 
+        <nav class="sidebar-main">
           <ul class="sidebar-links">
             <li class="sidebar-list">
               <a class="sidebar-link sidebar-title" href="javascript:void(0)">
@@ -131,7 +131,7 @@
         </nav>
       </aside>
       <!-- Page sidebar end -->
-      <div class="page-body grid-cols-4">                
+      <div class="page-body grid-cols-4">
         <div class="page-title">
           <div class="grid grid-cols-2 md:gap-3 sm:gap-1 items-center">
             <div class="flex flex-col items-start gap-y-[4px] md:col-span-2">
@@ -140,9 +140,9 @@
             </div>
             <div class="ml-auto md:col-span-2 md:ml-0">
               <nav class="w-full text-primary">
-                <ol class="items-center flex breadcrumb"> 
+                <ol class="items-center flex breadcrumb">
                   <li>
-                    <a class="h-7 flex items-center justify-center relative w-[30px]" href="index.html"> 
+                    <a class="h-7 flex items-center justify-center relative w-[30px]" href="index.html">
                       <div class="icbu leading-none">
                         <span class="iconlyBulk-Home text-base"></span>
                       </div>
@@ -157,10 +157,10 @@
             </div>
           </div>
         </div>
-        <!-- <div class="grid grid-cols-12 gap-card"> 
+        <!-- <div class="grid grid-cols-12 gap-card">
           <div class="card col-span-3 3xl:col-span-6 sm:col-span-12">
-            <div class="card-body">  
-               
+            <div class="card-body">
+
             </div>
           </div>
         </div> -->
@@ -180,13 +180,13 @@
         </div>
         <div class="py-[4px] dark:bg-mode-200">
           <div class="px-[15px] py-7  h-[calc(100vh_-_124px)] overflow-auto ">
-            <ul class="flex flex-col gap-7 mode-event">  
+            <ul class="flex flex-col gap-7 mode-event">
               <li>
                 <div>
                   <h5 class="leading-none text-dark text-xs font-medium">Template Mode</h5><span class="leading-none text-gray-500 text-2xs">Choose template mode dark & light</span>
                 </div>
                 <div class="mt-2">
-                  <ul class="flex items-center gap-3 flex-wrap"> 
+                  <ul class="flex items-center gap-3 flex-wrap">
                     <li class="relative">
                       <input class="peer absolute opacity-0 invisible" checked id="light-checked" type="radio" name="mode"><i class="stroke-primary z-[10] transition-all scale-0 opacity-0 absolute peer-checked:opacity-100 peer-checked:scale-100 top-2 right-2 w-4 h-4" data-feather="check-circle"></i>
                       <label class="mode-theme-light shadow-md border border-light overflow-hidden rounded-5 block" for="light-checked"> <img class="w-[90px] object-cover" src="../../assets/images/customizer/light.png" alt="light"></label>
@@ -208,7 +208,7 @@
                       <input class="peer absolute opacity-0 invisible" checked id="ltr-checked" type="radio" name="dir"><i class="stroke-primary z-[10] transition-all scale-0 opacity-0 absolute peer-checked:opacity-100 peer-checked:scale-100 top-2 right-2 w-4 h-4" data-feather="check-circle"></i>
                       <label class="layout-ltr shadow-md border border-light overflow-hidden rounded-5 block" for="ltr-checked"> <img class="w-[90px] object-cover" src="../../assets/images/customizer/ltr.png" alt="ltr"></label>
                     </li>
-                    <li class="relative"> 
+                    <li class="relative">
                       <input class="peer absolute opacity-0 invisible" id="rtl-checked" type="radio" name="dir"><i class="stroke-white z-[10] transition-all scale-0 opacity-0 absolute peer-checked:opacity-100 peer-checked:scale-100 top-2 right-2 w-4 h-4" data-feather="check-circle"></i>
                       <label class="layout-rtl shadow-md border border-light overflow-hidden rounded-5 block" for="rtl-checked"> <img class="w-[90px] object-cover" src="../../assets/images/customizer/rtl.png" alt="rtl"></label>
                     </li>
@@ -225,7 +225,7 @@
                       <input class="peer absolute opacity-0 invisible" checked id="full-sidebar" type="radio" name="sidebar-type"><i class="stroke-primary z-[10] transition-all scale-0 opacity-0 absolute peer-checked:opacity-100 peer-checked:scale-100 top-2 right-2 w-4 h-4" data-feather="check-circle"></i>
                       <label class="sidebar-full shadow-md border border-light overflow-hidden rounded-5 block" for="full-sidebar"> <img class="w-[90px] object-cover" src="../../assets/images/customizer/full-sidebar.png" alt="full sidebar"></label>
                     </li>
-                    <li class="relative"> 
+                    <li class="relative">
                       <input class="peer absolute opacity-0 invisible" id="icon-sidebar" type="radio" name="sidebar-type"><i class="stroke-primary z-[10] transition-all scale-0 opacity-0 absolute peer-checked:opacity-100 peer-checked:scale-100 top-2 right-2 w-4 h-4" data-feather="check-circle"></i>
                       <label class="sidebar-icon shadow-md border border-light overflow-hidden rounded-5 block" for="icon-sidebar"> <img class="w-[90px] object-cover" src="../../assets/images/customizer/icon-sidebar.png" alt="icon sidebar"></label>
                     </li>
@@ -233,7 +233,7 @@
                 </div>
               </li>
               <li>
-                <div class="flex items-center justify-between"> 
+                <div class="flex items-center justify-between">
                   <label class="leading-none text-dark text-xs font-medium" for="monochrome">Monochrome Mode</label>
                   <input class="monochrome toggle toggle-primary" id="monochrome" name="monochrome" type="checkbox">
                 </div>
@@ -241,19 +241,19 @@
             </ul>
           </div>
         </div>
-        <div class="flex items-center gap-2 p-[15px] border-t border-light dark:bg-primaryLight"> 
+        <div class="flex items-center gap-2 p-[15px] border-t border-light dark:bg-primaryLight">
           <button class="btn btn-ghost reset-customizer flex-1">Reset  </button><a class="btn btn-primary text-white flex-1" href="https://1.envato.market/2rG9E7">Buy Now</a>
         </div>
       </div>
     </div>
   </div> -->
-  
-  <script src="../../assets/js/helper.js"></script>
-  <script src="../../assets/js/sidebar.js"></script>
+
+  <script src="{{asset('js/helper.js')}}"></script>
+  <script src="{{asset('js/sidebar.js')}}"></script>
   <!-- Template Customizer ///   -->
-  <script src="../../assets/js/customizer.js"> </script>
+  <script src="{{asset('js/customizer.js')}}"> </script>
   <!-- custom script   -->
-  <script src="../../assets/js/script.js">  </script>
+  <script src="{{asset('js/script.js')}}">  </script>
 </body>
 
 </html>
