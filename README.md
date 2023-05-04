@@ -14,7 +14,8 @@ Customers in other hand, have there own panel which can sign in and copy links o
    - Laravel v10.8.0
    - PHP v8.2.3
 - ##### Front-end
-   - Tabler v1.0.0 ( Beta 5 )
+   - Roxo panel ( Tailwind )
+  
    
 
 
@@ -26,7 +27,7 @@ coming soon!
 - [ ] Admins login
 - [ ] Customers login
 - [ ] Customers panel
-- [ ] Installation ( with one command )
+- [x] Installation ( with one command )
 - [ ] Customers management
 - [ ] Configs management
 - [ ] Servers management
