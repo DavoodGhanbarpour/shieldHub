@@ -33,7 +33,6 @@ class MakeSuperUser extends Command
         $this->checkIfUserExistBefore($email);
         $user       = User::create([
             'name' => 'test',
-            'family' => 'test',
             'email' => $email,
             'password' => Hash::make($password)
         ]);

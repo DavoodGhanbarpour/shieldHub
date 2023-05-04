@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa-IR">
+<html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -75,16 +75,16 @@
                                     <div class="form-control col-span-1">
                                         <label class="label cursor-pointer p-0 flex items-center gap-2 justify-start">
                                             <input class="checkbox-sm checkbox checkbox-accent" type="checkbox"
-                                                   checked="checked"/>
+                                                   checked="checked" name="remember" value="1"/>
                                             <span class="label-text text-dark 3sm:text-2xs">Remember me</span>
                                         </label>
                                     </div>
-                                    <div class="form-control col-span-1 text-end">
-                                        <a class="text-xs text-gray-500 hover:text-primary 3sm:text-2xs"
-                                           href="forgot-password.html">
-                                            Forget password ?
-                                        </a>
-                                    </div>
+{{--                                    <div class="form-control col-span-1 text-end">--}}
+{{--                                        <a class="text-xs text-gray-500 hover:text-primary 3sm:text-2xs"--}}
+{{--                                           href="forgot-password.html">--}}
+{{--                                            Forget password ?--}}
+{{--                                        </a>--}}
+{{--                                    </div>--}}
                                     <div class="col-span-2">
                                         <button class="w-full btn btn-primary">Login</button>
                                     </div>
