@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function authenticate(AuthenticateRequest $request)
+    public function authenticate(AuthenticateRequest $request): RedirectResponse
     {
         $remember = $request->get('remember') ?? false;
 
-        if (Auth::attempt($request->validated(),$remember)) {
+        if (Auth::attempt($request->validated(), $remember)) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }
@@ -23,7 +24,7 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
