@@ -31,26 +31,31 @@ class Installation extends Command
         $bar = $this->output->createProgressBar(2);
         $bar->start();
 
+        $this->wait();
         $this->makeMigration();
         $bar->advance();
 
-        $this->makeDefaultUser();
+        $this->wait();
+        $credential = $this->makeDefaultUser();
         $bar->advance();
 
         $bar->finish();
 
         $this->newLine();
         $this->info('Installed successfully!');
+        $this->table(['Email', 'Password'], [[
+            'Email' => $credential['email'],
+            'Password' => $credential['password'],
+        ]]);
     }
 
 
-    private function makeMigration()
+    private function makeMigration() : void
     {
         Artisan::call('migrate');
-        $this->wait();
     }
 
-    private function makeDefaultUser()
+    private function makeDefaultUser() : array
     {
         $email = 'test@test.com';
         $password = 'password';
@@ -62,17 +67,10 @@ class Installation extends Command
                 'password' => Hash::make($password)
             ]);
         }
-        $this->newLine();
-        $this->table(
-            ['Email', 'Password'],
-            [
-                [
-                    'Email' => $email,
-                    'Password' => $password,
-                ]
-            ]
-        );
-        $this->wait();
+        return [
+            'email' => $email,
+            'password' => $password
+        ];
     }
 
     private function checkIfUserExistBefore($email): bool
