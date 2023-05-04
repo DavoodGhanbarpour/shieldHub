@@ -28,19 +28,19 @@ class Reinstallation extends Command
     {
         $choice = $this->choice(
             'This action will delete database forever, are you sure?',
-            ['Yes!', 'No'],
-            null,
+            ['yes', 'no'],
+            1,
             null,
             false
         );
-        if( $choice == 'No' )
+        if( $choice == 'no' )
             die;
 
         $bar = $this->output->createProgressBar(2);
         $bar->start();
-        Artisan::call('db:wipe');
+        $this->call('db:wipe');
         $bar->advance();
-        Artisan::call('app:install');
+        $this->call('app:install');
         $bar->advance();
         $bar->finish();
 

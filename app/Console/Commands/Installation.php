@@ -28,14 +28,15 @@ class Installation extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2);
+        $bar = $this->output->createProgressBar(3);
         $bar->start();
 
-        $this->wait();
+        $this->setConfigs();
+        $bar->advance();
+
         $this->makeMigration();
         $bar->advance();
 
-        $this->wait();
         $credential = $this->makeDefaultUser();
         $bar->advance();
 
@@ -49,10 +50,22 @@ class Installation extends Command
         ]]);
     }
 
-
-    private function makeMigration() : void
+    private function setConfigs(): void
     {
-        Artisan::call('migrate');
+
+        $source = base_path(). DIRECTORY_SEPARATOR . ".env.example";
+        $destination = base_path(). DIRECTORY_SEPARATOR . ".env";
+        if( !file_exists($destination) ){
+            copy($source,$destination);
+        }
+        if( !env('APP_KEY') ){
+            Artisan::call('key:generate');
+        }
+    }
+
+    private function makeMigration()
+    {
+        $this->call('migrate');
     }
 
     private function makeDefaultUser() : array
