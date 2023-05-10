@@ -14,17 +14,32 @@ Customers in other hand, have there own panel which can sign in and copy links o
    - Laravel v10.8.0
    - PHP v8.2.3
 - ##### Front-end
-   - Roxo panel ( Tailwind )
+   - Tailwind
   
    
 
 
 #### Installation
-coming soon!
+1. Clone the repo
+2. 
+   ```sh
+   cd project-name
+   ```
+3. Install Composer packages
+   ```sh
+   composer install
+   ```
+4. Run following aritsan command
+    ```php
+    php artisan app:install
+    php artisan serve
+   ```
+5. Now if everything works fine, you should see the website at http://127.0.0.1:8000
 
 ### ToDo
 
-- [ ] Admins login
+- [X] Admins login
+- [ ] Admins panel
 - [ ] Customers login
 - [ ] Customers panel
 - [x] Installation ( with one command )
