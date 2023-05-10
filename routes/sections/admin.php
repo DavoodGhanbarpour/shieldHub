@@ -2,4 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/dashboard','admin.dashboard')->name('dashboard');
+Route::get('/dashboard',function(){
+    die('we lack view here');
+})->name('dashboard');
