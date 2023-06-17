@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     //TODO
-    return redirect()->route('login');
+    return redirect()->route('auth.login');
 });
 
 Route::name('auth.')->group(function(){
