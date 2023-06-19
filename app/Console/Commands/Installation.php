@@ -53,12 +53,12 @@ class Installation extends Command
     private function setConfigs(): void
     {
 
-        $source = base_path(). DIRECTORY_SEPARATOR . ".env.example";
-        $destination = base_path(). DIRECTORY_SEPARATOR . ".env";
-        if( !file_exists($destination) ){
-            copy($source,$destination);
+        $source = base_path().DIRECTORY_SEPARATOR.'.env.example';
+        $destination = base_path().DIRECTORY_SEPARATOR.'.env';
+        if (! file_exists($destination)) {
+            copy($source, $destination);
         }
-        if( !env('APP_KEY') ){
+        if (! env('APP_KEY')) {
             Artisan::call('key:generate');
         }
     }
@@ -68,21 +68,22 @@ class Installation extends Command
         $this->call('migrate');
     }
 
-    private function makeDefaultUser() : array
+    private function makeDefaultUser(): array
     {
         $email = 'test@test.com';
         $password = 'password';
 
-        if (!$this->checkIfUserExistBefore($email)) {
+        if (! $this->checkIfUserExistBefore($email)) {
             User::create([
                 'name' => 'test',
                 'email' => $email,
-                'password' => Hash::make($password)
+                'password' => Hash::make($password),
             ]);
         }
+
         return [
             'email' => $email,
-            'password' => $password
+            'password' => $password,
         ];
     }
 
@@ -91,10 +92,12 @@ class Installation extends Command
         if (User::where('email', $email)->first()) {
             return true;
         }
+
         return false;
     }
 
-    private function wait(){
+    private function wait()
+    {
         sleep(1);
     }
 }

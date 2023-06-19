@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 
 class Reinstallation extends Command
 {
@@ -33,8 +32,9 @@ class Reinstallation extends Command
             null,
             false
         );
-        if( $choice == 'no' )
-            die;
+        if ($choice == 'no') {
+            exit;
+        }
 
         $bar = $this->output->createProgressBar(2);
         $bar->start();

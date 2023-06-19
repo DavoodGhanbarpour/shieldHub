@@ -23,6 +23,6 @@ class Alert extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.alert',['type' => $this->type]);
+        return view('components.alert', ['type' => $this->type]);
     }
 }

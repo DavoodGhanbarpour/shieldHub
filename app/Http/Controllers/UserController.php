@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection( User::all() );
+        return UserResource::collection(User::all());
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return UserResource::make( User::findOrFail($id) );
+        return UserResource::make(User::findOrFail($id));
     }
 
     /**

@@ -169,7 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        \App\Providers\FacadeServiceProvider::class
+        \App\Providers\FacadeServiceProvider::class,
     ])->toArray(),
 
     /*

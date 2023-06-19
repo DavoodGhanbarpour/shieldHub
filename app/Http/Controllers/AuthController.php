@@ -15,6 +15,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->validated(), $remember)) {
             $request->session()->regenerate();
+
             return redirect()->route('admin.dashboard');
         }
         // TODO need a way to return a global format
@@ -23,12 +24,12 @@ class AuthController extends Controller
         ]);
     }
 
-
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('auth.login');
     }
 }
