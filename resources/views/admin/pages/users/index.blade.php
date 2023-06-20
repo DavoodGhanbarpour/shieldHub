@@ -19,7 +19,7 @@
   <div class="card">
     <div class="card-body">
       <div id="table-default" class="table-responsive">
-        <table class="table">
+        <table class="table card-table table-vcenter text-nowrap datatable">
           <thead>
             <tr>
               <th><button class="table-sort" data-sort="sort-index">Index</button></th>
