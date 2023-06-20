@@ -7,12 +7,4 @@ Route::get('dashboard', function () {
     return view('admin.pages.home.home');
 })->name('dashboard');
 
-Route::resource('users', UserController::class, [
-    'names' => [
-        'index'     => 'users',
-        'create'    => 'userAdd',
-        'edit'      => 'userEdit',
-        'store'     => 'userStore',
-        'update'    => 'userUpdate',
-    ]
-]);
+Route::resource('users', UserController::class);

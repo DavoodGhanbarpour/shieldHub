@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{ route('admin.userStore') }}" method="POST" class="card">
+<form action="{{ route('admin.users.store') }}" method="POST" class="card">
     @csrf
 
     <div class="card-body">
