@@ -13,14 +13,14 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Name</label>
                 <div>
-                    <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="Name">
+                    <input type="text" value="{{ $user->name }}" name="name" class="form-control" aria-describedby="emailHelp" placeholder="Name">
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Email address</label>
                 <div>
-                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" value="{{ $user->email }}" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Password</label>
                 <div class="input-group input-group-flat">
-                    <input  type="password" id="password" class="form-control" name="password" placeholder="Your password" autocomplete="off">
+                    <input  type="password" id="password" class="form-control" name="password" placeholder="Your password" autocomplete="new-password">
                     <span class="input-group-text">
                         <a href="#" class="link-secondary" id="passwordDisplay" title="Show password" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -47,8 +47,8 @@
                 <label class="form-label required">Rule</label>
                 <div>
                     <select class="form-select">
-                        <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
+                        <option {{($user->rule == 'customer') ? 'selected' : ''}} value="customer">Customer</option>
+                        <option {{($user->rule == 'admin') ? 'selected' : ''}} value="admin">Admin</option>
                     </select>
                 </div>
             </div>

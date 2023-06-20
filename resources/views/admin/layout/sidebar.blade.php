@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <h1 class="navbar-brand navbar-brand-autodark">
-        <a href="./dashboard">
+        <a href="{{ route('admin.home') }}">
           <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
         </a>
       </h1>
