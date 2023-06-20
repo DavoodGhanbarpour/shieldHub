@@ -29,22 +29,24 @@
             </tr>
           </thead>
           <tbody class="table-tbody">
-            <tr>
-              <td class="sort-name">Saeed Zakarya</td>
-              <td class="sort-email">saeed@gmail.com</td>
-              <td class="sort-rule">Admin</td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="{{ route('admin.users.edit', ['user' => 1]) }}" class="btn">
-                    Edit
-                  </a>
-                  <a href="{{ route('admin.users.destroy', ['user' => 1]) }}" class="btn border-danger text-danger">
-                    Delete
-                  </a>
-                </div>
-              </td>
-            </tr>
-
+          @foreach($users as $eachUser)
+              <tr>
+                  <td class="sort-name">{{$eachUser->name}}</td>
+                  <td class="sort-email">{{$eachUser->email}}</td>
+                  <td class="sort-rule">{{$eachUser->role}}</td>
+                  <td>
+                      <div class="btn-list flex-nowrap">
+                          <a href="{{ route('admin.users.edit', ['user' => $eachUser->id]) }}" class="btn">
+                              Edit
+                          </a>
+                          <a href="{{ route('admin.users.destroy', ['user' => $eachUser->id]) }}"
+                             class="btn border-danger text-danger">
+                              Delete
+                          </a>
+                      </div>
+                  </td>
+              </tr>
+          @endforeach
           </tbody>
         </table>
       </div>
