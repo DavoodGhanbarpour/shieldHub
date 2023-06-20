@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +16,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->validated(), $remember)) {
             $request->session()->regenerate();
+            if( \auth()->user()->role == User::ADMIN )
+                return redirect()->route('admin.home');
 
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('customer.home');
         }
         // TODO need a way to return a global format
         return back()->withErrors([
