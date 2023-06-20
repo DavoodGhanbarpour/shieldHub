@@ -35,6 +35,8 @@
       <!-- Sidebar -->
       @include('admin.layout.sidebar')
 
+      <!-- Navbar -->
+      @include('admin.layout.navbar')
 
       <div class="page-wrapper">
         <!-- Page header -->
