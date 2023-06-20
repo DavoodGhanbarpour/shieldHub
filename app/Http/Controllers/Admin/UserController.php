@@ -15,8 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.user.users');
-        return UserResource::collection(User::all());
+        return view('admin.pages.users.index',[
+            'users' => UserResource::collection(User::all())
+        ]);
     }
 
     /**
@@ -24,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.user.add');
+        return view('admin.pages.users.add');
     }
 
     /**
@@ -48,7 +49,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.pages.user.edit');
+        return view('admin.pages.users.edit');
     }
 
     /**
