@@ -49,9 +49,9 @@ class User extends Authenticatable
         return $this->hasMany(Inbound::class);
     }
 
-    public function hasRole(): bool
+    public function hasRole( string $role ): bool
     {
-        return isset($this->role) && $this->role;
+        return isset($this->role) && $this->role == $role;
     }
 
     public function isAdmin(): bool
