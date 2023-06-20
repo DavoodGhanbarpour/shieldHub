@@ -3,6 +3,5 @@
 use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('dashboard', function () {
-    return view('customer.pages.home.home');
-})->name('dashboard');
+Route::view('home', 'customer.pages.home.index')->name('home');
+
