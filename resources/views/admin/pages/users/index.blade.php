@@ -22,15 +22,18 @@
         <table class="table">
           <thead>
             <tr>
+              <th><button class="table-sort" data-sort="sort-index">Index</button></th>
               <th><button class="table-sort" data-sort="sort-name">Name</button></th>
               <th><button class="table-sort" data-sort="sort-email">Email</button></th>
-              <th><button class="table-sort" data-sort="sort-rule">Rule</button></th>
+              <th><button class="table-sort" data-sort="sort-rule">Role</button></th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody class="table-tbody">
+          @php $index = 1; @endphp
           @foreach($users as $eachUser)
               <tr>
+                  <td class="sort-index">{{$index++}}</td>
                   <td class="sort-name">{{$eachUser->name}}</td>
                   <td class="sort-email">{{$eachUser->email}}</td>
                   <td class="sort-rule">{{$eachUser->role}}</td>
