@@ -77,6 +77,7 @@ class Installation extends Command
             User::create([
                 'name' => 'test',
                 'email' => $email,
+                'role'  => User::ADMIN,
                 'password' => Hash::make($password),
             ]);
         }
