@@ -1,5 +1,3 @@
-
-
 @extends('admin.layout.main')
 
 @section('title', 'Users')
@@ -7,14 +5,10 @@
 @section('actions')
   <div class="col-auto ms-auto d-print-none">
     <div class="btn-list">
-      <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+      <a href="{{ route('admin.userAdd') }}" class="btn btn-primary d-none d-sm-inline-block">
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
         New User
-      </a>
-      <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
-        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
       </a>
     </div>
   </div>
@@ -72,126 +66,6 @@
                     <div class="progress" style="width: 5rem">
                       <div class="progress-bar" style="width: 48%" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" aria-label="48% Complete">
                         <span class="visually-hidden">48% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">Wildfire</td>
-              <td class="sort-city">Kolmården  Sweden</td>
-              <td class="sort-type">RMC Twister, Wooden, Terrain</td>
-              <td class="sort-score">99,3%</td>
-              <td class="sort-date" data-date="1546016360">December 28, 2018</td>
-              <td class="sort-quantity">8</td>
-              <td class="sort-progress" data-progress="9">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">9%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 9%" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100" aria-label="9% Complete">
-                        <span class="visually-hidden">9% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">Lightning Rod</td>
-              <td class="sort-city">Dollywood, United States</td>
-              <td class="sort-type">RMC Wooden</td>
-              <td class="sort-score">99,1%</td>
-              <td class="sort-date" data-date="1604704179">November 07, 2020</td>
-              <td class="sort-quantity">104</td>
-              <td class="sort-progress" data-progress="98">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">98%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 98%" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" aria-label="98% Complete">
-                        <span class="visually-hidden">98% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">Maverick</td>
-              <td class="sort-city">Cedar Point, United States</td>
-              <td class="sort-type">Intamin Rocket, Steel</td>
-              <td class="sort-score">99,1%</td>
-              <td class="sort-date" data-date="1637669424">November 23, 2021</td>
-              <td class="sort-quantity">86</td>
-              <td class="sort-progress" data-progress="46">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">46%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 46%" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" aria-label="46% Complete">
-                        <span class="visually-hidden">46% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">El Toro</td>
-              <td class="sort-city">Six Flags Great Adventure, United States</td>
-              <td class="sort-type">Intamin Twister, Wooden</td>
-              <td class="sort-score">99,0%</td>
-              <td class="sort-date" data-date="1610586921">January 14, 2021</td>
-              <td class="sort-quantity">130</td>
-              <td class="sort-progress" data-progress="29">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">29%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 29%" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100" aria-label="29% Complete">
-                        <span class="visually-hidden">29% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">Twisted Colossus</td>
-              <td class="sort-city">Six Flags Magic Mountain, United States</td>
-              <td class="sort-type">RMC Hybrid</td>
-              <td class="sort-score">98,9%</td>
-              <td class="sort-date" data-date="1569399536">September 25, 2019</td>
-              <td class="sort-quantity">30</td>
-              <td class="sort-progress" data-progress="57">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">57%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 57%" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" aria-label="57% Complete">
-                        <span class="visually-hidden">57% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="sort-name">Eejanaika new</td>
-              <td class="sort-city">Fuji-Q Highland, Japan</td>
-              <td class="sort-type">S&S Power 4th Dimension, Steel</td>
-              <td class="sort-score">98,6%</td>
-              <td class="sort-date" data-date="1610794724">January 16, 2021</td>
-              <td class="sort-quantity">162</td>
-              <td class="sort-progress" data-progress="91">
-                <div class="row align-items-center">
-                  <div class="col-12 col-lg-auto">91%</div>
-                  <div class="col">
-                    <div class="progress" style="width: 5rem">
-                      <div class="progress-bar" style="width: 91%" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" aria-label="91% Complete">
-                        <span class="visually-hidden">91% Complete</span>
                       </div>
                     </div>
                   </div>
