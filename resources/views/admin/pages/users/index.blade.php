@@ -36,7 +36,7 @@
                   <td class="sort-index">{{$index++}}</td>
                   <td class="sort-name">{{$eachUser->name}}</td>
                   <td class="sort-email">{{$eachUser->email}}</td>
-                  <td class="sort-rule">{{$eachUser->role}}</td>
+                  <td class="sort-rule">{{ucfirst($eachUser->role)}}</td>
                   <td>
                       <div class="btn-list flex-nowrap">
                           <a href="{{ route('admin.users.edit', ['user' => $eachUser->id]) }}" class="btn">
