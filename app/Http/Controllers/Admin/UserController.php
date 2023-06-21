@@ -7,21 +7,10 @@ use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('admin.pages.users.index', [
-            'users' => UserResource::collection(User::all()),
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -37,6 +26,16 @@ class UserController extends Controller
     {
         User::create($request->validated());
         return $this->index();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('admin.pages.users.index', [
+            'users' => UserResource::collection(User::all()),
+        ]);
     }
 
     /**
@@ -63,7 +62,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, string $id)
     {
         $inputs = $request->validated();
-        if(!isset($inputs['password']))
+        if (!isset($inputs['password']))
             unset($inputs['password']);
         else
             $inputs['password'] = Hash::make($inputs['password']);
