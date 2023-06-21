@@ -8,7 +8,7 @@
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -19,49 +19,54 @@
     <link href="{{ asset('css/tabler-payments.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
+
     <style>
-      :root {
-      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-      }
-      body {
-      	font-feature-settings: "cv03", "cv04", "cv11";
-      }
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
     </style>
-  </head>
-  <body >
-    <script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
-    <div class="page">
-      <!-- Sidebar -->
-      @include('admin.layout.sidebar')
+</head>
+<body>
+<script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
+<div class="page">
+    <!-- Sidebar -->
+@include('admin.layout.sidebar')
 
-      <!-- Navbar -->
-      @include('admin.layout.navbar')
+<!-- Navbar -->
+    @include('admin.layout.navbar')
 
-      <div class="page-wrapper">
+    <div class="page-wrapper">
         <!-- Page header -->
-        @include('admin.layout.header')
-        
+    @include('admin.layout.header')
 
-        <!-- Page body -->
+
+    <!-- Page body -->
         <div class="page-body">
-          <div class="container-xl">
+            <div class="container-xl">
 
-			@yield('content')
+                @yield('content')
 
-          </div>
+            </div>
         </div>
 
         <!-- Page Footer -->
         @include('admin.layout.footer')
 
-        
-      </div>
+
     </div>
+</div>
 
-    <!-- Tabler Core -->
-    <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
-    <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+<!-- Tabler Core -->
+<script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
+<script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+<script src="{{ asset('js/toastr.min.js') }}" defer></script>
 
-  </body>
+
+</body>
 </html>

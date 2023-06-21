@@ -25,7 +25,7 @@
             </div>
 
 
-            
+
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Password</label>
                 <div class="input-group input-group-flat">
@@ -42,13 +42,13 @@
                     <button id="randomPassword" class="btn" type="button">Create Random Password</button>
                 </div>
             </div>
-            
+
             <div class="col-md-6 mb-3">
-                <label class="form-label required">Rule</label>
+                <label class="form-label required">Role</label>
                 <div>
                     <select class="form-select">
-                        <option {{($user->rule == 'customer') ? 'selected' : ''}} value="customer">Customer</option>
-                        <option {{($user->rule == 'admin') ? 'selected' : ''}} value="admin">Admin</option>
+                        <option {{($user->role->isCustomer()) ? 'selected' : ''}} value="{{\App\Models\User::CUSTOMER}}">Customer</option>
+                        <option {{($user->role->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">Admin</option>
                     </select>
                 </div>
             </div>

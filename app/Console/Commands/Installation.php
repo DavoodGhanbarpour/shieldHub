@@ -73,7 +73,7 @@ class Installation extends Command
             User::create([
                 'name' => 'test',
                 'email' => 'test@test.com',
-                'role'  => User::ADMIN,
+                'role' => User::ADMIN,
                 'password' => Hash::make($password),
             ]);
         }
@@ -82,7 +82,7 @@ class Installation extends Command
             User::create([
                 'name' => 'test2',
                 'email' => 'test2@test.com',
-                'role'  => User::CUSTOMER,
+                'role' => User::CUSTOMER,
                 'password' => Hash::make($password),
             ]);
         }
@@ -91,12 +91,12 @@ class Installation extends Command
             [
                 'Email' => 'test@test.com',
                 'Password' => $password,
-                'Role' => User::ADMIN
+                'Role' => User::ADMIN,
             ],
             [
                 'Email' => 'test2@test.com',
                 'Password' => $password,
-                'Role' => User::CUSTOMER
+                'Role' => User::CUSTOMER,
             ],
         ];
     }
