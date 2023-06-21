@@ -42,10 +42,11 @@
                           <a href="{{ route('admin.users.edit', ['user' => $eachUser->id]) }}" class="btn">
                               Edit
                           </a>
-                          <a href="{{ route('admin.users.destroy', ['user' => $eachUser->id]) }}"
-                             class="btn border-danger text-danger">
-                              Delete
-                          </a>
+                          <form action="{{ route('admin.users.destroy', ['user' => $eachUser->id]) }}" method="post">
+                              @method('delete')
+                              @csrf
+                              <Button type="submit" class="btn border-danger text-danger">Delete</Button>
+                          </form>
                       </div>
                   </td>
               </tr>

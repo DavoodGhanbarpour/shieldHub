@@ -67,7 +67,7 @@ class UserController extends Controller
             unset($inputs['password']);
         else
             $inputs['password'] = Hash::make($inputs['password']);
-        
+
         User::where('id', '=', $id)->update($inputs);
         return $this->index();
     }
@@ -77,6 +77,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        User::where('id', '=', $id)->delete();
         return $this->index();
     }
 }
