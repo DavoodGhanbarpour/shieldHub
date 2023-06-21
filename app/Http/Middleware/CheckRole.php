@@ -10,11 +10,6 @@ class CheckRole
 {
     /**
      * Handle an incoming request.
-     *
-     * @param Request $request
-     * @param Closure $next
-     * @param $role
-     * @return Response
      */
     public function handle(Request $request, Closure $next, $role): Response
     {

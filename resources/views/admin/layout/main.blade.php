@@ -21,6 +21,8 @@
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}" defer></script>
+
 
     <style>
         :root {
@@ -65,8 +67,5 @@
 <!-- Tabler Core -->
 <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
 <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
-<script src="{{ asset('js/toastr.min.js') }}" defer></script>
-
-
 </body>
 </html>

@@ -13,7 +13,9 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     const ADMIN = 'admin';
+
     const CUSTOMER = 'customer';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,7 +52,7 @@ class User extends Authenticatable
         return $this->hasMany(Inbound::class);
     }
 
-    public function hasRole( string $role ): bool
+    public function hasRole(string $role): bool
     {
         return isset($this->role) && $this->role == $role;
     }
