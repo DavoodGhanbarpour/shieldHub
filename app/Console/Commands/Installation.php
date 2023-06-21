@@ -37,17 +37,14 @@ class Installation extends Command
         $this->makeMigration();
         $bar->advance();
 
-        $credential = $this->makeDefaultUser();
+        $credential = $this->makeDefaultUsers();
         $bar->advance();
 
         $bar->finish();
 
         $this->newLine();
         $this->info('Installed successfully!');
-        $this->table(['Email', 'Password'], [[
-            'Email' => $credential['email'],
-            'Password' => $credential['password'],
-        ]]);
+        $this->table(['Email', 'Password', 'Role'], $credential);
     }
 
     private function setConfigs(): void
@@ -68,23 +65,39 @@ class Installation extends Command
         $this->call('migrate');
     }
 
-    private function makeDefaultUser(): array
+    private function makeDefaultUsers(): array
     {
-        $email = 'test@test.com';
         $password = 'password';
 
-        if (! $this->checkIfUserExistBefore($email)) {
+        if (! $this->checkIfUserExistBefore('test@test.com')) {
             User::create([
                 'name' => 'test',
-                'email' => $email,
+                'email' => 'test@test.com',
                 'role'  => User::ADMIN,
                 'password' => Hash::make($password),
             ]);
         }
 
+        if (! $this->checkIfUserExistBefore('test2@test.com')) {
+            User::create([
+                'name' => 'test2',
+                'email' => 'test2@test.com',
+                'role'  => User::CUSTOMER,
+                'password' => Hash::make($password),
+            ]);
+        }
+
         return [
-            'email' => $email,
-            'password' => $password,
+            [
+                'Email' => 'test@test.com',
+                'Password' => $password,
+                'Role' => User::ADMIN
+            ],
+            [
+                'Email' => 'test2@test.com',
+                'Password' => $password,
+                'Role' => User::CUSTOMER
+            ],
         ];
     }
 
