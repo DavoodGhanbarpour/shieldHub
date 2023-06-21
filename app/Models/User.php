@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function inbounds(): BelongsToMany
     {
-        return $this->belongsToMany(Inbound::class, 'inbound_user');
+        return $this->belongsToMany(Inbound::class, 'inbound_user')->using(InboundUser::class);
     }
 
     public function hasRole(string $role): bool

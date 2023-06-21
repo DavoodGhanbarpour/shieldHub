@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Inbound;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Inbound>
+ * @extends Factory
  */
 class InboundFactory extends Factory
 {
@@ -17,7 +18,11 @@ class InboundFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->title(),
+            'link' => fake()->text(),
+            'ip' => fake()->ipv4(),
+            'port' => fake()->numberBetween(0,65536),
+            'description' => fake()->text(),
         ];
     }
 }
