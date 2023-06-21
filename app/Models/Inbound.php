@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Inbound extends Model
 {
     use HasFactory;
 
-    public function user()
+
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo(Inbound::class);
+        return $this->belongsToMany(User::class, 'inbound_user');
     }
 }

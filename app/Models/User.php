@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -49,9 +50,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function inbounds()
+    public function inbounds(): BelongsToMany
     {
-        return $this->hasMany(Inbound::class);
+        return $this->belongsToMany(Inbound::class, 'inbound_user');
     }
 
     public function hasRole(string $role): bool
@@ -72,7 +73,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Hash::make($value),
+            set: fn(string $value) => Hash::make($value),
         );
     }
 }
