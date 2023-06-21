@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserCreateRequest;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,10 +33,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserCreateRequest $request)
+    public function store(UserStoreRequest $request)
     {
         User::create($request->validated());
-        $this->index();
+        return $this->index();
     }
 
     /**
@@ -58,9 +60,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
-        //
+        $inputs = $request->validated();
+        if(!isset($inputs['password']))
+            unset($inputs['password']);
+        else
+            $inputs['password'] = Hash::make($inputs['password']);
+        
+        User::where('id', '=', $id)->update($inputs);
+        return $this->index();
     }
 
     /**
@@ -68,6 +77,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->index();
     }
 }

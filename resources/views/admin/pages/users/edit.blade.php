@@ -1,10 +1,11 @@
 @extends('admin.layout.main')
 
-@section('title', 'Add User')
+@section('title', 'Edit User')
 
 @section('content')
 
-<form action="{{ route('admin.users.update', ['user' => 1]) }}" method="POST" class="card">
+<form action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="POST" class="card">
+    @method('put')
     @csrf
 
     <div class="card-body">
@@ -20,7 +21,7 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Email address</label>
                 <div>
-                    <input type="email" value="{{ $user->email }}" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" value="{{ $user->email }}" disabled name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
             </div>
 
@@ -46,9 +47,9 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Role</label>
                 <div>
-                    <select class="form-select">
-                        <option {{($user->role->isCustomer()) ? 'selected' : ''}} value="{{\App\Models\User::CUSTOMER}}">Customer</option>
-                        <option {{($user->role->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">Admin</option>
+                    <select class="form-select" name="role">
+                        <option {{($user->isCustomer()) ? 'selected' : ''}} value="{{\App\Models\User::CUSTOMER}}">Customer</option>
+                        <option {{($user->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">Admin</option>
                     </select>
                 </div>
             </div>
