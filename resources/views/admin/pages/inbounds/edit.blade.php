@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{ route('admin.inbounds.update', ['user' => 1]) }}" method="POST" class="card">
+<form action="{{ route('admin.inbounds.update', ['inbound' => 1]) }}" method="POST" class="card">
     @csrf
 
     <div class="card-body">
@@ -25,7 +25,7 @@
             </div>
 
 
-            
+
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Password</label>
                 <div class="input-group input-group-flat">
@@ -42,7 +42,7 @@
                     <button id="randomPassword" class="btn" type="button">Create Random Password</button>
                 </div>
             </div>
-            
+
             <div class="col-md-6 mb-3">
                 <label class="form-label required">Rule</label>
                 <div>

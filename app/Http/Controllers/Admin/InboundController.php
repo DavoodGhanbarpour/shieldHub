@@ -38,7 +38,7 @@ class InboundController extends Controller
     public function index()
     {
         return view('admin.pages.inbounds.index', [
-            'users' => InboundResource::collection(Inbound::all()),
+            'inbounds' => InboundResource::collection(Inbound::all()),
         ]);
     }
 
@@ -56,7 +56,7 @@ class InboundController extends Controller
     public function edit(string $id)
     {
         return view('admin.pages.inbounds.edit', [
-            'user' => UserResource::make(User::findOrFail($id)),
+            'inbound' => UserResource::make(Inbound::findOrFail($id)),
         ]);
     }
 
@@ -73,6 +73,7 @@ class InboundController extends Controller
      */
     public function destroy(string $id)
     {
+        Inbound::where('id', '=', $id)->delete();
         return $this->index();
     }
 }
