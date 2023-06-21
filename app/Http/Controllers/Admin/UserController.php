@@ -34,6 +34,7 @@ class UserController extends Controller
     public function store(UserCreateRequest $request)
     {
         User::create($request->validated());
+        $this->index();
     }
 
     /**

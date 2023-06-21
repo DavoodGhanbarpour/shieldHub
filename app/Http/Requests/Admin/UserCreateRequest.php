@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
@@ -21,8 +22,8 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required'],
+            'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'password' => ['required', new Password()],
             'role' => ['required', 'string'],
         ];
     }
