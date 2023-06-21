@@ -28,7 +28,7 @@ class Installation extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(3);
+        $bar = $this->output->createProgressBar(4);
         $bar->start();
 
         $this->setConfigs();
@@ -39,6 +39,10 @@ class Installation extends Command
 
         $credential = $this->makeDefaultUsers();
         $bar->advance();
+
+        $this->seedDatabase();
+        $bar->advance();
+
 
         $bar->finish();
 
@@ -63,6 +67,11 @@ class Installation extends Command
     private function makeMigration()
     {
         $this->call('migrate');
+    }
+
+    private function seedDatabase()
+    {
+        $this->call('db:seed');
     }
 
     private function makeDefaultUsers(): array
