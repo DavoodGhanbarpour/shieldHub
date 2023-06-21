@@ -5,7 +5,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-        
+
       </h1>
       <div class="navbar-nav flex-row order-md-last">
         <div class="d-none d-md-flex">
@@ -37,8 +37,8 @@
                 aria-label="Open user menu">
                 <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
                 <div class="d-none d-xl-block ps-2">
-                    <div>Paweł Kuna</div>
-                    <div class="mt-1 small text-muted">UI Designer</div>
+                    <div>{{auth()->user()->name}}</div>
+                    <div class="mt-1 small text-muted">{{ucfirst(auth()->user()->role)}}</div>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
