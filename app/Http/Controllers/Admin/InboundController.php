@@ -26,6 +26,7 @@ class InboundController extends Controller
     public function store(InboundStoreRequest $request)
     {
         InboundFacade::upsert($request->validated());
+
         return redirect()->route('admin.inbounds.index');
     }
 
@@ -63,6 +64,7 @@ class InboundController extends Controller
     public function update(InboundUpdateRequest $request, string $id)
     {
         InboundFacade::upsert($request->validated(), $id);
+
         return redirect()->route('admin.inbounds.index');
     }
 
@@ -72,6 +74,7 @@ class InboundController extends Controller
     public function destroy(string $id)
     {
         InboundFacade::delete($id);
+
         return redirect()->route('admin.inbounds.index');
     }
 }

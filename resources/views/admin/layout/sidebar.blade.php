@@ -6,7 +6,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href="{{ route('admin.home') }}">
-                <img src="{{asset('static/logo.png')}}" width="110" height="32" alt="ShieldHub" class="navbar-brand-image">
+                <img src="{{asset('static/logo_croped.png')}}" width="110" height="32" alt="ShieldHub" class="navbar-brand-image">
             </a>
         </h1>
         <div class="navbar-nav flex-row d-lg-none">
