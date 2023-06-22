@@ -14,7 +14,9 @@ class UserRepository
         }
 
         if (isset($id)) {
-            return User::where('id', '=', $id)->update($information);
+            $user = User::findOrFail($id);
+            $user->update($information);
+            return $user;
         }
 
         return User::create($information);
