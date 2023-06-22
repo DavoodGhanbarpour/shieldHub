@@ -1,7 +1,7 @@
 <header class="navbar navbar-expand-md d-print-none" data-bs-theme="dark">
     <div class="container-xl">
         <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="{{ route('admin.home') }}" class="text-decoration-none d-flex align-items-center">
+            <a href="{{ route('customer.home') }}" class="text-decoration-none d-flex align-items-center">
                 <img src="{{asset('static/logo_croped.png')}}" width="110" height="32" alt="ShieldHub" class="navbar-brand-image m-1">
                 ShieldHub
             </a>
