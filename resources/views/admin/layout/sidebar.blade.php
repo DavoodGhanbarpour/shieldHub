@@ -6,8 +6,8 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href="{{ route('admin.home') }}" class="text-decoration-none d-flex align-items-center">
-                <img src="{{asset('static/logo_croped.png')}}" width="110" height="32" alt="ShieldHub" class="navbar-brand-image m-1">
-                ShieldHub
+                <img src="{{asset('static/logo_croped.png')}}" width="110" height="32" alt="{{env('APP_NAME')}}" class="navbar-brand-image m-1">
+                {{env('APP_NAME')}}
             </a>
         </h1>
         <div class="navbar-nav flex-row d-lg-none">
