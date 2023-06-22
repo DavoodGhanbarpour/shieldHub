@@ -21,7 +21,7 @@ class InboundFactory extends Factory
             'link' => fake()->text(),
             'ip' => fake()->ipv4(),
             'port' => fake()->numberBetween(0, 65536),
-            'description' => fake()->text(10),
+            'description' => fake()->text(),
         ];
     }
 }
