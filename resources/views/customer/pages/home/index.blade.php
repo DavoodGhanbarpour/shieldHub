@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-body">
         <div id="table-default" class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap datatable">
+            <table class="table card-table table-vcenter datatable">
                 <thead>
                     <tr>
                         <th><button class="table-sort" data-sort="sort-index">Index</button></th>
