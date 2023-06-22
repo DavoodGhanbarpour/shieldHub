@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', 'Add User')
+@section('title', 'Add Inbound')
 
 @section('content')
 
