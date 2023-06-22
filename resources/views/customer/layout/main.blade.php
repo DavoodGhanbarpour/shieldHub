@@ -44,7 +44,7 @@
 
     <div class="page-wrapper">
         <!-- Page header -->
-    @include('admin.layout.header')
+    @include('customer.layout.header')
 
 
     <!-- Page body -->
@@ -57,7 +57,7 @@
         </div>
 
         <!-- Page Footer -->
-        @include('admin.layout.footer')
+        @include('customer.layout.footer')
 
 
     </div>
