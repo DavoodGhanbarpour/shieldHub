@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label">Link</label>
+                    <label class="form-label required">Link</label>
                     <div>
                         <input type="text" name="link" class="form-control" placeholder="Link">
                     </div>

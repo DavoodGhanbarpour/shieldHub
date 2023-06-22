@@ -23,7 +23,7 @@ class InboundStoreRequest extends FormRequest
             'title' => ['string', 'required'],
             'link' => ['string', 'required'],
             'ip' => ['ipv4', 'required'],
-            'port' => ['numeric', 'required', 'between,0,65535'],
+            'port' => ['numeric', 'required', 'between:0,65535'],
             'description' => ['string', 'nullable'],
         ];
     }
