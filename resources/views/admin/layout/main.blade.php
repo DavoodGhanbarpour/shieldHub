@@ -20,8 +20,8 @@
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    @stack('styles')
+
 
 
     <style>
@@ -67,6 +67,9 @@
 <!-- Tabler Core -->
 <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
 <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+@stack('scripts')
 </body>
 </html>
 @if( $errors->any() )
