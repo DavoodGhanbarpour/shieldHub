@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         UserFacade::upsert($request->validated());
 
-        return $this->index();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class UserController extends Controller
 
         UserFacade::upsert($inputs, $id);
 
-        return $this->index();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -79,6 +79,6 @@ class UserController extends Controller
     {
         UserFacade::delete($id);
 
-        return $this->index();
+        return redirect()->route('admin.users.index');
     }
 }

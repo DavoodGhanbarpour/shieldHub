@@ -26,7 +26,7 @@ class InboundController extends Controller
     {
         Inbound::create($request->validated());
 
-        return $this->index();
+        return redirect()->route('admin.inbounds.index');
     }
 
     /**
@@ -62,7 +62,7 @@ class InboundController extends Controller
      */
     public function update(InboundUpdateRequest $request, string $id)
     {
-        return $this->index();
+        return redirect()->route('admin.inbounds.index');
     }
 
     /**
@@ -72,6 +72,6 @@ class InboundController extends Controller
     {
         Inbound::where('id', '=', $id)->delete();
 
-        return $this->index();
+        return redirect()->route('admin.inbounds.index');
     }
 }
