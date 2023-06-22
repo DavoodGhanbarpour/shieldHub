@@ -13,8 +13,7 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label required">Name</label>
                     <div>
-                        <input type="text" name="name" class="form-control" aria-describedby="emailHelp"
-                               placeholder="Name">
+                        <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="Name">
                     </div>
                 </div>
 
@@ -25,7 +24,6 @@
                                placeholder="Enter email">
                     </div>
                 </div>
-
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label required">Password</label>
@@ -71,26 +69,28 @@
 
     </form>
 
-    <script>
-        $(document).on('click', '#passwordDisplay', function () {
+    @push('scripts')
+        <script>
+            $(document).on('click', '#passwordDisplay', function () {
 
-            if ($(this).hasClass('text-info')) {
-                $(this).removeClass('text-info');
-                $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
-                $('#password').attr('type', 'password');
-            } else {
-                $(this).addClass('text-info');
-                $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
-                $('#password').attr('type', 'text');
-            }
-        });
+                if ($(this).hasClass('text-info')) {
+                    $(this).removeClass('text-info');
+                    $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
+                    $('#password').attr('type', 'password');
+                } else {
+                    $(this).addClass('text-info');
+                    $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
+                    $('#password').attr('type', 'text');
+                }
+            });
 
-        $(document).on('click', '#randomPassword', function () {
+            $(document).on('click', '#randomPassword', function () {
 
-            var randomPassword = Math.random().toString(15).slice(-8);
-            $('#password').val(randomPassword);
-        });
-    </script>
+                var randomPassword = Math.random().toString(15).slice(-8);
+                $('#password').val(randomPassword);
+            });
+        </script>
+    @endpush
 
 
 @endsection
