@@ -11,29 +11,31 @@
                 <thead>
                     <tr>
                         <th><button class="table-sort" data-sort="sort-index">Index</button></th>
-                        <th><button class="table-sort" data-sort="sort-name">Name</button></th>
-                        <th><button class="table-sort" data-sort="sort-email">Email</button></th>
-                        <th><button class="table-sort" data-sort="sort-rule">Rule</button></th>
+                        <th><button class="table-sort" data-sort="sort-title">title</button></th>
+                        <th><button class="table-sort" data-sort="sort-ip">IP:PORT</button></th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-tbody">
-                    <tr>
-                        <td class="sort-index">1</td>
-                        <td class="sort-name">test</td>
-                        <td class="sort-email">test@gmail.com</td>
-                        <td class="sort-rule">Admin</td>
-                        <td>
-                            <div class="btn-list flex-nowrap">
-                                <a class="btn">
-                                    Edit
-                                </a>
-                                <a class="btn border-danger text-danger">
-                                    Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @php $index = 1 @endphp
+                    @foreach($inbounds as $eachInbound)
+                        <tr>
+                            <td class="sort-index">{{$index++}}</td>
+                            <td class="sort-title">{{$eachInbound->title}}</td>
+                            <td class="sort-ip">
+                                {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                            </td>
+                            <td>
+                                <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
+
+                                <div class="btn-list flex-nowrap">
+                                    <a class="btn border-blue text-blue inbound-copy-button" data-id="{{$eachInbound->id}}">
+                                        Copy
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
