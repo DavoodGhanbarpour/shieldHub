@@ -24,7 +24,12 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        User::create($request->validated());
+        $inputs = $request->validated();
+        if (isset($inputs['password']))
+            $inputs['password'] = Hash::make($inputs['password']);
+
+        User::create($inputs);
+
         return $this->index();
     }
 

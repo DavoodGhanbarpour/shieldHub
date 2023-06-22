@@ -70,10 +70,4 @@ class User extends Authenticatable
         return isset($this->role) && $this->role == self::CUSTOMER;
     }
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn(string $value) => Hash::make($value),
-        );
-    }
 }
