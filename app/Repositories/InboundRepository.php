@@ -2,29 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Inbound;
 
 class InboundRepository
 {
-    public function upsert(array $information, int $id = null): User
+    public function upsert(array $information, int $id = null): Inbound
     {
-        if (isset($information['password'])) {
-            $information['password'] = Hash::make($information['password']);
-        }
-
         if (isset($id)) {
-            $user = User::findOrFail($id);
-            $user->update($information);
+            $inbound = Inbound::findOrFail($id);
+            $inbound->update($information);
 
-            return $user;
+            return $inbound;
         }
 
-        return User::create($information);
+        return Inbound::create($information);
     }
 
     public function delete(int $id)
     {
-        return User::where('id', '=', $id)->delete();
+        return Inbound::where('id', '=', $id)->delete();
     }
 }
