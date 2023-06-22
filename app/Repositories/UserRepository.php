@@ -7,13 +7,22 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
-    public function register(array $informations): User
+    public function upsert(array $information, int $id = null): User
     {
-        return User::create([
-            'name' => $informations['name'],
-            'email' => $informations['email'],
-            'password' => Hash::make($informations['password']),
-        ]);
+        if (isset($information['password'])) {
+            $information['password'] = Hash::make($information['password']);
+        }
+
+        if (isset($id)) {
+            return User::where('id', '=', $id)->update($information);
+        }
+
+        return User::create($information);
+    }
+
+    public function delete(int $id)
+    {
+        return User::where('id', '=', $id)->delete();
     }
 
     public function UserShouldBeAdmin()

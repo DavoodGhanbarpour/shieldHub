@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
-use App\Http\Requests\Admin\UserStoreRequest;
-use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\InboundResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class InboundController extends Controller
 {
@@ -29,6 +25,7 @@ class InboundController extends Controller
     public function store(InboundStoreRequest $request)
     {
         Inbound::create($request->validated());
+
         return $this->index();
     }
 
@@ -74,6 +71,7 @@ class InboundController extends Controller
     public function destroy(string $id)
     {
         Inbound::where('id', '=', $id)->delete();
+
         return $this->index();
     }
 }

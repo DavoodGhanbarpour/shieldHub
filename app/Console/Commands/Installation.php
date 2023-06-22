@@ -43,7 +43,6 @@ class Installation extends Command
         $this->seedDatabase();
         $bar->advance();
 
-
         $bar->finish();
 
         $this->newLine();

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Inbound;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ class InboundFactory extends Factory
             'title' => fake()->title(),
             'link' => fake()->text(),
             'ip' => fake()->ipv4(),
-            'port' => fake()->numberBetween(0,65536),
+            'port' => fake()->numberBetween(0, 65536),
             'description' => fake()->text(10),
         ];
     }
