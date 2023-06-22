@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Customer\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('home', 'customer.pages.home.index')->name('home');
+Route::get('home', [DashboardController::class, 'index'])->name('home');
