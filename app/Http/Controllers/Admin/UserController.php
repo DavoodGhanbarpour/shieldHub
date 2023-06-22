@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,11 +24,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $inputs = $request->validated();
-        if (isset($inputs['password']))
-            $inputs['password'] = Hash::make($inputs['password']);
-
-        User::create($inputs);
+        UserFacade::upsert($request->validated());
 
         return $this->index();
     }
@@ -46,7 +42,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         return UserResource::make(User::findOrFail($id));
     }
@@ -54,7 +50,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
         return view('admin.pages.users.edit', [
             'user' => UserResource::make(User::findOrFail($id)),
@@ -64,24 +60,25 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, string $id)
+    public function update(UserUpdateRequest $request, int $id)
     {
         $inputs = $request->validated();
-        if (!isset($inputs['password']))
+        if (! isset($inputs['password'])) {
             unset($inputs['password']);
-        else
-            $inputs['password'] = Hash::make($inputs['password']);
+        }
 
-        User::where('id', '=', $id)->update($inputs);
+        UserFacade::upsert($inputs, $id);
+
         return $this->index();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        User::where('id', '=', $id)->delete();
+        UserFacade::delete($id);
+
         return $this->index();
     }
 }
