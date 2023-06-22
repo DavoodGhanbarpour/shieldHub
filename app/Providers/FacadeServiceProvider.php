@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\InboundRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +14,7 @@ class FacadeServiceProvider extends ServiceProvider
     public function register(): void
     {
         app()->singleton('UserFacade', UserRepository::class);
+        app()->singleton('InboundFacade', InboundRepository::class);
     }
 
     /**
