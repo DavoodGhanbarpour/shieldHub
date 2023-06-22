@@ -88,7 +88,7 @@
     <div class="col-md-12 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
+                <h3 class="card-title">Available Configs</h3>
             </div>
             <div class="table-responsive">
                 <table class="table card-table table-vcenter">
