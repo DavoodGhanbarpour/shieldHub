@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InboundUpdateRequest extends FormRequest
@@ -11,18 +12,22 @@ class InboundUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array
      */
     public function rules(): array
     {
         return [
-            //
+            'title' => ['string', 'required'],
+            'link' => ['string', 'required'],
+            'ip' => ['ipv4', 'required'],
+            'port' => ['numeric', 'required', 'between,0,65535'],
+            'description' => ['string', 'nullable'],
         ];
     }
 }

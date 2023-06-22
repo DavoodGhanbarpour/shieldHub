@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\InboundFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
@@ -24,8 +25,7 @@ class InboundController extends Controller
      */
     public function store(InboundStoreRequest $request)
     {
-        Inbound::create($request->validated());
-
+        InboundFacade::upsert($request->validated());
         return redirect()->route('admin.inbounds.index');
     }
 
@@ -62,6 +62,7 @@ class InboundController extends Controller
      */
     public function update(InboundUpdateRequest $request, string $id)
     {
+        InboundFacade::upsert($request->validated(), $id);
         return redirect()->route('admin.inbounds.index');
     }
 
@@ -70,8 +71,7 @@ class InboundController extends Controller
      */
     public function destroy(string $id)
     {
-        Inbound::where('id', '=', $id)->delete();
-
+        InboundFacade::delete($id);
         return redirect()->route('admin.inbounds.index');
     }
 }
