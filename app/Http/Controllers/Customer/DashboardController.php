@@ -13,8 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('customer.pages.home.index',[
-            'inbounds' => InboundResource::collection(Inbound::all()),
-            // 'inbounds' => auth()->user()->inbounds
+             'inbounds' => auth()->user()->inbounds
         ]);
     }
 }
