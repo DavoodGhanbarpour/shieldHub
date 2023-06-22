@@ -16,6 +16,7 @@ class UserRepository
         if (isset($id)) {
             $user = User::findOrFail($id);
             $user->update($information);
+
             return $user;
         }
 

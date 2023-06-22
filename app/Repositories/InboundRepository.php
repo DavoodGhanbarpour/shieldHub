@@ -16,6 +16,7 @@ class InboundRepository
         if (isset($id)) {
             $user = User::findOrFail($id);
             $user->update($information);
+
             return $user;
         }
 
@@ -26,5 +27,4 @@ class InboundRepository
     {
         return User::where('id', '=', $id)->delete();
     }
-
 }
