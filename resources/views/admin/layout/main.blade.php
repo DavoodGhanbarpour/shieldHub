@@ -70,11 +70,13 @@
 <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
+<script>
+    toastr.options = {
+        'positionClass' : "toast-bottom-right",
+    }
+</script>
 @if( $errors->any() )
     <script>
-        toastr.options = {
-            'positionClass' : "toast-bottom-right",
-        }
         toastr.error('@foreach ($errors->all() as $error)<li class="mx-3"> {{ $error }} </li> @endforeach')
     </script>
 @endif
