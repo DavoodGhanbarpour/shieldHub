@@ -24,7 +24,7 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap datatable">
+                <table class="table card-table table-vcenter datatable">
                     <thead>
                     <tr>
                         <th>
@@ -55,12 +55,14 @@
                                 {{$eachInbound->description}}
                             </td>
                             <td>
+                                <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
+
                                 <div class="btn-list flex-nowrap">
-                                    <a class="btn btn-blue">
+                                    <a class="btn border-blue text-blue inbound-copy-button" data-id="{{$eachInbound->id}}">
                                         Copy
                                     </a>
                                     <a href="{{ route('admin.inbounds.edit', ['inbound' => $eachInbound->id]) }}"
-                                       class="btn">
+                                       class="btn border-secondary text-secondary">
                                         Edit
                                     </a>
                                     <form
@@ -80,4 +82,16 @@
         </div>
     </div>
 
+
+    @push('scripts')
+        <script>
+            $(document).on( 'click', '.inbound-copy-button', function(){
+            
+                let link = $(this).closest('tr').find('.row-inbound-link').text();
+                navigator.clipboard.writeText(link);
+                toastr.success('Copied to clipboard!');
+            });
+        </script>
+    @endpush
+    
 @endsection
