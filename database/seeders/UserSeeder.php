@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->has(Inbound::factory()->count(3))
-            ->count(50)
+            ->count(10)
             ->create();
     }
 }
