@@ -35,7 +35,7 @@
                                placeholder="Your password" autocomplete="new-password">
                         <span class="input-group-text">
                         <a href="#" class="link-secondary" id="passwordDisplay" title="Show password"
-                           data-bs-toggle="tooltip">
+                            data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">
@@ -75,26 +75,28 @@
 
     </form>
 
-    <script>
-        $(document).on('click', '#passwordDisplay', function () {
+    @push('scripts')
+        <script>
+            $(document).on('click', '#passwordDisplay', function () {
 
-            if ($(this).hasClass('text-info')) {
-                $(this).removeClass('text-info');
-                $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
-                $('#password').attr('type', 'password');
-            } else {
-                $(this).addClass('text-info');
-                $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
-                $('#password').attr('type', 'text');
-            }
-        });
+                if ($(this).hasClass('text-info')) {
+                    $(this).removeClass('text-info');
+                    $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
+                    $('#password').attr('type', 'password');
+                } else {
+                    $(this).addClass('text-info');
+                    $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
+                    $('#password').attr('type', 'text');
+                }
+            });
 
-        $(document).on('click', '#randomPassword', function () {
+            $(document).on('click', '#randomPassword', function () {
 
-            var randomPassword = Math.random().toString(15).slice(-8);
-            $('#password').val(randomPassword);
-        });
-    </script>
+                var randomPassword = Math.random().toString(15).slice(-8);
+                $('#password').val(randomPassword);
+            });
+        </script>
+    @endpush
 
 
 @endsection

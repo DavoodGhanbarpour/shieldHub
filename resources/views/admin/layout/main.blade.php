@@ -19,6 +19,7 @@
     <link href="{{ asset('css/tabler-payments.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     @stack('styles')
 
