@@ -23,6 +23,7 @@
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
+    @stack('styles')
 
     <style>
         :root {
@@ -70,11 +71,14 @@
 </body>
 </html>
 
+<script>
+    toastr.options = {
+        'positionClass': "toast-bottom-right",
+    }
+</script>
 @if( $errors->any() )
     <script>
-        toastr.options = {
-            'positionClass': "toast-bottom-right",
-        }
         toastr.error('@foreach ($errors->all() as $error)<li class="mx-3"> {{ $error }} </li> @endforeach')
     </script>
 @endif
+@stack('scripts')

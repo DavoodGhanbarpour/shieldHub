@@ -43,51 +43,50 @@
                     </tr>
                     </thead>
                     <tbody class="table-tbody">
-                    @php $index = 1 @endphp
-                    @foreach($inbounds as $eachInbound)
-                        <tr>
-                            <td class="sort-index">{{$index++}}</td>
-                            <td class="sort-title">{{$eachInbound->title}}</td>
-                            <td class="sort-ip">
-                                {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
-                            </td>
-                            <td class="sort-description">
-                                {{$eachInbound->description}}
-                            </td>
-                            <td>
-                                <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
+                        @php $index = 1 @endphp
+                        @foreach($inbounds as $eachInbound)
+                            <tr>
+                                <td class="sort-index">{{$index++}}</td>
+                                <td class="sort-title">{{$eachInbound->title}}</td>
+                                <td class="sort-ip">
+                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                </td>
+                                <td class="sort-description">
+                                    {{$eachInbound->description}}
+                                </td>
+                                <td>
+                                    <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
 
-                                <div class="btn-list flex-nowrap">
-                                    <a class="btn border-blue text-blue inbound-copy-button" data-id="{{$eachInbound->id}}">
-                                        Copy
-                                    </a>
-                                    <a href="{{ route('admin.inbounds.edit', ['inbound' => $eachInbound->id]) }}"
-                                       class="btn border-secondary text-secondary">
-                                        Edit
-                                    </a>
-                                    <form
-                                        action="{{ route('admin.inbounds.destroy', ['inbound' => $eachInbound->id]) }}"
-                                        method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <Button type="submit" class="btn border-danger text-danger">Delete</Button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                    <div class="btn-list flex-nowrap">
+                                        <a class="btn border-blue text-blue inbound-copy-button" data-id="{{$eachInbound->id}}">
+                                            Copy
+                                        </a>
+                                        <a href="{{ route('admin.inbounds.edit', ['inbound' => $eachInbound->id]) }}"
+                                        class="btn border-secondary text-secondary">
+                                            Edit
+                                        </a>
+                                        <form
+                                            action="{{ route('admin.inbounds.destroy', ['inbound' => $eachInbound->id]) }}"
+                                            method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <Button type="submit" class="btn border-danger text-danger">Delete</Button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-
     @push('scripts')
         <script>
             $(document).on( 'click', '.inbound-copy-button', function(){
             
-                let link = $(this).closest('tr').find('.row-inbound-link').text();
+                let link = $(this).closest('td').find('.row-inbound-link').text();
                 navigator.clipboard.writeText(link);
                 toastr.success('Copied to clipboard!');
             });
