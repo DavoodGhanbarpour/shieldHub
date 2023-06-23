@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserInboundsResource;
@@ -37,7 +38,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.pages.users.index', [
-            'users' => UserResource::collection(User::all()),
+            'users' => UserResource::collection(User::withCount('inbounds')->get()),
         ]);
     }
 
@@ -100,8 +101,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function assignInbounds()
+    public function assignInbounds(AssignInboundsRequest $request, User $user)
     {
-
+        $user->inbounds()->sync($request->get('inbounds'));
+        return redirect()->route('admin.users.index');
     }
 }

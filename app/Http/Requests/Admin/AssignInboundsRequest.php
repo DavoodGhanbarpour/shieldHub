@@ -22,7 +22,7 @@ class AssignInboundsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'inbounds' => ['array']
+            'inbounds' => ['array', 'nullable']
         ];
     }
 }
