@@ -22,9 +22,10 @@ class AuthController extends Controller
             $user = auth()->user();
 
             if ($request->get('locale') != $user->locale) {
-                UserFacade::upsert(['locale' => $request->get('locale')], $user->id);
+                UserFacade::upsert([
+                    'locale' => $request->get('locale')
+                ], $user->id);
             }
-
             if ($user->isAdmin()) {
                 return redirect()->route('admin.home');
             }
