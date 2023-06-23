@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <p class="card-title fw-bold">{{$eachInbound->title}}</p>
                                 <hr class="p-0 m-0">
-                                <p class="card-title mb-1">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
+                                <p class="card-title my-2" dir="ltr">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
                                 <p>
                                     {{$eachInbound->description}}
                                 </p>
@@ -78,8 +78,13 @@
 
     @push('styles')
         <style>
-            .inbound-copy-button {
+            .copy-button {
                 cursor: copy;
+            }
+            .inbound-card {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
             }
         </style>
     @endpush

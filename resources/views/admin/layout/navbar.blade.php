@@ -8,7 +8,19 @@
 
         </h1>
         <div class="navbar-nav flex-row order-md-last">
-            <div class="d-none d-md-flex">
+            
+
+            <div class="d-none d-md-flex align-items-center">
+                <div class="row">
+                    <a class="w-auto px-0" href="#">
+                      <span class="flag btn flag-xs flag-country-gb" role="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="English"></span>
+                    </a>
+                    <a class="w-auto" href="#">
+                      <span class="flag btn flag-xs flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="فارسی"></span>
+                    </a>
+                </div>
+                
+                
                 <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="{{__('app.dashboard.enable_dark_mode')}}"
                    data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
