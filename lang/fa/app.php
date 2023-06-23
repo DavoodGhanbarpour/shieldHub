@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
     'login' => [
         'login_to_your_account' => 'ورود به ناحیه کاربری',
@@ -11,6 +13,8 @@ return [
         'home' => 'خانه',
         'enable_dark_mode' => 'فعال سازی حالت تاریک',
         'enable_light_mode' => 'فعال سازی حالت روشن',
+        'built_with' => 'Built with the :title theme.',
+        'rights_reserved' => 'All rights reserved.',
     ],
     'auth' => [
         'user' => 'کاربر',
@@ -24,10 +28,8 @@ return [
         'hide_password' => 'عدم گذرواژه',
         'generate_password' => 'ایجاد گذواژه',
         'roles' => [
-            'customer' => 'مشتری',
-            'customers' => 'مشتریان',
-            'admin' => 'ادمین',
-            'admins' => 'ادمین ها',
+            User::CUSTOMER => 'Customer',
+            User::ADMIN => 'Admin',
         ],
         'login' => 'ورود',
         'logout' => 'خروج',
@@ -42,6 +44,7 @@ return [
         'port' => 'Port',
     ],
     'pageComponents' => [
+        'new' => 'جدید',
         'add' => 'افزودن',
         'edit' => 'ویرایش',
         'delete' => 'حذف',
