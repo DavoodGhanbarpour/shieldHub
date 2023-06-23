@@ -45,16 +45,16 @@
                 <div class="card-body p-4">
 
                   <div class="row">
-                    <a class="w-auto px-0" href="{{ route('auth.login', [ 'en' ]) }}">
+                    <a class="w-auto px-0" href="{{ route('auth.login', [ App\Models\User::SUPPORTED_LANGUAGES['en']['key'] ]) }}">
                       <span class="flag btn flag-sm flag-country-gb" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="English"></span>
                     </a>
-                    <a class="w-auto" href="{{ route('auth.login', [ 'fa' ]) }}">
+                    <a class="w-auto" href="{{ route('auth.login', [ App\Models\User::SUPPORTED_LANGUAGES['fa']['key'] ]) }}">
                       <span class="flag btn flag-sm flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="فارسی"></span>
                     </a>
                   </div>
-
+                  
                   <h2 class="h2 text-center mb-4">{{__('app.login.login_to_your_account')}}</h2>
-                  <form action="{{route('auth.authenticate')}}" method="post" autocomplete="off" novalidate>
+                  <form action="{{route('auth.authenticate', ['locale' => config()->get('app.locale')])}}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
                       <label class="form-label">{{__('app.auth.email_address')}}</label>
