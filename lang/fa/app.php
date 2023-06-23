@@ -28,7 +28,9 @@ return [
         'generate_password' => 'ایجاد گذواژه',
         'roles' => [
             User::CUSTOMER => 'مشتری',
+            User::CUSTOMER . 's' => 'مشتریان',
             User::ADMIN => 'ادمین',
+            User::ADMIN . 's' => 'ادمین ها',
         ],
         'login' => 'ورود',
         'logout' => 'خروج',
@@ -44,6 +46,8 @@ return [
         'assign_inbounds' => 'تخصیص ورودی به :user',
         'date' => 'Date',
         'available_inbounds' => 'ورودی های موجود (کانفیگ های VPN)',
+        'in_use' => 'درحال استفاده',
+        'not_in_use' => 'بدون استفاده',
     ],
     'pageComponents' => [
         'new' => 'جدید',
