@@ -7,18 +7,23 @@
 * Copyright 2018-2023 codecalm.net Paweł Kuna
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
-<html lang="{{config()->get('app.locale')}}">
+<html dir="{{App\Models\User::SUPPORTED_LANGUAGES[config()->get('app.locale')]['dir']}}" lang="{{config()->get('app.locale')}}">
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{__('app.auth.login')}}</title>
     <!-- CSS files -->
-    <link href="{{ asset('css/tabler.min.css?1684106062') }}" rel="stylesheet"/>
+    @if (App\Models\User::SUPPORTED_LANGUAGES[config()->get('app.locale')]['dir'] == 'ltr')
+      <link href="{{ asset('css/tabler.min.css?1684106062') }}" rel="stylesheet"/>        
+    @else
+      <link href="{{ asset('css/tabler.rtl.css') }}" rel="stylesheet"/>        
+    @endif
     <link href="{{ asset('css/tabler-flags.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-payments.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <style>
       :root {
@@ -37,7 +42,17 @@
           <div class="col-lg">
             <div class="container-tight">
               <div class="card card-md">
-                <div class="card-body">
+                <div class="card-body p-4">
+
+                  <div class="row">
+                    <a class="w-auto px-0" href="{{ route('auth.login', [ 'en' ]) }}">
+                      <span class="flag btn flag-sm flag-country-gb" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="English"></span>
+                    </a>
+                    <a class="w-auto" href="{{ route('auth.login', [ 'fa' ]) }}">
+                      <span class="flag btn flag-sm flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="فارسی"></span>
+                    </a>
+                  </div>
+
                   <h2 class="h2 text-center mb-4">{{__('app.login.login_to_your_account')}}</h2>
                   <form action="{{route('auth.authenticate')}}" method="post" autocomplete="off" novalidate>
                     @csrf

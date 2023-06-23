@@ -73,11 +73,21 @@
 
     @push('scripts')
         <script>
-            $(document).on( 'click', '.inbound-copy-button', function(){
 
-                let link = $(this).closest('td').find('.row-inbound-link').text();
-                navigator.clipboard.writeText(link);
+            $(document).ready(function () {
+
+                var clipboard = new ClipboardJS('.inbound-copy-button', {
+                    text: function (trigger) {
+                        return $(trigger).closest('td').find('.row-inbound-link').text();
+                    }
+                });
+
+                clipboard.on('success', function () {
                 toastr.success('{{__('app.pageComponents.copied')}}');
+
+                }).on('error', function () {
+                    toastr.error('Can not copy to clipboard!');
+                });
             });
         </script>
     @endpush
