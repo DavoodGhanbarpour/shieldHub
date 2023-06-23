@@ -6,7 +6,6 @@ return [
     'login' => [
         'login_to_your_account' => 'ورود به ناحیه کاربری',
         'remember' => 'مرا به خاطر بسپار',
-        'your_password' => 'گذرواژه شما',
         'sign_in' => 'ورود',
     ],
     'dashboard' => [
