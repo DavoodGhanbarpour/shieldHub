@@ -18,8 +18,14 @@ class User extends Authenticatable
     const CUSTOMER = 'customer';
 
     const SUPPORTED_LANGUAGES = [
-        'en',
-        'fa',
+        'en' => [
+            'dir' => 'ltr',
+            'key' => 'en'
+        ],
+        'fa' => [
+            'dir' => 'rtl',
+            'key' => 'fa'
+        ],
     ];
 
     /**
