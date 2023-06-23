@@ -24,7 +24,7 @@ return [
         'email_address' => 'نشانی پست الکترونیک',
         'password' => 'گذرواژه',
         'show_password' => 'نمایش گذرواژه',
-        'hide_password' => 'عدم گذرواژه',
+        'hide_password' => 'عدم نمایش گذرواژه',
         'generate_password' => 'ایجاد گذواژه',
         'roles' => [
             User::CUSTOMER => 'مشتری',
