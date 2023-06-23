@@ -70,18 +70,9 @@
 <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
 <script src="{{ asset('libs/select2/select2.js') }}"></script>
 <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
-
+<x-alerts.toastr />
+@stack('scripts')
 </body>
 </html>
 
-<script>
-    toastr.options = {
-        'positionClass': "toast-bottom-right",
-    }
-</script>
-@if( $errors->any() )
-    <script>
-        toastr.error('@foreach ($errors->all() as $error)<li class="mx-3"> {{ $error }} </li> @endforeach')
-    </script>
-@endif
-@stack('scripts')
+

@@ -88,7 +88,7 @@
     <div class="col-md-12 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Available Configs</h3>
+                <h3 class="card-title">{{__('app.inbounds.available_inbounds')}}</h3>
             </div>
             <div class="table-responsive">
                 <table class="table card-table table-vcenter">
@@ -107,7 +107,7 @@
                                 <span class="d-none copy-text">{{$eachInbound->link}}</span>
                                 <div class="btn-list flex-nowrap">
                                     <a class="btn border-blue text-blue copy-button" data-id="{{$eachInbound->id}}">
-                                        Copy
+                                        {{__('app.pageComponents.copy')}}
                                     </a>
                                 </div>
                             </td>

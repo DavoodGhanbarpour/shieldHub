@@ -8,7 +8,7 @@
         </h1>
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-flex align-items-center">
-                <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
+                <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="{{__('app.dashboard.enable_dark_mode')}}"
                    data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -17,7 +17,7 @@
                         <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
                     </svg>
                 </a>
-                <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
+                <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="{{__('app.dashboard.enable_light_mode')}}"
                    data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -34,13 +34,13 @@
                    aria-label="Open user menu">
                     <span class="avatar avatar-sm" style="background-image: url({{asset('static/avatars/profile_white_outlined.png')}})"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>Paweł Kuna</div>
-                        <div class="mt-1 small text-muted">UI Designer</div>
+                        <div>{{auth()->user()->name}}</div>
+                        <div class="mt-1 small text-muted">{{__('app.auth.roles.'.auth()->user()->role)}}</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     {{-- <a href="./profile.html" class="dropdown-item">Profile</a> --}}
-                    <a href="{{ route('auth.logout') }}" class="dropdown-item">Logout</a>
+                    <a href="{{ route('auth.logout') }}" class="dropdown-item">{{__('app.auth.logout')}}</a>
                 </div>
             </div>
         </div>

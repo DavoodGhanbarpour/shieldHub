@@ -42,7 +42,8 @@ return [
         'ip' => 'IP',
         'port' => 'Port',
         'assign_inbounds' => 'Assign Inbounds to :user',
-        'date' => 'Date'
+        'date' => 'Date',
+        'available_inbounds' => 'Available Inbounds (VPN configs)',
     ],
     'pageComponents' => [
         'new' => 'New',
