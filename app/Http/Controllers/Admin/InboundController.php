@@ -35,8 +35,9 @@ class InboundController extends Controller
      */
     public function index()
     {
+        // We are using view composer instead of this
         return view('admin.pages.inbounds.index', [
-            'inbounds' => InboundResource::collection(Inbound::all()),
+//            'inbounds' => InboundResource::collection(Inbound::all()),
         ]);
     }
 
