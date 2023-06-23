@@ -8,10 +8,10 @@
         });
 
         clipboard.on('success', function () {
-            toastr.success('Copied to clipboard.');
+            toastr.success('{{__('app.pageComponents.copied')}}');
 
         }).on('error', function () {
-            toastr.error('Can not copy to clipboard!');
+            toastr.error('{{__('app.pageComponents.not_copied')}}');
         });
     });
 </script>
