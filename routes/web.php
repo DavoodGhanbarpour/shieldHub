@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::fallback(function () {
+    return abort(404);
+});
+
 Route::get('/', function () {
     //TODO
     return redirect()->route('auth.login');

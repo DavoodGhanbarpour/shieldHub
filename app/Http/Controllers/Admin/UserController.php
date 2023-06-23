@@ -82,7 +82,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-
     public function inbounds()
     {
         return view('admin.pages.users.inbounds');

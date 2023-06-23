@@ -7,7 +7,7 @@
 * Copyright 2018-2023 codecalm.net Paweł Kuna
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
-<html lang="{{auth()->user()->locale}}">
+<html lang="{{config()->get('app.locale')}}">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>

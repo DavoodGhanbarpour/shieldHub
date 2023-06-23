@@ -6,7 +6,6 @@ return [
     'login' => [
         'login_to_your_account' => 'Login to your account',
         'remember' => 'Remember me on this device',
-        'your_password' => 'Your password',
         'sign_in' => 'Sign in',
     ],
     'dashboard' => [
