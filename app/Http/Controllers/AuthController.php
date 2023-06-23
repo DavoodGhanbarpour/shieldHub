@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\UserFacade;
 use App\Http\Requests\AuthenticateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,7 +16,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->validated(), $remember)) {
             $request->session()->regenerate();
-            if (auth()->user()->isAdmin()) {
+            $user = auth()->user();
+
+            if ($request->get('locale') != $user->locale)
+                UserFacade::upsert(['locale' => $request->get('locale')], $user->id);
+
+            if ($user->isAdmin()) {
                 return redirect()->route('admin.home');
             }
 
@@ -34,6 +40,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.login',[$locale]);
+        return redirect()->route('auth.login', [$locale]);
     }
 }
