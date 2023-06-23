@@ -42,6 +42,7 @@ return [
         'ip' => 'IP',
         'port' => 'Port',
         'assign_inbounds' => 'Assign Inbounds to :user',
+        'date' => 'Date'
     ],
     'pageComponents' => [
         'new' => 'New',
@@ -55,7 +56,6 @@ return [
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
-        'date' => 'Date'
     ],
     'downloadables' => [
         'apps_for_download' => 'Apps for download'

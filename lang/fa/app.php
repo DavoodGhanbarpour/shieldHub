@@ -41,6 +41,8 @@ return [
         'title' => 'عنوان',
         'ip' => 'IP',
         'port' => 'Port',
+        'assign_inbounds' => 'Assign Inbounds to :user',
+        'date' => 'Date'
     ],
     'pageComponents' => [
         'new' => 'جدید',
