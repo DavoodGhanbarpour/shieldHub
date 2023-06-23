@@ -72,6 +72,7 @@
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script src="{{ asset('libs/select2/select2.js') }}"></script>
+<script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
 
 
 <script>

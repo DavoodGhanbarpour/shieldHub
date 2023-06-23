@@ -67,6 +67,8 @@
 <!-- Tabler Core -->
 <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
 <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+<script src="{{ asset('libs/select2/select2.js') }}"></script>
+<script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
 
 </body>
 </html>
