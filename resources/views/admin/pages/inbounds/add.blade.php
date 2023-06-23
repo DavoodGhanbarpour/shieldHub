@@ -20,18 +20,19 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.inbounds.ip') . ':' . __('app.inbounds.port')}}</label>
                     <div class="input-group input-group-flat">
-                        <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1" autocomplete="off">
+                        <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1"
+                               autocomplete="off">
                         <input type="text" class="form-control w-25 border_left" name="port" placeholder="443">
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.inbounds.date')}}</label>
                     <div>
-                        <input type="text" name="date" class="form-control datepicker" placeholder="{{__('app.inbounds.date')}}">
+                        <input type="text" name="date" class="form-control datepicker"
+                               placeholder="{{__('app.inbounds.date')}}">
                     </div>
                 </div>
-
 
 
                 <div class="col-md-12 mb-3">
@@ -44,7 +45,8 @@
                 <div class="col-md-12 mb-3">
                     <label class="form-label">{{__('app.inbounds.description')}}</label>
                     <div>
-                        <input type="text" name="description" class="form-control" placeholder="{{__('app.inbounds.description')}}">
+                        <input type="text" name="description" class="form-control"
+                               placeholder="{{__('app.inbounds.description')}}">
                     </div>
                 </div>
 

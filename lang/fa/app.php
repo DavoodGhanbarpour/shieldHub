@@ -48,6 +48,7 @@ return [
         'available_inbounds' => 'ورودی های موجود (کانفیگ های VPN)',
         'inbounds_in_use' => ':count ورودی فعال',
         'inbounds_not_in_use' => ':count ورودی غیرفعال',
+        'quota' => 'روز باقی مانده',
     ],
     'pageComponents' => [
         'new' => 'جدید',
