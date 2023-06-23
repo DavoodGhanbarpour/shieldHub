@@ -37,6 +37,12 @@
                             <button class="table-sort" data-sort="sort-ip">{{__('app.inbounds.ip').':'.__('app.inbounds.port')}}</button>
                         </th>
                         <th>
+                            <button class="table-sort" data-sort="sort-date">{{__('app.inbounds.date')}}</button>
+                        </th>
+                        <th>
+                            <button class="table-sort" data-sort="sort-date">{{__('app.inbounds.quota')}}</button>
+                        </th>
+                        <th>
                             <button class="table-sort" data-sort="sort-description">{{__('app.inbounds.description')}}</button>
                         </th>
                         <th>{{__('app.pageComponents.actions')}}</th>
@@ -50,6 +56,12 @@
                                 <td class="sort-title">{{$eachInbound->title}}</td>
                                 <td class="sort-ip">
                                     {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                </td>
+                                <td class="sort-date">
+                                    {{convertDate($eachInbound->date)}}
+                                </td>
+                                <td class="sort-quota">
+                                    {{ \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())  }}
                                 </td>
                                 <td class="sort-description">
                                     {{$eachInbound->description}}

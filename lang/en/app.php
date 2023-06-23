@@ -48,6 +48,7 @@ return [
         'available_inbounds' => 'Available Inbounds (VPN configs)',
         'inbounds_in_use' => ':count Inbounds active',
         'inbounds_not_in_use' => ':count Inbounds idle',
+        'quota' => 'Quota'
     ],
     'pageComponents' => [
         'new' => 'New',
