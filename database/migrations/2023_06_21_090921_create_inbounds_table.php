@@ -18,6 +18,7 @@ return new class extends Migration
             $table->ipAddress('ip');
             $table->integer('port');
             $table->text('description')->nullable();
+            $table->date('date');
             $table->timestamps();
         });
     }
