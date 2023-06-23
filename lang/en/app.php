@@ -55,5 +55,9 @@ return [
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
+        'date' => 'Date'
     ],
+    'downloadables' => [
+        'apps_for_download' => 'Apps for download'
+    ]
 ];
