@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AuthenticateRequest extends FormRequest
 {
@@ -23,6 +25,7 @@ class AuthenticateRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'exists:users'],
             'password' => ['required', new Password()],
+            'locale' => ['required', Rule::in(array_column(User::SUPPORTED_LANGUAGES,'key')),],
         ];
     }
 }

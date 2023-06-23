@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login/{locale?}', function (string $locale = User::SUPPORTED_LANGUAGES['en']['key']) {
-    if (! in_array($locale, array_keys(User::SUPPORTED_LANGUAGES))) {
+    if (! in_array($locale, array_column(User::SUPPORTED_LANGUAGES,'key'))) {
         return abort(404);
     }
     App::setLocale($locale);
