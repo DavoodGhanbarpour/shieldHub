@@ -54,5 +54,6 @@ return [
         'submit' => 'Submit',
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
+        'not_copied' => 'Coping to clipboard failed',
     ],
 ];

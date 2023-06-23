@@ -53,5 +53,6 @@ return [
         'submit' => 'ثبت',
         'cancel' => 'انصراف',
         'copied' => 'در کلیپبورد شما کپی شد',
+        'not_copied' => 'Coping to clipboard failed',
     ],
 ];
