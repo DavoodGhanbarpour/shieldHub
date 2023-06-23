@@ -84,13 +84,6 @@
                 setInboundStatus($(this));
             });
 
-            // $(document).on( 'click', '.inbound-copy-button', function(){
-
-            //     let link = $(this).closest('.inbound-card').find('.row-inbound-link').text();
-
-            //     navigator.clipboard.writeText(link);
-            //     toastr.success('Copied to clipboard!');
-            // });
         </script>
     @endpush
 
