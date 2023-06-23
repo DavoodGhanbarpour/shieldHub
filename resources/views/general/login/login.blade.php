@@ -50,9 +50,9 @@
                       <span class="flag btn flag-sm flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="فارسی"></span>
                     </a>
                   </div>
-                  
+
                   <h2 class="h2 text-center mb-4">{{__('app.login.login_to_your_account')}}</h2>
-                  <form action="{{route('auth.authenticate', ['locale' => config()->get('app.locale')])}}" method="post" autocomplete="off" novalidate>
+                  <form action="{{route('auth.authenticate', [config()->get('app.locale')])}}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
                       <label class="form-label">{{__('app.auth.email_address')}}</label>
@@ -102,7 +102,7 @@
     <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
     <script>
       $(document).on( 'click', '#passwordDisplay', function(){
-    
+
         if ( $(this).hasClass('text-info') ) {
           $(this).removeClass('text-info');
           $(this).attr('data-bs-original-title', '{{__('app.auth.show_password')}}').tooltip('show');

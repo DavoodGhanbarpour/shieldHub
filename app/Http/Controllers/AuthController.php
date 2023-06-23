@@ -10,21 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function authenticate(AuthenticateRequest $request): RedirectResponse
+    public function authenticate(AuthenticateRequest $request, string $locale): RedirectResponse
     {
         $remember = $request->get('remember') ?? false;
 
-        if (Auth::attempt([
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        ], $remember)) {
+        if (Auth::attempt($request->validated(), $remember)) {
             $request->session()->regenerate();
             $user = auth()->user();
 
-            if ($request->get('locale') != $user->locale) {
-                UserFacade::upsert([
-                    'locale' => $request->get('locale')
-                ], $user->id);
+            if ($locale != $user->locale) {
+                UserFacade::upsert(['locale' => $locale], $user->id);
             }
             if ($user->isAdmin()) {
                 return redirect()->route('admin.home');
