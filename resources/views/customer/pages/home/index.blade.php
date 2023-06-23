@@ -10,79 +10,45 @@
             <div class="card-header">
                 <h3 class="card-title">Social Media Traffic</h3>
             </div>
-            <table class="table card-table table-vcenter">
-                <thead>
-                    <tr>
-                        <th>Network</th>
-                        <th colspan="2">Visitors</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Instagram</td>
-                        <td>3,550</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 71.0%"></div>
+
+            <div class="card-body">
+                <div class="row row-cards">
+
+
+                    <div class="col-12">
+                        <div class="card card-sm social-media-card" role="button">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="bg-green text-white avatar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-android" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M4 10l0 6"></path>
+                                                <path d="M20 10l0 6"></path>
+                                                <path d="M7 9h10v8a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-8a5 5 0 0 1 10 0"></path>
+                                                <path d="M8 3l1 2"></path>
+                                                <path d="M16 3l-1 2"></path>
+                                                <path d="M9 18l0 3"></path>
+                                                <path d="M15 18l0 3"></path>
+                                             </svg>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="font-weight-medium">
+                                            v2rayNG
+                                        </div>
+                                        <div class="text-muted">
+                                            {{ __('app.auth.roles.admins') }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Twitter</td>
-                        <td>1,798</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 35.96%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Facebook</td>
-                        <td>1,245</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 24.9%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TikTok</td>
-                        <td>986</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 19.72%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Pinterest</td>
-                        <td>854</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 17.08%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>VK</td>
-                        <td>650</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 13.0%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Pinterest</td>
-                        <td>420</td>
-                        <td class="w-50">
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-primary" style="width: 8.4%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-12 col-lg-8">
@@ -120,6 +86,21 @@
 
 @push('scripts')
     @include('components.scripts.copy')
+@endpush
+
+@push('styles')
+    <style>
+        .social-media-card {
+            background-image: url("{{asset('static/icons/download.svg')}}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 15%;
+            transition: opacity 0s ease-in-out;
+        }
+        .social-media-card:hover {
+            opacity: 0.5; /* مقدار شفافیت SVG هنگام hover */
+        }
+    </style>
 @endpush
 
 @endsection
