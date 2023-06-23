@@ -4,99 +4,91 @@
 
 @section('content')
 
-    <form action="" method="POST" class="card">
-        @method('put')
-        @csrf
+<form action="{{ route('admin.users.assignInbounds', ['user' => 1]) }}" method="POST" class="card">
+    @method('put')
+    @csrf
 
-        <div class="card-body">
+    <div class="card-body">
+        <div class="row">
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label required">Name</label>
-                    <div>
-                        <input type="text" value="{{ $user->name }}" name="name" class="form-control"
-                               aria-describedby="emailHelp" placeholder="Name">
+
+
+            <div class="col-lg-6 col-xl-3 mb-3">
+                <div class="card card-active inbound-card"  role="button">
+                    <input class="d-none inbound-checkbox" value="1" type="checkbox" name="inbounds[1]">
+                    <span class="d-none row-inbound-link">Inbound Text</span>
+                    
+                    <div class="ribbon btn btn-primary inbound-copy-button">Copy</div>
+                    <div class="card-body">
+                        <p class="card-title fw-bold">Reality_01 | User_01</p>
+                        <hr class="p-0 m-0">
+                        <p class="card-title mb-1">192.168.1.1:443</p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, id eaque pariatur fuga eos esse ullam aliquam nihil quibusdam dolorem modi excepturi, ipsam corrupti laudantium at blanditiis totam laborum placeat.
+                        </p>
                     </div>
                 </div>
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label required">Email address</label>
-                    <div>
-                        <input type="email" value="{{ $user->email }}" disabled name="email" class="form-control"
-                               aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label required">Password</label>
-                    <div class="input-group input-group-flat">
-                        <input type="password" id="password" class="form-control" name="password"
-                               placeholder="Your password" autocomplete="new-password">
-                        <span class="input-group-text">
-                        <a href="#" class="link-secondary" id="passwordDisplay" title="Show password"
-                            data-bs-toggle="tooltip">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
-                                <path
-                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
-                            </svg>
-                        </a>
-                    </span>
-                        <button id="randomPassword" class="btn" type="button">Create Random Password</button>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label required">Role</label>
-                    <div>
-                        <select class="form-select" name="role">
-                            <option {{($user->isCustomer()) ? 'selected' : ''}} value="{{\App\Models\User::CUSTOMER}}">
-                                Customer
-                            </option>
-                            <option {{($user->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">Admin
-                            </option>
-                        </select>
+            </div>
+            
+            <div class="col-lg-6 col-xl-3 mb-3">
+                <div class="card card-active inbound-card"  role="button">
+                    <input class="d-none inbound-checkbox" value="1" type="checkbox" name="inbounds[1]">
+                    <span class="d-none row-inbound-link">Inbound Text</span>
+                    <div class="ribbon btn btn-primary inbound-copy-button">Copy</div>
+                    <div class="card-body">
+                        <p class="card-title fw-bold">Reality_01 | User_01</p>
+                        <hr class="p-0 m-0">
+                        <p class="card-title mb-1">192.168.1.1:443</p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, id eaque pariatur fuga eos esse ullam aliquam nihil quibusdam dolorem modi excepturi, ipsam corrupti laudantium at blanditiis totam laborum placeat.
+                        </p>
                     </div>
                 </div>
             </div>
 
+            
+
         </div>
+    </div>
 
-        <div class="card-footer text-end">
-            <div class="d-flex">
-                <a href="{{ url()->previous() }}" class="btn btn-link">Cancel</a>
-                <button type="submit" class="btn btn-primary ms-auto">Submit</button>
-            </div>
+    <div class="card-footer text-end">
+        <div class="d-flex">
+            <a href="{{ url()->previous() }}" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary ms-auto">Submit</button>
         </div>
+    </div>
 
-    </form>
+</form>
 
-    @push('scripts')
-        <script>
-            $(document).on('click', '#passwordDisplay', function () {
 
-                if ($(this).hasClass('text-info')) {
-                    $(this).removeClass('text-info');
-                    $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
-                    $('#password').attr('type', 'password');
-                } else {
-                    $(this).addClass('text-info');
-                    $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
-                    $('#password').attr('type', 'text');
-                }
-            });
+@push('scripts')
+<script>
+    $(document).on( 'click', '.inbound-card', function(e){
+    
+        if ( $(e.target).is('div.inbound-copy-button') )
+            return;
 
-            $(document).on('click', '#randomPassword', function () {
+        $(this).toggleClass('card-active');
+        $(this).find('.inbound-checkbox').prop('checked', $(this).hasClass('card-active'));
+        $(this).find('.inbound-checkbox').prop('disabled', !$(this).hasClass('card-active'));
+    });
+    
+    $(document).on( 'click', '.inbound-copy-button', function(){
+    
+        let link = $(this).closest('.inbound-card').find('.row-inbound-link').text();
 
-                var randomPassword = Math.random().toString(15).slice(-8);
-                $('#password').val(randomPassword);
-            });
-        </script>
-    @endpush
+        navigator.clipboard.writeText(link);
+        toastr.success('Copied to clipboard!');
+    });
+</script>
+@endpush
 
+@push('styles')
+    <style>
+        .inbound-copy-button {
+            cursor: copy;
+        }
+    </style>
+@endpush
 
 @endsection
