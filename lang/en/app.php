@@ -28,7 +28,9 @@ return [
         'generate_password' => 'Generate Password',
         'roles' => [
             User::CUSTOMER => 'Customer',
+            User::CUSTOMER . 's' => 'Customers',
             User::ADMIN => 'Admin',
+            User::ADMIN . 's' => 'Admins',
         ],
         'login' => 'Login',
         'logout' => 'Logout',
@@ -44,6 +46,8 @@ return [
         'assign_inbounds' => 'Assign Inbounds to :user',
         'date' => 'Date',
         'available_inbounds' => 'Available Inbounds (VPN configs)',
+        'in_use' => 'In use',
+        'not_in_use' => 'Not in use',
     ],
     'pageComponents' => [
         'new' => 'New',
