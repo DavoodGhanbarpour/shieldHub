@@ -95,7 +95,7 @@ return [
     ],
     'max_digits' => 'گزینه :attribute نباید بیشتر از :max رقم باشد',
     'mimes' => 'گزینه :attribute باید دارای یکی از این فرمت ها باشد: :values',
-    'mimetypes' =>  'گزینه :attribute باید دارای یکی از این فرمت ها باشد: :values',
+    'mimetypes' => 'گزینه :attribute باید دارای یکی از این فرمت ها باشد: :values',
     'min' => [
         'array' => 'گزینه :attribute باید حداقل :min آیتم داشته باشد',
         'file' => 'گزینه :attribute باید حداقل :min کیلوبایت باشد',

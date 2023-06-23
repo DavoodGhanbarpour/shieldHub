@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('locale','4')->default(User::SUPPORTED_LANGUAGES[0]);
+            $table->string('locale', '4')->default(User::SUPPORTED_LANGUAGES[0]);
             $table->enum('role', [User::ADMIN, User::CUSTOMER]);
             $table->rememberToken();
             $table->timestamps();

@@ -8,7 +8,6 @@ use Illuminate\View\View;
 
 class InboundComposer
 {
-
     /**
      * Bind data to the view.
      */
