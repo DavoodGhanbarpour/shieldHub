@@ -20,11 +20,11 @@ class User extends Authenticatable
     const SUPPORTED_LANGUAGES = [
         'en' => [
             'dir' => 'ltr',
-            'key' => 'en'
+            'key' => 'en',
         ],
         'fa' => [
             'dir' => 'rtl',
-            'key' => 'fa'
+            'key' => 'fa',
         ],
     ];
 
