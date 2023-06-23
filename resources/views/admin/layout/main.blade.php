@@ -77,12 +77,11 @@
 
 <script>
     $(document).ready(function() {
-
         $('.select2').select2();
-        toastr.options = {
-            'positionClass' : "toast-bottom-right",
-        }
     });
+    toastr.options = {
+        'positionClass' : "toast-bottom-right",
+    }
 </script>
 
 @stack('scripts')
