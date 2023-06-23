@@ -18,9 +18,14 @@ Route::fallback(function () {
 });
 
 Route::get('/', function () {
-    //TODO
+    if(\Illuminate\Support\Facades\Auth::check()){
+        if(auth()->user()->isAdmin())
+            return redirect()->route('admin.home');
+
+        return redirect()->route('customer.home');
+    }
     return redirect()->route('auth.login');
-});
+})->name('root');
 
 Route::name('auth.')->middleware(['setLocale'])->group(function () {
     include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'auth.php';
@@ -32,4 +37,8 @@ Route::middleware(['auth', 'role:admin', 'setLocale'])->prefix('admin')->name('a
 
 Route::middleware(['auth', 'role:customer', 'setLocale'])->prefix('customer')->name('customer.')->group(function () {
     include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'customer.php';
+});
+
+Route::middleware(['auth', 'setLocale'])->prefix('profile')->name('profile.')->group(function () {
+    include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'profile.php';
 });
