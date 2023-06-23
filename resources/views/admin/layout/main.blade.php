@@ -85,18 +85,10 @@
     $(document).ready(function() {
         $('.select2').select2();
     });
-    toastr.options = {
-        'positionClass' : "toast-bottom-right",
-    }
 </script>
 
+<x-alerts.toastr />
 @stack('scripts')
-
-@if( $errors->any() )
-    <script>
-        toastr.error('@foreach ($errors->all() as $error)<li class="mx-3"> {{ $error }} </li> @endforeach')
-    </script>
-@endif
 
 </body>
 </html>

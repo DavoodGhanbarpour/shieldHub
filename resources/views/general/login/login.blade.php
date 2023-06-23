@@ -24,6 +24,7 @@
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <style>
       :root {
@@ -100,8 +101,24 @@
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
-    @include('general.login.login_include')
+    <script>
+      $(document).on( 'click', '#passwordDisplay', function(){
+    
+        if ( $(this).hasClass('text-info') ) {
+          $(this).removeClass('text-info');
+          $(this).attr('data-bs-original-title', '{{__('app.auth.show_password')}}').tooltip('show');
+          $('#password').attr('type', 'password');
+        } else {
+          $(this).addClass('text-info');
+          $(this).attr('data-bs-original-title', '{{__('app.auth.hide_password')}}').tooltip('show');
+          $('#password').attr('type', 'text');
+        }
+      });
+    </script>
+
+    <x-alerts.toastr />
 
   </body>
 </html>
