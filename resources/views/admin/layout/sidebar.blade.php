@@ -178,12 +178,12 @@
                     <span class="avatar avatar-sm" style="background-image: url({{asset('static/avatars/profile_white_outlined.png')}})"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>{{auth()->user()->name}}</div>
-                        <div class="mt-1 small text-muted">{{ucfirst(auth()->user()->role)}}</div>
+                        <div class="mt-1 small text-muted">{{__('app.auth.roles.'.auth()->user()->role)}}</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     {{-- <a href="./profile.html" class="dropdown-item">Profile</a> --}}
-                    <a href="{{ route('auth.logout') }}" class="dropdown-item">Logout</a>
+                    <a href="{{ route('auth.logout') }}" class="dropdown-item">{{__('app.auth.logout')}}</a>
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
                         d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></svg>
               </span>
                         <span class="nav-link-title">
-                Home
+                {{__('app.dashboard.home')}}
               </span>
                     </a>
                 </li>
@@ -217,7 +217,7 @@
                </svg>
               </span>
                         <span class="nav-link-title">
-                Users
+                {{__('app.auth.users')}}
               </span>
                     </a>
                 </li>
@@ -240,7 +240,7 @@
                </svg>
               </span>
                         <span class="nav-link-title">
-                Inbounds
+                {{__('app.inbounds.inbounds')}}
               </span>
                     </a>
                 </li>

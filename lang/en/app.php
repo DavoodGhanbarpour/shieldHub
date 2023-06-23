@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
     'login' => [
         'login_to_your_account' => 'Login to your account',
@@ -11,6 +13,8 @@ return [
         'home' => 'Home',
         'enable_dark_mode' => 'Enable dark mode',
         'enable_light_mode' => 'Enable light mode',
+        'built_with' => 'Built with the :title theme.',
+        'rights_reserved' => 'All rights reserved.',
     ],
     'auth' => [
         'user' => 'User',
@@ -24,10 +28,8 @@ return [
         'hide_password' => 'Hide password',
         'generate_password' => 'Generate Password',
         'roles' => [
-            'customer' => 'Customer',
-            'customers' => 'Customers',
-            'admin' => 'Admin',
-            'admins' => 'Admins',
+            User::CUSTOMER => 'Customer',
+            User::ADMIN => 'Admin',
         ],
         'login' => 'Login',
         'logout' => 'Logout',
@@ -42,6 +44,7 @@ return [
         'port' => 'Port',
     ],
     'pageComponents' => [
+        'new' => 'New',
         'add' => 'Add',
         'edit' => 'Edit',
         'delete' => 'Delete',

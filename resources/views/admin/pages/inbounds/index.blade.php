@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', 'Inbounds')
+@section('title', __('app.inbounds.inbounds'))
 
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
@@ -13,7 +13,7 @@
                     <path d="M12 5l0 14"/>
                     <path d="M5 12l14 0"/>
                 </svg>
-                New Inbound
+                {{__('app.pageComponents.add') .' '. __('app.inbounds.inbound')}}
             </a>
         </div>
     </div>
@@ -28,18 +28,18 @@
                     <thead>
                     <tr>
                         <th>
-                            <button class="table-sort" data-sort="sort-index">Index</button>
+                            <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-title">Title</button>
+                            <button class="table-sort" data-sort="sort-title">{{__('app.inbounds.title')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-ip">IP:Port</button>
+                            <button class="table-sort" data-sort="sort-ip">{{__('app.inbounds.ip').':'.__('app.inbounds.port')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-description">Description</button>
+                            <button class="table-sort" data-sort="sort-description">{{__('app.inbounds.description')}}</button>
                         </th>
-                        <th>Actions</th>
+                        <th>{{__('app.pageComponents.actions')}}</th>
                     </tr>
                     </thead>
                     <tbody class="table-tbody">
@@ -74,12 +74,12 @@
     @push('scripts')
         <script>
             $(document).on( 'click', '.inbound-copy-button', function(){
-            
+
                 let link = $(this).closest('td').find('.row-inbound-link').text();
                 navigator.clipboard.writeText(link);
                 toastr.success('Copied to clipboard!');
             });
         </script>
     @endpush
-    
+
 @endsection

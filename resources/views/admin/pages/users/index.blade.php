@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', 'Users')
+@section('title', __('app.auth.users'))
 
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
@@ -13,7 +13,7 @@
                     <path d="M12 5l0 14"/>
                     <path d="M5 12l14 0"/>
                 </svg>
-                New User
+                {{__('app.pageComponents.add') .' '. __('app.auth.user')}}
             </a>
         </div>
     </div>
@@ -28,18 +28,18 @@
                     <thead>
                     <tr>
                         <th>
-                            <button class="table-sort" data-sort="sort-index">Index</button>
+                            <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-name">Name</button>
+                            <button class="table-sort" data-sort="sort-name">{{__('app.auth.name')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-email">Email</button>
+                            <button class="table-sort" data-sort="sort-email">{{__('app.auth.email')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-rule">Role</button>
+                            <button class="table-sort" data-sort="sort-role">{{__('app.auth.role')}}</button>
                         </th>
-                        <th>Actions</th>
+                        <th>{{__('app.pageComponents.actions')}}</th>
                     </tr>
                     </thead>
                     <tbody class="table-tbody">
@@ -49,7 +49,7 @@
                             <td class="sort-index">{{$index++}}</td>
                             <td class="sort-name">{{$eachUser->name}}</td>
                             <td class="sort-email">{{$eachUser->email}}</td>
-                            <td class="sort-rule">{{ucfirst($eachUser->role)}}</td>
+                            <td class="sort-role    ">{{__('app.auth.roles.'.$eachUser->role)}}</td>
                             <td>
                                 <div class="btn-list flex-nowrap">
 
@@ -60,7 +60,7 @@
                                             <path d="M15.536 16.536a5 5 0 1 0 -7.072 0"></path>
                                             <path d="M12 13m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
                                         </svg>
-                                        Inbounds
+                                        {{__('app.inbounds.inbounds')}}
                                     </a>
                                     <x-buttons.edit :link="route('admin.users.edit', ['user' => $eachUser->id])"/>
                                     <x-buttons.destroy :link="route('admin.users.destroy', ['user' => $eachUser->id])"/>

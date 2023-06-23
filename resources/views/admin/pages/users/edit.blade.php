@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', 'Edit User')
+@section('title', __('app.pageComponents.edit') .' '. __('app.auth.user'))
 
 @section('content')
 
@@ -12,27 +12,27 @@
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Name</label>
+                    <label class="form-label required">{{__('app.auth.name')}}</label>
                     <div>
                         <input type="text" value="{{ $user->name }}" name="name" class="form-control"
-                               aria-describedby="emailHelp" placeholder="Name">
+                               aria-describedby="emailHelp" placeholder="{{__('app.auth.name')}}">
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Email address</label>
+                    <label class="form-label required">{{__('app.auth.email_address')}}</label>
                     <div>
                         <input type="email" value="{{ $user->email }}" disabled name="email" class="form-control"
-                               aria-describedby="emailHelp" placeholder="Enter email">
+                               aria-describedby="emailHelp" placeholder="{{__('app.auth.email_address')}}">
                     </div>
                 </div>
 
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Password</label>
+                    <label class="form-label required">{{__('app.auth.password')}}</label>
                     <div class="input-group input-group-flat">
                         <input type="password" id="password" class="form-control" name="password"
-                               placeholder="Your password" autocomplete="new-password">
+                               placeholder="{{__('app.auth.password')}}" autocomplete="new-password">
                         <span class="input-group-text">
                         <a href="#" class="link-secondary" id="passwordDisplay" title="Show password"
                             data-bs-toggle="tooltip">
@@ -46,18 +46,19 @@
                             </svg>
                         </a>
                     </span>
-                        <button id="randomPassword" class="btn" type="button">Create Random Password</button>
+                        <button id="randomPassword" class="btn" type="button">{{__('app.auth.generate_password')}}</button>
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Role</label>
+                    <label class="form-label required">{{__('app.auth.role')}}</label>
                     <div>
                         <select class="form-select" name="role">
                             <option {{($user->isCustomer()) ? 'selected' : ''}} value="{{\App\Models\User::CUSTOMER}}">
-                                Customer
+                                {{__('app.auth.roles.'.\App\Models\User::CUSTOMER)}}
                             </option>
-                            <option {{($user->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">Admin
+                            <option {{($user->isAdmin()) ? 'selected' : ''}} value="{{\App\Models\User::ADMIN}}">
+                                {{__('app.auth.roles.'.\App\Models\User::ADMIN)}}
                             </option>
                         </select>
                     </div>
@@ -68,8 +69,8 @@
 
         <div class="card-footer text-end">
             <div class="d-flex">
-                <a href="{{ url()->previous() }}" class="btn btn-link">Cancel</a>
-                <button type="submit" class="btn btn-primary ms-auto">Submit</button>
+                <a href="{{ url()->previous() }}" class="btn btn-link">{{__('app.pageComponents.cancel')}}</a>
+                <button type="submit" class="btn btn-primary ms-auto">{{__('app.pageComponents.submit')}}</button>
             </div>
         </div>
 
