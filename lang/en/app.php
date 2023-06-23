@@ -58,7 +58,4 @@ return [
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
     ],
-    'downloadables' => [
-        'apps_for_download' => 'Apps for download'
-    ]
 ];

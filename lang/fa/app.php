@@ -41,8 +41,9 @@ return [
         'title' => 'عنوان',
         'ip' => 'IP',
         'port' => 'Port',
-        'assign_inbounds' => 'Assign Inbounds to :user',
-        'date' => 'Date'
+        'assign_inbounds' => 'تخصیص ورودی به :user',
+        'date' => 'Date',
+        'available_inbounds' => 'ورودی های موجود (کانفیگ های VPN)',
     ],
     'pageComponents' => [
         'new' => 'جدید',
@@ -55,6 +56,6 @@ return [
         'submit' => 'ثبت',
         'cancel' => 'انصراف',
         'copied' => 'در کلیپبورد شما کپی شد',
-        'not_copied' => 'Coping to clipboard failed',
+        'not_copied' => 'عملیات کپی کردن با خطا مواجه شد',
     ],
 ];
