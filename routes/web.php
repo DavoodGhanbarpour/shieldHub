@@ -22,7 +22,7 @@ Route::get('/', function () {
     return redirect()->route('auth.login');
 });
 
-Route::name('auth.')->group(function () {
+Route::name('auth.')->middleware(['setLocale'])->group(function () {
     include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'auth.php';
 });
 
