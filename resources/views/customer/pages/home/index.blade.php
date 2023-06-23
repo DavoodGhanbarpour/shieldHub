@@ -105,10 +105,9 @@
                             </td>
                             <td class="copy-parent">
                                 <span class="d-none copy-text">{{$eachInbound->link}}</span>
+
                                 <div class="btn-list flex-nowrap">
-                                    <a class="btn border-blue text-blue copy-button">
-                                        {{__('app.pageComponents.copy')}}
-                                    </a>
+                                    <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
                                 </div>
                             </td>
                         </tr>
