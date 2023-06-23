@@ -21,7 +21,7 @@ class ViewComposerProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('admin.pages.users.index', InboundComposer::class);
-        View::composer('admin.pages.inbounds.index', InboundComposer::class);
+//        View::composer('admin.pages.users.index', InboundComposer::class);
+//        View::composer('admin.pages.inbounds.index', InboundComposer::class);
     }
 }

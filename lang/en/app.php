@@ -41,6 +41,7 @@ return [
         'title' => 'Title',
         'ip' => 'IP',
         'port' => 'Port',
+        'assign_inbounds' => 'Assign Inbounds to :user',
     ],
     'pageComponents' => [
         'new' => 'New',

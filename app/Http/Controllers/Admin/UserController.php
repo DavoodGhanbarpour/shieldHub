@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
+use App\Models\Inbound;
 use App\Models\User;
 
 class UserController extends Controller
@@ -63,7 +64,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, int $id)
     {
         $inputs = $request->validated();
-        if (! isset($inputs['password'])) {
+        if (!isset($inputs['password'])) {
             unset($inputs['password']);
         }
 
@@ -82,9 +83,18 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function inbounds()
+    public function inbounds(User $user)
     {
-        return view('admin.pages.users.inbounds');
+        $result = [];
+        $userInboundsID = array_column(collect($user->inbounds)->toArray(), 'id');
+        foreach (Inbound::all() as $key => $each) {
+            $result[$key] = $each;
+            $result[$key]['isUsing'] = in_array($each->id, $userInboundsID);
+        }
+        return view('admin.pages.users.inbounds', [
+            'user' => $user,
+            'inbounds' => collect($result)->sortBy('isUsing',SORT_REGULAR, true),
+        ]);
     }
 
     public function assignInbounds()

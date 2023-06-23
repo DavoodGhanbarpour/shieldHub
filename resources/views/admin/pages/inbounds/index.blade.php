@@ -44,7 +44,7 @@
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
-                        @foreach($inboundsComposed as $eachInbound)
+                        @foreach($inbounds as $eachInbound)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
