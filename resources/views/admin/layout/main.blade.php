@@ -7,20 +7,15 @@
 * Copyright 2018-2023 codecalm.net Paweł Kuna
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
-<html dir="{{config()->get('app.locale')}}" lang="{{config()->get('app.locale')}}">
+<html dir="{{App\Models\User::SUPPORTED_LANGUAGES[config()->get('app.locale')]['dir']}}" lang="{{config()->get('app.locale')}}">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{env('APP_NAME')}} | @yield('title')</title>
     <!-- CSS files -->
-    @if (App\Models\User::SUPPORTED_LANGUAGES[config()->get('app.locale')]['dir'] == 'ltr')
-        <link href="{{ asset('css/tabler.min.css?1684106062') }}" rel="stylesheet"/>        
-    @else
-        <link href="{{ asset('css/tabler.rtl.css?1684106062') }}" rel="stylesheet"/>        
-    @endif
+    @include('components.locale.main-styles')
 
-    <link href="{{ asset('css/tabler.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-flags.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-payments.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>

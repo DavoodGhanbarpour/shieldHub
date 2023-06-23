@@ -14,11 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{__('app.auth.login')}}</title>
     <!-- CSS files -->
-    @if (App\Models\User::SUPPORTED_LANGUAGES[config()->get('app.locale')]['dir'] == 'ltr')
-      <link href="{{ asset('css/tabler.min.css?1684106062') }}" rel="stylesheet"/>        
-    @else
-      <link href="{{ asset('css/tabler.rtl.css') }}" rel="stylesheet"/>        
-    @endif
+    @include('components.locale.main-styles')
+
     <link href="{{ asset('css/tabler-flags.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-payments.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet"/>
