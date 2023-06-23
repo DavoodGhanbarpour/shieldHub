@@ -53,7 +53,7 @@
                             <td>
                                 <div class="btn-list flex-nowrap">
 
-                                    <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">
+                                    <a href="{{route('admin.users.inbounds', ['user' => $eachUser->id])}}" class="btn btn-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-broadcast" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M18.364 19.364a9 9 0 1 0 -12.728 0"></path>

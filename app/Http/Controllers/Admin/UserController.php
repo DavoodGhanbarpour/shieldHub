@@ -85,7 +85,7 @@ class UserController extends Controller
 
     public function inbounds()
     {
-
+        return view('admin.pages.users.inbounds');
     }
 
     public function assignInbounds()

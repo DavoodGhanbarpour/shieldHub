@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="POST" class="card">
+    <form action="" method="POST" class="card">
         @method('put')
         @csrf
 
