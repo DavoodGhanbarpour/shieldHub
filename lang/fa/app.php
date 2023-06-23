@@ -46,8 +46,8 @@ return [
         'assign_inbounds' => 'تخصیص ورودی به :user',
         'date' => 'Date',
         'available_inbounds' => 'ورودی های موجود (کانفیگ های VPN)',
-        'in_use' => 'درحال استفاده',
-        'not_in_use' => 'بدون استفاده',
+        'inbounds_in_use' => ':count ورودی فعال',
+        'inbounds_not_in_use' => ':count ورودی غیرفعال',
     ],
     'pageComponents' => [
         'new' => 'جدید',

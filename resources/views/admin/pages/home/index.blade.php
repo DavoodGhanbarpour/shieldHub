@@ -56,10 +56,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $inboundCounts['inUse'] }} {{__('app.inbounds.inbounds').' '.__('app.inbounds.in_use')}}
+                                        {{__('app.inbounds.inbounds_in_use', ['count' => $inboundCounts['inUse'] ])}}
                                     </div>
                                     <div class="text-muted">
-                                        {{ $inboundCounts['notInUse'] }} {{__('app.inbounds.inbounds').' '.__('app.inbounds.not_in_use')}}
+                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $inboundCounts['notInUse'] ])}}
                                     </div>
                                 </div>
                             </div>

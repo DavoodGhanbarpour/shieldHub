@@ -46,8 +46,8 @@ return [
         'assign_inbounds' => 'Assign Inbounds to :user',
         'date' => 'Date',
         'available_inbounds' => 'Available Inbounds (VPN configs)',
-        'in_use' => 'In use',
-        'not_in_use' => 'Not in use',
+        'inbounds_in_use' => ':count Inbounds active',
+        'inbounds_not_in_use' => ':count Inbounds idle',
     ],
     'pageComponents' => [
         'new' => 'New',
