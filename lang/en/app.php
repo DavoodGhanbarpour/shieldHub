@@ -53,6 +53,6 @@ return [
         'index' => 'Index',
         'submit' => 'Submit',
         'cancel' => 'Cancel',
-        'copied_to_clipboard' => 'Copied to clipboard',
+        'copied' => 'Copied to clipboard',
     ],
 ];

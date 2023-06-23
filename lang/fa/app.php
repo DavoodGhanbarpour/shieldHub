@@ -28,8 +28,8 @@ return [
         'hide_password' => 'عدم گذرواژه',
         'generate_password' => 'ایجاد گذواژه',
         'roles' => [
-            User::CUSTOMER => 'Customer',
-            User::ADMIN => 'Admin',
+            User::CUSTOMER => 'مشتری',
+            User::ADMIN => 'ادمین',
         ],
         'login' => 'ورود',
         'logout' => 'خروج',
@@ -53,6 +53,6 @@ return [
         'index' => 'ردیف',
         'submit' => 'ثبت',
         'cancel' => 'انصراف',
-        'copied_to_clipboard' => 'در کلیپبورد شما کپی شد',
+        'copied' => 'در کلیپبورد شما کپی شد',
     ],
 ];

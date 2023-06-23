@@ -77,7 +77,7 @@
 
                 let link = $(this).closest('td').find('.row-inbound-link').text();
                 navigator.clipboard.writeText(link);
-                toastr.success('Copied to clipboard!');
+                toastr.success('{{__('app.pageComponents.copied')}}');
             });
         </script>
     @endpush
