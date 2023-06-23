@@ -25,7 +25,7 @@ class AuthenticateRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'exists:users'],
             'password' => ['required', new Password()],
-            'locale' => ['required', Rule::in(array_column(User::SUPPORTED_LANGUAGES,'key')),],
+            'locale' => ['required', Rule::in(array_column(User::SUPPORTED_LANGUAGES, 'key'))],
         ];
     }
 }

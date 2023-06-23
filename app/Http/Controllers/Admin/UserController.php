@@ -66,7 +66,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, int $id)
     {
         $inputs = $request->validated();
-        if (!isset($inputs['password'])) {
+        if (! isset($inputs['password'])) {
             unset($inputs['password']);
         }
 
@@ -93,10 +93,11 @@ class UserController extends Controller
             $result[$key] = $each;
             $result[$key]['isUsing'] = in_array($each->id, $userInboundsID);
         }
+
         return view('admin.pages.users.inbounds', [
             'user' => $user,
             'inbounds' => UserInboundsResource::collection(
-                collect($result)->sortBy('isUsing',SORT_REGULAR, true)
+                collect($result)->sortBy('isUsing', SORT_REGULAR, true)
             ),
         ]);
     }
@@ -104,6 +105,7 @@ class UserController extends Controller
     public function assignInbounds(AssignInboundsRequest $request, User $user)
     {
         $user->inbounds()->sync($request->get('inbounds'));
+
         return redirect()->route('admin.users.index');
     }
 }

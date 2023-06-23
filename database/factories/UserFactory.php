@@ -22,7 +22,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'role' => User::CUSTOMER,
-            'locale' => fake()->randomElement(array_column(User::SUPPORTED_LANGUAGES,'key')),
+            'locale' => fake()->randomElement(array_column(User::SUPPORTED_LANGUAGES, 'key')),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password

@@ -14,12 +14,16 @@ class AuthController extends Controller
     {
         $remember = $request->get('remember') ?? false;
 
-        if (Auth::attempt($request->validated(), $remember)) {
+        if (Auth::attempt([
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        ], $remember)) {
             $request->session()->regenerate();
             $user = auth()->user();
 
-            if ($request->get('locale') != $user->locale)
+            if ($request->get('locale') != $user->locale) {
                 UserFacade::upsert(['locale' => $request->get('locale')], $user->id);
+            }
 
             if ($user->isAdmin()) {
                 return redirect()->route('admin.home');

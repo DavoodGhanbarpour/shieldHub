@@ -17,7 +17,7 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'inbounds_count' => $this->inbounds_count
+            'inbounds_count' => $this->inbounds_count,
         ];
     }
 }
