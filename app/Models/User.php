@@ -17,6 +17,12 @@ class User extends Authenticatable
 
     const CUSTOMER = 'customer';
 
+
+    const SUPPORTED_LANGUAGES = [
+        'en',
+        'fa'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
