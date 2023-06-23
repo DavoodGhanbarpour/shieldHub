@@ -10,6 +10,7 @@ return [
     'dashboard' => [
         'home' => 'خانه',
         'enable_dark_mode' => 'فعال سازی حالت تاریک',
+        'enable_light_mode' => 'فعال سازی حالت روشن',
     ],
     'auth' => [
         'user' => 'کاربر',

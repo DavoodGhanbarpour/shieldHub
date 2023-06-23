@@ -10,6 +10,7 @@ return [
     'dashboard' => [
         'home' => 'Home',
         'enable_dark_mode' => 'Enable dark mode',
+        'enable_light_mode' => 'Enable light mode',
     ],
     'auth' => [
         'user' => 'User',
