@@ -11,12 +11,12 @@
             <div class="row">
                 @foreach($inbounds as $eachInbound)
                     <div class="col-lg-6 col-xl-3 mb-3">
-                        <div class="card inbound-card {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
+                        <div class="card inbound-card copy-parent {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
-                            <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
+                            <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                             <div
-                                class="ribbon btn btn-primary inbound-copy-button">{{__('app.pageComponents.copy')}}</div>
+                                class="ribbon btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
                             <div class="card-body">
                                 <p class="card-title fw-bold">{{$eachInbound->title}}</p>
                                 <hr class="p-0 m-0">
@@ -42,6 +42,8 @@
 
 
     @push('scripts')
+        @include('components.scripts.copy')
+    
         <script>
 
             function setInboundStatus(element) {
@@ -60,24 +62,11 @@
             $(document).ready(function () {
 
                 setInboundsStatus();
-
-                var clipboard = new ClipboardJS('.inbound-copy-button', {
-                    text: function (trigger) {
-                        return $(trigger).closest('.inbound-card').find('.row-inbound-link').text();
-                    }
-                });
-
-                clipboard.on('success', function () {
-                    toastr.success('Copied to clipboard.');
-
-                }).on('error', function () {
-                    toastr.error('Can not copy to clipboard!');
-                });
             });
 
             $(document).on('click', '.inbound-card', function (e) {
 
-                if ($(e.target).is('div.inbound-copy-button'))
+                if ($(e.target).is('div.copy-button'))
                     return;
 
                 $(this).toggleClass('card-active');

@@ -54,11 +54,11 @@
                                 <td class="sort-description">
                                     {{$eachInbound->description}}
                                 </td>
-                                <td>
-                                    <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
+                                <td class="copy-parent">
+                                    <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                                     <div class="btn-list flex-nowrap">
-                                        <x-buttons.copy :class="'inbound-copy-button'" data-id="{{$eachInbound->id}}"/>
+                                        <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
                                         <x-buttons.edit :link="route('admin.inbounds.edit', ['inbound' => $eachInbound->id])"/>
                                         <x-buttons.destroy :link="route('admin.inbounds.destroy', ['inbound' => $eachInbound->id])"/>
                                     </div>
@@ -72,24 +72,7 @@
     </div>
 
     @push('scripts')
-        <script>
-
-            $(document).ready(function () {
-
-                var clipboard = new ClipboardJS('.inbound-copy-button', {
-                    text: function (trigger) {
-                        return $(trigger).closest('td').find('.row-inbound-link').text();
-                    }
-                });
-
-                clipboard.on('success', function () {
-                toastr.success('{{__('app.pageComponents.copied')}}');
-
-                }).on('error', function () {
-                    toastr.error('Can not copy to clipboard!');
-                });
-            });
-        </script>
+        @include('components.scripts.copy')
     @endpush
 
 @endsection
