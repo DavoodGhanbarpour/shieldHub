@@ -80,6 +80,19 @@
     $(document).ready( function(){
     
         setInboundsStatus();
+
+        var clipboard = new ClipboardJS('.inbound-copy-button', {
+            text: function(trigger) {
+                return $(trigger).closest('.inbound-card').find('.row-inbound-link').text();
+            }
+        });
+        
+        clipboard.on('success', function() {
+            toastr.success('Copied to clipboard.');
+
+        }).on('error', function() {
+            toastr.error('Can not copy to clipboard!');
+        });
     });
 
     $(document).on( 'click', '.inbound-card', function(e){
@@ -91,13 +104,13 @@
         setInboundStatus($(this));
     });
     
-    $(document).on( 'click', '.inbound-copy-button', function(){
+    // $(document).on( 'click', '.inbound-copy-button', function(){
     
-        let link = $(this).closest('.inbound-card').find('.row-inbound-link').text();
+    //     let link = $(this).closest('.inbound-card').find('.row-inbound-link').text();
 
-        navigator.clipboard.writeText(link);
-        toastr.success('Copied to clipboard!');
-    });
+    //     navigator.clipboard.writeText(link);
+    //     toastr.success('Copied to clipboard!');
+    // });
 </script>
 @endpush
 
