@@ -25,6 +25,7 @@ class InboundUpdateRequest extends FormRequest
             'ip' => ['ipv4', 'required'],
             'port' => ['numeric', 'required', 'between:0,65535'],
             'description' => ['string', 'nullable'],
+            'date' => ['string', 'required', 'date_format:Y-m-d'],
         ];
     }
 }
