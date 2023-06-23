@@ -12,7 +12,7 @@
                 @foreach($inbounds as $eachInbound)
                     <div class="col-lg-6 col-xl-3 mb-3">
                         <div class="card inbound-card {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
-                            <input class="d-none inbound-checkbox" value="1" type="checkbox" name="inbounds[1]">
+                            <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
 
                             <div

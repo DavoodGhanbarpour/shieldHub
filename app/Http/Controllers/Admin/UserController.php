@@ -6,6 +6,7 @@ use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
+use App\Http\Resources\Admin\UserInboundsResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
 use App\Models\User;
@@ -93,7 +94,9 @@ class UserController extends Controller
         }
         return view('admin.pages.users.inbounds', [
             'user' => $user,
-            'inbounds' => collect($result)->sortBy('isUsing',SORT_REGULAR, true),
+            'inbounds' => UserInboundsResource::collection(
+                collect($result)->sortBy('isUsing',SORT_REGULAR, true)
+            ),
         ]);
     }
 
