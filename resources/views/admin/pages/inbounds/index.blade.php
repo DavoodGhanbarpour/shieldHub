@@ -58,20 +58,9 @@
                                     <span class="d-none row-inbound-link">{{$eachInbound->link}}</span>
 
                                     <div class="btn-list flex-nowrap">
-                                        <a class="btn border-blue text-blue inbound-copy-button" data-id="{{$eachInbound->id}}">
-                                            Copy
-                                        </a>
-                                        <a href="{{ route('admin.inbounds.edit', ['inbound' => $eachInbound->id]) }}"
-                                        class="btn border-secondary text-secondary">
-                                            Edit
-                                        </a>
-                                        <form
-                                            action="{{ route('admin.inbounds.destroy', ['inbound' => $eachInbound->id]) }}"
-                                            method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <Button type="submit" class="btn border-danger text-danger">Delete</Button>
-                                        </form>
+                                        <x-buttons.copy :class="'inbound-copy-button'" data-id="{{$eachInbound->id}}"/>
+                                        <x-buttons.edit :link="route('admin.inbounds.edit', ['inbound' => $eachInbound->id])"/>
+                                        <x-buttons.destroy :link="route('admin.inbounds.destroy', ['inbound' => $eachInbound->id])"/>
                                     </div>
                                 </td>
                             </tr>
@@ -85,12 +74,12 @@
     @push('scripts')
         <script>
             $(document).on( 'click', '.inbound-copy-button', function(){
-
+            
                 let link = $(this).closest('td').find('.row-inbound-link').text();
                 navigator.clipboard.writeText(link);
                 toastr.success('Copied to clipboard!');
             });
         </script>
     @endpush
-
+    
 @endsection
