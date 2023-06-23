@@ -17,7 +17,7 @@
                 <div class="card card-active inbound-card"  role="button">
                     <input class="d-none inbound-checkbox" value="1" type="checkbox" name="inbounds[1]">
                     <span class="d-none row-inbound-link">Inbound Text</span>
-                    
+
                     <div class="ribbon btn btn-primary inbound-copy-button">Copy</div>
                     <div class="card-body">
                         <p class="card-title fw-bold">Reality_01 | User_01</p>
@@ -31,7 +31,7 @@
             </div>
             
             <div class="col-lg-6 col-xl-3 mb-3">
-                <div class="card card-active inbound-card"  role="button">
+                <div class="card inbound-card"  role="button">
                     <input class="d-none inbound-checkbox" value="1" type="checkbox" name="inbounds[1]">
                     <span class="d-none row-inbound-link">Inbound Text</span>
                     <div class="ribbon btn btn-primary inbound-copy-button">Copy</div>
@@ -63,14 +63,32 @@
 
 @push('scripts')
 <script>
+
+    function setInboundStatus( element ) {
+
+        element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
+        element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
+    }
+
+    function setInboundsStatus() {
+
+        $('.inbound-card').each(function(){
+            setInboundStatus($(this));
+        })
+    }
+    
+    $(document).ready( function(){
+    
+        setInboundsStatus();
+    });
+
     $(document).on( 'click', '.inbound-card', function(e){
     
         if ( $(e.target).is('div.inbound-copy-button') )
             return;
 
         $(this).toggleClass('card-active');
-        $(this).find('.inbound-checkbox').prop('checked', $(this).hasClass('card-active'));
-        $(this).find('.inbound-checkbox').prop('disabled', !$(this).hasClass('card-active'));
+        setInboundStatus($(this));
     });
     
     $(document).on( 'click', '.inbound-copy-button', function(){
