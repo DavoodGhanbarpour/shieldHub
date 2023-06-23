@@ -1,8 +1,76 @@
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/vazir/ttf/Vazirmatn-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/vazir/ttf/Vazirmatn-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/vazir/ttf/Vazirmatn-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/vazir/ttf/Vazirmatn-Black.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Vazirmatn' !important;
+}
+
 
 .border_right {
     border-right: 1px solid #dadfe5 !important;
 }
-.border_left{
+
+.border_left {
     border-left: 1px solid #dadfe5 !important;
 }
 
