@@ -44,7 +44,7 @@
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
-                        @foreach($inbounds as $eachInbound)
+                        @foreach($inboundsComposed as $eachInbound)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
@@ -85,12 +85,12 @@
     @push('scripts')
         <script>
             $(document).on( 'click', '.inbound-copy-button', function(){
-            
+
                 let link = $(this).closest('td').find('.row-inbound-link').text();
                 navigator.clipboard.writeText(link);
                 toastr.success('Copied to clipboard!');
             });
         </script>
     @endpush
-    
+
 @endsection
