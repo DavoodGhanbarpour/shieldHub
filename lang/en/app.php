@@ -14,6 +14,7 @@ return [
         'enable_light_mode' => 'Enable light mode',
         'built_with' => 'Built with the :title theme.',
         'rights_reserved' => 'All rights reserved.',
+
     ],
     'auth' => [
         'user' => 'User',
@@ -48,7 +49,8 @@ return [
         'available_inbounds' => 'Available Inbounds (VPN configs)',
         'inbounds_in_use' => ':count Inbounds active',
         'inbounds_not_in_use' => ':count Inbounds idle',
-        'quota' => 'Quota'
+        'quota' => 'Quota',
+        'inbounds_clients' => 'V2ray clients',
     ],
     'pageComponents' => [
         'new' => 'New',
@@ -62,5 +64,12 @@ return [
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
+    ],
+    'platform' => [
+        'android' => 'Android',
+        'windows' => 'Windows',
+        'linux' => 'Linux',
+        'ios' => 'IOS',
+        'mac' => 'Mac',
     ],
 ];

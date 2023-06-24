@@ -8,7 +8,7 @@
     <div class="col-md-6 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Social Media Traffic</h3>
+                <h3 class="card-title">{{__('app.inbounds.inbounds_clients')}}</h3>
             </div>
 
             <div class="card-body">
@@ -21,7 +21,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-auto">
                                         <span class="bg-green text-white avatar">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-android" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-{{__('app.platform.android')}}" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M4 10l0 6"></path>
                                                 <path d="M20 10l0 6"></path>
@@ -38,7 +38,7 @@
                                             v2rayNG
                                         </div>
                                         <div class="text-info">
-                                            Android
+                                            {{__('app.platform.android')}}
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                             v2rayN
                                         </div>
                                         <div class="text-info">
-                                            Windows
+                                            {{ __('app.platform.windows') }}
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                             FoXray
                                         </div>
                                         <div class="text-info">
-                                            iPhone
+                                            {{__('app.platform.ios')}}
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                             V2Box
                                         </div>
                                         <div class="text-info">
-                                            iPhone
+                                            {{__('app.platform.ios')}}
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                             FoXray
                                         </div>
                                         <div class="text-info">
-                                            Mac
+                                            {{__('app.platform.mac')}}
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@
                                             V2Box
                                         </div>
                                         <div class="text-info">
-                                            Mac
+                                            {{__('app.platform.mac')}}
                                         </div>
                                     </div>
                                 </div>
