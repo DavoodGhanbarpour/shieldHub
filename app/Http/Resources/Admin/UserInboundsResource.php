@@ -20,6 +20,7 @@ class UserInboundsResource extends JsonResource
             'description' => $this->description,
             'isUsing' => $this->isUsing,
             'link' => $this->link,
+            'users_count' => $this->users_count
         ];
     }
 }
