@@ -39,12 +39,12 @@ Customers in other hand, have there own panel which can sign in and copy links o
 ### ToDo
 
 - [X] Admins login
-- [ ] Admins panel
-- [ ] Customers login
-- [ ] Customers panel
+- [X] Admins panel
+- [X] Customers login
+- [X] Customers panel
 - [x] Installation ( with one command )
-- [ ] Customers management
-- [ ] Configs management
+- [X] Customers management
+- [X] Configs management
 - [ ] Servers management
 - [ ] Connect configs to Kafka Panel
 - [ ] Connect server status to Kafka Panel
