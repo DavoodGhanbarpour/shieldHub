@@ -17,15 +17,13 @@ Route::fallback(function () {
     return abort(404);
 });
 
-Route::get('/', function () {
-    if(\Illuminate\Support\Facades\Auth::check()){
-        if(auth()->user()->isAdmin())
-            return redirect()->route('admin.home');
+Route::middleware('guest')->get('/', function () { return redirect()->route('auth.login'); })->name('root');
+Route::get('/home', function () {
+    if(auth()->user()->isAdmin())
+        return redirect()->route('admin.home');
 
-        return redirect()->route('customer.home');
-    }
-    return redirect()->route('auth.login');
-})->name('root');
+    return redirect()->route('customer.home');
+})->name('home');
 
 Route::name('auth.')->middleware(['setLocale'])->group(function () {
     include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'auth.php';
