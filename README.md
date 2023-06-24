@@ -14,7 +14,7 @@ Customers in other hand, have there own panel which can sign in and copy links o
    - Laravel v10.8.0
    - PHP v8.2.3
 - ##### Front-end
-   - **Help required here!**
+   - Tabler theme v1.0.0
   
    
 
