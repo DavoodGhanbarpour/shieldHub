@@ -40,9 +40,6 @@ class Installation extends Command
         $credential = $this->makeDefaultUsers();
         $bar->advance();
 
-        $this->seedDatabase();
-        $bar->advance();
-
         $bar->finish();
 
         $this->newLine();
@@ -68,10 +65,6 @@ class Installation extends Command
         $this->call('migrate');
     }
 
-    private function seedDatabase()
-    {
-        $this->call('db:seed');
-    }
 
     private function makeDefaultUsers(): array
     {
