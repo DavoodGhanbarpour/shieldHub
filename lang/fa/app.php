@@ -12,8 +12,8 @@ return [
         'home' => 'خانه',
         'enable_dark_mode' => 'فعال سازی حالت تاریک',
         'enable_light_mode' => 'فعال سازی حالت روشن',
-        'built_with' => 'Built with the :title theme.',
-        'rights_reserved' => 'All rights reserved.',
+        'built_with' => 'ساخته شده با قالب :title.',
+        'rights_reserved' => 'تمام حقوق محفوظ میباشد.',
     ],
     'auth' => [
         'user' => 'کاربر',
@@ -49,6 +49,7 @@ return [
         'inbounds_in_use' => ':count ورودی فعال',
         'inbounds_not_in_use' => ':count ورودی غیرفعال',
         'quota' => 'روز باقی مانده',
+        'inbounds_clients' => 'نرم افزار های V2ray',
     ],
     'pageComponents' => [
         'new' => 'جدید',
@@ -62,5 +63,12 @@ return [
         'cancel' => 'انصراف',
         'copied' => 'در کلیپبورد شما کپی شد',
         'not_copied' => 'عملیات کپی کردن با خطا مواجه شد',
+    ],
+    'platform' => [
+        'android' => 'اندروید',
+        'windows' => 'ویندوز',
+        'linux' => 'لینوکس',
+        'ios' => 'اَپل',
+        'mac' => 'مک',
     ],
 ];

@@ -14,7 +14,6 @@ return [
         'enable_light_mode' => 'Enable light mode',
         'built_with' => 'Built with the :title theme.',
         'rights_reserved' => 'All rights reserved.',
-
     ],
     'auth' => [
         'user' => 'User',
