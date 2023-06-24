@@ -49,6 +49,7 @@ return [
         'inbounds_in_use' => ':count ورودی فعال',
         'inbounds_not_in_use' => ':count ورودی غیرفعال',
         'quota' => 'روز باقی مانده',
+        'days_remain' => ':count روز باقی مانده',
         'inbounds_clients' => 'نرم افزار های V2ray',
     ],
     'pageComponents' => [
