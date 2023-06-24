@@ -61,7 +61,7 @@
     src: url('../fonts/vazir/ttf/Vazirmatn-Black.ttf') format('truetype');
 }
 
-body {
+body, button, input, select {
     font-family: 'Vazirmatn' !important;
 }
 
