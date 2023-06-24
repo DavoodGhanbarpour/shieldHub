@@ -17,7 +17,7 @@ return [
     ],
     'auth' => [
         'user' => 'User',
-        'users' => 'User(s)',
+        'users' => 'Users',
         'role' => 'Role',
         'name' => 'Name',
         'email' => 'Email',
@@ -28,16 +28,16 @@ return [
         'generate_password' => 'Generate Password',
         'roles' => [
             User::CUSTOMER => 'Customer',
-            User::CUSTOMER . 's' => 'Customer(s)',
+            User::CUSTOMER . 's' => 'Customers',
             User::ADMIN => 'Admin',
-            User::ADMIN . 's' => 'Admin(s)',
+            User::ADMIN . 's' => 'Admins',
         ],
         'login' => 'Login',
         'logout' => 'Logout',
     ],
     'inbounds' => [
         'inbound' => 'Inbound',
-        'inbounds' => 'Inbound(s)',
+        'inbounds' => 'Inbounds',
         'link' => 'Link',
         'description' => 'Description',
         'title' => 'Title',
@@ -50,7 +50,7 @@ return [
         'inbounds_not_in_use' => ':count Inbound(s) idle',
         'quota' => 'Quota',
         'days_remain' => ':count day(s) remains',
-        'inbounds_clients' => 'V2ray client(s)',
+        'inbounds_clients' => 'V2ray clients',
     ],
     'pageComponents' => [
         'new' => 'New',
