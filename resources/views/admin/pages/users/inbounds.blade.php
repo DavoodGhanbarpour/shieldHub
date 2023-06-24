@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row">
                 @foreach($inbounds as $eachInbound)
-                    <div class="col-lg-6 col-xl-3 mb-3">
+                    <div class="col-lg-6 col-xl-3 mb-3 inbound-card-parent">
                         <div class="card inbound-card copy-parent {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
@@ -43,7 +43,27 @@
 
     @push('scripts')
         @include('components.scripts.copy')
+        @include('components.scripts.search')
     
+        <script>
+            $(document).on( 'keyup', '#pageSearch', function(){
+    
+                let searchedValue = $(this).val().toString().trim().toLowerCase();
+                $('.inbound-card-parent').addClass('d-none');
+                $('.inbound-card-parent').each(function() {
+                    let found = false;
+                    let parentElement = $(this);
+                    $(this).find('.card-body p').each(function(){
+                        if ($(this).text().toString().trim().toLowerCase().includes( searchedValue ))
+                            found = true;
+                    });
+
+                    if ( found )
+                        parentElement.removeClass('d-none');
+                });
+            });
+        </script>
+        
         <script>
 
             function setInboundStatus(element) {
