@@ -5,6 +5,48 @@
 @section('content')
 
     <div class="row row-deck row-cards">
+        <div class="col-md-12 col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{__('app.inbounds.available_inbounds')}}</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table card-table table-vcenter">
+                        @php $index = 1 @endphp
+                        @foreach($inbounds as $eachInbound)
+                            <tr>
+                                <td class="sort-index">{{$index++}}</td>
+                                <td class="sort-title">{{$eachInbound->title}}</td>
+                                <td class="sort-ip">
+                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                </td>
+                                <td class="sort-date">
+                                    {{convertDate($eachInbound->date)}}
+                                </td>
+                                <td class="sort-quota">
+                                    {{
+                                        __('app.inbounds.days_remain',['count' =>
+                                            \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())
+                                        ])
+                                    }}
+                                </td>
+                                <td class="sort-description">
+                                    {{$eachInbound->description}}
+                                </td>
+                                <td class="copy-parent">
+                                    <span class="d-none copy-text">{{$eachInbound->link}}</span>
+
+                                    <div class="btn-list flex-nowrap">
+                                        <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-header">
@@ -211,47 +253,6 @@
 
 
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">{{__('app.inbounds.available_inbounds')}}</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="table card-table table-vcenter">
-                        @php $index = 1 @endphp
-                        @foreach($inbounds as $eachInbound)
-                            <tr>
-                                <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-title">{{$eachInbound->title}}</td>
-                                <td class="sort-ip">
-                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
-                                </td>
-                                <td class="sort-date">
-                                    {{convertDate($eachInbound->date)}}
-                                </td>
-                                <td class="sort-quota">
-                                    {{
-                                        __('app.inbounds.days_remain',['count' =>
-                                            \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())
-                                        ])
-                                    }}
-                                </td>
-                                <td class="sort-description">
-                                    {{$eachInbound->description}}
-                                </td>
-                                <td class="copy-parent">
-                                    <span class="d-none copy-text">{{$eachInbound->link}}</span>
-
-                                    <div class="btn-list flex-nowrap">
-                                        <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
                 </div>
             </div>
         </div>
