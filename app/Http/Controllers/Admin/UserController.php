@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $result = [];
         $userInboundsID = array_column(collect($user->inbounds)->toArray(), 'id');
-        foreach (Inbound::all() as $key => $each) {
+        foreach (Inbound::withCount('users')->get() as $key => $each) {
             $result[$key] = $each;
             $result[$key]['isUsing'] = in_array($each->id, $userInboundsID);
         }

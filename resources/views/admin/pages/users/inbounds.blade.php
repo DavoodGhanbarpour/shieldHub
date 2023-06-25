@@ -23,6 +23,7 @@
                                 <p class="card-title my-2" dir="ltr">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
                                 <p>
                                     {{$eachInbound->description}}
+                                    {{--{{$eachInbound->users_count}}--}}
                                 </p>
                             </div>
                         </div>
@@ -44,10 +45,10 @@
     @push('scripts')
         @include('components.scripts.copy')
         @include('components.scripts.search')
-    
+
         <script>
             $(document).on( 'keyup', '#pageSearch', function(){
-    
+
                 let searchedValue = $(this).val().toString().trim().toLowerCase();
                 $('.inbound-card-parent').addClass('d-none');
                 $('.inbound-card-parent').each(function() {
@@ -63,7 +64,7 @@
                 });
             });
         </script>
-        
+
         <script>
 
             function setInboundStatus(element) {
