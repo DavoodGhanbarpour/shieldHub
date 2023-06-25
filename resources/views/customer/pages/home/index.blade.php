@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="row row-deck row-cards">
-        <div class="col-md-12 col-lg-8">
+        <div class="col-md-12 col-lg-9">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{__('app.inbounds.available_inbounds')}}</h3>
@@ -37,7 +37,10 @@
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                                     <div class="btn-list flex-nowrap">
-                                        <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
+                                        <x-buttons.qrcode :class="'w-100'" data-bs-toggle="modal" data-bs-target="#QRCodeModal"/>
+                                    </div>
+                                    <div class="btn-list flex-nowrap">
+                                        <x-buttons.copy :class="'w-100'"/>
                                     </div>
                                 </td>
                             </tr>
@@ -47,7 +50,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{__('app.inbounds.inbounds_clients')}}</h3>
@@ -258,7 +261,47 @@
         </div>
     </div>
 
+      
+    <div class="modal" id="QRCodeModal" tabindex="-1">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="QRCodeDisplay" class="modal-body">
+
+                </div>
+                <div class="modal-footer copy-parent">
+                    <span class="d-none copy-text"></span>
+                    <x-buttons.copy :class="'w-100'"/>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+
     @push('scripts')
+        <script type="text/javascript">
+
+            var qrcode = new QRCode(document.getElementById("QRCodeDisplay"), {
+                width : 200,
+                height : 200,
+                useSVG: true
+            });
+
+            $(document).on( 'click', '.qrcode-button', function(){
+            
+                makeCode($(this));
+                $('#QRCodeModal .copy-text').text($(this).closest('.copy-parent').find('.copy-text').text());
+            });
+
+            function makeCode(element) {		
+
+                qrcode.makeCode(element.closest('.copy-parent').find('.copy-text').text());
+            }
+        </script>
         @include('components.scripts.copy')
     @endpush
 

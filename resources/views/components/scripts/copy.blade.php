@@ -1,7 +1,8 @@
 <script>
+    var clipboard;
     $(document).ready(function () {
 
-        var clipboard = new ClipboardJS('.copy-button', {
+        clipboard = new ClipboardJS('.copy-button', {
             text: function (trigger) {
                 return $(trigger).closest('.copy-parent').find('.copy-text').text();
             }
@@ -14,4 +15,16 @@
             toastr.error('{{__('app.pageComponents.not_copied')}}');
         });
     });
+
+    $(document).on( 'shown.bs.modal', '.modal', function(){
+    
+        clipboard.container = document.getElementById($(this).attr('id')); 
+    });
+
+    $(document).on( 'hidden.bs.modal', '.modal', function(){
+    
+        clipboard.container = document.getElementsByTagName('docy')[0]; 
+    });
+
+
 </script>
