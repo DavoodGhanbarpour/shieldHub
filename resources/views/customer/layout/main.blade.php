@@ -37,41 +37,44 @@
     </style>
 </head>
 <body>
-<script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
-<div class="page">
+    <script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
+    <div class="page">
 
-    <!-- Navbar -->
-    @include('customer.layout.navbar')
-
-
-    <div class="page-wrapper">
-        <!-- Page header -->
-    @include('customer.layout.header')
+        <!-- Navbar -->
+        @include('customer.layout.navbar')
 
 
-    <!-- Page body -->
-        <div class="page-body">
-            <div class="container-xl">
+        <div class="page-wrapper">
+            <!-- Page header -->
+        @include('customer.layout.header')
 
-                @yield('content')
 
+        <!-- Page body -->
+            <div class="page-body">
+                <div class="container-xl">
+
+                    @yield('content')
+
+                </div>
             </div>
+
+            <!-- Page Footer -->
+            @include('customer.layout.footer')
+
+
         </div>
-
-        <!-- Page Footer -->
-        @include('customer.layout.footer')
-
-
     </div>
-</div>
 
-<!-- Tabler Core -->
-<script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
-<script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
-<script src="{{ asset('libs/select2/select2.js') }}"></script>
-<script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
-<x-alerts.toastr />
-@stack('scripts')
+    <!-- Tabler Core -->
+    <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
+    <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
+
+    <x-alerts.toastr />
+    @stack('scripts')
+    
 </body>
 </html>
 
