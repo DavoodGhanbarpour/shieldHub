@@ -13,7 +13,8 @@
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
         "morilog/jalali": "3.*",
-        "nesbot/carbon": "^2.67"
+        "nesbot/carbon": "^2.67",
+        "shetabit/visitor": "^4.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
