@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('inbound_user', function (Blueprint $table) {
             $table->after('inbound_id',function (Blueprint $table){
-                $table->unsignedDouble('subscription_price_per_month');
+                $table->unsignedDouble('subscription_price_per_month')->default(0);
                 $table->text('description')->nullable();
                 $table->text('private_description')->nullable();
                 $table->unsignedDouble('payment_amount')->nullable();
