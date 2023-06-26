@@ -36,24 +36,25 @@
                                placeholder="{{__('app.inbounds.date')}}">
                     </div>
                 </div>
-
+                
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label">{{__('app.inbounds.link')}}</label>
+                    <label class="form-label required">{{__('app.inbounds.link')}}</label>
                     <div>
-                        <input type="text" name="link" class="form-control" placeholder="{{__('app.inbounds.link')}}"
-                               value="{{$inbound->link}}">
+                        <textarea name="link" rows="3" class="form-control" placeholder="{{__('app.inbounds.link')}}">
+                            {{$inbound->link}}
+                        </textarea>
                     </div>
                 </div>
 
                 <div class="col-md-12 mb-3">
                     <label class="form-label">{{__('app.inbounds.description')}}</label>
                     <div>
-                        <input type="text" name="description" class="form-control"
-                               placeholder="{{__('app.inbounds.description')}}" value="{{$inbound->description}}">
+                        <textarea type="text" rows="3" name="description" class="form-control" placeholder="{{__('app.inbounds.description')}}">
+                            {{$inbound->description}}
+                        </textarea>
                     </div>
                 </div>
-
             </div>
 
         </div>

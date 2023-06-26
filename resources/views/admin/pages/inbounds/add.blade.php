@@ -38,15 +38,15 @@
                 <div class="col-md-12 mb-3">
                     <label class="form-label required">{{__('app.inbounds.link')}}</label>
                     <div>
-                        <input type="text" name="link" class="form-control" placeholder="{{__('app.inbounds.link')}}">
+                        <textarea name="link" rows="3" class="form-control" placeholder="{{__('app.inbounds.link')}}"></textarea>
                     </div>
                 </div>
 
                 <div class="col-md-12 mb-3">
                     <label class="form-label">{{__('app.inbounds.description')}}</label>
                     <div>
-                        <input type="text" name="description" class="form-control"
-                               placeholder="{{__('app.inbounds.description')}}">
+                        <textarea type="text" rows="3" name="description" class="form-control"
+                               placeholder="{{__('app.inbounds.description')}}"></textarea>
                     </div>
                 </div>
 
