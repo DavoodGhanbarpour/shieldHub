@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\AuthFacade;
 use App\Facades\UserFacade;
 use App\Http\Requests\AuthenticateRequest;
 use Illuminate\Http\RedirectResponse;
@@ -12,24 +13,24 @@ class AuthController extends Controller
 {
     public function authenticate(AuthenticateRequest $request, string $locale): RedirectResponse
     {
-        $remember = $request->get('remember') ?? false;
+        $result = AuthFacade::authenticate(
+            $request->get('email'),
+            $request->get('password'),
+            $request->get('remember') ?? false,
+        );
 
-        if (Auth::attempt($request->validated(), $remember)) {
-            $request->session()->regenerate();
+        if ($result) {
             $user = auth()->user();
+            UserFacade::setLocale($locale, $user->id);
+            UserFacade::updateLastVisit($user->id);
 
-            if ($locale != $user->locale) {
-                UserFacade::upsert(['locale' => $locale], $user->id);
-            }
-            if ($user->isAdmin()) {
-                return redirect()->route('admin.home');
-            }
+            if ($user->isAdmin()) return redirect()->route('admin.home');
 
             return redirect()->route('customer.home');
         }
         // TODO need a way to return a global format
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            __('auth.failed'),
         ]);
     }
 
