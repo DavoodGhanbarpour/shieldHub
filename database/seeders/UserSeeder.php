@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Inbound;
+use App\Models\Server;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -13,8 +15,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $inbounds = Inbound::factory()
+            ->count(10)
+            ->for(Server::factory()
+                ->create())
+            ->create();
+
         User::factory()
-            ->has(Inbound::factory()->count(3))
+            ->hasAttached($inbounds, [
+                'subscription_price_per_month' => fake()->numberBetween('0'),
+                'start_date' => fake()->date(),
+                'end_date' => Carbon::parse(fake()->date())->addMonth(1),
+            ])
             ->count(10)
             ->create();
     }
