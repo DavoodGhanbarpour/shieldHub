@@ -18,7 +18,7 @@ class ServerController extends Controller
      */
     public function index()
     {
-        return view('', [
+        return view('admin.pages.servers.index', [
             'servers' => ServerResource::collection(Server::all())
         ]);
     }
@@ -28,7 +28,7 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('');
+        return view('admin.pages.servers.add');
     }
 
     /**
@@ -55,7 +55,7 @@ class ServerController extends Controller
      */
     public function edit(string $id)
     {
-        return view('', [
+        return view('admin.pages.servers.edit', [
             'server' => Server::findOrFail($id)
         ]);
     }
