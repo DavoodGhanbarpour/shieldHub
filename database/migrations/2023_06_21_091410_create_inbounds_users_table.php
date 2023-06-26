@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('inbound_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Inbound::class);
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Inbound::class)->constrained();
             $table->timestamps();
         });
     }
