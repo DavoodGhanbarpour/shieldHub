@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->text('description')->nullable();
-            $table->unsignedDouble('subscription_price_per_month')->nullable();
+            $table->unsignedDouble('subscription_price_per_month')->default(0);
             $table->timestamps();
         });
     }
