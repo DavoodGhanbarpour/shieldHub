@@ -70,7 +70,7 @@
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                                     <div class="btn-list flex-nowrap">
-                                        <x-buttons.copy :class="'copy-button'" data-id="{{$eachInbound->id}}"/>
+                                        <x-buttons.copy/>
                                         <x-buttons.edit :link="route('admin.inbounds.edit', ['inbound' => $eachInbound->id])"/>
                                         <x-buttons.destroy :link="route('admin.inbounds.destroy', ['inbound' => $eachInbound->id])"/>
                                     </div>
