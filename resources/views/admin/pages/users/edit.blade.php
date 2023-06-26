@@ -22,7 +22,7 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label required">{{__('app.auth.email_address')}}</label>
                     <div>
-                        <input type="email" value="{{ $user->email }}" disabled name="email" class="form-control"
+                        <input type="email" value="{{ $user->email }}"  name="email" class="form-control"
                                aria-describedby="emailHelp" placeholder="{{__('app.auth.email_address')}}">
                     </div>
                 </div>

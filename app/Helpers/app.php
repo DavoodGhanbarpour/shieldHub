@@ -5,10 +5,10 @@ use Carbon\Carbon;
 use Morilog\Jalali\CalendarUtils;
 use Morilog\Jalali\Jalalian;
 
-if (!function_exists('convertDate')) {
+if (! function_exists('convertDate')) {
     function convertDate($date, $destCalendar = null)
     {
-        if (!isset($destCalendar)) {
+        if (! isset($destCalendar)) {
             $destCalendar = config()->get('app.locale');
         }
 

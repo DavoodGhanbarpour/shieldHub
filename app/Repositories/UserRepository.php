@@ -37,22 +37,32 @@ class UserRepository
     public function setLocale(string $locale, int $id): User
     {
         throw_if(
-            !in_array($locale, array_column(User::SUPPORTED_LANGUAGES, 'key')),
+            ! in_array($locale, array_column(User::SUPPORTED_LANGUAGES, 'key')),
             new NotInSupportedLanguagesListException("Provided language {$locale} is not supported")
         );
+
         return $this->upsert([
-            'locale' => $locale
+            'locale' => $locale,
         ], $id);
     }
 
     public function updateLastVisit(int $id, $date = null): User
     {
-        if (!isset($date)) {
+        if (! isset($date)) {
             $date = Carbon::now();
         }
+
         return $this->upsert([
-            'last_visit' => $date
+            'last_visit' => $date,
         ], $id);
+    }
+
+    public function isEmailUnique(string $email, array $emailsToIgnore = []): bool
+    {
+        return (bool) User::query()
+            ->where('email', '=', $email)
+            ->whereNotIn('email', $emailsToIgnore)
+            ->count();
     }
 
     public function UserShouldBeAdmin()

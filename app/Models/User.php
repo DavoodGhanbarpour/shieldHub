@@ -86,7 +86,7 @@ class User extends Authenticatable
     protected function last_visit(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
+            set: fn (string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
         );
     }
 }

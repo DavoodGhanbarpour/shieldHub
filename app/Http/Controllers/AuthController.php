@@ -24,7 +24,9 @@ class AuthController extends Controller
             UserFacade::setLocale($locale, $user->id);
             UserFacade::updateLastVisit($user->id);
 
-            if ($user->isAdmin()) return redirect()->route('admin.home');
+            if ($user->isAdmin()) {
+            return redirect()->route('admin.home');
+            }
 
             return redirect()->route('customer.home');
         }
