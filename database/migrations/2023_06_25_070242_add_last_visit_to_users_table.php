@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('last_visit')->nullable();
+            $table->after('remember_token',function (Blueprint $table){
+                $table->dateTime('last_visit')->nullable();
+            });
         });
     }
 

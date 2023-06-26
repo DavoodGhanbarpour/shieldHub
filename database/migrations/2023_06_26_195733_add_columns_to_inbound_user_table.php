@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('inbound_user', function (Blueprint $table) {
-            $table->unsignedDouble('subscription_price_per_month');
-            $table->text('description');
-            $table->text('private_description');
-            $table->unsignedDouble('payment_amount');
-            $table->date('payment_date');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->after('inbound_id',function (Blueprint $table){
+                $table->unsignedDouble('subscription_price_per_month');
+                $table->text('description')->nullable();
+                $table->text('private_description')->nullable();
+                $table->unsignedDouble('payment_amount')->nullable();
+                $table->date('payment_date')->nullable();
+                $table->date('start_date');
+                $table->date('end_date');
+            });
+
         });
     }
 

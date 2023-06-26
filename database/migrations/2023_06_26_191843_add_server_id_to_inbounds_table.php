@@ -12,7 +12,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('inbounds', function (Blueprint $table) {
-            $table->foreignIdFor(Server::class)->constrained();
+            $table->after('date',function (Blueprint $table){
+                $table->foreignIdFor(Server::class)->constrained();
+            });
         });
     }
 
