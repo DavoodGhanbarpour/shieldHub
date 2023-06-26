@@ -72,11 +72,11 @@ body, button, input, select {
 
 
 .border_right {
-    border-right: 1px solid #dadfe5 !important;
+    border-right: var(--tblr-border-width) solid var(--tblr-border-color) !important;
 }
 
 .border_left {
-    border-left: 1px solid #dadfe5 !important;
+    border-left: var(--tblr-border-width) solid var(--tblr-border-color) !important;
 }
 
 .select2 {
