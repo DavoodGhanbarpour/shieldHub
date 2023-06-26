@@ -82,6 +82,7 @@
 <script src="{{ asset('libs/select2/select2.js') }}"></script>
 <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
 <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
+<script src="{{ asset('js/number-format.js') }}" defer></script>
 
 <script>
     $(document).ready(function() {
