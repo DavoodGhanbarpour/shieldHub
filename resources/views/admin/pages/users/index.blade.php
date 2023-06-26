@@ -42,6 +42,9 @@
                         <th>
                             <button class="table-sort" data-sort="sort-inbounds">{{__('app.inbounds.inbounds')}}</button>
                         </th>
+                        <th>
+                            <button class="table-sort" data-sort="sort-last-visit">{{__('app.auth.last_visit')}}</button>
+                        </th>
                         <th>{{__('app.pageComponents.actions')}}</th>
                     </tr>
                     </thead>
@@ -54,6 +57,7 @@
                             <td class="sort-email">{{$eachUser->email}}</td>
                             <td class="sort-role">{{__('app.auth.roles.'.$eachUser->role)}}</td>
                             <td class="sort-inbounds">{{$eachUser->inbounds_count}}</td>
+                            <td class="sort-last-visit">{{$eachUser->last_visit}}</td>
                             <td>
                                 <div class="btn-list flex-nowrap">
 

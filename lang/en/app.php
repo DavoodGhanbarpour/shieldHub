@@ -34,6 +34,7 @@ return [
         ],
         'login' => 'Login',
         'logout' => 'Logout',
+        'last_visit' => 'Last visit',
     ],
     'inbounds' => [
         'inbound' => 'Inbound',

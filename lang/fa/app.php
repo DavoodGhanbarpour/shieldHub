@@ -34,6 +34,7 @@ return [
         ],
         'login' => 'ورود',
         'logout' => 'خروج',
+        'last_visit' => 'آخرین بازدید',
     ],
     'inbounds' => [
         'inbound' => 'ورودی',
