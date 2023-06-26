@@ -52,6 +52,7 @@ return [
         'quota' => 'روز باقی مانده',
         'days_remain' => ':count روز باقی مانده',
         'inbounds_clients' => 'نرم افزار های V2ray',
+        'users_count' => 'تعداد کاربر',
     ],
     'pageComponents' => [
         'new' => 'جدید',

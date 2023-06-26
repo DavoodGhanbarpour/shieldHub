@@ -45,6 +45,9 @@
                         <th>
                             <button class="table-sort" data-sort="sort-description">{{__('app.inbounds.description')}}</button>
                         </th>
+                        <th>
+                            <button class="table-sort" data-sort="sort-users-count">{{__('app.inbounds.users_count')}}</button>
+                        </th>
                         <th>{{__('app.pageComponents.actions')}}</th>
                     </tr>
                     </thead>
@@ -65,6 +68,9 @@
                                 </td>
                                 <td class="sort-description">
                                     {{$eachInbound->description}}
+                                </td>
+                                <td class="sort-users-count">
+                                    {{$eachInbound->user_count}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
