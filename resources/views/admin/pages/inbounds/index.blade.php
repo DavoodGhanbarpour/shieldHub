@@ -70,7 +70,7 @@
                                     {{$eachInbound->description}}
                                 </td>
                                 <td class="sort-users-count">
-                                    {{$eachInbound->user_count}}
+                                    {{$eachInbound->users_count}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
