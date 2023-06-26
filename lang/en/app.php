@@ -52,6 +52,7 @@ return [
         'quota' => 'Quota',
         'days_remain' => ':count day(s) remains',
         'inbounds_clients' => 'V2ray clients',
+        'users_count' => 'Users count',
     ],
     'pageComponents' => [
         'new' => 'New',

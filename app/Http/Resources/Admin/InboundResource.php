@@ -14,6 +14,15 @@ class InboundResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'ip' => $this->ip,
+            'port' => $this->port,
+            'link' => $this->link,
+            'date' => $this->date,
+            'description' => $this->description,
+            'users_count' => $this->users_count,
+        ];
     }
 }
