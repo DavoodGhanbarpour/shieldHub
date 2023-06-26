@@ -19,6 +19,7 @@ class ServerFactory extends Factory
     {
         return [
             'title' => fake()->text('10'),
+            'ip' => fake()->ipv4(),
             'start_date' => fake()->date(),
             'end_date' => Carbon::parse(fake()->date())->addMonth(1),
             'description' => fake()->text('50'),
