@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\AuthRepository;
 use App\Repositories\InboundRepository;
+use App\Repositories\ServerRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,6 +18,8 @@ class FacadeServiceProvider extends ServiceProvider
         app()->singleton('UserFacade', UserRepository::class);
         app()->singleton('InboundFacade', InboundRepository::class);
         app()->singleton('AuthFacade', AuthRepository::class);
+        app()->singleton('AuthFacade', AuthRepository::class);
+        app()->singleton('ServerFacade', ServerRepository::class);
     }
 
     /**

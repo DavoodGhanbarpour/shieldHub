@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
-class Inbound extends Model
+class Server extends Model
 {
     use HasFactory;
 
@@ -19,26 +18,26 @@ class Inbound extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'server_id',
         'title',
-        'link',
+        'start_date',
+        'end_date',
         'description',
-        'port',
-        'ip',
-        'date',
+        'subscription_price_per_month',
     ];
 
-    public function users(): BelongsToMany
+    public function inbounds(): HasMany
     {
-        return $this->belongsToMany(User::class, 'inbound_user')->using(InboundUser::class);
+        return $this->hasMany(Inbound::class);
     }
 
-    public function server() : BelongsTo
+    protected function end_date(): Attribute
     {
-        return $this->belongsTo(Server::class);
+        return Attribute::make(
+            set: fn (string $value) => Carbon::parse($value)->format('Y-m-d')
+        );
     }
 
-    protected function date(): Attribute
+    protected function start_date(): Attribute
     {
         return Attribute::make(
             set: fn (string $value) => Carbon::parse($value)->format('Y-m-d')

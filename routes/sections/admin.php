@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InboundController;
+use App\Http\Controllers\Admin\ServerController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,3 +13,5 @@ Route::get('users/{user}/inbounds', [UserController::class, 'inbounds'])->name('
 Route::post('users/{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
 
 Route::resource('inbounds', InboundController::class);
+
+Route::resource('servers', ServerController::class);
