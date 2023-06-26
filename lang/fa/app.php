@@ -28,9 +28,9 @@ return [
         'generate_password' => 'ایجاد گذواژه',
         'roles' => [
             User::CUSTOMER => 'مشتری',
-            User::CUSTOMER . 's' => 'مشتریان',
+            User::CUSTOMER.'s' => 'مشتریان',
             User::ADMIN => 'ادمین',
-            User::ADMIN . 's' => 'ادمین ها',
+            User::ADMIN.'s' => 'ادمین ها',
         ],
         'login' => 'ورود',
         'logout' => 'خروج',

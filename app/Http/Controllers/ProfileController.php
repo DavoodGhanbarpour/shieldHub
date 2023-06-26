@@ -12,6 +12,7 @@ class ProfileController extends Controller
     public function changeLocale(ChangeUserLocaleRequest $request, User $user): RedirectResponse
     {
         UserFacade::upsert($request->validated(), $user->id);
+
         return redirect()->route('root');
     }
 }
