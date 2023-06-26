@@ -18,13 +18,11 @@ class ChangeUserLocaleRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
-            'locale' => ['required', Rule::in(array_column(User::SUPPORTED_LANGUAGES, 'key'))]
+            'locale' => ['required', Rule::in(array_column(User::SUPPORTED_LANGUAGES, 'key'))],
         ];
     }
 }

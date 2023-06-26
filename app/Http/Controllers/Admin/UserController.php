@@ -11,6 +11,7 @@ use App\Http\Resources\Admin\UserInboundsResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -25,7 +26,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         UserFacade::upsert($request->validated());
 
@@ -45,7 +46,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(int $id): UserResource
     {
         return UserResource::make(User::findOrFail($id));
     }
@@ -63,14 +64,20 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, int $id)
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
+        if (UserFacade::isEmailUnique($request->get('email'), [$user->email])) {
+            return back()->withErrors([
+                __('validation.exists', ['attribute' => $request->get('email')]),
+            ]);
+        }
+
         $inputs = $request->validated();
         if (! isset($inputs['password'])) {
             unset($inputs['password']);
         }
 
-        UserFacade::upsert($inputs, $id);
+        UserFacade::upsert($inputs, $user->id);
 
         return redirect()->route('admin.users.index');
     }
@@ -102,7 +109,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function assignInbounds(AssignInboundsRequest $request, User $user)
+    public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
         $user->inbounds()->sync($request->get('inbounds'));
 

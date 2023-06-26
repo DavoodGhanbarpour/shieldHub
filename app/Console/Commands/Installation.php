@@ -65,7 +65,6 @@ class Installation extends Command
         $this->call('migrate');
     }
 
-
     private function makeDefaultUsers(): array
     {
         $password = 'password';

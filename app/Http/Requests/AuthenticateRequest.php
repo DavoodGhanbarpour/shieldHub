@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Models\User;
 use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class AuthenticateRequest extends FormRequest
 {

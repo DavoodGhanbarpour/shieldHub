@@ -17,10 +17,13 @@ Route::fallback(function () {
     return abort(404);
 });
 
-Route::middleware('guest')->get('/', function () { return redirect()->route('auth.login'); })->name('root');
+Route::middleware('guest')->get('/', function () {
+return redirect()->route('auth.login');
+})->name('root');
 Route::get('/home', function () {
-    if(auth()->user()->isAdmin())
+    if (auth()->user()->isAdmin()) {
         return redirect()->route('admin.home');
+    }
 
     return redirect()->route('customer.home');
 })->name('home');

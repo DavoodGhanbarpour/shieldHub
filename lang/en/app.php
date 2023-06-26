@@ -28,9 +28,9 @@ return [
         'generate_password' => 'Generate Password',
         'roles' => [
             User::CUSTOMER => 'Customer',
-            User::CUSTOMER . 's' => 'Customers',
+            User::CUSTOMER.'s' => 'Customers',
             User::ADMIN => 'Admin',
-            User::ADMIN . 's' => 'Admins',
+            User::ADMIN.'s' => 'Admins',
         ],
         'login' => 'Login',
         'logout' => 'Logout',
