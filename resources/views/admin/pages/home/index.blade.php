@@ -30,10 +30,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $userCounts['customers'] }} {{ __('app.auth.roles.customers') }}
+                                        {{ $user_counts['customers'] }} {{ __('app.auth.roles.customers') }}
                                     </div>
                                     <div class="text-muted">
-                                        {{ $userCounts['admins'] }} {{ __('app.auth.roles.admins') }}
+                                        {{ $user_counts['admins'] }} {{ __('app.auth.roles.admins') }}
                                     </div>
                                 </div>
                             </div>
@@ -56,10 +56,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{__('app.inbounds.inbounds_in_use', ['count' => $inboundCounts['inUse'] ])}}
+                                        {{__('app.inbounds.inbounds_in_use', ['count' => $inbound_counts['inUse'] ])}}
                                     </div>
                                     <div class="text-muted">
-                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $inboundCounts['notInUse'] ])}}
+                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $inbound_counts['notInUse'] ])}}
                                     </div>
                                 </div>
                             </div>
