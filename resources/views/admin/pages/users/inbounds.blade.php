@@ -16,8 +16,14 @@
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                             <div class="ribbon-container">
+                                @php
+                                    if ($eachInbound->users_count > 0)
+                                        $BGClass = 'success';
+                                    else
+                                        $BGClass = 'secondary';
+                                @endphp
                                 <div class="ribbon btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
-                                <div class="ribbon btn fw-bold fs-4 border-success bg-success btn-success">{{$eachInbound->users_count}}</div>
+                                <div class="ribbon btn fw-bold fs-4 border-{{$BGClass}} bg-{{$BGClass}} btn-{{$BGClass}}">{{$eachInbound->users_count}}</div>
                             </div>
                             <div class="card-body">
                                 <p class="card-title w-85 fs-4 fw-bold">{{$eachInbound->title}}</p>
