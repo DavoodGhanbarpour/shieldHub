@@ -86,7 +86,9 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
-        new DataTable('.datatable');
+        new DataTable('.datatable', {
+            stateSave: true,
+        });
     });
 </script>
 
