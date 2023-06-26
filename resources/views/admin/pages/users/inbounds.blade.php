@@ -15,13 +15,15 @@
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
-                            <div
-                                class="ribbon btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
+                            <div class="ribbon-container">
+                                <div class="ribbon btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
+                                <div class="ribbon btn fw-bold fs-4 border-success bg-success btn-success">{{$eachInbound->users_count}}</div>
+                            </div>
                             <div class="card-body">
-                                <p class="card-title fw-bold">{{$eachInbound->title}}</p>
+                                <p class="card-title w-85 fs-4 fw-bold">{{$eachInbound->title}}</p>
                                 <hr class="p-0 m-0">
-                                <p class="card-title my-2" dir="ltr">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
-                                <p>
+                                <p class="card-title fs-4 text-muted my-2" dir="ltr">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
+                                <p class="text-muted">
                                     {{$eachInbound->description}}
                                     {{--{{$eachInbound->users_count}}--}}
                                 </p>
@@ -99,6 +101,14 @@
 
     @push('styles')
         <style>
+            .ribbon-container .ribbon:nth-of-type(1) {
+                top: 0.75rem;
+            }
+
+            .ribbon-container .ribbon:nth-of-type(2) {
+                top: 2.9rem;
+            }
+            
             .copy-button {
                 cursor: copy;
             }
