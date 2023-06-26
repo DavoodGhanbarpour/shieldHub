@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->ipAddress('ip');
             $table->date('start_date');
             $table->date('end_date');
             $table->text('description')->nullable();
