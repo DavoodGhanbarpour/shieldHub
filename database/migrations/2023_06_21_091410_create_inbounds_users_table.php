@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('inbound_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Inbound::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Inbound::class);
             $table->timestamps();
         });
     }
