@@ -61,8 +61,8 @@
 
         <div class="card-footer text-end">
             <div class="d-flex">
-                <a href="{{ url()->previous() }}" class="btn btn-link">{{__('app.pageComponents.cancel')}}</a>
-                <button type="submit" class="btn btn-primary ms-auto">{{__('app.pageComponents.submit')}}</button>
+                <x-buttons.cancel/>
+                <x-buttons.submit/>
             </div>
         </div>
 
