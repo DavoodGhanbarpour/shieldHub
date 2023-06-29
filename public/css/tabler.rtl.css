@@ -16900,7 +16900,7 @@ Navbar vertical
     z-index: 1030;
     align-items: flex-start;
     transition: transform 0.3s;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0;
   }
 }
