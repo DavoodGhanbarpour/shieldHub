@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\ServerStoreRequest;
 use App\Http\Requests\Admin\ServerUpdateRequest;
 use App\Http\Resources\Admin\ServerResource;
 use App\Models\Server;
-use Cknow\Money\Money;
 use Illuminate\Http\RedirectResponse;
 
 class ServerController extends Controller
@@ -36,6 +35,7 @@ class ServerController extends Controller
      */
     public function store(ServerStoreRequest $request): RedirectResponse
     {
+        dd($request->validated());
         ServerFacade::upsert($request->validated());
         return redirect()->route('admin.servers.index');
     }
@@ -75,6 +75,11 @@ class ServerController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
+        if( Server::withCount('inbounds')->first()->inbounds_count ){
+            return redirect()->back()->withErrors([
+                __('app.messages.server_has_children')
+            ]);
+        }
         ServerFacade::delete($id);
         return redirect()->route('admin.servers.index');
     }

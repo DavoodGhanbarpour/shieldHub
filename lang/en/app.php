@@ -20,6 +20,9 @@ return [
         'end_date' => 'End date',
         'subscription_price_per_month' => 'Subscription price/month',
     ],
+    'messages' => [
+        'server_has_children' => 'Server has inbounds connected to it',
+    ],
     'login' => [
         'login_to_your_account' => 'Login to your account',
         'remember' => 'Remember me on this device',
