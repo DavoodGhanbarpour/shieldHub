@@ -20,6 +20,11 @@ class InboundController extends Controller
         return view('admin.pages.inbounds.add');
     }
 
+    public function multipleCreate()
+    {
+        return view('admin.pages.inbounds.add-multiple');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

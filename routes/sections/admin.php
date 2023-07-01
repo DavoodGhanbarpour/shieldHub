@@ -13,5 +13,6 @@ Route::get('users/{user}/inbounds', [UserController::class, 'inbounds'])->name('
 Route::post('users/{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
 
 Route::resource('inbounds', InboundController::class);
+Route::view('inbounds/add-multiple', 'admin.pages.inbounds.add-multiple')->name('inbounds.multipleCreate');
 
 Route::resource('servers', ServerController::class);

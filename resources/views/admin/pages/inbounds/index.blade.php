@@ -6,6 +6,7 @@
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
             <x-buttons.add :title="__('app.pageComponents.add') .' '. __('app.inbounds.inbound')"/>
+            <x-buttons.add :class="'btn-info'" :link="route('admin.inbounds.multipleCreate')" :title="__('app.pageComponents.add') .' '. __('app.inbounds.inbounds')"/>
         </div>
     </div>
 @endsection
