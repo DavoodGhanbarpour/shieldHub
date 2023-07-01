@@ -20,9 +20,14 @@ class InboundController extends Controller
         return view('admin.pages.inbounds.add');
     }
 
-    public function multipleCreate()
+    public function bulkCreate()
     {
         return view('admin.pages.inbounds.add-multiple');
+    }
+
+    public function bulkStore()
+    {
+        dd('');
     }
 
     /**

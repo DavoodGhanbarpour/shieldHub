@@ -12,7 +12,8 @@ Route::resource('users', UserController::class);
 Route::get('users/{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
 Route::post('users/{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
 
+Route::get('inbounds/bulk-create', [InboundController::class, 'bulkCreate'])->name('inbounds.bulk.create');
+Route::get('inbounds/bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
 Route::resource('inbounds', InboundController::class);
-Route::view('inbounds/add-multiple', 'admin.pages.inbounds.add-multiple')->name('inbounds.multipleCreate');
 
 Route::resource('servers', ServerController::class);
