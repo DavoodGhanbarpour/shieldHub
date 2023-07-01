@@ -13,7 +13,7 @@ Route::get('users/{user}/inbounds', [UserController::class, 'inbounds'])->name('
 Route::post('users/{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
 
 Route::get('inbounds/bulk-create', [InboundController::class, 'bulkCreate'])->name('inbounds.bulk.create');
-Route::get('inbounds/bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
+Route::post('inbounds/bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
 Route::resource('inbounds', InboundController::class);
 
 Route::resource('servers', ServerController::class);
