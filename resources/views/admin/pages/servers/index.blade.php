@@ -59,7 +59,7 @@
                                     {{$eachServer->description}}
                                 </td>
                                 <td class="sort-users-count">
-                                    {{$eachServer->subscription_price_per_month}}
+                                    {{number_format($eachServer->subscription_price_per_month)}}
                                 </td>
                                 <td class="copy-parent">
                                     <div class="btn-list flex-nowrap">

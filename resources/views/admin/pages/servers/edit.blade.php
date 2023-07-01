@@ -14,7 +14,7 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
-                        <input type="text" name="title" value="{{$inbound->title}}" class="form-control" placeholder="{{__('app.general.title')}}">
+                        <input type="text" name="title" value="{{$server->title}}" class="form-control" placeholder="{{__('app.general.title')}}">
                     </div>
                 </div>
 
@@ -22,7 +22,7 @@
                     <label class="form-label required">{{__('app.general.start_date')}}</label>
                     <div>
                         <input type="text" name="start_date" class="form-control datepicker"
-                            value="{{$inbound->start_date}}" placeholder="{{__('app.general.start_date')}}">
+                            value="{{$server->start_date}}" placeholder="{{__('app.general.start_date')}}">
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label class="form-label required">{{__('app.general.end_date')}}</label>
                     <div>
                         <input type="text" name="end_date" class="form-control datepicker"
-                            value="{{$inbound->end_date}}" placeholder="{{__('app.general.end_date')}}">
+                            value="{{$server->end_date}}" placeholder="{{__('app.general.end_date')}}">
                     </div>
                 </div>
 
@@ -39,17 +39,17 @@
                     <div class="row">
 
                         <div class="col-md-12 mb-3" id="inputParent">
-                            <label class="form-label required">{{__('app.servers.ip')}}</label>
+                            <label class="form-label required">{{__('app.general.ip')}}</label>
                             <div>
-                                <input type="text" name="ip" value="{{$inbound->end_date}}"
-                                    class="form-control" placeholder="{{__('app.servers.ip')}}">
+                                <input type="text" name="ip" value="{{$server->ip}}"
+                                    class="form-control" placeholder="{{__('app.general.ip')}}">
                             </div>
                         </div>
 
                         <div class="col-md-12 mb-3">
                             <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
                             <div>
-                                <input type="text" value="{{$inbound->subscription_price_per_month}}" name="subscription_price_per_month"
+                                <input type="text" value="{{number_format($server->subscription_price_per_month)}}" name="subscription_price_per_month"
                                     class="form-control number_format" placeholder="{{__('app.general.subscription_price_per_month')}}">
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
                                 <textarea id="textarea" name="description" rows="4" class="form-control"
-                                    placeholder="{{__('app.general.description')}}">{{$inbound->description}}</textarea>
+                                    placeholder="{{__('app.general.description')}}">{{$server->description}}</textarea>
                             </div>
                         </div>
                     </div>

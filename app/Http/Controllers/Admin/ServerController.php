@@ -66,7 +66,9 @@ class ServerController extends Controller
      */
     public function update(ServerUpdateRequest $request, string $id): RedirectResponse
     {
-        ServerFacade::upsert($request->validated(), $id);
+        $data = $request->validated();
+        $data['subscription_price_per_month'] = str_replace(',','',$data['subscription_price_per_month']);
+        ServerFacade::upsert($data, $id);
         return redirect()->route('admin.servers.index');
 
     }
