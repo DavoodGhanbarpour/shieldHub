@@ -12,28 +12,28 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.servers.title')}}</label>
+                    <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
-                        <input type="text" name="title" value="{{$inbound->title}}" class="form-control" placeholder="{{__('app.servers.title')}}">
+                        <input type="text" name="title" value="{{$inbound->title}}" class="form-control" placeholder="{{__('app.general.title')}}">
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.servers.start_date')}}</label>
+                    <label class="form-label required">{{__('app.general.start_date')}}</label>
                     <div>
                         <input type="text" name="start_date" class="form-control datepicker"
-                            value="{{$inbound->start_date}}" placeholder="{{__('app.servers.start_date')}}">
+                            value="{{$inbound->start_date}}" placeholder="{{__('app.general.start_date')}}">
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.servers.end_date')}}</label>
+                    <label class="form-label required">{{__('app.general.end_date')}}</label>
                     <div>
                         <input type="text" name="end_date" class="form-control datepicker"
-                            value="{{$inbound->end_date}}" placeholder="{{__('app.servers.end_date')}}">
+                            value="{{$inbound->end_date}}" placeholder="{{__('app.general.end_date')}}">
                     </div>
                 </div>
-                
+
 
                 <div class="col-md-4" id="twoInputsParent">
                     <div class="row">
@@ -41,29 +41,29 @@
                         <div class="col-md-12 mb-3" id="inputParent">
                             <label class="form-label required">{{__('app.servers.ip')}}</label>
                             <div>
-                                <input type="text" name="ip" value="{{$inbound->end_date}}" 
+                                <input type="text" name="ip" value="{{$inbound->end_date}}"
                                     class="form-control" placeholder="{{__('app.servers.ip')}}">
                             </div>
                         </div>
-        
+
                         <div class="col-md-12 mb-3">
-                            <label class="form-label required">{{__('app.servers.subscription_price_per_month')}}</label>
+                            <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
                             <div>
-                                <input type="text" value="{{$inbound->subscription_price_per_month}}" name="subscription_price_per_month" 
-                                    class="form-control number_format" placeholder="{{__('app.servers.subscription_price_per_month')}}">
+                                <input type="text" value="{{$inbound->subscription_price_per_month}}" name="subscription_price_per_month"
+                                    class="form-control number_format" placeholder="{{__('app.general.subscription_price_per_month')}}">
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">{{__('app.servers.description')}}</label>
+                            <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
                                 <textarea id="textarea" name="description" rows="4" class="form-control"
-                                    placeholder="{{__('app.servers.description')}}">{{$inbound->description}}</textarea>
+                                    placeholder="{{__('app.general.description')}}">{{$inbound->description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
     @endpush
 
     @push('scripts')
-        <script> 
+        <script>
             $(document).ready(adjustTextareaHeight);
             function adjustTextareaHeight() {
                 let height = Math.round(($('#inputParent').height() * 2) - $('#inputParent label').height() + 8);

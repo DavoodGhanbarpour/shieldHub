@@ -16,6 +16,9 @@ return [
         'email' => 'Email',
         'email_address' => 'Email address',
         'users_count' => 'Users count',
+        'start_date' => 'Start date',
+        'end_date' => 'End date',
+        'subscription_price_per_month' => 'Subscription price/month',
     ],
     'login' => [
         'login_to_your_account' => 'Login to your account',

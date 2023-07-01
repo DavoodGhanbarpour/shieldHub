@@ -22,22 +22,22 @@
                             <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-title">{{__('app.servers.title')}}</button>
+                            <button class="table-sort" data-sort="sort-title">{{__('app.general.title')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-ip">{{__('app.servers.ip')}}</button>
+                            <button class="table-sort" data-sort="sort-ip">{{__('app.general.ip')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.servers.start_date')}}</button>
+                            <button class="table-sort" data-sort="sort-date">{{__('app.general.start_date')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.servers.end_date')}}</button>
+                            <button class="table-sort" data-sort="sort-date">{{__('app.general.end_date')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-description">{{__('app.servers.description')}}</button>
+                            <button class="table-sort" data-sort="sort-description">{{__('app.general.description')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-users-count">{{__('app.servers.subscription_price_per_month')}}</button>
+                            <button class="table-sort" data-sort="sort-users-count">{{__('app.general.subscription_price_per_month')}}</button>
                         </th>
                         <th>{{__('app.pageComponents.actions')}}</th>
                     </tr>
