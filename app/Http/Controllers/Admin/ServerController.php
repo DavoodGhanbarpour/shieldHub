@@ -35,8 +35,9 @@ class ServerController extends Controller
      */
     public function store(ServerStoreRequest $request): RedirectResponse
     {
-        dd($request->validated());
-        ServerFacade::upsert($request->validated());
+        $data = $request->validated();
+        $data['subscription_price_per_month'] = str_replace(',','',$data['subscription_price_per_month']);
+        ServerFacade::upsert($data);
         return redirect()->route('admin.servers.index');
     }
 

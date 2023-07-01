@@ -19,6 +19,7 @@ class Server extends Model
      */
     protected $fillable = [
         'title',
+        'ip',
         'start_date',
         'end_date',
         'description',
