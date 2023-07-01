@@ -56,7 +56,7 @@
                     @csrf
                     <div class="mb-3">
                       <label class="form-label">{{__('app.auth.email_address')}}</label>
-                      <input type="email" class="form-control" name="email" placeholder="{{__('app.auth.email')}}" autocomplete="off">
+                      <input type="email" class="form-control" name="email" placeholder="{{__('app.general.email')}}" autocomplete="off">
                     </div>
                     <div class="mb-2">
                       <label class="form-label">

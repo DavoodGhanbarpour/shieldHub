@@ -11,9 +11,9 @@
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">{{__('app.auth.name')}}</label>
+                    <label class="form-label required">{{__('app.general.name')}}</label>
                     <div>
-                        <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="{{__('app.auth.name')}}">
+                        <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="{{__('app.general.name')}}">
                     </div>
                 </div>
 

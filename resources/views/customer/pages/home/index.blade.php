@@ -90,7 +90,7 @@
                                                 v2rayNG
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.android')}}
+                                                {{__('app.platforms.android')}}
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                                 v2rayN
                                             </div>
                                             <div class="text-info">
-                                                {{ __('app.platform.windows') }}
+                                                {{ __('app.platforms.windows') }}
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                                 FoXray
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.ios')}}
+                                                {{__('app.platforms.ios')}}
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@
                                                 V2Box
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.ios')}}
+                                                {{__('app.platforms.ios')}}
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@
                                                 FoXray
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.mac')}}
+                                                {{__('app.platforms.mac')}}
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                                 V2Box
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.mac')}}
+                                                {{__('app.platforms.mac')}}
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
         </div>
     </div>
 
-      
+
     <div class="modal" id="QRCodeModal" tabindex="-1">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -279,7 +279,7 @@
             </div>
         </div>
     </div>
-      
+
 
 
     @push('scripts')
@@ -292,12 +292,12 @@
             });
 
             $(document).on( 'click', '.qrcode-button', function(){
-            
+
                 makeCode($(this));
                 $('#QRCodeModal .copy-text').text($(this).closest('.copy-parent').find('.copy-text').text());
             });
 
-            function makeCode(element) {		
+            function makeCode(element) {
 
                 qrcode.makeCode(element.closest('.copy-parent').find('.copy-text').text());
             }

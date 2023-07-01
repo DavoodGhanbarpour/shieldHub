@@ -63,8 +63,8 @@
                                 </td>
                                 <td class="copy-parent">
                                     <div class="btn-list flex-nowrap">
-                                        <x-buttons.edit :link="route('admin.servers.edit', ['inbound' => $eachServer->id])"/>
-                                        <x-buttons.destroy :link="route('admin.servers.destroy', ['inbound' => $eachServer->id])"/>
+                                        <x-buttons.edit :link="route('admin.servers.edit', ['server' => $eachServer->id])"/>
+                                        <x-buttons.destroy :link="route('admin.servers.destroy', ['server' => $eachServer->id])"/>
                                     </div>
                                 </td>
                             </tr>

@@ -22,10 +22,10 @@
                             <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-name">{{__('app.auth.name')}}</button>
+                            <button class="table-sort" data-sort="sort-name">{{__('app.general.name')}}</button>
                         </th>
                         <th>
-                            <button class="table-sort" data-sort="sort-email">{{__('app.auth.email')}}</button>
+                            <button class="table-sort" data-sort="sort-email">{{__('app.general.email')}}</button>
                         </th>
                         <th>
                             <button class="table-sort" data-sort="sort-role">{{__('app.auth.role')}}</button>
