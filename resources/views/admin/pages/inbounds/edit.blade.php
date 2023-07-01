@@ -12,15 +12,15 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.title')}}</label>
+                    <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
                         <input type="text" name="title" value="{{$inbound->title}}" class="form-control"
-                               placeholder="{{__('app.inbounds.title')}}">
+                               placeholder="{{__('app.general.title')}}">
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.ip') . ':' . __('app.inbounds.port')}}</label>
+                    <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
                     <div class="input-group input-group-flat">
                         <input type="text" class="form-control w-75 border_right" name="ip" value="{{$inbound->ip}}"
                                placeholder="192.168.1.1" autocomplete="off">
@@ -30,29 +30,25 @@
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.date')}}</label>
+                    <label class="form-label required">{{__('app.general.date')}}</label>
                     <div>
                         <input type="text" name="date" value="{{$inbound->date}}" class="form-control datepicker"
-                               placeholder="{{__('app.inbounds.date')}}">
-                    </div>
-                </div>
-                
-
-                <div class="col-md-12 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.link')}}</label>
-                    <div>
-                        <textarea name="link" rows="3" class="form-control" placeholder="{{__('app.inbounds.link')}}">
-                            {{$inbound->link}}
-                        </textarea>
+                               placeholder="{{__('app.general.date')}}">
                     </div>
                 </div>
 
+
                 <div class="col-md-12 mb-3">
-                    <label class="form-label">{{__('app.inbounds.description')}}</label>
+                    <label class="form-label required">{{__('app.general.link')}}</label>
                     <div>
-                        <textarea type="text" rows="3" name="description" class="form-control" placeholder="{{__('app.inbounds.description')}}">
-                            {{$inbound->description}}
-                        </textarea>
+                        <textarea name="link" rows="3" class="form-control" placeholder="{{__('app.general.link')}}">{{$inbound->link}}</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">{{__('app.general.description')}}</label>
+                    <div>
+                        <textarea type="text" rows="3" name="description" class="form-control" placeholder="{{__('app.general.description')}}">{{$inbound->description}}</textarea>
                     </div>
                 </div>
             </div>

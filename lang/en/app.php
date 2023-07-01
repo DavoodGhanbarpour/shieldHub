@@ -22,7 +22,7 @@ return [
         'remember' => 'Remember me on this device',
         'sign_in' => 'Sign in',
     ],
-    'password' => [
+    'passwords' => [
         'password' => 'Password',
         'show_password' => 'Show password',
         'hide_password' => 'Hide password',

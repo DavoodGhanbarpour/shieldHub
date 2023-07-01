@@ -20,21 +20,21 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">{{__('app.auth.email_address')}}</label>
+                    <label class="form-label required">{{__('app.general.email_address')}}</label>
                     <div>
                         <input type="email" value="{{ $user->email }}"  name="email" class="form-control"
-                               aria-describedby="emailHelp" placeholder="{{__('app.auth.email_address')}}">
+                               aria-describedby="emailHelp" placeholder="{{__('app.general.email_address')}}">
                     </div>
                 </div>
 
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">{{__('app.auth.password')}}</label>
+                    <label class="form-label required">{{__('app.passwords.password')}}</label>
                     <div class="input-group input-group-flat">
                         <input type="password" id="password" class="form-control" name="password"
-                               placeholder="{{__('app.auth.password')}}" autocomplete="new-password">
+                               placeholder="{{__('app.passwords.password')}}" autocomplete="new-password">
                         <span class="input-group-text">
-                        <a href="#" class="link-secondary" id="passwordDisplay" title="Show password"
+                        <a href="#" class="link-secondary" id="passwordDisplay" title="{{__('app.passwords.show_password')}}"
                             data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -46,7 +46,7 @@
                             </svg>
                         </a>
                     </span>
-                        <button id="randomPassword" class="btn" type="button">{{__('app.auth.generate_password')}}</button>
+                        <button id="randomPassword" class="btn" type="button">{{__('app.passwords.generate_password')}}</button>
                     </div>
                 </div>
 
@@ -80,13 +80,13 @@
         <script>
             $(document).on('click', '#passwordDisplay', function () {
 
-                if ($(this).hasClass('text-info')) {
+                if ( $(this).hasClass('text-info') ) {
                     $(this).removeClass('text-info');
-                    $(this).attr('data-bs-original-title', 'Show password').tooltip('show');
+                    $(this).attr('data-bs-original-title', '{{__('app.passwords.show_password')}}').tooltip('show');
                     $('#password').attr('type', 'password');
                 } else {
                     $(this).addClass('text-info');
-                    $(this).attr('data-bs-original-title', 'Hide password').tooltip('show');
+                    $(this).attr('data-bs-original-title', '{{__('app.passwords.hide_password')}}').tooltip('show');
                     $('#password').attr('type', 'text');
                 }
             });
