@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row">
                 @foreach($inbounds as $eachInbound)
-                    <div class="col-lg-6 col-xl-3 mb-3 inbound-card-parent">
+                    <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent">
                         <div class="card inbound-card copy-parent {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
@@ -22,13 +22,13 @@
                                     else
                                         $BGClass = 'secondary';
                                 @endphp
-                                <div class="ribbon btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
-                                <div class="ribbon btn fw-bold fs-4 border-{{$BGClass}} bg-{{$BGClass}} btn-{{$BGClass}}">{{$eachInbound->users_count}}</div>
+                                <div class="ribbon w-18 btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
+                                <div class="ribbon w-12 btn fw-bold fs-4 border-{{$BGClass}} bg-{{$BGClass}} btn-{{$BGClass}}">{{$eachInbound->users_count}}</div>
                             </div>
                             <div class="card-body">
                                 <p class="card-title w-85 fs-4 fw-bold">{{$eachInbound->title}}</p>
                                 <hr class="p-0 m-0">
-                                <p class="card-title fs-4 text-muted my-2" dir="ltr">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
+                                <p class="card-title fs-4 text-muted my-2">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
                                 <p class="text-muted">
                                     {{$eachInbound->description}}
                                     {{--{{$eachInbound->users_count}}--}}
