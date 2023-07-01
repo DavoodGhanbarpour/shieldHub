@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\CommaSeparatedPrice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServerUpdateRequest extends FormRequest
@@ -26,7 +27,7 @@ class ServerUpdateRequest extends FormRequest
             'start_date' => ['date', 'required'],
             'end_date' => ['date', 'required'],
             'description' => ['string','nullable'],
-            'subscription_price_per_month' => ['integer','max:10', 'required'],
+            'subscription_price_per_month' => ['max:10', 'required', new CommaSeparatedPrice()],
         ];
     }
 }
