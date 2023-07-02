@@ -10,6 +10,20 @@
         <div class="card-header row">
 
             <div class="w-auto ps-0">
+                <a href="#"  data-bs-toggle="modal" data-bs-target="#inboudsModal" class="btn btn-primary btn-block d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-zoom-replace" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M21 21l-6 -6"></path>
+                        <path d="M3.291 8a7 7 0 0 1 5.077 -4.806a7.021 7.021 0 0 1 8.242 4.403"></path>
+                        <path d="M17 4v4h-4"></path>
+                        <path d="M16.705 12a7 7 0 0 1 -5.074 4.798a7.021 7.021 0 0 1 -8.241 -4.403"></path>
+                        <path d="M3 16v-4h4"></path>
+                     </svg>
+                    Extractor
+                </a>
+            </div>
+
+            <div class="w-auto ps-0">
                 <a href="#" data-repeater-create class="btn btn-success btn-block d-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -111,6 +125,26 @@
 
     </form>
 
+
+    <div class="modal" id="inboudsModal" tabindex="-1">
+        <div class="modal-dialog modal-2xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Inbound Extractor</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" id="inboundsPlace" rows="20" placeholder="Please provide a set of inbounds"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+              <button id="detectButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Extract</button>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+    
     @include('components.libs.pwt-datepicker')
 
     @push('styles')
@@ -126,11 +160,14 @@
     @endpush    
     
     @push('scripts')
-        <script src="{{ asset('libs/jquery.repeater/jquery.repeater.js') }}"></script>
+        <script src="{{ asset('libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 
         <script>
+
+            var repeater;
             $(document).ready(function () {
-                $('.repeater').repeater({
+
+                repeater = $('.repeater').repeater({
                     show: function () {
                         $(this).slideDown();
                         $(".datepicker").pDatepicker({
@@ -147,9 +184,6 @@
                     ready: function (setIndexes) {
                         setIndexes();
                     },
-                    reset: function (test) {
-                        console.log(test);
-                    },
                     isFirstItemUndeletable: true
                 })
 
@@ -159,7 +193,40 @@
                         $('[data-repeater-list]').empty();
                     }
                 });
+
+                function getInbound(text)
+                {
+                    let link    = text;
+                    let ip      = text.split('@')[1].split(':')[0];
+                    let port    = text.split('@')[1].split(':')[1].split('?')[0];
+                    let date    = text.split('|')[text.split('|').length - 1].split(' ')[0].replaceAll('-', '/');
+                    let title   = `${text.split('#')[1].split('|')[0]}|${text.split('#')[1].split('|')[1]}`;
+
+                    return {link, ip, port, date, title};
+                }
+                
+                function makeInboundsArray()
+                {
+                    let inbounds = [];
+                    var inboundsArray = $('#inboundsPlace').val().replace(/\r/g, "").split(/\n/);
+
+                    inboundsArray.forEach(text => {
+                        if( text != undefined && text.length )
+                            inbounds.push(getInbound(text)); 
+                    });
+
+                    return inbounds;
+                }
+
+                $(document).on( 'click', '#detectButton', function(){
+                
+                    let inbounds = makeInboundsArray();
+                    repeater.setList(inbounds);
+                    toastr.info(`<strong>${inbounds.length}</strong> inbound(s) added to the list`);
+                });
+                
             });
+            
         </script>
     @endpush
 @endsection

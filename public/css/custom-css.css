@@ -90,6 +90,40 @@ body, button, input, select {
 
 
 
+.modal-2xl {
+    max-width: 65%;
+}
+
+.modal-3xl {
+    max-width: 70%;
+}
+
+.modal-4xl {
+    max-width: 75%;
+}
+
+.modal-5xl {
+    max-width: 80%;
+}
+
+.modal-6xl {
+    max-width: 85%;
+}
+
+.modal-7xl {
+    max-width: 90%;
+}
+
+.modal-8xl {
+    max-width: 95%;
+}
+
+.modal-9xl {
+    max-width: 100%;
+}
+
+
+
 .w-1 {
     width: 1%;
 }
