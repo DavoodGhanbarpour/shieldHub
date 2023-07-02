@@ -13,6 +13,6 @@ class ProfileController extends Controller
     {
         UserFacade::upsert($request->validated(), $user->id);
 
-        return redirect()->route('root');
+        return back();
     }
 }
