@@ -7,19 +7,39 @@
     <form class="repeater card" action="{{ route('admin.inbounds.store') }}" method="POST">
         @csrf
         
-        <div class="card-body" data-repeater-list="inboundsList">
-                
-            <div class="row mb-3">
-                <a href="#" data-repeater-create class="btn btn-success w-20 d-sm-inline-block">
+        <div class="card-header row">
+
+            <div class="w-auto ps-0">
+                <a href="#" data-repeater-create class="btn btn-success btn-block d-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M12 5l0 14"/>
-                        <path d="M5 12l14 0"/>
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 5l0 14"/>
+                    <path d="M5 12l14 0"/>
                     </svg>
                     {{__('app.pageComponents.add')}}
                 </a>
             </div>
+
+            <div class="w-auto ps-0">
+                <a href="#" id="clearAll" class="btn btn-danger btn-block d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 7l16 0"></path>
+                    <path d="M10 11l0 6"></path>
+                    <path d="M14 11l0 6"></path>
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                    </svg>
+                    {{__('app.pageComponents.clearAll')}}
+                </a>
+            </div>
+                
+        </div>
+
+        <div class="card-body" data-repeater-list="inboundsList">
+                
+           
             
             <div class="row form_border p-0" data-repeater-item>
                 <div class="col-12 p-4 pe-7">
@@ -110,7 +130,7 @@
 
         <script>
             $(document).ready(function () {
-                $('form').repeater({
+                $('.repeater').repeater({
                     show: function () {
                         $(this).slideDown();
                         $(".datepicker").pDatepicker({
@@ -127,8 +147,18 @@
                     ready: function (setIndexes) {
                         setIndexes();
                     },
+                    reset: function (test) {
+                        console.log(test);
+                    },
                     isFirstItemUndeletable: true
                 })
+
+                $(document).on( 'click', '#clearAll', function(){
+                
+                    if ( confirm('Are you sure you want to delete All elements?') ) {
+                        $('[data-repeater-list]').empty();
+                    }
+                });
             });
         </script>
     @endpush
