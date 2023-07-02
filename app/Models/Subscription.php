@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class InboundUser extends Pivot
+class Subscription extends Pivot
 {
     use HasFactory;
+
+    protected $table = 'subscriptions';
+
 
     /**
      * Indicates if the IDs are auto-incrementing.

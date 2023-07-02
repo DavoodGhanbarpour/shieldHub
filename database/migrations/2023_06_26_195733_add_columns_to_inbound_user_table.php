@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('inbound_user', function (Blueprint $table) {
+        Schema::table('subscriptions', function (Blueprint $table) {
             $table->after('inbound_id',function (Blueprint $table){
                 $table->unsignedDouble('subscription_price_per_month')->default(0);
                 $table->text('description')->nullable();
                 $table->text('private_description')->nullable();
-                $table->unsignedDouble('payment_amount')->nullable();
-                $table->date('payment_date')->nullable();
                 $table->date('start_date');
                 $table->date('end_date');
             });

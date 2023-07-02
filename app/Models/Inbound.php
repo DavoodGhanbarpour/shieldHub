@@ -30,7 +30,7 @@ class Inbound extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'inbound_user')->using(InboundUser::class);
+        return $this->belongsToMany(User::class, 'subscriptions')->using(Subscriptions::class);
     }
 
     public function server() : BelongsTo
