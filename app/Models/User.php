@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function inbounds(): BelongsToMany
     {
-        return $this->belongsToMany(Inbound::class, 'subscriptions')->using(Subscriptions::class);
+        return $this->belongsToMany(Inbound::class, 'subscriptions')->using(Subscription::class);
     }
 
     public function hasRole(string $role): bool
