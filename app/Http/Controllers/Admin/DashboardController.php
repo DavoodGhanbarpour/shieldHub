@@ -16,9 +16,9 @@ class DashboardController extends Controller
         return view('admin.pages.home.index', [
             'user_counts' => DashboardFacade::getUserCounts(),
             'inbound_counts' => DashboardFacade::getInboundCounts(),
-            'user_visits' => LastVisitsCountResource::collection(DashboardFacade::getLastVisitsCount(7)),
-            'added_inbounds_count' => LastInboundsCreationCountResource::collection(DashboardFacade::getLastInboundsCreationCount(7)),
-            'added_users_count' => LastUsersCreationCountResource::collection(DashboardFacade::getLastUsersCreationCount(7)),
+            'user_visits' => DashboardFacade::getLastVisitsCount(7),
+            'added_inbounds_count' => DashboardFacade::getLastInboundsCreationCount(7),
+            'added_users_count' => DashboardFacade::getLastUsersCreationCount(7),
             'online_user' => User::online()->get()
         ]);
     }

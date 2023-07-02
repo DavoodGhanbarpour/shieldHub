@@ -5,48 +5,76 @@ namespace App\Repositories;
 use App\Models\Inbound;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Shetabit\Visitor\Models\Visit;
 
 class DashboardRepository
 {
-    public function getLastVisitsCount(int $count): Collection|array
+    public function getLastVisitsCount(int $count): array
     {
-        return Visit::query()
+        $resultByQuery = Visit::query()
             ->select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('COUNT(id) as count'))
             ->where('visitor_type', '=', User::class)
             ->where('created_at', '>', Carbon::now()->subDays($count))
             ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+            ->get()
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $days = [];
+        foreach (CarbonPeriod::create(Carbon::now()->subDays($count), Carbon::now()) as $key => $each) {
+            $days[$key]['date'] = $each;
+            $days[$key]['count'] = $resultByQuery[$each->format('Y-m-d')] ?? 0;
+        }
+        return $days;
     }
 
 
-    public function getLastInboundsCreationCount(int $count): Collection|array
+    public function getLastInboundsCreationCount(int $count): array
     {
-        return Inbound::query()
+        $resultByQuery = Inbound::query()
             ->select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('COUNT(id) as count'))
             ->where('created_at', '>', Carbon::now()->subDays($count))
             ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+            ->get()
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $days = [];
+        foreach (CarbonPeriod::create(Carbon::now()->subDays($count), Carbon::now()) as $key => $each) {
+            $days[$key]['date'] = $each;
+            $days[$key]['count'] = $resultByQuery[$each->format('Y-m-d')] ?? 0;
+        }
+        return $days;
     }
 
     public function getLastUsersCreationCount(int $count): Collection|array
     {
-        return Inbound::query()
+        $resultByQuery = User::query()
             ->select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('COUNT(id) as count'))
             ->where('created_at', '>', Carbon::now()->subDays($count))
             ->groupBy(DB::raw('DATE(created_at)'))
-            ->get();
+            ->get()
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $days = [];
+        foreach (CarbonPeriod::create(Carbon::now()->subDays($count), Carbon::now()) as $key => $each) {
+            $days[$key]['date'] = $each;
+            $days[$key]['count'] = $resultByQuery[$each->format('Y-m-d')] ?? 0;
+        }
+        return $days;
     }
 
-    public function getUserCounts() : array
+    public function getUserCounts(): array
     {
         return [
             'admins' => User::where('role', '=', User::ADMIN)->count(),
