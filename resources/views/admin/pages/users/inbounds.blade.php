@@ -154,7 +154,7 @@
 
                 element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
                 element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
-                element.find('select, input').prop('disabled', !element.hasClass('card-active'));
+                element.find('select, input, textarea').prop('disabled', !element.hasClass('card-active'));
 
                 if ( element.hasClass('card-active') )
                     element.find('.card-footer').collapse('show');
