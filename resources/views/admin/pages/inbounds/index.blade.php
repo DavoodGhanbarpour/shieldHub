@@ -29,7 +29,7 @@
                                 {{__('app.general.ip').':'.__('app.general.port')}}
                             </th>
                             <th>
-                                {{__('app.general.date')}}
+                                {{__('app.servers.server')}}
                             </th>
                             <th>
                                 {{__('app.general.quota')}}
@@ -52,10 +52,10 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
                                 <td class="sort-ip">
-                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                    {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
-                                <td class="sort-date">
-                                    {{convertDate($eachInbound->date)}}
+                                <td class="sort-server">
+                                    {{$eachInbound->server->title}}
                                 </td>
                                 <td class="sort-quota">
                                     {{ \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())  }}

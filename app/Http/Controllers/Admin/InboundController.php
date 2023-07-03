@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\InboundUpdateRequest;
 use App\Http\Resources\Admin\InboundResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
+use App\Models\Server;
 
 class InboundController extends Controller
 {
@@ -17,7 +18,9 @@ class InboundController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.inbounds.add');
+        return view('admin.pages.inbounds.add',[
+            'servers' => Server::all(),
+        ]);
     }
 
     public function bulkCreate()
@@ -47,7 +50,7 @@ class InboundController extends Controller
     {
         // We are using view composer instead of this
         return view('admin.pages.inbounds.index', [
-            'inbounds' => InboundResource::collection(Inbound::withCount('users')->get()),
+            'inbounds' => Inbound::withCount('users')->with('server')->get(),
         ]);
     }
 
@@ -66,6 +69,7 @@ class InboundController extends Controller
     {
         return view('admin.pages.inbounds.edit', [
             'inbound' => UserResource::make(Inbound::findOrFail($id)),
+            'servers' => Server::all(),
         ]);
     }
 

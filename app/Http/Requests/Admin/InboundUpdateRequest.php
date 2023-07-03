@@ -20,7 +20,7 @@ class InboundUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'server_id' => ['integer', 'required', 'exists:users,id'],
+            'server' => ['integer', 'required', 'exists:users,id'],
             'title' => ['string', 'required'],
             'link' => ['string', 'required'],
             'port' => ['numeric', 'required', 'between:0,65535'],

@@ -17,7 +17,6 @@ class InboundResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'ip' => $this->ip,
             'port' => $this->port,
             'link' => $this->link,
             'date' => $this->date,

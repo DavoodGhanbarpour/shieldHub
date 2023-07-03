@@ -10,34 +10,29 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
                         <input type="text" name="title" class="form-control" placeholder="{{__('app.general.title')}}">
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-3">
-                    <label class="form-label required">{{__('app.general.date')}}</label>
-                    <div>
-                        <input type="text" name="date" class="form-control datepicker"
-                               placeholder="{{__('app.general.date')}}">
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-3">
-                    <label class="form-label required">{{__('app.general.server')}}</label>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">{{__('app.servers.server')}}</label>
                     <div>
                         <select name="server" class="form-select" placeholder="{{__('app.general.server')}}">
-                            <option data-server-ip="1" value="-1">&nbsp;</option>
-                            <option data-server-ip="2" value="">test 2</option>
-                            <option data-server-ip="3" value="">test 3</option>
-                            <option data-server-ip="4" value="">test 4</option>
+                            @foreach($servers as $eachServer)
+                                <option
+                                    data-server-ip="{{$eachServer->ip}}"
+                                    value="{{$eachServer->id}}">
+                                    {{$eachServer->title}}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
                     <div class="input-group input-group-flat">
                         <input type="text" class="form-control w-75 border_right" id="serverIP" disabled="" autocomplete="off">
@@ -79,12 +74,12 @@
     @push('scripts')
         <script>
             $(document).ready( function(){
-            
+
                 setServerIP()
             });
 
             $(document).on( 'change', 'select[name=server]', function(){
-            
+
                 setServerIP()
             });
 
@@ -94,5 +89,5 @@
             }
         </script>
     @endpush
-    
+
 @endsection
