@@ -59,26 +59,38 @@
                 <div class="col-12 p-4 pe-7">
                     <div class="row">
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label class="form-label required">{{__('app.general.title')}}</label>
                             <div>
                                 <input type="text" name="title" class="form-control" placeholder="{{__('app.general.title')}}">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
-                            <div class="input-group input-group-flat">
-                                <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1" autocomplete="off">
-                                <input type="text" class="form-control w-25 border_left" name="port" placeholder="443">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label class="form-label required">{{__('app.general.date')}}</label>
                             <div>
                                 <input type="text" name="date" class="form-control datepicker"
                                     placeholder="{{__('app.general.date')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label required">{{__('app.general.server')}}</label>
+                            <div>
+                                <select name="server_id" class="form-select" placeholder="{{__('app.general.server')}}">
+                                    <option value="-1">&nbsp;</option>
+                                    <option value="">test 2</option>
+                                    <option value="">test 3</option>
+                                    <option value="">test 4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
+                            <div class="input-group input-group-flat">
+                                <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1" autocomplete="off">
+                                <input type="text" class="form-control w-25 border_left" name="port" placeholder="443">
                             </div>
                         </div>
 
