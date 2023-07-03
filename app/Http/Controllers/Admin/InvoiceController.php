@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -12,7 +14,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.invoices.index', [
+            'invoices' => Invoice::all()
+        ]);
     }
 
     /**
@@ -20,7 +24,9 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.invoices.add', [
+            'users' => User::all(),
+        ]);
     }
 
     /**

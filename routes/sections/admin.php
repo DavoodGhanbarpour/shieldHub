@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InboundController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ServerController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,5 @@ Route::post('inbounds/bulk-create', [InboundController::class, 'bulkStore'])->na
 Route::resource('inbounds', InboundController::class);
 
 Route::resource('servers', ServerController::class);
+
+Route::resource('invoices', InvoiceController::class);
