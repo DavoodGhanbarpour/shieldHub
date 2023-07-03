@@ -88,6 +88,10 @@ body, button, input, select {
     z-index: 2000;
 }
 
+.resize-none {
+    resize: none;
+}
+
 
 
 .modal-2xl {

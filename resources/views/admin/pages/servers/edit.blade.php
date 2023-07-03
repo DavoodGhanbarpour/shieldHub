@@ -62,7 +62,7 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
-                                <textarea id="textarea" name="description" rows="4" class="form-control"
+                                <textarea id="textarea" name="description" rows="4" class="form-control resize-none"
                                     placeholder="{{__('app.general.description')}}">{{$server->description}}</textarea>
                             </div>
                         </div>
@@ -82,14 +82,6 @@
     </form>
 
     @include('components.libs.pwt-datepicker')
-
-    @push('styles')
-        <style>
-            textarea {
-                resize: none;
-            }
-        </style>
-    @endpush
 
     @push('scripts')
         <script>

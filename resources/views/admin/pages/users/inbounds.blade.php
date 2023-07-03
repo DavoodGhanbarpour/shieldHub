@@ -28,7 +28,7 @@
             <div class="row">
                 @foreach($inbounds as $eachInbound)
                     <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent data target-id-{{$eachInbound->server_id}}">
-                        <div class="card inbound-card copy-parent {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
+                        <div class="card inbound-card copy-parent border-3 {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
@@ -49,6 +49,39 @@
                                 <p class="text-muted">
                                     {{$eachInbound->description}}
                                 </p>
+                            </div>
+                            <div class="card-footer collapse">
+                                <div class="row">
+                                    
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label required">{{__('app.general.start_date')}}</label>
+                                        <div>
+                                            <input type="text" name="start_date" class="form-control" placeholder="{{__('app.general.start_date')}}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label required">{{__('app.general.end_date')}}</label>
+                                        <div>
+                                            <input type="text" name="end_date" class="form-control" placeholder="{{__('app.general.end_date')}}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label required">{{__('app.general.subscription_per_month')}}</label>
+                                        <div>
+                                            <input type="text" name="subscription_per_month" class="form-control" placeholder="{{__('app.general.subscription_per_month')}}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">{{__('app.general.description')}}</label>
+                                        <div>
+                                            <textarea name="description" rows="3" class="form-control resize-none" placeholder="{{__('app.general.description')}}"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,6 +128,16 @@
 
                 element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
                 element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
+                
+                if ( element.hasClass('card-active') ) {
+                    
+                    console.log('aaaa');
+                    element.find('.card-footer').collapse('show');
+                } else {
+
+                    console.log('bbbb');
+                    element.find('.card-footer').collapse('hide');
+                }
             }
 
             function setInboundsStatus() {
@@ -109,13 +152,13 @@
                 setInboundsStatus();
             });
 
-            $(document).on('click', '.inbound-card', function (e) {
+            $(document).on('click', '.inbound-card .card-body', function (e) {
 
                 if ($(e.target).is('div.copy-button'))
                     return;
 
-                $(this).toggleClass('card-active');
-                setInboundStatus($(this));
+                $(this).closest('.inbound-card').toggleClass('card-active');
+                setInboundStatus($(this).closest('.inbound-card'));
             });
 
             $(document).on( 'click', '.form-selectgroup-item', function(){
@@ -150,6 +193,14 @@
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+            }
+
+            .form-selectgroup-label {
+                color: var(--tblr-gray-500-darken);
+            }
+
+            .card-footer {
+                background-color: var(--tblr-dark-lt);
             }
         </style>
     @endpush

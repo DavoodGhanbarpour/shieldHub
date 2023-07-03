@@ -48,7 +48,8 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
                             <div>
-                                <input type="text" name="subscription_price_per_month" class="form-control number_format" placeholder="{{__('app.general.subscription_price_per_month')}}">
+                                <input type="text" name="subscription_price_per_month" class="form-control number_format" 
+                                    placeholder="{{__('app.general.subscription_price_per_month')}}">
                             </div>
                         </div>
 
@@ -60,8 +61,9 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
-                                <textarea id="textarea" name="description" rows="4" class="form-control"
-                                placeholder="{{__('app.general.description')}}"></textarea>
+                                <textarea id="textarea" name="description" rows="4" class="form-control resize-none"
+                                    placeholder="{{__('app.general.description')}}">
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -80,14 +82,6 @@
     </form>
 
     @include('components.libs.pwt-datepicker')
-
-    @push('styles')
-        <style>
-            textarea {
-                resize: none;
-            }
-        </style>
-    @endpush
 
     @push('scripts')
         <script>
