@@ -11,7 +11,7 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
                         <input type="text" name="title" value="{{$inbound->title}}" class="form-control"
@@ -19,21 +19,32 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
-                    <div class="input-group input-group-flat">
-                        <input type="text" class="form-control w-75 border_right" name="ip" value="{{$inbound->ip}}"
-                               placeholder="192.168.1.1" autocomplete="off">
-                        <input type="text" class="form-control w-25 border_left" name="port" value="{{$inbound->port}}"
-                               placeholder="443">
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <label class="form-label required">{{__('app.general.date')}}</label>
                     <div>
                         <input type="text" name="date" value="{{$inbound->date}}" class="form-control datepicker"
                                placeholder="{{__('app.general.date')}}">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label required">{{__('app.general.server')}}</label>
+                    <div>
+                        <select name="server" class="form-select" placeholder="{{__('app.general.server')}}">
+                            <option data-server-ip="1" value="-1">&nbsp;</option>
+                            <option data-server-ip="2" value="">test 2</option>
+                            <option data-server-ip="3" value="">test 3</option>
+                            <option data-server-ip="4" value="">test 4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
+                    <div class="input-group input-group-flat">
+                        <input type="text" class="form-control w-75 border_right" id="serverIP" disabled="" autocomplete="off">
+                        <input type="text" class="form-control w-25 border_left" name="port" value="{{$inbound->port}}"
+                               placeholder="443">
                     </div>
                 </div>
 
@@ -65,5 +76,25 @@
     </form>
 
     @include('components.libs.pwt-datepicker')
+
+    
+    @push('scripts')
+        <script>
+            $(document).ready( function(){
+            
+                setServerIP()
+            });
+
+            $(document).on( 'change', 'select[name=server]', function(){
+            
+                setServerIP()
+            });
+
+            function setServerIP() {
+
+                $('#serverIP').val($('select[name=server]').find('option:selected').data('server-ip'));
+            }
+        </script>
+    @endpush
 
 @endsection
