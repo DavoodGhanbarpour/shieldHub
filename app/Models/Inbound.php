@@ -24,8 +24,6 @@ class Inbound extends Model
         'link',
         'description',
         'port',
-        'ip',
-        'date',
     ];
 
     public function users(): BelongsToMany
