@@ -7,10 +7,27 @@
     <form action="{{ route('admin.users.assignInbounds', ['user' => $user->id]) }}" method="POST" class="card">
         @csrf
 
+        <div class="card-header">
+            <div class="form-selectgroup form-selectgroup-pills">
+
+                <label class="form-selectgroup-item showAll">
+                    <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
+                    <span class="form-selectgroup-label">All</span>
+                </label>
+                
+                @foreach ($servers as $server)
+                    <label class="form-selectgroup-item" data-target-item="{{$server->id}}">
+                        <input type="radio" name="servers" value="HTML" class="form-selectgroup-input">
+                        <span class="form-selectgroup-label">{{$server->title}} | {{$server->ip}}</span>
+                    </label>
+                @endforeach
+                
+            </div>
+        </div>
         <div class="card-body">
             <div class="row">
                 @foreach($inbounds as $eachInbound)
-                    <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent">
+                    <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent data target-id-{{$eachInbound->server_id}}">
                         <div class="card inbound-card copy-parent {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
@@ -31,7 +48,6 @@
                                 <p class="card-title fs-4 text-muted my-2">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
                                 <p class="text-muted">
                                     {{$eachInbound->description}}
-                                    {{--{{$eachInbound->users_count}}--}}
                                 </p>
                             </div>
                         </div>
@@ -100,6 +116,18 @@
 
                 $(this).toggleClass('card-active');
                 setInboundStatus($(this));
+            });
+
+            $(document).on( 'click', '.form-selectgroup-item', function(){
+            
+                if ( $(this).hasClass('showAll') ) {
+
+                    $('.inbound-card-parent').removeClass('d-none');
+                    return;
+                }
+
+                $('.inbound-card-parent').addClass('d-none');
+                $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
             });
 
         </script>

@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
+use App\Http\Resources\Admin\ServerResource;
 use App\Http\Resources\Admin\UserInboundsResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
+use App\Models\Server;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
@@ -106,6 +108,7 @@ class UserController extends Controller
             'inbounds' => UserInboundsResource::collection(
                 collect($result)->sortBy('isUsing', SORT_REGULAR, true)
             ),
+            'servers' => ServerResource::collection(Server::all())
         ]);
     }
 
