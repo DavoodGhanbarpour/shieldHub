@@ -25,3 +25,11 @@ if (! function_exists('convertDate')) {
         return $date;
     }
 }
+
+
+if (! function_exists('removeSeparator')) {
+    function removeSeparator(string $string): string
+    {
+        return str_replace(',','', $string);
+    }
+}
