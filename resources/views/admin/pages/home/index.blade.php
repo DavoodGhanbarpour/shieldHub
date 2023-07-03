@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
-                                <div class="h1 mb-0 me-2">0</div>
+                                <div class="h1 mb-0 me-2">{{collect($user_visits)->sum('count')}}</div>
                             </div>
                         </div>
                         <div id="chart-users-visits" class="chart-sm"></div>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
-                                <div class="h1 mb-0 me-2">0</div>
+                                <div class="h1 mb-0 me-2">{{collect($added_inbounds_count)->sum('count')}}</div>
                             </div>
                         </div>
                         <div id="chart-inbounds" class="chart-sm"></div>
