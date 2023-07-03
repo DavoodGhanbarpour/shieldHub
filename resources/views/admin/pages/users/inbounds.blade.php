@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <p class="card-title w-85 fs-4 fw-bold">{{$eachInbound->title}}</p>
                                 <hr class="p-0 m-0">
-                                <p class="card-title fs-4 text-muted my-2">{{$eachInbound->ip}}:{{$eachInbound->port}}</p>
+                                <p class="card-title fs-4 text-muted my-2">{{$eachInbound->server->ip}}:{{$eachInbound->port}}</p>
                                 <p class="text-muted">
                                     {{$eachInbound->description}}
                                 </p>
