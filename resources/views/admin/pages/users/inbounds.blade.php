@@ -14,14 +14,14 @@
                     <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
                     <span class="form-selectgroup-label">All</span>
                 </label>
-                
+
                 @foreach ($servers as $server)
                     <label class="form-selectgroup-item" data-target-item="{{$server->id}}">
                         <input type="radio" name="servers" value="HTML" class="form-selectgroup-input">
                         <span class="form-selectgroup-label">{{$server->title}} | {{$server->ip}}</span>
                     </label>
                 @endforeach
-                
+
             </div>
         </div>
         <div class="card-body">
@@ -29,7 +29,7 @@
                 @foreach($inbounds as $eachInbound)
                     <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent data target-id-{{$eachInbound->server_id}}">
                         <div class="card inbound-card copy-parent border-3 {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
-                            <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[]">
+                            <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[{{$eachInbound->id}}][inbound_id]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
                             <div class="ribbon-container">
@@ -52,35 +52,35 @@
                             </div>
                             <div class="card-footer collapse">
                                 <div class="row">
-                                    
+
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.start_date')}}</label>
                                         <div>
-                                            <input type="text" name="start_date" class="form-control" placeholder="{{__('app.general.start_date')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][start_date]" class="form-control" placeholder="{{__('app.general.start_date')}}">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.end_date')}}</label>
                                         <div>
-                                            <input type="text" name="end_date" class="form-control" placeholder="{{__('app.general.end_date')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][end_date]" class="form-control" placeholder="{{__('app.general.end_date')}}">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label required">{{__('app.general.subscription_per_month')}}</label>
+                                        <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
                                         <div>
-                                            <input type="text" name="subscription_per_month" class="form-control" placeholder="{{__('app.general.subscription_per_month')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_per_month]" class="form-control" placeholder="{{__('app.general.subscription_price_per_month')}}">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">{{__('app.general.description')}}</label>
                                         <div>
-                                            <textarea name="description" rows="3" class="form-control resize-none" placeholder="{{__('app.general.description')}}"></textarea>
+                                            <textarea name="inbounds[{{$eachInbound->id}}][description]" rows="3" class="form-control resize-none" placeholder="{{__('app.general.description')}}"></textarea>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -128,9 +128,9 @@
 
                 element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
                 element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
-                
+
                 if ( element.hasClass('card-active') ) {
-                    
+
                     console.log('aaaa');
                     element.find('.card-footer').collapse('show');
                 } else {
@@ -162,7 +162,7 @@
             });
 
             $(document).on( 'click', '.form-selectgroup-item', function(){
-            
+
                 if ( $(this).hasClass('showAll') ) {
 
                     $('.inbound-card-parent').removeClass('d-none');
@@ -185,7 +185,7 @@
             .ribbon-container .ribbon:nth-of-type(2) {
                 top: 2.9rem;
             }
-            
+
             .copy-button {
                 cursor: copy;
             }

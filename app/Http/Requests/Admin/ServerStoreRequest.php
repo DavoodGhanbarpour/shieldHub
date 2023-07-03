@@ -25,7 +25,7 @@ class ServerStoreRequest extends FormRequest
         return [
             'title' => ['string', 'required'],
             'start_date' => ['date', 'required'],
-            'end_date' => ['date', 'required'],
+            'end_date' => ['date', 'required', 'after_or_equal:start_date'],
             'ip' => ['ipv4', 'required'],
             'description' => ['string','nullable'],
             'subscription_price_per_month' => ['max:10', 'required', new CommaSeparatedPrice()],

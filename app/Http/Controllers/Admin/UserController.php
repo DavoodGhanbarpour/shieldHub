@@ -110,7 +110,8 @@ class UserController extends Controller
 
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
-        $user->inbounds()->sync($request->get('inbounds'));
+        dd($request->validated(),array_column($request->get('inbounds'),'inbound_id'));
+        $user->inbounds()->sync(array_column($request->get('inbounds'),'inbound_id'));
 
         return redirect()->route('admin.users.index');
     }
