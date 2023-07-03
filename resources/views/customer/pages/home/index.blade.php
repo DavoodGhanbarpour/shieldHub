@@ -302,8 +302,9 @@
                 qrcode.makeCode(element.closest('.copy-parent').find('.copy-text').text());
             }
         </script>
-        @include('components.scripts.copy')
     @endpush
+
+    <x-scripts.copy/>
 
     @push('styles')
         <style>

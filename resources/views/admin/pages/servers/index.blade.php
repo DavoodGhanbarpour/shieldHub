@@ -15,32 +15,34 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
-                <table class="table card-table table-vcenter datatable">
+                <x-tables.default>
                     <thead>
-                    <tr>
-                        <th>
-                            <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-title">{{__('app.general.title')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-ip">{{__('app.general.ip')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.general.start_date')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.general.end_date')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-description">{{__('app.general.description')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-users-count">{{__('app.general.subscription_price_per_month')}}</button>
-                        </th>
-                        <th>{{__('app.pageComponents.actions')}}</th>
-                    </tr>
+                        <tr>
+                            <th>
+                                {{__('app.pageComponents.index')}}
+                            </th>
+                            <th>
+                                {{__('app.general.title')}}
+                            </th>
+                            <th>
+                                {{__('app.general.ip')}}
+                            </th>
+                            <th>
+                                {{__('app.general.start_date')}}
+                            </th>
+                            <th>
+                                {{__('app.general.end_date')}}
+                            </th>
+                            <th>
+                                {{__('app.general.description')}}
+                            </th>
+                            <th>
+                                {{__('app.general.subscription_price_per_month')}}
+                            </th>
+                            <th>
+                                {{__('app.pageComponents.actions')}}
+                            </th>
+                        </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
@@ -62,7 +64,7 @@
                                     {{number_format($eachServer->subscription_price_per_month)}}
                                 </td>
                                 <td class="copy-parent">
-                                    <div class="btn-list flex-nowrap">
+                                    <div class="btn-list flex-nowrap justify-content-center">
                                         <x-buttons.edit :link="route('admin.servers.edit', ['server' => $eachServer->id])"/>
                                         <x-buttons.destroy :link="route('admin.servers.destroy', ['server' => $eachServer->id])"/>
                                     </div>
@@ -70,13 +72,12 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </x-tables.default>
             </div>
         </div>
     </div>
 
-    @push('scripts')
-        @include('components.scripts.copy')
-    @endpush
+    <x-scripts.copy/>
+    <x-scripts.datatable-search/>
 
 @endsection

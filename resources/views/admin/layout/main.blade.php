@@ -25,6 +25,7 @@
     <link href="{{ asset('libs/datatables/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('libs/select2/select2.css') }}" rel="stylesheet"/>
     @stack('styles')
+    <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
 
 
 
@@ -36,65 +37,61 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
-        .dataTables_filter input {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 4px 8px;
+
+        .dataTables_filter {
+            display: none;
         }
     </style>
 </head>
-<body>
-<script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
-<div class="page">
-    <!-- Sidebar -->
-@include('admin.layout.sidebar')
+<body class="layout-fluid">
+    <script src="{{ asset('js/demo-theme.min.js?1684106062') }}"></script>
+    <div class="page">
+        <!-- Sidebar -->
+        @include('admin.layout.sidebar')
 
-<!-- Navbar -->
-    @include('admin.layout.navbar')
+        <!-- Navbar -->
+        @include('admin.layout.navbar')
 
-    <div class="page-wrapper">
-        <!-- Page header -->
-    @include('admin.layout.header')
+        <div class="page-wrapper">
+            <!-- Page header -->
+            @include('admin.layout.header')
 
 
-    <!-- Page body -->
-        <div class="page-body">
-            <div class="container-xl">
+            <!-- Page body -->
+            <div class="page-body">
+                <div class="container-xl">
 
-                @yield('content')
+                    @yield('content')
 
+                </div>
             </div>
+
+            <!-- Page Footer -->
+            @include('admin.layout.footer')
+
+
         </div>
-
-        <!-- Page Footer -->
-        @include('admin.layout.footer')
-
-
     </div>
-</div>
 
-<!-- Tabler Core -->
-<script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
-<script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
-<script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('libs/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('js/toastr.min.js') }}"></script>
-<script src="{{ asset('libs/select2/select2.js') }}"></script>
-<script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
-<script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
-<script src="{{ asset('js/number-format.js') }}" defer></script>
+    <!-- Tabler Core -->
+    <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
+    <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
+    <script src="{{ asset('js/number-format.js') }}" defer></script>
 
-<script>
-    $(document).ready(function() {
-        $('.select2').select2();
-        new DataTable('.datatable', {
-            stateSave: true,
+    <script>
+        $(document).ready(function () {
+
+            $('.select2').select2();
         });
-    });
-</script>
+    </script>
 
-<x-alerts.toastr />
-@stack('scripts')
+    <x-alerts.toastr />
+    @stack('scripts')
 
 </body>
 </html>

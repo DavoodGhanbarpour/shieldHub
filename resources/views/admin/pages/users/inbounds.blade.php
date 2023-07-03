@@ -49,10 +49,10 @@
 
     </form>
 
+    <x-scripts.copy/>
+    <x-scripts.search/>
 
     @push('scripts')
-        @include('components.scripts.copy')
-        @include('components.scripts.search')
 
         <script>
             $(document).on( 'keyup', '#pageSearch', function(){

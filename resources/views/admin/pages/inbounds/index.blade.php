@@ -16,32 +16,34 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
-                <table class="table card-table table-vcenter datatable">
+                <x-tables.default>
                     <thead>
-                    <tr>
-                        <th>
-                            <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-title">{{__('app.general.title')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-ip">{{__('app.general.ip').':'.__('app.general.port')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.general.date')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.general.quota')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-description">{{__('app.general.description')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-users-count">{{__('app.general.users_count')}}</button>
-                        </th>
-                        <th>{{__('app.pageComponents.actions')}}</th>
-                    </tr>
+                        <tr>
+                            <th>
+                                {{__('app.pageComponents.index')}}
+                            </th>
+                            <th>
+                                {{__('app.general.title')}}
+                            </th>
+                            <th>
+                                {{__('app.general.ip').':'.__('app.general.port')}}
+                            </th>
+                            <th>
+                                {{__('app.general.date')}}
+                            </th>
+                            <th>
+                                {{__('app.general.quota')}}
+                            </th>
+                            <th>
+                                {{__('app.general.description')}}
+                            </th>
+                            <th>
+                                {{__('app.general.users_count')}}
+                            </th>
+                            <th>
+                                {{__('app.pageComponents.actions')}}
+                            </th>
+                        </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
@@ -67,7 +69,7 @@
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
-                                    <div class="btn-list flex-nowrap">
+                                    <div class="btn-list flex-nowrap justify-content-center">
                                         <x-buttons.copy/>
                                         <x-buttons.edit :link="route('admin.inbounds.edit', ['inbound' => $eachInbound->id])"/>
                                         <x-buttons.destroy :link="route('admin.inbounds.destroy', ['inbound' => $eachInbound->id])"/>
@@ -76,13 +78,12 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </x-tables.default>
             </div>
         </div>
     </div>
 
-    @push('scripts')
-        @include('components.scripts.copy')
-    @endpush
+    <x-scripts.copy/>
+    <x-scripts.datatable-search/>
 
 @endsection
