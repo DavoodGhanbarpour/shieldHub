@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
-                                <div class="h1 mb-0 me-2">{{collect($user_visits)->sum('count')}}</div>
+                                <div class="h1 mb-0 me-2">{{collect($charts['user_visits'])->sum('count')}}</div>
                             </div>
                         </div>
                         <div id="chart-users-visits" class="chart-sm"></div>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
-                                <div class="h1 mb-0 me-2">{{collect($added_inbounds_count)->sum('count')}}</div>
+                                <div class="h1 mb-0 me-2">{{collect($charts['added_inbounds_count'])->sum('count')}}</div>
                             </div>
                         </div>
                         <div id="chart-inbounds" class="chart-sm"></div>
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $user_counts['customers'] }} {{ __('app.auth.roles.customers') }}
+                                        {{ $cards['user_counts']['customers'] }} {{ __('app.auth.roles.customers') }}
                                     </div>
                                     <div class="text-muted">
-                                        {{ $user_counts['admins'] }} {{ __('app.auth.roles.admins') }}
+                                        {{ $cards['user_counts']['admins'] }} {{ __('app.auth.roles.admins') }}
                                     </div>
                                 </div>
                             </div>
@@ -97,10 +97,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{__('app.inbounds.inbounds_in_use', ['count' => $inbound_counts['inUse'] ])}}
+                                        {{__('app.inbounds.inbounds_in_use', ['count' => $cards['inbound_counts']['inUse'] ])}}
                                     </div>
                                     <div class="text-muted">
-                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $inbound_counts['notInUse'] ])}}
+                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $cards['inbound_counts']['notInUse'] ])}}
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +245,7 @@
                     series: [{
                         name: "Visits",
                         data: [
-                            @foreach( $user_visits as $each )'{{$each['count']}}',@endforeach
+                            @foreach( $charts['user_visits'] as $each )'{{$each['count']}}',@endforeach
                         ],
                     }],
                     tooltip: {
@@ -272,7 +272,7 @@
                         },
                     },
                     labels: [
-                        @foreach( $user_visits as $each )'{{$each['date']}}',@endforeach
+                        @foreach( $charts['user_visits'] as $each )'{{$each['date']}}',@endforeach
                     ],
                     colors: [tabler.getColor("primary")],
                     legend: {
@@ -308,7 +308,7 @@
                     series: [{
                         name: "Inbounds",
                         data: [
-                            @foreach( $added_inbounds_count as $each )'{{$each['count']}}',@endforeach
+                            @foreach( $charts['added_inbounds_count'] as $each )'{{$each['count']}}',@endforeach
                         ]
                     }],
                     tooltip: {
@@ -335,7 +335,7 @@
                         },
                     },
                     labels: [
-                        @foreach( $added_inbounds_count as $each )'{{$each['date']}}',@endforeach
+                        @foreach( $charts['added_inbounds_count'] as $each )'{{$each['date']}}',@endforeach
                     ],
                     colors: [tabler.getColor("primary")],
                     legend: {
