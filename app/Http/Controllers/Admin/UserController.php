@@ -7,9 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
-use App\Http\Resources\Admin\ServerResource;
-use App\Http\Resources\Admin\UserInboundsResource;
-use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
 use App\Models\Server;
 use App\Models\User;
@@ -41,16 +38,16 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.pages.users.index', [
-            'users' => UserResource::collection(User::withCount('inbounds')->get()),
+            'users' => User::withCount('inbounds')->get(),
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id): UserResource
+    public function show(int $id)
     {
-        return UserResource::make(User::findOrFail($id));
+        return User::findOrFail($id);
     }
 
     /**
@@ -59,7 +56,7 @@ class UserController extends Controller
     public function edit(int $id)
     {
         return view('admin.pages.users.edit', [
-            'user' => UserResource::make(User::findOrFail($id)),
+            'user' => User::findOrFail($id),
         ]);
     }
 
@@ -75,7 +72,7 @@ class UserController extends Controller
         }
 
         $inputs = $request->validated();
-        if (! isset($inputs['password'])) {
+        if (!isset($inputs['password'])) {
             unset($inputs['password']);
         }
 
@@ -105,10 +102,9 @@ class UserController extends Controller
 
         return view('admin.pages.users.inbounds', [
             'user' => $user,
-            'inbounds' => UserInboundsResource::collection(
-                collect($result)->sortBy('isUsing', SORT_REGULAR, true)
-            ),
-            'servers' => ServerResource::collection(Server::all())
+            'inbounds' =>
+                collect($result)->sortBy('isUsing', SORT_REGULAR, true),
+            'servers' => Server::all()
         ]);
     }
 

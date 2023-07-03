@@ -6,8 +6,6 @@ use App\Facades\InboundFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
-use App\Http\Resources\Admin\InboundResource;
-use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
 use App\Models\Server;
 
@@ -18,7 +16,7 @@ class InboundController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.inbounds.add',[
+        return view('admin.pages.inbounds.add', [
             'servers' => Server::all(),
         ]);
     }
@@ -59,7 +57,7 @@ class InboundController extends Controller
      */
     public function show(string $id)
     {
-        return InboundResource::make(Inbound::findOrFail($id));
+        return Inbound::findOrFail($id);
     }
 
     /**
@@ -68,7 +66,7 @@ class InboundController extends Controller
     public function edit(string $id)
     {
         return view('admin.pages.inbounds.edit', [
-            'inbound' => UserResource::make(Inbound::findOrFail($id)),
+            'inbound' => Inbound::findOrFail($id),
             'servers' => Server::all(),
         ]);
     }

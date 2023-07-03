@@ -6,7 +6,6 @@ use App\Facades\ServerFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ServerStoreRequest;
 use App\Http\Requests\Admin\ServerUpdateRequest;
-use App\Http\Resources\Admin\ServerResource;
 use App\Models\Server;
 use Illuminate\Http\RedirectResponse;
 
@@ -18,7 +17,7 @@ class ServerController extends Controller
     public function index()
     {
         return view('admin.pages.servers.index', [
-            'servers' => ServerResource::collection(Server::all())
+            'servers' => Server::all()
         ]);
     }
 
@@ -36,7 +35,7 @@ class ServerController extends Controller
     public function store(ServerStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['subscription_price_per_month'] = str_replace(',','',$data['subscription_price_per_month']);
+        $data['subscription_price_per_month'] = str_replace(',', '', $data['subscription_price_per_month']);
         ServerFacade::upsert($data);
         return redirect()->route('admin.servers.index');
     }
@@ -67,7 +66,7 @@ class ServerController extends Controller
     public function update(ServerUpdateRequest $request, string $id): RedirectResponse
     {
         $data = $request->validated();
-        $data['subscription_price_per_month'] = str_replace(',','',$data['subscription_price_per_month']);
+        $data['subscription_price_per_month'] = str_replace(',', '', $data['subscription_price_per_month']);
         ServerFacade::upsert($data, $id);
         return redirect()->route('admin.servers.index');
 
@@ -78,7 +77,7 @@ class ServerController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        if( Server::withCount('inbounds')->first()->inbounds_count ){
+        if (Server::withCount('inbounds')->first()->inbounds_count) {
             return redirect()->back()->withErrors([
                 __('app.messages.server_has_children')
             ]);
