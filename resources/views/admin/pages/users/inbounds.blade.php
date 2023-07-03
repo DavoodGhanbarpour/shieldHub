@@ -56,21 +56,21 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.start_date')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][start_date]" class="form-control" placeholder="{{__('app.general.start_date')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][start_date]" class="form-control datepicker" placeholder="{{__('app.general.start_date')}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.end_date')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][end_date]" class="form-control" placeholder="{{__('app.general.end_date')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][end_date]" class="form-control datepicker" placeholder="{{__('app.general.end_date')}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_per_month]" class="form-control" placeholder="{{__('app.general.subscription_price_per_month')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_per_month]" class="form-control number_format" placeholder="{{__('app.general.subscription_price_per_month')}}">
                                         </div>
                                     </div>
 
@@ -100,7 +100,9 @@
 
     <x-scripts.copy/>
     <x-scripts.search/>
+    <x-libs.pwt-datepicker/>
 
+    
     @push('scripts')
 
         <script>
@@ -120,32 +122,6 @@
                         parentElement.removeClass('d-none');
                 });
             });
-        </script>
-
-        <script>
-
-            function setInboundStatus(element) {
-
-                element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
-                element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
-
-                if ( element.hasClass('card-active') ) {
-
-                    console.log('aaaa');
-                    element.find('.card-footer').collapse('show');
-                } else {
-
-                    console.log('bbbb');
-                    element.find('.card-footer').collapse('hide');
-                }
-            }
-
-            function setInboundsStatus() {
-
-                $('.inbound-card').each(function () {
-                    setInboundStatus($(this));
-                })
-            }
 
             $(document).ready(function () {
 
@@ -172,6 +148,26 @@
                 $('.inbound-card-parent').addClass('d-none');
                 $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
             });
+            
+
+            function setInboundStatus(element) {
+
+                element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
+                element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
+                element.find('select, input').prop('disabled', !element.hasClass('card-active'));
+
+                if ( element.hasClass('card-active') )
+                    element.find('.card-footer').collapse('show');
+                else
+                    element.find('.card-footer').collapse('hide');
+            }
+
+            function setInboundsStatus() {
+
+                $('.inbound-card').each(function () {
+                    setInboundStatus($(this));
+                })
+            }
 
         </script>
     @endpush
