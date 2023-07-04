@@ -20,3 +20,5 @@ Route::resource('inbounds', InboundController::class);
 Route::resource('servers', ServerController::class);
 
 Route::resource('invoices', InvoiceController::class);
+
+Route::get('reports/users/invoices', [InvoiceController::class, 'index'])->name('reports.users.invoices');
