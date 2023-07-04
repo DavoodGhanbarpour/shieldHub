@@ -23,7 +23,7 @@ class ServerFactory extends Factory
             'start_date' => fake()->date(),
             'end_date' => Carbon::parse(fake()->date())->addMonth(1),
             'description' => fake()->text('50'),
-            'subscription_price_per_month' => fake()->numberBetween('0'),
+            'subscription_price' => fake()->numberBetween('0'),
         ];
     }
 }

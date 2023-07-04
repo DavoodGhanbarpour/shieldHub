@@ -23,7 +23,7 @@ class Server extends Model
         'start_date',
         'end_date',
         'description',
-        'subscription_price_per_month',
+        'subscription_price',
     ];
 
     public function inbounds(): HasMany

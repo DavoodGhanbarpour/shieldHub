@@ -37,7 +37,7 @@
                                 {{__('app.general.description')}}
                             </th>
                             <th>
-                                {{__('app.general.subscription_price_per_month')}}
+                                {{__('app.general.subscription_price')}}
                             </th>
                             <th>
                                 {{__('app.pageComponents.actions')}}
@@ -61,7 +61,7 @@
                                     {{$eachServer->description}}
                                 </td>
                                 <td class="sort-users-count">
-                                    {{number_format($eachServer->subscription_price_per_month)}}
+                                    {{number_format($eachServer->subscription_price)}}
                                 </td>
                                 <td class="copy-parent">
                                     <div class="btn-list flex-nowrap justify-content-center">

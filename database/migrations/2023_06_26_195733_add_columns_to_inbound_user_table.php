@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('subscriptions', function (Blueprint $table) {
             $table->after('inbound_id',function (Blueprint $table){
-                $table->unsignedDouble('subscription_price_per_month')->default(0);
+                $table->unsignedDouble('subscription_price')->default(0);
                 $table->text('description')->nullable();
                 $table->text('private_description')->nullable();
                 $table->date('start_date');
@@ -29,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('inbound_user', function (Blueprint $table) {
-            $table->dropColumn('subscription_price_per_month');
+            $table->dropColumn('subscription_price');
             $table->dropColumn('description');
             $table->dropColumn('private_description');
             $table->dropColumn('payment_amount');

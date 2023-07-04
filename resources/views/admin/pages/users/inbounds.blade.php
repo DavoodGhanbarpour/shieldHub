@@ -68,9 +68,9 @@
                                     </div>
 
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label required">{{__('app.general.subscription_price_per_month')}}</label>
+                                        <label class="form-label required">{{__('app.general.subscription_price')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_per_month]" class="form-control number_format" placeholder="{{__('app.general.subscription_price_per_month')}}">
+                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_price]" class="form-control number_format" placeholder="{{__('app.general.subscription_price')}}">
                                         </div>
                                     </div>
 
@@ -102,7 +102,7 @@
     <x-scripts.search/>
     <x-libs.pwt-datepicker/>
 
-    
+
     @push('scripts')
 
         <script>
@@ -148,7 +148,7 @@
                 $('.inbound-card-parent').addClass('d-none');
                 $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
             });
-            
+
 
             function setInboundStatus(element) {
 

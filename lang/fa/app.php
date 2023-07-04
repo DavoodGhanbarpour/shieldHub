@@ -18,7 +18,7 @@ return [
         'users_count' => 'تعداد کاربران',
         'start_date' => 'تاریخ شروع',
         'end_date' => 'تاریخ پایان',
-        'subscription_price_per_month' => 'مبلغ عضویت ماهانه',
+        'subscription_price' => 'مبلغ عضویت ماهانه',
     ],
     'messages' => [
         'server_has_children' => 'تعدادی ورودی به این سرور متصل میباشد',

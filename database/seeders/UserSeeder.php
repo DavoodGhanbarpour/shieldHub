@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
         User::factory()
             ->hasAttached($inbounds, [
-                'subscription_price_per_month' => fake()->numberBetween('0'),
+                'subscription_price' => fake()->numberBetween('0'),
                 'start_date' => fake()->date(),
                 'end_date' => Carbon::parse(fake()->date())->addMonth(1),
             ])
