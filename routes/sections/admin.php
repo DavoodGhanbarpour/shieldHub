@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InboundController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ServerController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,4 @@ Route::resource('servers', ServerController::class);
 
 Route::resource('invoices', InvoiceController::class);
 
-Route::get('reports/users/invoices', [InvoiceController::class, 'index'])->name('reports.users.invoices');
+Route::get('reports/users/invoices', [ReportController::class, 'index'])->name('reports.users.invoices');
