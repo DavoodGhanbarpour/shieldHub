@@ -49,6 +49,8 @@
                     <a class="w-auto" href="{{ route('auth.login', [ App\Models\User::SUPPORTED_LANGUAGES['fa']['key'] ]) }}">
                       <span class="flag btn flag-sm flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="فارسی"></span>
                     </a>
+                    
+                    <x-buttons.theme-mode :class="'w-auto'"/>
                   </div>
 
                   <h2 class="h2 text-center mb-4">{{__('app.login.login_to_your_account')}}</h2>
