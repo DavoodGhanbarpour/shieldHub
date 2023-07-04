@@ -24,6 +24,7 @@
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
     <link href="{{ asset('libs/datatables/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('libs/select2/select2.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"/>
     @stack('styles')
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
 
@@ -79,6 +80,7 @@
     <script src="{{ asset('libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
     <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
     <script src="{{ asset('js/number-format.js') }}" defer></script>

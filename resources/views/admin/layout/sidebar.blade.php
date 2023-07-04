@@ -285,7 +285,7 @@
                       <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
                             <a class="dropdown-item" href="{{route('admin.reports.users.invoices')}}">
-                                Users invoices
+                                Users Invoices
                             </a>
                         </div>
                       </div>
