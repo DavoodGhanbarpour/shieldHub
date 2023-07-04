@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Subscription::class, 'subscription_id');
+            $table->foreignIdFor(Subscription::class, 'subscription_id')->nullable();
             $table->foreignIdFor(User::class);
             $table->unsignedDouble('debit');
             $table->unsignedDouble('credit');
