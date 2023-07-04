@@ -23,14 +23,14 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.credit')}}</label>
                     <div>
                         <input type="text" name="credit" class="form-control number_format" placeholder="{{__('app.general.credit')}}">
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.date')}}</label>
                     <div>

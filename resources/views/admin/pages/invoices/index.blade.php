@@ -5,7 +5,7 @@
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
-            <x-buttons.add :title="__('app.pageComponents.add') .' '. __('app.servers.server')"/>
+            <x-buttons.add :title="__('app.pageComponents.add') .' '. __('app.invoices.invoice')"/>
         </div>
     </div>
 @endsection
@@ -20,6 +20,9 @@
                         <tr>
                             <th>
                                 {{__('app.auth.user')}}
+                            </th>
+                            <th>
+                                {{__('app.general.debit')}}
                             </th>
                             <th>
                                 {{__('app.general.credit')}}

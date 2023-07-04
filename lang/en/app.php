@@ -11,6 +11,8 @@ return [
         'port' => 'Port',
         'date' => 'Date',
         'quota' => 'Quota',
+        'debit' => 'Debit',
+        'credit' => 'Credit',
         'days_remain' => ':count day(s) remains',
         'name' => 'Name',
         'email' => 'Email',
@@ -67,6 +69,10 @@ return [
     'servers' => [
         'server' => 'Server',
         'servers' => 'Servers',
+    ],
+    'invoices' => [
+        'invoice' => 'Invoice',
+        'invoices' => 'Invoices',
     ],
     'pageComponents' => [
         'new' => 'New',
