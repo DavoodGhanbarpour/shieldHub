@@ -14,7 +14,7 @@ return [
         'debit' => 'Debit',
         'credit' => 'Credit',
         'total' => 'Total',
-        'remain' => 'Remain',
+        'remain' => 'Remaining',
         'you_have_debt' => 'Your account has (:price) debt',
         'you_have_credit' => 'Your account has (:price) credit',
         'you_dont_have_credit_or_debt' => 'Your account has no credit or debt',
