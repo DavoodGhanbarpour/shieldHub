@@ -64,7 +64,7 @@
                                     {{$eachInbound->description}}
                                 </td>
                                 <td class="sort-users-count">
-                                    {{$eachInbound->users_count}}
+                                    {{$eachInbound->active_subscriptions_count}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
