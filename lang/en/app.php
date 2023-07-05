@@ -87,6 +87,7 @@ return [
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
+        'clearAll' => 'Clear all',
     ],
     'platforms' => [
         'android' => 'Android',
