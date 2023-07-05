@@ -18,8 +18,8 @@ Route::resource('users', UserController::class);
 Route::name('users.')->prefix('users')->group(function () {
     Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('inbounds');
     Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('assignInbounds');
-    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('invoices');
-    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('subscriptions');
+    Route::get('{user}/invoices', [UserController::class, 'invoices'])->name('invoices');
+    Route::get('{user}/subscriptions', [UserController::class, 'subscriptions'])->name('subscriptions');
 });
 
 // Inbound Routes

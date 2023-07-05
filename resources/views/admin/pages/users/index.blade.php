@@ -19,27 +19,27 @@
                 <x-tables.default>
 
                     <thead>
-                    <tr>
-                        <th>
-                            {{__('app.pageComponents.index')}}
-                        </th>
-                        <th>
-                            {{__('app.general.name')}}
-                        </th>
-                        <th>
-                            {{__('app.general.email')}}
-                        </th>
-                        <th>
-                            {{__('app.auth.role')}}
-                        </th>
-                        <th>
-                            {{__('app.inbounds.inbounds')}}
-                        </th>
-                        <th>
-                            {{__('app.auth.last_visit')}}
-                        </th>
-                        <th>{{__('app.pageComponents.actions')}}</th>
-                    </tr>
+                        <tr>
+                            <th>
+                                {{__('app.pageComponents.index')}}
+                            </th>
+                            <th>
+                                {{__('app.general.name')}}
+                            </th>
+                            <th>
+                                {{__('app.general.email')}}
+                            </th>
+                            <th>
+                                {{__('app.auth.role')}}
+                            </th>
+                            <th>
+                                {{__('app.inbounds.inbounds')}}
+                            </th>
+                            <th>
+                                {{__('app.auth.last_visit')}}
+                            </th>
+                            <th>{{__('app.pageComponents.actions')}}</th>
+                        </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
@@ -54,6 +54,7 @@
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
 
+                                        <x-buttons.history :user="$eachUser->id"/>
                                         <a href="{{route('admin.users.inbounds', ['user' => $eachUser->id])}}" class="btn btn-secondary my-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-broadcast" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -72,7 +73,7 @@
                         @endforeach
                     </tbody>
 
-            </x-tables.default>
+                </x-tables.default>
 
             </div>
         </div>
