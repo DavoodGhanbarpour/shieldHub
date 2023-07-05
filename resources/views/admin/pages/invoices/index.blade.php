@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', __('app.inbounds.inbounds'))
+@section('title', __('app.invoices.invoices'))
 
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
