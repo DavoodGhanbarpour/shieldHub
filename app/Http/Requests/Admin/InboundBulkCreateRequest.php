@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin;
 
 use App\Rules\NetworkPortRule;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InboundBulkCreateRequest extends FormRequest
@@ -25,9 +24,10 @@ class InboundBulkCreateRequest extends FormRequest
     {
         return [
             'inbounds' => ['array', 'required'],
+            'inbounds.*.title' => ['required', 'string'],
             'inbounds.*.server_id' => ['required', 'exists:servers,id'],
             'inbounds.*.description' => ['string', 'nullable'],
-            'inbounds.*.port' => [new NetworkPortRule()],
+            'inbounds.*.port' => ['required', new NetworkPortRule()],
             'inbounds.*.link' => ['string', 'required'],
         ];
     }
