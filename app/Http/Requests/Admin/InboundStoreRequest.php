@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\NetworkPortRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InboundStoreRequest extends FormRequest
@@ -23,7 +24,7 @@ class InboundStoreRequest extends FormRequest
             'server' => ['integer', 'required', 'exists:users,id'],
             'title' => ['string', 'required'],
             'link' => ['string', 'required'],
-            'port' => ['numeric', 'required', 'between:0,65535'],
+            'port' => ['required', new NetworkPortRule()],
             'description' => ['string', 'nullable'],
         ];
     }

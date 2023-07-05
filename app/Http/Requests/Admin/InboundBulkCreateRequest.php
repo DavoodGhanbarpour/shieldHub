@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use App\Rules\NetworkPortRule;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class InboundUpdateRequest extends FormRequest
+class InboundBulkCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,15 +18,17 @@ class InboundUpdateRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array
      */
     public function rules(): array
     {
         return [
-            'server' => ['integer', 'required', 'exists:users,id'],
-            'title' => ['string', 'required'],
-            'link' => ['string', 'required'],
-            'port' => ['required', new NetworkPortRule()],
-            'description' => ['string', 'nullable'],
+            'inbounds' => ['array', 'required'],
+            'inbounds.*.server_id' => [],
+            'inbounds.*.description' => [],
+            'inbounds.*.port' => [new NetworkPortRule()],
+            'inbounds.*.port' => [],
         ];
     }
 }
