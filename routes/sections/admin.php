@@ -8,18 +8,40 @@ use App\Http\Controllers\Admin\ServerController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('home', [DashboardController::class, 'index'])->name('home');
+// Dashboard Routes
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('home', [DashboardController::class, 'index'])->name('home');
+});
 
-Route::resource('users', UserController::class);
-Route::get('users/{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
-Route::post('users/{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
+// User Routes
+Route::group(['prefix' => 'users'], function () {
+    Route::resource('users', UserController::class);
 
-Route::get('inbounds/bulk-create', [InboundController::class, 'bulkCreate'])->name('inbounds.bulk.create');
-Route::post('inbounds/bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
-Route::resource('inbounds', InboundController::class);
+    Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
+    Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
+});
 
+// Inbound Routes
+Route::group(['prefix' => 'inbounds'], function () {
+    Route::get('bulk-create', [InboundController::class, 'bulkCreate'])->name('inbounds.bulk.create');
+    Route::post('bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
+    Route::resource('inbounds', InboundController::class);
+});
+
+// Server Routes
 Route::resource('servers', ServerController::class);
 
+// Invoice Routes
 Route::resource('invoices', InvoiceController::class);
 
-Route::get('reports/users/invoices', [ReportController::class, 'allUsers'])->name('reports.users.invoices');
+// Report Routes
+Route::group(['prefix' => 'reports'], function () {
+    Route::get('users/invoices', [ReportController::class, 'allUsers'])->name('reports.users.invoices');
+});
+
+// History Routes
+Route::group(['prefix' => 'histories'], function () {
+    Route::get('users/histories/{user}/invoices', [ReportController::class, 'allUsers'])->name('histories.invoices');
+    Route::get('users/histories/{user}/subscriptions', [ReportController::class, 'allUsers'])->name('histories.subscriptions');
+});
+
