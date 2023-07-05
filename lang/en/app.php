@@ -106,6 +106,7 @@ return [
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
         'clearAll' => 'Clear all',
+        'search' => 'Search',
     ],
     'platforms' => [
         'android' => 'Android',

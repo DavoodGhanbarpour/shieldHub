@@ -3,7 +3,7 @@
         $(document).ready(function () {
 
         const SEARCH_ELEMENT =   `<div class="input-icon mb-3 col-md-3">
-                                        <input type="text" id="pageSearch" value="" class="form-control" placeholder="Search…">
+                                        <input type="text" id="pageSearch" value="" class="form-control" placeholder="{{__('app.pageComponents.search')}}…">
                                         <span class="input-icon-addon">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
