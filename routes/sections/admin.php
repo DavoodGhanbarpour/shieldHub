@@ -22,4 +22,4 @@ Route::resource('servers', ServerController::class);
 
 Route::resource('invoices', InvoiceController::class);
 
-Route::get('reports/users/invoices', [ReportController::class, 'index'])->name('reports.users.invoices');
+Route::get('reports/users/invoices', [ReportController::class, 'allUsers'])->name('reports.users.invoices');

@@ -11,6 +11,9 @@
                     <thead>
                         <tr>
                             <th>
+                                {{__('app.pageComponents.index')}}
+                            </th>
+                            <th>
                                 {{__('app.auth.user')}}
                             </th>
                             <th>
@@ -20,10 +23,7 @@
                                 {{__('app.general.credit')}}
                             </th>
                             <th>
-                                {{__('app.general.date')}}
-                            </th>
-                            <th>
-                                {{__('app.general.description')}}
+                                {{__('app.general.credit')}}
                             </th>
                             <th>
                                 {{__('app.pageComponents.actions')}}
@@ -32,21 +32,15 @@
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
-                        @foreach($invoices as $eachInvoice)
+                        @foreach($users as $eachUser)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-user">{{$eachInvoice->user}}</td>
-                                <td class="sort-credit">{{$eachInvoice->credit}}</td>
-                                <td class="sort-date">
-                                    {{convertDate($eachInvoice->date)}}
-                                </td>
-                                <td class="sort-description">
-                                    {{$eachInvoice->description}}
-                                </td>
+                                <td class="sort-user">{{$eachUser->name}}</td>
+                                <td class="sort-credit">{{number_format($eachUser->credit)}}</td>
+                                <td class="sort-debit">{{number_format($eachUser->debit)}}</td>
+                                <td class="sort-debit">{{''}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
-                                        <x-buttons.edit :link="route('admin.invoices.edit', ['invoice' => $eachInvoice->id])"/>
-                                        <x-buttons.destroy :link="route('admin.invoices.destroy', ['invoice' => $eachInvoice->id])"/>
                                     </div>
                                 </td>
                             </tr>
