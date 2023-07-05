@@ -61,7 +61,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Home
+                                {{__('app.dashboard.home')}}
                             </span>
                         </a>
                     </li>
@@ -76,7 +76,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                invoices History
+                                {{__('app.invoices.invoices_history')}}
                             </span>
                         </a>
                     </li>

@@ -13,10 +13,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Visits</div>
+                                <div class="subheader">{{__('app.visits.visits')}}</div>
                                 <div class="ms-auto lh-1">
                                     <span class="text-muted" href="#" data-bs-toggle="dropdown"
-                                          aria-haspopup="true" aria-expanded="false">Last 7 days</span>
+                                          aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
@@ -31,10 +31,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Inbounds</div>
+                                <div class="subheader">{{__('app.inbounds.inbounds')}}</div>
                                 <div class="ms-auto lh-1">
                                     <span class="text-muted" href="#" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">Last 7 days</span>
+                                        aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
@@ -49,10 +49,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Users</div>
+                                <div class="subheader">{{__('app.auth.users')}}</div>
                                 <div class="ms-auto lh-1">
                                     <span class="text-muted" href="#" data-bs-toggle="dropdown"
-                                          aria-haspopup="true" aria-expanded="false">Last 7 days</span>
+                                          aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-baseline">
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{$cards['online_user']}} Online users
+                                        {{__('app.general.online_users',['count'=>$cards['online_user']])}}
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Visits",
+                        name: "{{ __('app.visits.visits') }}",
                         data: [
                             @foreach( $charts['user_visits'] as $each )'{{$each['count']}}',@endforeach
                         ],
@@ -314,7 +314,7 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Inbounds",
+                        name: "{{ __('app.inbounds.inbounds') }}",
                         data: [
                             @foreach( $charts['added_inbounds_count'] as $each )'{{$each['count']}}',@endforeach
                         ]
@@ -377,7 +377,7 @@
                         curve: "smooth",
                     },
                     series: [{
-                        name: "Inbounds",
+                        name: "{{ __('app.auth.users') }}",
                         data: [
                             @foreach( $charts['added_users_count'] as $each )'{{$each['count']}}',@endforeach
                         ]

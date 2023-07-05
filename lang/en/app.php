@@ -14,6 +14,7 @@ return [
         'debit' => 'Debit',
         'credit' => 'Credit',
         'total' => 'Total',
+        'remain' => 'Remain',
         'days_remain' => ':count day(s) remains',
         'name' => 'Name',
         'email' => 'Email',
@@ -22,6 +23,17 @@ return [
         'start_date' => 'Start date',
         'end_date' => 'End date',
         'subscription_price' => 'Subscription price/day',
+        'history' => 'History',
+        'last_days' => 'Last :count day(s)',
+        'online_users' => 'Online :count user(s)',
+    ],
+    'reports' => [
+        'report' => 'Report',
+        'reports' => 'Reports',
+    ],
+    'visits' => [
+        'visit' => 'Visit',
+        'visits' => 'Visits',
     ],
     'messages' => [
         'server_has_children' => 'Server has inbounds connected to it',
@@ -79,6 +91,7 @@ return [
     'invoices' => [
         'invoice' => 'Invoice',
         'invoices' => 'Invoices',
+        'invoices_history' => 'Invoices history',
     ],
     'pageComponents' => [
         'new' => 'New',

@@ -11,7 +11,7 @@ class InvoiceController extends Controller
     public function index()
     {
         return view('customer.pages.invoices.index', [
-            'invoices' => Invoice::all()
+            'invoices' => auth()->user()->invoices
         ]);
     }
 }

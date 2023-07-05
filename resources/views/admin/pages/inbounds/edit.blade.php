@@ -20,9 +20,9 @@
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.general.server')}}</label>
+                    <label class="form-label required">{{__('app.servers.server')}}</label>
                     <div>
-                        <select name="server_id" class="form-select" placeholder="{{__('app.general.server')}}">
+                        <select name="server_id" class="form-select" placeholder="{{__('app.servers.server')}}">
                             @foreach($servers as $eachServer)
                                 <option
                                     @if($eachServer->id == $inbound->server_id)

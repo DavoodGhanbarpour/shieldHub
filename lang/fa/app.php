@@ -11,6 +11,10 @@ return [
         'port' => 'Port',
         'date' => 'تاریخ',
         'quota' => 'مهلت',
+        'debit' => 'بدهکاری',
+        'credit' => 'بستانکاری',
+        'total' => 'جمع',
+        'remain' => 'مانده',
         'days_remain' => ':count روز مانده',
         'name' => 'نام',
         'email' => 'پست الکترونیک',
@@ -18,7 +22,18 @@ return [
         'users_count' => 'تعداد کاربران',
         'start_date' => 'تاریخ شروع',
         'end_date' => 'تاریخ پایان',
-        'subscription_price' => 'مبلغ عضویت ماهانه',
+        'subscription_price' => 'مبلغ عضویت روزانه',
+        'history' => 'تاریخچه',
+        'last_days' => 'آخرین :count روز',
+        'online_users' => ':count کاربر آنلاین',
+    ],
+    'reports' => [
+        'report' => 'گزارش',
+        'reports' => 'گزارشات',
+    ],
+    'visits' => [
+        'visit' => 'بازدید',
+        'visits' => 'بازدیدها',
     ],
     'messages' => [
         'server_has_children' => 'تعدادی ورودی به این سرور متصل میباشد',
@@ -63,10 +78,20 @@ return [
         'inbounds_in_use' => ':count ورودی فعال',
         'inbounds_not_in_use' => ':count ورودی غیرفعال',
         'inbounds_clients' => 'نرم افزار های V2ray',
+        'inbounds_count' => 'تعداد ورودی ها',
+    ],
+    'subscriptions' => [
+        'subscription' => 'اشتراک',
+        'subscriptions' => 'اشتراک ها',
     ],
     'servers' => [
-        'server' => 'Server',
-        'servers' => 'Servers',
+        'server' => 'سرور',
+        'servers' => 'سرور ها',
+    ],
+    'invoices' => [
+        'invoice' => 'تراکنش',
+        'invoices' => 'تراکنش ها',
+        'invoices_history' => 'تاریخچه تراکنش ها',
     ],
     'pageComponents' => [
         'new' => 'جدید',
@@ -80,6 +105,7 @@ return [
         'cancel' => 'انصراف',
         'copied' => 'در کلیپبورد شما کپی شد',
         'not_copied' => 'عملیات کپی کردن با خطا مواجه شد',
+        'clearAll' => 'حذف همه',
     ],
     'platforms' => [
         'android' => 'اندروید',
