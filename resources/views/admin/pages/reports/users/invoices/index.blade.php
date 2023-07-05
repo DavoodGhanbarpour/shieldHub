@@ -17,10 +17,13 @@
                                 {{__('app.auth.user')}}
                             </th>
                             <th>
+                                {{__('app.general.credit')}}
+                            </th>
+                            <th>
                                 {{__('app.general.debit')}}
                             </th>
                             <th>
-                                {{__('app.general.credit')}}
+                                {{__('app.general.total')}}
                             </th>
                             <th>
                                 {{__('app.inbounds.inbounds_count')}}
@@ -38,6 +41,7 @@
                                 <td class="sort-user">{{$eachUser->name}}</td>
                                 <td class="sort-credit">{{number_format($eachUser->invoices_sum_credit)}}</td>
                                 <td class="sort-debit">{{number_format($eachUser->invoices_sum_debit)}}</td>
+                                <td class="sort-total">{{number_format($eachUser->invoices_sum_credit - $eachUser->invoices_sum_debit)}}</td>
                                 <td class="sort-subscription-count">{{$eachUser->active_subscriptions_count}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
