@@ -35,7 +35,7 @@ class InvoiceRepository
                 ->diffInDays($subscription->end_date);
 
         return $this->upsert([
-            'debit' => $debitPrice,
+            'debit' => round($debitPrice),
             'user_id' => $subscription->user_id,
             'subscription_id' => $subscription->id,
             'date' => now(),
