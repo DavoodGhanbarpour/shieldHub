@@ -16,10 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Subscription::class, 'subscription_id')->nullable();
             $table->foreignIdFor(User::class);
-            $table->unsignedDouble('debit');
-            $table->unsignedDouble('credit');
+            $table->unsignedDouble('debit')->default(0);
+            $table->unsignedDouble('credit')->default(0);
             $table->date('date');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

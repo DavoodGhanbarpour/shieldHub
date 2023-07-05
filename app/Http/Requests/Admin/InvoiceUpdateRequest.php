@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\CommaSeparatedPrice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InvoiceUpdateRequest extends FormRequest
@@ -11,18 +12,21 @@ class InvoiceUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array
      */
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'exists:users,id'],
+            'date' => ['date', 'required'],
+            'description' => ['string', 'nullable'],
+            'credit' => ['required', new CommaSeparatedPrice()]
         ];
     }
 }

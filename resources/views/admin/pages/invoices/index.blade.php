@@ -19,10 +19,10 @@
                     <thead>
                         <tr>
                             <th>
-                                {{__('app.auth.user')}}
+                                {{__('app.pageComponents.index')}}
                             </th>
                             <th>
-                                {{__('app.general.debit')}}
+                                {{__('app.auth.user')}}
                             </th>
                             <th>
                                 {{__('app.general.credit')}}
@@ -43,8 +43,8 @@
                         @foreach($invoices as $eachInvoice)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-user">{{$eachInvoice->user}}</td>
-                                <td class="sort-credit">{{$eachInvoice->credit}}</td>
+                                <td class="sort-user">{{$eachInvoice->user->name}}</td>
+                                <td class="sort-credit">{{number_format($eachInvoice->credit)}}</td>
                                 <td class="sort-date">
                                     {{convertDate($eachInvoice->date)}}
                                 </td>
@@ -53,8 +53,8 @@
                                 </td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
-                                        <x-buttons.edit :link="route('admin.invoixes.edit', ['server' => $eachInvoice->id])"/>
-                                        <x-buttons.destroy :link="route('admin.invoixes.destroy', ['server' => $eachInvoice->id])"/>
+                                        <x-buttons.edit :link="route('admin.invoices.edit', ['invoice' => $eachInvoice->id])"/>
+                                        <x-buttons.destroy :link="route('admin.invoices.destroy', ['invoice' => $eachInvoice->id])"/>
                                     </div>
                                 </td>
                             </tr>

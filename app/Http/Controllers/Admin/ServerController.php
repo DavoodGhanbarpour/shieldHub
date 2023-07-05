@@ -69,7 +69,6 @@ class ServerController extends Controller
         $data['subscription_price'] = removeSeparator($data['subscription_price']);
         ServerFacade::upsert($data, $id);
         return redirect()->route('admin.servers.index');
-
     }
 
     /**

@@ -1,10 +1,10 @@
 @extends('admin.layout.main')
 
-@section('title', __('app.pageComponents.add') .' '. __('app.servers.server'))
+@section('title', __('app.pageComponents.add') .' '. __('app.invoices.invoice'))
 
 @section('content')
 
-    <form action="{{ route('admin.servers.store') }}" method="POST" class="card">
+    <form action="{{ route('admin.invoices.store') }}" method="POST" class="card">
         @csrf
 
         <div class="card-body">
@@ -46,8 +46,7 @@
                             <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
                                 <textarea name="description" rows="4" class="form-control resize-none"
-                                    placeholder="{{__('app.general.description')}}">
-                                </textarea>
+                                    placeholder="{{__('app.general.description')}}"></textarea>
                             </div>
                         </div>
                     </div>

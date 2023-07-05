@@ -1,10 +1,10 @@
 @extends('admin.layout.main')
 
-@section('title', __('app.pageComponents.edit') .' '. __('app.servers.server'))
+@section('title', __('app.pageComponents.edit') .' '. __('app.invoices.invoice'))
 
 @section('content')
 
-    <form action="{{ route('admin.servers.update', ['invoice' => $invoice->id]) }}" method="POST" class="card">
+    <form action="{{ route('admin.invoices.update', ['invoice' => $invoice->id]) }}" method="POST" class="card">
         @csrf
         @method('put')
 
@@ -17,6 +17,9 @@
                         <select name="user_id" class="form-select" placeholder="{{__('app.auth.user')}}">
                             @foreach($users as $eachUser)
                                 <option
+                                    @if($eachUser->id == $invoice->user_id)
+                                        {{'selected'}}
+                                    @endif
                                     value="{{$eachUser->id}}">
                                     {{$eachUser->name}}
                                 </option>
@@ -24,18 +27,22 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.credit')}}</label>
                     <div>
-                        <input type="text" name="credit" class="form-control number_format" placeholder="{{__('app.general.credit')}}">
+                        <input type="text" name="credit"
+                               class="form-control number_format"
+                               value="{{number_format($invoice->credit)}}"
+                               placeholder="{{__('app.general.credit')}}">
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.date')}}</label>
                     <div>
                         <input type="text" name="date" class="form-control datepicker"
+                               value="{{$invoice->date}}"
                                placeholder="{{__('app.general.date')}}">
                     </div>
                 </div>
@@ -47,8 +54,7 @@
                             <label class="form-label">{{__('app.general.description')}}</label>
                             <div>
                                 <textarea name="description" rows="4" class="form-control resize-none"
-                                    placeholder="{{__('app.general.description')}}">
-                                </textarea>
+                                    placeholder="{{__('app.general.description')}}">{{$invoice->description}}</textarea>
                             </div>
                         </div>
                     </div>
