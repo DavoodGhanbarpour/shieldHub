@@ -99,6 +99,7 @@ class UserController extends Controller
         foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
             $result[$key] = $each;
             $result[$key]->subscription_data = $each->activeSubscriptions()
+                ->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))
                 ->first()
                 ?->pivot ?: null;
         }
