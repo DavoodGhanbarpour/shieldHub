@@ -18,8 +18,9 @@ Route::fallback(function () {
 });
 
 Route::middleware('guest')->get('/', function () {
-return redirect()->route('auth.login');
+    return redirect()->route('auth.login');
 })->name('root');
+
 Route::get('/home', function () {
     if (auth()->user()->isAdmin()) {
         return redirect()->route('admin.home');
@@ -29,17 +30,17 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::name('auth.')->middleware(['setLocale'])->group(function () {
-    include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'auth.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'auth.php';
 });
 
 Route::middleware(['auth', 'role:admin', 'setLocale'])->prefix('admin')->name('admin.')->group(function () {
-    include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'admin.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'admin.php';
 });
 
 Route::middleware(['auth', 'role:customer', 'setLocale'])->prefix('customer')->name('customer.')->group(function () {
-    include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'customer.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'customer.php';
 });
 
 Route::middleware(['auth', 'setLocale'])->prefix('profile')->name('profile.')->group(function () {
-    include_once __DIR__.DIRECTORY_SEPARATOR.'sections'.DIRECTORY_SEPARATOR.'profile.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'profile.php';
 });
