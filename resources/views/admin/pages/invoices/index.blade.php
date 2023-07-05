@@ -47,8 +47,8 @@
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-user">{{$eachInvoice->user->name}}</td>
-                                <td class="sort-debit">{{number_format($eachInvoice->debit)}}</td>
-                                <td class="sort-credit">{{number_format($eachInvoice->credit)}}</td>
+                                <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
+                                <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
                                 <td class="sort-date">
                                     {{convertDate($eachInvoice->date)}}
                                 </td>

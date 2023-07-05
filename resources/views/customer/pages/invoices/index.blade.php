@@ -41,9 +41,9 @@
                                 <td class="sort-date">
                                     {{convertDate($eachInvoice->date)}}
                                 </td>
-                                <td class="sort-debit">{{number_format($eachInvoice->debit)}}</td>
-                                <td class="sort-credit">{{number_format($eachInvoice->credit)}}</td>
-                                <td class="sort-remaining">{{number_format($eachInvoice->debit - $eachInvoice->credit)}}</td>
+                                <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
+                                <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
+                                <td class="sort-remaining">{{addSeparator($eachInvoice->debit - $eachInvoice->credit)}}</td>
                             </tr>
                         @endforeach
                     </tbody>

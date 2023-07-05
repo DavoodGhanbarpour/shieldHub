@@ -49,7 +49,7 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label required">{{__('app.general.subscription_price')}}</label>
                             <div>
-                                <input type="text" value="{{number_format($server->subscription_price)}}" name="subscription_price"
+                                <input type="text" value="{{addSeparator($server->subscription_price)}}" name="subscription_price"
                                     class="form-control number_format" placeholder="{{__('app.general.subscription_price')}}">
                             </div>
                         </div>

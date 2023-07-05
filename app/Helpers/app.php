@@ -34,6 +34,12 @@ if (! function_exists('removeSeparator')) {
     }
 }
 
+if (! function_exists('addSeparator')) {
+    function addSeparator(float $number): string
+    {
+        return addSeparator($number,5);
+    }
+}
 
 if (! function_exists('getFreeStorageAsGB')) {
     function getFreeStorageAsGB(string $dir = '/'): float

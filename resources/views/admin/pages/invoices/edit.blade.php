@@ -33,7 +33,7 @@
                     <div>
                         <input type="text" name="credit"
                                class="form-control number_format"
-                               value="{{number_format($invoice->credit)}}"
+                               value="{{addSeparator($invoice->credit)}}"
                                placeholder="{{__('app.general.credit')}}">
                     </div>
                 </div>
