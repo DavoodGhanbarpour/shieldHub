@@ -112,6 +112,17 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function invoices()
+    {
+
+    }
+
+    public function subscriptions()
+    {
+
+    }
+
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
         $data = collect($request->get('inbounds'))->map(function ($item, $key) {
