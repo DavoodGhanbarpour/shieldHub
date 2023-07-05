@@ -59,25 +59,18 @@
                 <div class="col-12 p-4 pe-7">
                     <div class="row">
 
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.general.title')}}</label>
                             <div>
                                 <input type="text" name="title" class="form-control" placeholder="{{__('app.general.title')}}">
                             </div>
                         </div>
-
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label required">{{__('app.general.date')}}</label>
-                            <div>
-                                <input type="text" name="date" class="form-control datepicker"
-                                    placeholder="{{__('app.general.date')}}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
+        
+                        <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.servers.server')}}</label>
                             <div>
-                                <select name="server_id" class="form-select" placeholder="{{__('app.servers.server')}}">
+                                <select name="server" class="form-select server-select" placeholder="{{__('app.general.server')}}">
+                                    <option value="" disabled selected>Choose a server...</option>
                                     @foreach($servers as $eachServer)
                                         <option
                                             data-server-ip="{{$eachServer->ip}}"
@@ -88,11 +81,11 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-md-3 mb-3">
+        
+                        <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
                             <div class="input-group input-group-flat">
-                                <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1" autocomplete="off">
+                                <input type="text" class="form-control w-75 border_right serverIP" disabled="" autocomplete="off">
                                 <input type="text" class="form-control w-25 border_left" name="port" placeholder="443">
                             </div>
                         </div>
@@ -179,7 +172,9 @@
 
         <script>
 
+            const SERVERS_IPS = Object.freeze(JSON.parse('{!! addslashes($servers_pluck) !!}'));
             var repeater;
+
             $(document).ready(function () {
 
                 repeater = $('.repeater').repeater({
@@ -200,7 +195,7 @@
                         setIndexes();
                     },
                     isFirstItemUndeletable: true
-                })
+                });
 
                 $(document).on( 'click', '#clearAll', function(){
 
@@ -209,15 +204,28 @@
                     }
                 });
 
+                $(document).on( 'click', '#detectButton', function(){
+
+                    let inbounds = makeInboundsArray();
+                    repeater.setList(inbounds);
+                    setServerIPs();
+                    toastr.info(`<strong>${inbounds.length}</strong> inbound(s) added to the list`);
+                });
+
+                $(document).on( 'change', '.server-select', function(){
+
+                    setServerIP($(this).closest('[data-repeater-item]'));
+                });
+
+
                 function getInbound(text)
                 {
                     let link    = text;
-                    let ip      = text.split('@')[1].split(':')[0];
+                    let server  = SERVERS_IPS[text.split('@')[1].split(':')[0]];
                     let port    = text.split('@')[1].split(':')[1].split('?')[0];
-                    let date    = text.split('|')[text.split('|').length - 1].split(' ')[0].replaceAll('-', '/');
                     let title   = `${text.split('#')[1].split('|')[0]}|${text.split('#')[1].split('|')[1]}`;
 
-                    return {link, ip, port, date, title};
+                    return {link, server, port, title};
                 }
 
                 function makeInboundsArray()
@@ -233,12 +241,18 @@
                     return inbounds;
                 }
 
-                $(document).on( 'click', '#detectButton', function(){
+                function setServerIPs() {
 
-                    let inbounds = makeInboundsArray();
-                    repeater.setList(inbounds);
-                    toastr.info(`<strong>${inbounds.length}</strong> inbound(s) added to the list`);
-                });
+                    $('[data-repeater-item]').each(function(){
+
+                        setServerIP($(this));
+                    });
+                }
+
+                function setServerIP(row) {
+
+                    row.find('.serverIP').val(row.find('.server-select').find('option:selected').data('server-ip'));
+                }
 
             });
 
