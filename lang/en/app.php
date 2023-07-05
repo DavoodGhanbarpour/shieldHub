@@ -13,6 +13,7 @@ return [
         'quota' => 'Quota',
         'debit' => 'Debit',
         'credit' => 'Credit',
+        'total' => 'Total',
         'days_remain' => ':count day(s) remains',
         'name' => 'Name',
         'email' => 'Email',
