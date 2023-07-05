@@ -69,7 +69,7 @@
                         <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.servers.server')}}</label>
                             <div>
-                                <select name="server" class="form-select server-select" placeholder="{{__('app.general.server')}}">
+                                <select name="server_id" class="form-select server-select" placeholder="{{__('app.general.server')}}">
                                     <option value="" disabled selected>Choose a server...</option>
                                     @foreach($servers as $eachServer)
                                         <option
