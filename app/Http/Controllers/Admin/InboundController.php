@@ -48,7 +48,7 @@ class InboundController extends Controller
     {
         // We are using view composer instead of this
         return view('admin.pages.inbounds.index', [
-            'inbounds' => Inbound::withCount('users')->with('server')->get(),
+            'inbounds' => Inbound::withCount('activeSubscriptions')->with('server')->get(),
         ]);
     }
 

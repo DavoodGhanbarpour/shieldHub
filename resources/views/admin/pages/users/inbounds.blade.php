@@ -34,13 +34,13 @@
 
                             <div class="ribbon-container">
                                 @php
-                                    if ($eachInbound->users_count > 0)
+                                    if ($eachInbound->active_subscriptions_count > 0)
                                         $BGClass = 'success';
                                     else
                                         $BGClass = 'secondary';
                                 @endphp
                                 <div class="ribbon w-18 btn btn-primary copy-button">{{__('app.pageComponents.copy')}}</div>
-                                <div class="ribbon w-12 btn fw-bold fs-4 border-{{$BGClass}} bg-{{$BGClass}} btn-{{$BGClass}}">{{$eachInbound->users_count}}</div>
+                                <div class="ribbon w-12 btn fw-bold fs-4 border-{{$BGClass}} bg-{{$BGClass}} btn-{{$BGClass}}">{{$eachInbound->active_subscriptions_count}}</div>
                             </div>
                             <div class="card-body">
                                 <p class="card-title w-85 fs-4 fw-bold">{{$eachInbound->title}}</p>

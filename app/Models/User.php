@@ -69,12 +69,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Inbound::class, 'subscriptions')
             ->using(Subscription::class)
-            ->withPivot('id','subscription_price', 'start_date', 'end_date', 'description')
+            ->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
+
+    }
+
+    public function activeSubscriptions(): BelongsToMany
+    {
+        return $this->inbounds()
             ->wherePivot('end_date', '>', now());
     }
 
-
-    public function invoices() : HasMany
+    public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
     }
@@ -97,7 +102,7 @@ class User extends Authenticatable
     protected function last_visit(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
+            set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
         );
     }
 }

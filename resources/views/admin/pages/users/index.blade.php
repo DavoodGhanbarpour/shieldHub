@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
-                
+
                 <x-tables.default>
 
                     <thead>
@@ -49,7 +49,7 @@
                                 <td class="sort-name">{{$eachUser->name}}</td>
                                 <td class="sort-email">{{$eachUser->email}}</td>
                                 <td class="sort-role">{{__('app.auth.roles.'.$eachUser->role)}}</td>
-                                <td class="sort-inbounds">{{$eachUser->inbounds_count}}</td>
+                                <td class="sort-inbounds">{{$eachUser->active_subscriptions_count}}</td>
                                 <td class="sort-last-visit">{{$eachUser->last_visit}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
@@ -79,5 +79,5 @@
     </div>
 
     <x-scripts.datatable-search/>
-    
+
 @endsection

@@ -40,7 +40,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.pages.users.index', [
-            'users' => User::withCount('inbounds')->get(),
+            'users' => User::withCount('activeSubscriptions')->get(),
         ]);
     }
 
@@ -96,13 +96,13 @@ class UserController extends Controller
     public function inbounds(User $user)
     {
         $result = [];
-        foreach (Inbound::withCount('users')->get() as $key => $each) {
+        foreach (Inbound::withCount('activeSubscriptions')->get() as $key => $each) {
             $result[$key] = $each;
-            $result[$key]->subscription_data = $each->users
-                ->where('id', '=', $user->id)
-                ?->first()
+            $result[$key]->subscription_data = $each->activeSubscriptions()
+                ->first()
                 ?->pivot ?: null;
         }
+
         return view('admin.pages.users.inbounds', [
             'user' => $user,
             'inbounds' =>
@@ -120,9 +120,7 @@ class UserController extends Controller
             return $item;
         });
 
-        $user->inbounds()->where([
-            'end_date', '>', now()
-        ])->sync($data ?: []);
+        $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
 
         InvoiceFacade::deletePreviousDebitInvoices($user->id);
 
