@@ -186,25 +186,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item{{ Route::is('admin.users.index') ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.users.index') }}">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            {{__('app.auth.users')}}
-                        </span>
-                    </a>
-                </li>
-
                 <li class="nav-item{{ Route::is('admin.inbounds.index') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.inbounds.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -225,6 +206,30 @@
                         </span>
                         <span class="nav-link-title">
                             {{__('app.inbounds.inbounds')}}
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item{{ Route::is('admin.invoices.index') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.invoices.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-settings"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                <path d="M12 10.5v1.5"></path>
+                                <path d="M12 16v1.5"></path>
+                                <path d="M15.031 12.25l-1.299 .75"></path>
+                                <path d="M10.268 15l-1.3 .75"></path>
+                                <path d="M15 15.803l-1.285 -.773"></path>
+                                <path d="M10.285 12.97l-1.285 -.773"></path>
+                                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            {{__('app.invoices.invoices')}}
                         </span>
                     </a>
                 </li>
@@ -253,26 +258,21 @@
                     </a>
                 </li>
 
-                <li class="nav-item{{ Route::is('admin.invoices.index') ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.invoices.index') }}">
+                <li class="nav-item{{ Route::is('admin.users.index') ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.users.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-settings"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                <path d="M12 10.5v1.5"></path>
-                                <path d="M12 16v1.5"></path>
-                                <path d="M15.031 12.25l-1.299 .75"></path>
-                                <path d="M10.268 15l-1.3 .75"></path>
-                                <path d="M15 15.803l-1.285 -.773"></path>
-                                <path d="M10.285 12.97l-1.285 -.773"></path>
-                                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            {{__('app.invoices.invoices')}}
+                            {{__('app.auth.users')}}
                         </span>
                     </a>
                 </li>
