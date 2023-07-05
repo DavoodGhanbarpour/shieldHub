@@ -146,10 +146,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        623 Shares
-                                    </div>
-                                    <div class="text-muted">
-                                        16 today
+                                        {{$cards['online_user']}} Online users
                                     </div>
                                 </div>
                             </div>
@@ -157,67 +154,67 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-sm">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <span class="bg-facebook text-white avatar">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="col">
-                                    <div class="font-weight-medium">
-                                        132 Likes
-                                    </div>
-                                    <div class="text-muted">
-                                        21 today
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-sm-6 col-xl-3">--}}
+{{--                    <div class="card card-sm">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="row align-items-center">--}}
+{{--                                <div class="col-auto">--}}
+{{--                                    <span class="bg-facebook text-white avatar">--}}
+{{--                                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"--}}
+{{--                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"--}}
+{{--                                            stroke-linecap="round" stroke-linejoin="round">--}}
+{{--                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                            <path--}}
+{{--                                                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <div class="font-weight-medium">--}}
+{{--                                        132 Likes--}}
+{{--                                    </div>--}}
+{{--                                    <div class="text-muted">--}}
+{{--                                        21 today--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="mb-3">Using Storage <strong> {{$system_statics['usedDisk']}} GB </strong>of {{$system_statics['totalDisk']}} GB</p>
-                            <div class="progress progress-separated mb-3">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 44%"
-                                    aria-label="Regular">
-                                </div>
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 19%"
-                                    aria-label="System">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-auto d-flex align-items-center pe-2">
-                                    <span class="legend me-2 bg-primary"></span>
-                                    <span>Regular</span>
-                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">915MB</span>
-                                </div>
-                                <div class="col-auto d-flex align-items-center px-2">
-                                    <span class="legend me-2 bg-info"></span>
-                                    <span>System</span>
-                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">415MB</span>
-                                </div>
-                                <div class="col-auto d-flex align-items-center ps-2">
-                                    <span class="legend me-2"></span>
-                                    <span>Free</span>
-                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">612MB</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-12">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <p class="mb-3">Using Storage <strong> {{$system_statics['usedDisk']}} GB </strong>of {{$system_statics['totalDisk']}} GB</p>--}}
+{{--                            <div class="progress progress-separated mb-3">--}}
+{{--                                <div class="progress-bar bg-primary" role="progressbar" style="width: 44%"--}}
+{{--                                    aria-label="Regular">--}}
+{{--                                </div>--}}
+{{--                                <div class="progress-bar bg-info" role="progressbar" style="width: 19%"--}}
+{{--                                    aria-label="System">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-auto d-flex align-items-center pe-2">--}}
+{{--                                    <span class="legend me-2 bg-primary"></span>--}}
+{{--                                    <span>Regular</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">915MB</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-auto d-flex align-items-center px-2">--}}
+{{--                                    <span class="legend me-2 bg-info"></span>--}}
+{{--                                    <span>System</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">415MB</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-auto d-flex align-items-center ps-2">--}}
+{{--                                    <span class="legend me-2"></span>--}}
+{{--                                    <span>Free</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">612MB</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
             </div>
         </div>

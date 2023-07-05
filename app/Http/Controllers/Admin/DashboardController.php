@@ -29,7 +29,7 @@ class DashboardController extends Controller
             'cards' => [
                 'user_counts' => DashboardFacade::getUserCounts(),
                 'inbound_counts' => DashboardFacade::getInboundCounts(),
-                'online_user' => User::online()->get()
+                'online_user' => User::online()->get()->first() ?: 0
             ]
         ]);
     }
