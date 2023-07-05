@@ -45,7 +45,26 @@
                     </div>
                 </div>
 
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">Users</div>
+                                <div class="ms-auto lh-1">
+                                    <span class="text-muted" href="#" data-bs-toggle="dropdown"
+                                          aria-haspopup="true" aria-expanded="false">Last 7 days</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="h1 mb-0 me-2">{{collect($charts['added_users_count'])->sum('count')}}</div>
+                            </div>
+                        </div>
+                        <div id="chart-users" class="chart-sm"></div>
+                    </div>
+                </div>
 
+                <div class="col-sm-6">
+                </div>
 
 
                 <div class="col-sm-6 col-xl-3">
@@ -328,6 +347,69 @@
                     },
                     labels: [
                         @foreach( $charts['added_inbounds_count'] as $each )'{{$each['date']}}',@endforeach
+                    ],
+                    colors: [tabler.getColor("primary")],
+                    legend: {
+                        show: false,
+                    },
+                })).render();
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-users'), {
+                    chart: {
+                        type: "area",
+                        fontFamily: 'inherit',
+                        height: 40.0,
+                        sparkline: {
+                            enabled: true
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    fill: {
+                        opacity: .16,
+                        type: 'solid'
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "smooth",
+                    },
+                    series: [{
+                        name: "Inbounds",
+                        data: [
+                            @foreach( $charts['added_users_count'] as $each )'{{$each['count']}}',@endforeach
+                        ]
+                    }],
+                    tooltip: {
+                        theme: 'dark'
+                    },
+                    grid: {
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        @foreach( $charts['added_users_count'] as $each )'{{$each['date']}}',@endforeach
                     ],
                     colors: [tabler.getColor("primary")],
                     legend: {
