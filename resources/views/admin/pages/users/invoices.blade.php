@@ -9,7 +9,7 @@
         <div class="card-header">
             @include('admin.pages.users.header')
         </div>
-        
+
         <div class="card-body">
             <div id="table-default" class="table-responsive">
                 <x-tables.default>
@@ -19,16 +19,16 @@
                                 {{__('app.pageComponents.index')}}
                             </th>
                             <th>
-                                {{__('app.auth.user')}}
+                                {{__('app.general.date')}}
                             </th>
                             <th>
-                                {{__('app.general.debit')}}
+                                {{__('app.general.description')}}
                             </th>
                             <th>
                                 {{__('app.general.credit')}}
                             </th>
                             <th>
-                                {{__('app.inbounds.inbounds_count')}}
+                                {{__('app.general.debit')}}
                             </th>
                             <th>
                                 {{__('app.pageComponents.actions')}}
@@ -37,19 +37,21 @@
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
-                        {{-- @foreach($users as $eachUser) --}}
+                         @foreach($invoices as $eachInvoice)
                             <tr>
-                                <td class="sort-index"></td>
-                                <td class="sort-user"></td>
-                                <td class="sort-credit"></td>
-                                <td class="sort-debit"></td>
-                                <td class="sort-subscription-count"></td>
+                                <td class="sort-index">{{$index++}}</td>
+                                <td class="sort-date">{{$eachInvoice->date}}</td>
+                                <td class="sort-description">{{$eachInvoice->description}}</td>
+                                <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
+                                <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
+                                        <x-buttons.edit :link="route('admin.invoices.edit', ['invoice' => $eachInvoice->id])"/>
+                                        <x-buttons.destroy :link="route('admin.invoices.destroy', ['invoice' => $eachInvoice->id])"/>
                                     </div>
                                 </td>
                             </tr>
-                        {{-- @endforeach --}}
+                         @endforeach
                     </tbody>
                 </x-tables.default>
             </div>

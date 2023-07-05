@@ -119,14 +119,16 @@ class UserController extends Controller
     public function invoices(User $user)
     {
         return view('admin.pages.users.invoices', [
-            'invoices' => $user->invoices()
+            'invoices' => $user->invoices,
+            'user' => $user
         ]);
     }
 
     public function subscriptions(User $user)
     {
         return view('admin.pages.users.subscriptions', [
-            'subscriptions' => $user->inbounds()
+            'subscriptions' => $user->inbounds,
+            'user' => $user
         ]);
     }
 

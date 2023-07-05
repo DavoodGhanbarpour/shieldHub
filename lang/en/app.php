@@ -68,6 +68,10 @@ return [
         'inbounds_clients' => 'V2ray clients',
         'inbounds_count' => 'Inbounds count',
     ],
+    'subscriptions' => [
+        'subscription' => 'Subscription',
+        'subscriptions' => 'Subscriptions',
+    ],
     'servers' => [
         'server' => 'Server',
         'servers' => 'Servers',

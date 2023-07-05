@@ -9,7 +9,7 @@
         <div class="card-header">
             @include('admin.pages.users.header')
         </div>
-        
+
         <div class="card-body">
             <div id="table-default" class="table-responsive">
                 <x-tables.default>
@@ -19,37 +19,56 @@
                                 {{__('app.pageComponents.index')}}
                             </th>
                             <th>
-                                {{__('app.auth.user')}}
+                                {{__('app.general.title')}}
                             </th>
                             <th>
-                                {{__('app.general.debit')}}
+                                {{__('app.servers.server')}}
                             </th>
                             <th>
-                                {{__('app.general.credit')}}
+                                {{__('app.general.start_date')}}
                             </th>
                             <th>
-                                {{__('app.inbounds.inbounds_count')}}
+                                {{__('app.general.end_date')}}
                             </th>
                             <th>
-                                {{__('app.pageComponents.actions')}}
+                                {{__('app.general.remains')}}
+                            </th>
+                            <th>
+                                {{__('app.general.subscription_price')}}
+                            </th>
+                            <th>
+                                {{__('app.general.total')}}
+                            </th>
+                            <th>
+                                {{__('app.general.description')}}
                             </th>
                         </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
-                        {{-- @foreach($users as $eachUser) --}}
+                        @foreach($subscriptions as $eachSubscription)
+                            @php $diffDayCount = \Carbon\Carbon::parse($eachSubscription->pivot->end_date)->diffInDays(now()) @endphp
+
                             <tr>
-                                <td class="sort-index"></td>
-                                <td class="sort-user"></td>
-                                <td class="sort-credit"></td>
-                                <td class="sort-debit"></td>
-                                <td class="sort-subscription-count"></td>
-                                <td>
-                                    <div class="btn-list flex-nowrap justify-content-center">
-                                    </div>
+                                <td class="sort-index">{{$index++}}</td>
+                                <td class="sort-title">{{$eachSubscription->title}}</td>
+                                <td class="sort-server-title">
+                                    {{$eachSubscription->server->title}}
+                                    <br>
+                                    {{$eachSubscription->server->ip}}:<span class="text-muted">{{$eachSubscription->port}}</span>
                                 </td>
+                                <td class="sort-start-date">{{$eachSubscription->pivot->start_date}}</td>
+                                <td class="sort-end-date">{{$eachSubscription->pivot->end_date}}</td>
+                                <td class="sort-diff">{{$diffDayCount}}</td>
+                                <td class="sort-subscription-price">
+                                    {{addSeparator($eachSubscription->pivot->subscription_price)}}
+                                </td>
+                                <td class="sort-subscription-price">
+                                    {{addSeparator($eachSubscription->pivot->subscription_price * $diffDayCount)}}
+                                </td>
+                                <td class="sort-description">{{$eachSubscription->pivot->description}}</td>
                             </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </x-tables.default>
             </div>
