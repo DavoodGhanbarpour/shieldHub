@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
@@ -10,6 +11,7 @@ use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Inbound;
 use App\Models\Server;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -96,7 +98,10 @@ class UserController extends Controller
         $result = [];
         foreach (Inbound::withCount('users')->get() as $key => $each) {
             $result[$key] = $each;
-            $result[$key]->subscription_data = $each->users->where('id', $user->id)?->first()?->pivot ?: null;
+            $result[$key]->subscription_data = $each->users
+                ->where('id', '=', $user->id)
+                ?->first()
+                ?->pivot ?: null;
         }
         return view('admin.pages.users.inbounds', [
             'user' => $user,
@@ -108,14 +113,23 @@ class UserController extends Controller
 
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
-        $data = collect($request->get('inbounds'))->map(function ($item, $key){
-            if($item['subscription_price']){
+        $data = collect($request->get('inbounds'))->map(function ($item, $key) {
+            if ($item['subscription_price']) {
                 $item['subscription_price'] = removeSeparator($item['subscription_price']);
             }
             return $item;
         });
-        $user->inbounds()->sync( $data ?: []);
 
+        $user->inbounds()->where([
+            'end_date', '>', now()
+        ])->sync($data ?: []);
+
+        InvoiceFacade::deletePreviousDebitInvoices($user->id);
+
+        $user->inbounds->map(function ($inbound) {
+            if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
+                InvoiceFacade::sendDebit($inbound->pivot->id);
+        });
         return redirect()->route('admin.users.index');
     }
 }

@@ -30,7 +30,8 @@ class Inbound extends Model
     {
         return $this->belongsToMany(User::class, 'subscriptions')
             ->using(Subscription::class)
-            ->withPivot('subscription_price', 'start_date', 'end_date', 'description');
+            ->withPivot('id','subscription_price', 'start_date', 'end_date', 'description')
+            ->wherePivot('end_date', '>', now());
     }
 
     public function server() : BelongsTo

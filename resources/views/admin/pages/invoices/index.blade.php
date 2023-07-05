@@ -25,6 +25,9 @@
                                 {{__('app.auth.user')}}
                             </th>
                             <th>
+                                {{__('app.general.debit')}}
+                            </th>
+                            <th>
                                 {{__('app.general.credit')}}
                             </th>
                             <th>
@@ -44,6 +47,7 @@
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-user">{{$eachInvoice->user->name}}</td>
+                                <td class="sort-debit">{{number_format($eachInvoice->debit)}}</td>
                                 <td class="sort-credit">{{number_format($eachInvoice->credit)}}</td>
                                 <td class="sort-date">
                                     {{convertDate($eachInvoice->date)}}

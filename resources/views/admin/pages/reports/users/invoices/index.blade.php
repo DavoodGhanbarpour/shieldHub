@@ -45,8 +45,8 @@
                                 </td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
-                                        <x-buttons.edit :link="route('admin.invoixes.edit', ['server' => $eachInvoice->id])"/>
-                                        <x-buttons.destroy :link="route('admin.invoixes.destroy', ['server' => $eachInvoice->id])"/>
+                                        <x-buttons.edit :link="route('admin.invoices.edit', ['invoice' => $eachInvoice->id])"/>
+                                        <x-buttons.destroy :link="route('admin.invoices.destroy', ['invoice' => $eachInvoice->id])"/>
                                     </div>
                                 </td>
                             </tr>
