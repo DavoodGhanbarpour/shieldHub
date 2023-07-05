@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\InboundFacade;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\InboundBulkCreateRequest;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
 use App\Models\Inbound;
@@ -23,15 +24,18 @@ class InboundController extends Controller
 
     public function bulkCreate()
     {
-        return view('admin.pages.inbounds.add-multiple',[
+        return view('admin.pages.inbounds.add-multiple', [
             'servers' => Server::all(),
-            'servers_pluck' => Server::all()->pluck('id','ip')->toJson(),
+            'servers_pluck' => Server::all()->pluck('id', 'ip')->toJson(),
         ]);
     }
 
-    public function bulkStore()
+    public function bulkStore(InboundBulkCreateRequest $request)
     {
-        dd('');
+        $request->validated()->map(function ($eachInbound) {
+            dd($eachInbound);
+        });
+        return redirect()->route('admin.inbounds.index');
     }
 
     /**
