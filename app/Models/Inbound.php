@@ -28,7 +28,9 @@ class Inbound extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'subscriptions')->using(Subscription::class);
+        return $this->belongsToMany(User::class, 'subscriptions')
+            ->using(Subscription::class)
+            ->withPivot('subscription_price', 'start_date', 'end_date', 'description');
     }
 
     public function server() : BelongsTo

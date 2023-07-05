@@ -94,23 +94,27 @@ class UserController extends Controller
     public function inbounds(User $user)
     {
         $result = [];
-        $userInboundsID = array_column(collect($user->inbounds)->toArray(), 'id');
         foreach (Inbound::withCount('users')->get() as $key => $each) {
             $result[$key] = $each;
-            $result[$key]['isUsing'] = in_array($each->id, $userInboundsID);
+            $result[$key]->subscription_data = $each->users->where('id', $user->id)?->first()?->pivot ?: null;
         }
-
         return view('admin.pages.users.inbounds', [
             'user' => $user,
             'inbounds' =>
-                collect($result)->sortBy('isUsing', SORT_REGULAR, true),
+                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
             'servers' => Server::all()
         ]);
     }
 
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
-        $user->inbounds()->sync($request->get('inbounds') ?: []);
+        $data = collect($request->get('inbounds'))->map(function ($item, $key){
+            if($item['subscription_price']){
+                $item['subscription_price'] = removeSeparator($item['subscription_price']);
+            }
+            return $item;
+        });
+        $user->inbounds()->sync( $data ?: []);
 
         return redirect()->route('admin.users.index');
     }

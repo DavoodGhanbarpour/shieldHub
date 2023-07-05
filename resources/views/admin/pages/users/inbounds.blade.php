@@ -28,7 +28,7 @@
             <div class="row">
                 @foreach($inbounds as $eachInbound)
                     <div class="col-sm-6 col-xl-3 mb-3 inbound-card-parent data target-id-{{$eachInbound->server_id}}">
-                        <div class="card inbound-card copy-parent border-3 {{$eachInbound->isUsing ? 'card-active' : ''}}" role="button">
+                        <div class="card inbound-card copy-parent border-3 {{$eachInbound->subscription_data ? 'card-active' : ''}}" role="button">
                             <input class="d-none inbound-checkbox" value="{{$eachInbound->id}}" type="checkbox" name="inbounds[{{$eachInbound->id}}][inbound_id]">
                             <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
@@ -56,28 +56,43 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.start_date')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][start_date]" class="form-control datepicker" placeholder="{{__('app.general.start_date')}}">
+                                            <input type="text"
+                                                   name="inbounds[{{$eachInbound->id}}][start_date]"
+                                                   class="form-control datepicker"
+                                                   value="{{$eachInbound->subscription_data?->start_date}}"
+                                                   placeholder="{{__('app.general.start_date')}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.end_date')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][end_date]" class="form-control datepicker" placeholder="{{__('app.general.end_date')}}">
+                                            <input type="text"
+                                                   name="inbounds[{{$eachInbound->id}}][end_date]"
+                                                   value="{{$eachInbound->subscription_data?->end_date}}"
+                                                   class="form-control datepicker"
+                                                   placeholder="{{__('app.general.end_date')}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label required">{{__('app.general.subscription_price')}}</label>
                                         <div>
-                                            <input type="text" name="inbounds[{{$eachInbound->id}}][subscription_price]" class="form-control number_format" placeholder="{{__('app.general.subscription_price')}}">
+                                            <input type="text"
+                                                   name="inbounds[{{$eachInbound->id}}][subscription_price]"
+                                                   value="{{number_format($eachInbound->subscription_data?->subscription_price)}}"
+                                                   class="form-control number_format"
+                                                   placeholder="{{__('app.general.subscription_price')}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">{{__('app.general.description')}}</label>
                                         <div>
-                                            <textarea name="inbounds[{{$eachInbound->id}}][description]" rows="3" class="form-control resize-none" placeholder="{{__('app.general.description')}}"></textarea>
+                                            <textarea name="inbounds[{{$eachInbound->id}}][description]"
+                                                      rows="3"
+                                                      class="form-control resize-none"
+                                                      placeholder="{{__('app.general.description')}}">{{$eachInbound->subscription_data?->description}}</textarea>
                                         </div>
                                     </div>
 

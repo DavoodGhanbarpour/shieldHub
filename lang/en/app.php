@@ -20,7 +20,7 @@ return [
         'users_count' => 'Users count',
         'start_date' => 'Start date',
         'end_date' => 'End date',
-        'subscription_price' => 'Subscription price/month',
+        'subscription_price' => 'Subscription price/day',
     ],
     'messages' => [
         'server_has_children' => 'Server has inbounds connected to it',
