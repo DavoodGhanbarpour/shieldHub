@@ -20,7 +20,8 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.servers.server')}}</label>
                     <div>
-                        <select name="server_id" class="form-select" placeholder="{{__('app.general.server')}}">
+                        <select name="server_id" class="form-select server-select" placeholder="{{__('app.general.server')}}">
+                            <option value="" hidden>Choose a server...</option>
                             @foreach($servers as $eachServer)
                                 <option
                                     data-server-ip="{{$eachServer->ip}}"
@@ -78,14 +79,14 @@
                 setServerIP()
             });
 
-            $(document).on( 'change', 'select[name=server]', function(){
+            $(document).on( 'change', '.server-select', function(){
 
                 setServerIP()
             });
 
             function setServerIP() {
 
-                $('#serverIP').val($('select[name=server]').find('option:selected').data('server-ip'));
+                $('#serverIP').val($('.server-select').find('option:selected').data('server-ip'));
             }
         </script>
     @endpush

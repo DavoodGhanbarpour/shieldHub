@@ -70,7 +70,7 @@
                             <label class="form-label required">{{__('app.servers.server')}}</label>
                             <div>
                                 <select name="server_id" class="form-select server-select" placeholder="{{__('app.general.server')}}">
-                                    <option value="" disabled selected>Choose a server...</option>
+                                    <option value="" hidden>Choose a server...</option>
                                     @foreach($servers as $eachServer)
                                         <option
                                             data-server-ip="{{$eachServer->ip}}"
@@ -221,11 +221,11 @@
                 function getInbound(text)
                 {
                     let link    = text;
-                    let server  = SERVERS_IPS[text.split('@')[1].split(':')[0]];
+                    let server_id  = SERVERS_IPS[text.split('@')[1].split(':')[0]];
                     let port    = text.split('@')[1].split(':')[1].split('?')[0];
                     let title   = `${text.split('#')[1].split('|')[0]}|${text.split('#')[1].split('|')[1]}`;
 
-                    return {link, server, port, title};
+                    return {link, server_id, port, title};
                 }
 
                 function makeInboundsArray()
