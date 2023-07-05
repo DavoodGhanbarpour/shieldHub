@@ -19,6 +19,9 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
     Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
+
+    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('histories.invoices');
+    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('histories.subscriptions');
 });
 
 // Inbound Routes
@@ -39,9 +42,4 @@ Route::group(['prefix' => 'reports'], function () {
     Route::get('users/invoices', [ReportController::class, 'allUsers'])->name('reports.users.invoices');
 });
 
-// History Routes
-Route::group(['prefix' => 'histories'], function () {
-    Route::get('users/histories/{user}/invoices', [ReportController::class, 'allUsers'])->name('histories.invoices');
-    Route::get('users/histories/{user}/subscriptions', [ReportController::class, 'allUsers'])->name('histories.subscriptions');
-});
 
