@@ -6,7 +6,7 @@
 
     <form class="repeater card" action="{{ route('admin.inbounds.store') }}" method="POST">
         @csrf
-        
+
         <div class="card-header row">
 
             <div class="w-auto ps-0">
@@ -48,13 +48,13 @@
                     {{__('app.pageComponents.clearAll')}}
                 </a>
             </div>
-                
+
         </div>
 
         <div class="card-body" data-repeater-list="inboundsList">
-                
-           
-            
+
+
+
             <div class="row form_border p-0" data-repeater-item>
                 <div class="col-12 p-4 pe-7">
                     <div class="row">
@@ -75,13 +75,16 @@
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label class="form-label required">{{__('app.general.server')}}</label>
+                            <label class="form-label required">{{__('app.servers.server')}}</label>
                             <div>
-                                <select name="server_id" class="form-select" placeholder="{{__('app.general.server')}}">
-                                    <option value="-1">&nbsp;</option>
-                                    <option value="">test 2</option>
-                                    <option value="">test 3</option>
-                                    <option value="">test 4</option>
+                                <select name="server_id" class="form-select" placeholder="{{__('app.servers.server')}}">
+                                    @foreach($servers as $eachServer)
+                                        <option
+                                            data-server-ip="{{$eachServer->ip}}"
+                                            value="{{$eachServer->id}}">
+                                            {{$eachServer->title}}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -108,7 +111,7 @@
                                     placeholder="{{__('app.general.description')}}">
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -155,8 +158,8 @@
           </div>
         </div>
     </div>
-      
-    
+
+
     @include('components.libs.pwt-datepicker')
 
     @push('styles')
@@ -169,8 +172,8 @@
                 margin-bottom: 1rem !important;
             }
         </style>
-    @endpush    
-    
+    @endpush
+
     @push('scripts')
         <script src="{{ asset('libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 
@@ -183,8 +186,8 @@
                     show: function () {
                         $(this).slideDown();
                         $(".datepicker").pDatepicker({
-                            calendarType: 'gregorian', 
-                            format: 'L', 
+                            calendarType: 'gregorian',
+                            format: 'L',
                             autoClose: true
                         });
                     },
@@ -200,7 +203,7 @@
                 })
 
                 $(document).on( 'click', '#clearAll', function(){
-                
+
                     if ( confirm('Are you sure you want to delete All elements?') ) {
                         $('[data-repeater-list]').empty();
                     }
@@ -216,7 +219,7 @@
 
                     return {link, ip, port, date, title};
                 }
-                
+
                 function makeInboundsArray()
                 {
                     let inbounds = [];
@@ -224,21 +227,21 @@
 
                     inboundsArray.forEach(text => {
                         if( text != undefined && text.length )
-                            inbounds.push(getInbound(text)); 
+                            inbounds.push(getInbound(text));
                     });
 
                     return inbounds;
                 }
 
                 $(document).on( 'click', '#detectButton', function(){
-                
+
                     let inbounds = makeInboundsArray();
                     repeater.setList(inbounds);
                     toastr.info(`<strong>${inbounds.length}</strong> inbound(s) added to the list`);
                 });
-                
+
             });
-            
+
         </script>
     @endpush
 @endsection

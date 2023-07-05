@@ -23,7 +23,9 @@ class InboundController extends Controller
 
     public function bulkCreate()
     {
-        return view('admin.pages.inbounds.add-multiple');
+        return view('admin.pages.inbounds.add-multiple',[
+            'servers' => Server::all(),
+        ]);
     }
 
     public function bulkStore()
