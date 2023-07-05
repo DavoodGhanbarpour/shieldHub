@@ -45,6 +45,7 @@
                                 <td class="sort-subscription-count">{{$eachUser->active_subscriptions_count}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
+                                        <x-buttons.history :user="$eachUser->id"/>
                                     </div>
                                 </td>
                             </tr>
