@@ -12,7 +12,11 @@ class ReportController extends Controller
     public function allUsers()
     {
         return view('admin.pages.reports.users.invoices.index', [
-            'users' => User::query()->with('invoices')->get(),
+            'users' => User::query()
+                ->withSum('invoices','debit')
+                ->withSum('invoices','credit')
+                ->withCount('activeSubscriptions')
+                ->get(),
         ]);
     }
 

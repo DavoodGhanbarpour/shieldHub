@@ -23,7 +23,7 @@
                                 {{__('app.general.credit')}}
                             </th>
                             <th>
-                                {{__('app.general.credit')}}
+                                {{__('app.inbounds.inbounds_count')}}
                             </th>
                             <th>
                                 {{__('app.pageComponents.actions')}}
@@ -36,9 +36,9 @@
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-user">{{$eachUser->name}}</td>
-                                <td class="sort-credit">{{number_format($eachUser->credit)}}</td>
-                                <td class="sort-debit">{{number_format($eachUser->debit)}}</td>
-                                <td class="sort-debit">{{''}}</td>
+                                <td class="sort-credit">{{number_format($eachUser->invoices_sum_credit)}}</td>
+                                <td class="sort-debit">{{number_format($eachUser->invoices_sum_debit)}}</td>
+                                <td class="sort-subscription-count">{{$eachUser->active_subscriptions_count}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
                                     </div>

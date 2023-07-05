@@ -65,6 +65,7 @@ return [
         'inbounds_in_use' => ':count Inbound(s) active',
         'inbounds_not_in_use' => ':count Inbound(s) idle',
         'inbounds_clients' => 'V2ray clients',
+        'inbounds_count' => 'Inbounds count',
     ],
     'servers' => [
         'server' => 'Server',
