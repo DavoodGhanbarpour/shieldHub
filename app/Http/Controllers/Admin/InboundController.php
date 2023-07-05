@@ -25,6 +25,7 @@ class InboundController extends Controller
     {
         return view('admin.pages.inbounds.add-multiple',[
             'servers' => Server::all(),
+            'servers_plunk' => Server::all()->pluck('id','ip'),
         ]);
     }
 

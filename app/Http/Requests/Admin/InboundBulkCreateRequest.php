@@ -25,10 +25,10 @@ class InboundBulkCreateRequest extends FormRequest
     {
         return [
             'inbounds' => ['array', 'required'],
-            'inbounds.*.server_id' => [],
-            'inbounds.*.description' => [],
+            'inbounds.*.server_id' => ['required', 'exists:servers,id'],
+            'inbounds.*.description' => ['string', 'nullable'],
             'inbounds.*.port' => [new NetworkPortRule()],
-            'inbounds.*.port' => [],
+            'inbounds.*.link' => ['string', 'required'],
         ];
     }
 }
