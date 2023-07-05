@@ -80,7 +80,11 @@
                                         <div>
                                             <input type="text"
                                                    name="inbounds[{{$eachInbound->id}}][subscription_price]"
+                                                   @if($eachInbound->subscription_data?->subscription_price)
                                                    value="{{number_format($eachInbound->subscription_data?->subscription_price)}}"
+                                                   @else
+                                                   value="{{number_format($eachInbound->server?->subscription_price)}}"
+                                                   @endif
                                                    class="form-control number_format"
                                                    placeholder="{{__('app.general.subscription_price')}}">
                                         </div>

@@ -96,7 +96,7 @@ class UserController extends Controller
     public function inbounds(User $user)
     {
         $result = [];
-        foreach (Inbound::withCount('activeSubscriptions')->get() as $key => $each) {
+        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
             $result[$key] = $each;
             $result[$key]->subscription_data = $each->activeSubscriptions()
                 ->first()
