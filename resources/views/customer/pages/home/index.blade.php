@@ -18,7 +18,7 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
                                 <td class="sort-ip">
-                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                    {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
                                 <td class="sort-date">
                                     {{convertDate($eachInbound->date)}}
