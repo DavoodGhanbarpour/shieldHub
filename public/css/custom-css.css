@@ -72,11 +72,11 @@ body, button, input, select {
 
 
 .border_right {
-    border-right: 1px solid #dadfe5 !important;
+    border-right: var(--tblr-border-width) solid var(--tblr-border-color) !important;
 }
 
 .border_left {
-    border-left: 1px solid #dadfe5 !important;
+    border-left: var(--tblr-border-width) solid var(--tblr-border-color) !important;
 }
 
 .select2 {
@@ -86,6 +86,44 @@ body, button, input, select {
 
 .select2-container {
     z-index: 2000;
+}
+
+.resize-none {
+    resize: none;
+}
+
+
+
+.modal-2xl {
+    max-width: 65%;
+}
+
+.modal-3xl {
+    max-width: 70%;
+}
+
+.modal-4xl {
+    max-width: 75%;
+}
+
+.modal-5xl {
+    max-width: 80%;
+}
+
+.modal-6xl {
+    max-width: 85%;
+}
+
+.modal-7xl {
+    max-width: 90%;
+}
+
+.modal-8xl {
+    max-width: 95%;
+}
+
+.modal-9xl {
+    max-width: 100%;
 }
 
 

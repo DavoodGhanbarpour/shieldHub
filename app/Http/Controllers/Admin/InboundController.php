@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\InboundFacade;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\InboundBulkCreateRequest;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
-use App\Http\Resources\Admin\InboundResource;
-use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
+use App\Models\Server;
 
 class InboundController extends Controller
 {
@@ -17,7 +17,25 @@ class InboundController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.inbounds.add');
+        return view('admin.pages.inbounds.add', [
+            'servers' => Server::all(),
+        ]);
+    }
+
+    public function bulkCreate()
+    {
+        return view('admin.pages.inbounds.add-multiple', [
+            'servers' => Server::all(),
+            'servers_pluck' => Server::all()->pluck('id', 'ip')->toJson(),
+        ]);
+    }
+
+    public function bulkStore(InboundBulkCreateRequest $request)
+    {
+        collect($request->get('inbounds'))->map(function ($eachInbound) {
+            InboundFacade::upsert($eachInbound);
+        });
+        return redirect()->route('admin.inbounds.index');
     }
 
     /**
@@ -37,7 +55,7 @@ class InboundController extends Controller
     {
         // We are using view composer instead of this
         return view('admin.pages.inbounds.index', [
-            'inbounds' => InboundResource::collection(Inbound::withCount('users')->get()),
+            'inbounds' => Inbound::withCount('activeSubscriptions')->with('server')->get(),
         ]);
     }
 
@@ -46,7 +64,7 @@ class InboundController extends Controller
      */
     public function show(string $id)
     {
-        return InboundResource::make(Inbound::findOrFail($id));
+        return Inbound::findOrFail($id);
     }
 
     /**
@@ -55,7 +73,8 @@ class InboundController extends Controller
     public function edit(string $id)
     {
         return view('admin.pages.inbounds.edit', [
-            'inbound' => UserResource::make(Inbound::findOrFail($id)),
+            'inbound' => Inbound::findOrFail($id),
+            'servers' => Server::all(),
         ]);
     }
 
@@ -64,7 +83,8 @@ class InboundController extends Controller
      */
     public function update(InboundUpdateRequest $request, string $id)
     {
-        InboundFacade::upsert($request->validated(), $id);
+        $data = $request->validated();
+        InboundFacade::upsert($data, $id);
 
         return redirect()->route('admin.inbounds.index');
     }

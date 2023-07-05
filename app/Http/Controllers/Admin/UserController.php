@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
-use App\Http\Resources\Admin\UserInboundsResource;
-use App\Http\Resources\Admin\UserResource;
 use App\Models\Inbound;
+use App\Models\Server;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -39,16 +43,16 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.pages.users.index', [
-            'users' => UserResource::collection(User::withCount('inbounds')->get()),
+            'users' => User::withCount('activeSubscriptions')->get(),
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id): UserResource
+    public function show(int $id)
     {
-        return UserResource::make(User::findOrFail($id));
+        return User::findOrFail($id);
     }
 
     /**
@@ -57,7 +61,7 @@ class UserController extends Controller
     public function edit(int $id)
     {
         return view('admin.pages.users.edit', [
-            'user' => UserResource::make(User::findOrFail($id)),
+            'user' => User::findOrFail($id),
         ]);
     }
 
@@ -73,7 +77,7 @@ class UserController extends Controller
         }
 
         $inputs = $request->validated();
-        if (! isset($inputs['password'])) {
+        if (!isset($inputs['password'])) {
             unset($inputs['password']);
         }
 
@@ -95,24 +99,56 @@ class UserController extends Controller
     public function inbounds(User $user)
     {
         $result = [];
-        $userInboundsID = array_column(collect($user->inbounds)->toArray(), 'id');
-        foreach (Inbound::withCount('users')->get() as $key => $each) {
+        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
             $result[$key] = $each;
-            $result[$key]['isUsing'] = in_array($each->id, $userInboundsID);
+            $result[$key]->subscription_data = $each->activeSubscriptions()
+                ->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))
+                ->first()
+                ?->pivot ?: null;
         }
 
         return view('admin.pages.users.inbounds', [
             'user' => $user,
-            'inbounds' => UserInboundsResource::collection(
-                collect($result)->sortBy('isUsing', SORT_REGULAR, true)
-            ),
+            'inbounds' =>
+                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
+            'servers' => Server::all()
+        ]);
+    }
+
+
+    public function invoices(User $user)
+    {
+        return view('admin.pages.users.invoices', [
+            'invoices' => $user->invoices,
+            'user' => $user
+        ]);
+    }
+
+    public function subscriptions(User $user)
+    {
+        return view('admin.pages.users.subscriptions', [
+            'subscriptions' => $user->inbounds,
+            'user' => $user
         ]);
     }
 
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
     {
-        $user->inbounds()->sync($request->get('inbounds'));
+        $data = collect($request->get('inbounds'))->map(function ($item, $key) {
+            if ($item['subscription_price']) {
+                $item['subscription_price'] = removeSeparator($item['subscription_price']);
+            }
+            return $item;
+        });
 
+        $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
+
+        InvoiceFacade::deletePreviousDebitInvoices($user->id);
+
+        $user->inbounds->map(function ($inbound) {
+            if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
+                InvoiceFacade::sendDebit($inbound->pivot->id);
+        });
         return redirect()->route('admin.users.index');
     }
 }

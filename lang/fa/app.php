@@ -3,10 +3,51 @@
 use App\Models\User;
 
 return [
+    'general' => [
+        'link' => 'لینک',
+        'description' => 'توضیحات',
+        'title' => 'عنوان',
+        'ip' => 'IP',
+        'port' => 'Port',
+        'date' => 'تاریخ',
+        'quota' => 'مهلت',
+        'debit' => 'بدهکاری',
+        'credit' => 'بستانکاری',
+        'total' => 'جمع',
+        'remain' => 'مانده',
+        'days_remain' => ':count روز مانده',
+        'name' => 'نام',
+        'email' => 'پست الکترونیک',
+        'email_address' => 'آدرس پست الکترونیک',
+        'users_count' => 'تعداد کاربران',
+        'start_date' => 'تاریخ شروع',
+        'end_date' => 'تاریخ پایان',
+        'subscription_price' => 'مبلغ عضویت روزانه',
+        'history' => 'تاریخچه',
+        'last_days' => 'آخرین :count روز',
+        'online_users' => ':count کاربر آنلاین',
+    ],
+    'reports' => [
+        'report' => 'گزارش',
+        'reports' => 'گزارشات',
+    ],
+    'visits' => [
+        'visit' => 'بازدید',
+        'visits' => 'بازدیدها',
+    ],
+    'messages' => [
+        'server_has_children' => 'تعدادی ورودی به این سرور متصل میباشد',
+    ],
     'login' => [
         'login_to_your_account' => 'ورود به ناحیه کاربری',
         'remember' => 'مرا به خاطر بسپار',
         'sign_in' => 'ورود',
+    ],
+    'passwords' => [
+        'password' => 'گذرواژه',
+        'show_password' => 'نمایش گذرواژه',
+        'hide_password' => 'عدم نمایش گذرواژه',
+        'generate_password' => 'تولید گذرواژه',
     ],
     'dashboard' => [
         'home' => 'خانه',
@@ -19,13 +60,6 @@ return [
         'user' => 'کاربر',
         'users' => 'کاربران',
         'role' => 'نقش',
-        'name' => 'نام',
-        'email' => 'پست الکترونیک',
-        'email_address' => 'نشانی پست الکترونیک',
-        'password' => 'گذرواژه',
-        'show_password' => 'نمایش گذرواژه',
-        'hide_password' => 'عدم نمایش گذرواژه',
-        'generate_password' => 'ایجاد گذواژه',
         'roles' => [
             User::CUSTOMER => 'مشتری',
             User::CUSTOMER.'s' => 'مشتریان',
@@ -39,20 +73,25 @@ return [
     'inbounds' => [
         'inbound' => 'ورودی',
         'inbounds' => 'ورودی ها',
-        'link' => 'لینک',
-        'description' => 'توضیحات',
-        'title' => 'عنوان',
-        'ip' => 'IP',
-        'port' => 'Port',
         'assign_inbounds' => 'تخصیص ورودی به :user',
-        'date' => 'Date',
         'available_inbounds' => 'ورودی های موجود (کانفیگ های VPN)',
         'inbounds_in_use' => ':count ورودی فعال',
         'inbounds_not_in_use' => ':count ورودی غیرفعال',
-        'quota' => 'روز باقی مانده',
-        'days_remain' => ':count روز باقی مانده',
         'inbounds_clients' => 'نرم افزار های V2ray',
-        'users_count' => 'تعداد کاربر',
+        'inbounds_count' => 'تعداد ورودی ها',
+    ],
+    'subscriptions' => [
+        'subscription' => 'اشتراک',
+        'subscriptions' => 'اشتراک ها',
+    ],
+    'servers' => [
+        'server' => 'سرور',
+        'servers' => 'سرور ها',
+    ],
+    'invoices' => [
+        'invoice' => 'تراکنش',
+        'invoices' => 'تراکنش ها',
+        'invoices_history' => 'تاریخچه تراکنش ها',
     ],
     'pageComponents' => [
         'new' => 'جدید',
@@ -66,8 +105,9 @@ return [
         'cancel' => 'انصراف',
         'copied' => 'در کلیپبورد شما کپی شد',
         'not_copied' => 'عملیات کپی کردن با خطا مواجه شد',
+        'clearAll' => 'حذف همه',
     ],
-    'platform' => [
+    'platforms' => [
         'android' => 'اندروید',
         'windows' => 'ویندوز',
         'linux' => 'لینوکس',

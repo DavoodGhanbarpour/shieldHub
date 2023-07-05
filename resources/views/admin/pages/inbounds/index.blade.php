@@ -5,16 +5,8 @@
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
-            <a href="{{ route('admin.inbounds.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M12 5l0 14"/>
-                    <path d="M5 12l14 0"/>
-                </svg>
-                {{__('app.pageComponents.add') .' '. __('app.inbounds.inbound')}}
-            </a>
+            <x-buttons.add :title="__('app.pageComponents.add') .' '. __('app.inbounds.inbound')"/>
+            <x-buttons.add :class="'btn-info'" :link="route('admin.inbounds.bulk.create')" :title="__('app.pageComponents.add') .' '. __('app.inbounds.inbounds')"/>
         </div>
     </div>
 @endsection
@@ -24,32 +16,34 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
-                <table class="table card-table table-vcenter datatable">
+                <x-tables.default>
                     <thead>
-                    <tr>
-                        <th>
-                            <button class="table-sort" data-sort="sort-index">{{__('app.pageComponents.index')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-title">{{__('app.inbounds.title')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-ip">{{__('app.inbounds.ip').':'.__('app.inbounds.port')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.inbounds.date')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-date">{{__('app.inbounds.quota')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-description">{{__('app.inbounds.description')}}</button>
-                        </th>
-                        <th>
-                            <button class="table-sort" data-sort="sort-users-count">{{__('app.inbounds.users_count')}}</button>
-                        </th>
-                        <th>{{__('app.pageComponents.actions')}}</th>
-                    </tr>
+                        <tr>
+                            <th>
+                                {{__('app.pageComponents.index')}}
+                            </th>
+                            <th>
+                                {{__('app.general.title')}}
+                            </th>
+                            <th>
+                                {{__('app.general.ip').':'.__('app.general.port')}}
+                            </th>
+                            <th>
+                                {{__('app.servers.server')}}
+                            </th>
+                            <th>
+                                {{__('app.general.quota')}}
+                            </th>
+                            <th>
+                                {{__('app.general.description')}}
+                            </th>
+                            <th>
+                                {{__('app.general.users_count')}}
+                            </th>
+                            <th>
+                                {{__('app.pageComponents.actions')}}
+                            </th>
+                        </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
@@ -58,10 +52,10 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
                                 <td class="sort-ip">
-                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                    {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
-                                <td class="sort-date">
-                                    {{convertDate($eachInbound->date)}}
+                                <td class="sort-server">
+                                    {{$eachInbound->server->title}}
                                 </td>
                                 <td class="sort-quota">
                                     {{ \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())  }}
@@ -70,12 +64,12 @@
                                     {{$eachInbound->description}}
                                 </td>
                                 <td class="sort-users-count">
-                                    {{$eachInbound->users_count}}
+                                    {{$eachInbound->active_subscriptions_count}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
 
-                                    <div class="btn-list flex-nowrap">
+                                    <div class="btn-list flex-nowrap justify-content-center">
                                         <x-buttons.copy/>
                                         <x-buttons.edit :link="route('admin.inbounds.edit', ['inbound' => $eachInbound->id])"/>
                                         <x-buttons.destroy :link="route('admin.inbounds.destroy', ['inbound' => $eachInbound->id])"/>
@@ -84,13 +78,12 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </x-tables.default>
             </div>
         </div>
     </div>
 
-    @push('scripts')
-        @include('components.scripts.copy')
-    @endpush
+    <x-scripts.copy/>
+    <x-scripts.datatable-search/>
 
 @endsection

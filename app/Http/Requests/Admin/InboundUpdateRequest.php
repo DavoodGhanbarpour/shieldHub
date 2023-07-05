@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\NetworkPortRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InboundUpdateRequest extends FormRequest
@@ -20,12 +21,11 @@ class InboundUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'server_id' => ['integer', 'required', 'exists:servers,id'],
             'title' => ['string', 'required'],
             'link' => ['string', 'required'],
-            'ip' => ['ipv4', 'required'],
-            'port' => ['numeric', 'required', 'between:0,65535'],
+            'port' => ['required', new NetworkPortRule()],
             'description' => ['string', 'nullable'],
-            'date' => ['string', 'required', 'date'],
         ];
     }
 }

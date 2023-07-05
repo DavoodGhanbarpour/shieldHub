@@ -25,3 +25,34 @@ if (! function_exists('convertDate')) {
         return $date;
     }
 }
+
+
+if (! function_exists('removeSeparator')) {
+    function removeSeparator(string $string): string
+    {
+        return str_replace(',','', $string);
+    }
+}
+
+if (! function_exists('addSeparator')) {
+    function addSeparator(?float $number): string
+    {
+        return number_format($number,3);
+    }
+}
+
+if (! function_exists('getFreeStorageAsGB')) {
+    function getFreeStorageAsGB(string $dir = '/'): float
+    {
+        return round( ( disk_free_space($dir) ) / 1024 / 1024 / 1024, 2 );
+    }
+}
+
+
+if (! function_exists('getFullStorageAsGB')) {
+    function getFullStorageAsGB(string $dir = '/'): float
+    {
+        return round( ( disk_total_space($dir) ) / 1024 / 1024 / 1024, 2 );
+    }
+}
+

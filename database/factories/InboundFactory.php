@@ -19,8 +19,8 @@ class InboundFactory extends Factory
         return [
             'title' => fake()->title(),
             'link' => fake()->text(),
-            'date' => fake()->date(),
-            'ip' => fake()->ipv4(),
+//            'date' => fake()->date(),
+//            'ip' => fake()->ipv4(),
             'port' => fake()->numberBetween(0, 65536),
             'description' => fake()->text(),
         ];

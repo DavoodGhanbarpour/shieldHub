@@ -2,23 +2,36 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\DashboardFacade;
 use App\Http\Controllers\Controller;
-use App\Models\Inbound;
 use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        $freeDisk   = getFreeStorageAsGB(storage_path());
+        $totalDisk  = getFullStorageAsGB();
+        $usedDisk   = $totalDisk - $freeDisk;
         return view('admin.pages.home.index', [
-            'userCounts' => [
-                'admins' => User::where('role', '=', User::ADMIN)->count(),
-                'customers' => User::where('role', '=', User::CUSTOMER)->count(),
+            'charts' => [
+                'user_visits' => DashboardFacade::getLastVisitsCount(7),
+                'added_inbounds_count' => DashboardFacade::getLastInboundsCreationCount(7),
+                'added_users_count' => DashboardFacade::getLastUsersCreationCount(7),
             ],
-            'inboundCounts' => [
-                'inUse' => Inbound::has('users')->count(),
-                'notInUse' => Inbound::doesntHave('users')->count(),
+            'system_statics' => [
+                'totalDisk'     => $totalDisk,
+                'usedDisk'      => $usedDisk,
+                'freeDisk'      => $freeDisk,
+                'usedPercent'   => round( ( $usedDisk / $totalDisk ) * 100 ),
             ],
+            'cards' => [
+                'user_counts' => DashboardFacade::getUserCounts(),
+                'inbound_counts' => DashboardFacade::getInboundCounts(),
+                'online_user' => User::online()->get()->count() ?: 0
+            ]
         ]);
     }
+
+
 }

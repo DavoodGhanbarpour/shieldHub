@@ -11,42 +11,49 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.title')}}</label>
+                    <label class="form-label required">{{__('app.general.title')}}</label>
                     <div>
-                        <input type="text" name="title" class="form-control" placeholder="{{__('app.inbounds.title')}}">
+                        <input type="text" name="title" class="form-control" placeholder="{{__('app.general.title')}}">
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.ip') . ':' . __('app.inbounds.port')}}</label>
+                    <label class="form-label required">{{__('app.servers.server')}}</label>
+                    <div>
+                        <select name="server_id" class="form-select server-select" placeholder="{{__('app.general.server')}}">
+                            <option value="" hidden>Choose a server...</option>
+                            @foreach($servers as $eachServer)
+                                <option
+                                    data-server-ip="{{$eachServer->ip}}"
+                                    value="{{$eachServer->id}}">
+                                    {{$eachServer->title}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
                     <div class="input-group input-group-flat">
-                        <input type="text" class="form-control w-75 border_right" name="ip" placeholder="192.168.1.1"
-                               autocomplete="off">
+                        <input type="text" class="form-control w-75 border_right" id="serverIP" disabled="" autocomplete="off">
                         <input type="text" class="form-control w-25 border_left" name="port" placeholder="443">
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.date')}}</label>
-                    <div>
-                        <input type="text" name="date" class="form-control datepicker"
-                               placeholder="{{__('app.inbounds.date')}}">
-                    </div>
-                </div>
-
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label required">{{__('app.inbounds.link')}}</label>
+                    <label class="form-label required">{{__('app.general.link')}}</label>
                     <div>
-                        <input type="text" name="link" class="form-control" placeholder="{{__('app.inbounds.link')}}">
+                        <textarea name="link" rows="3" class="form-control" placeholder="{{__('app.general.link')}}"></textarea>
                     </div>
                 </div>
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label">{{__('app.inbounds.description')}}</label>
+                    <label class="form-label">{{__('app.general.description')}}</label>
                     <div>
-                        <input type="text" name="description" class="form-control"
-                               placeholder="{{__('app.inbounds.description')}}">
+                        <textarea type="text" rows="3" name="description" class="form-control"
+                               placeholder="{{__('app.general.description')}}"></textarea>
                     </div>
                 </div>
 
@@ -56,13 +63,32 @@
 
         <div class="card-footer text-end">
             <div class="d-flex">
-                <a href="{{ url()->previous() }}" class="btn btn-link">{{__('app.pageComponents.cancel')}}</a>
-                <button type="submit" class="btn btn-primary ms-auto">{{__('app.pageComponents.submit')}}</button>
+                <x-buttons.cancel/>
+                <x-buttons.submit/>
             </div>
         </div>
 
     </form>
 
     @include('components.libs.pwt-datepicker')
+
+    @push('scripts')
+        <script>
+            $(document).ready( function(){
+
+                setServerIP()
+            });
+
+            $(document).on( 'change', '.server-select', function(){
+
+                setServerIP()
+            });
+
+            function setServerIP() {
+
+                $('#serverIP').val($('.server-select').find('option:selected').data('server-ip'));
+            }
+        </script>
+    @endpush
 
 @endsection

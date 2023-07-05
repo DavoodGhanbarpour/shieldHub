@@ -36,13 +36,8 @@ class Reinstallation extends Command
             exit;
         }
 
-        $bar = $this->output->createProgressBar(2);
-        $bar->start();
         $this->call('db:wipe');
-        $bar->advance();
         $this->call('app:install');
-        $bar->advance();
-        $bar->finish();
 
         $this->newLine();
         $this->info('Reinstalled successfully!');

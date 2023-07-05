@@ -23,6 +23,7 @@ class AuthController extends Controller
             $user = auth()->user();
             UserFacade::setLocale($locale, $user->id);
             UserFacade::updateLastVisit($user->id);
+            $user->visit();
 
             if ($user->isAdmin()) {
             return redirect()->route('admin.home');
@@ -30,6 +31,7 @@ class AuthController extends Controller
 
             return redirect()->route('customer.home');
         }
+        visitor()->visit();
         // TODO need a way to return a global format
         return back()->withErrors([
             __('auth.failed'),

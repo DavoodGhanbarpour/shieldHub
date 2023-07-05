@@ -581,12 +581,12 @@ legend + * {
   -webkit-appearance: textfield;
 }
 
-[type="tel"],
+/* [type="tel"],
 [type="url"],
 [type="email"],
 [type="number"] {
   direction: ltr;
-}
+} */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
@@ -16900,7 +16900,7 @@ Navbar vertical
     z-index: 1030;
     align-items: flex-start;
     transition: transform 0.3s;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0;
   }
 }

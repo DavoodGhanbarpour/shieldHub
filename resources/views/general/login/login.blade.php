@@ -49,23 +49,25 @@
                     <a class="w-auto" href="{{ route('auth.login', [ App\Models\User::SUPPORTED_LANGUAGES['fa']['key'] ]) }}">
                       <span class="flag btn flag-sm flag-country-ir" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="فارسی"></span>
                     </a>
+                    
+                    <x-buttons.theme-mode :class="'w-auto'"/>
                   </div>
 
                   <h2 class="h2 text-center mb-4">{{__('app.login.login_to_your_account')}}</h2>
                   <form action="{{route('auth.authenticate', [config()->get('app.locale')])}}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
-                      <label class="form-label">{{__('app.auth.email_address')}}</label>
-                      <input type="email" class="form-control" name="email" placeholder="{{__('app.auth.email')}}" autocomplete="off">
+                      <label class="form-label">{{__('app.general.email_address')}}</label>
+                      <input type="email" class="form-control" name="email" placeholder="{{__('app.general.email')}}" autocomplete="off">
                     </div>
                     <div class="mb-2">
                       <label class="form-label">
-                          {{__('app.auth.password')}}
+                          {{__('app.passwords.password')}}
                       </label>
                       <div class="input-group input-group-flat">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="{{__('app.auth.password')}}" autocomplete="off">
+                        <input type="password" id="password" class="form-control" name="password" placeholder="{{__('app.passwords.password')}}" autocomplete="off">
                         <span class="input-group-text">
-                          <a href="#" class="link-secondary" id="passwordDisplay" title="{{__('app.auth.show_password')}}" data-bs-toggle="tooltip">
+                          <a href="#" class="link-secondary" id="passwordDisplay" title="{{__('app.passwords.show_password')}}" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                               <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
@@ -105,11 +107,11 @@
 
         if ( $(this).hasClass('text-info') ) {
           $(this).removeClass('text-info');
-          $(this).attr('data-bs-original-title', '{{__('app.auth.show_password')}}').tooltip('show');
+          $(this).attr('data-bs-original-title', '{{__('app.passwords.show_password')}}').tooltip('show');
           $('#password').attr('type', 'password');
         } else {
           $(this).addClass('text-info');
-          $(this).attr('data-bs-original-title', '{{__('app.auth.hide_password')}}').tooltip('show');
+          $(this).attr('data-bs-original-title', '{{__('app.passwords.hide_password')}}').tooltip('show');
           $('#password').attr('type', 'text');
         }
       });

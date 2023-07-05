@@ -18,20 +18,20 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-title">{{$eachInbound->title}}</td>
                                 <td class="sort-ip">
-                                    {{$eachInbound->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
+                                    {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
                                 <td class="sort-date">
                                     {{convertDate($eachInbound->date)}}
                                 </td>
                                 <td class="sort-quota">
                                     {{
-                                        __('app.inbounds.days_remain',['count' =>
-                                            \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())
+                                        __('app.general.days_remain',['count' =>
+                                            \Carbon\Carbon::parse($eachInbound->pivot->end_date)->diffInDays(\Carbon\Carbon::now())
                                         ])
                                     }}
                                 </td>
                                 <td class="sort-description">
-                                    {{$eachInbound->description}}
+                                    {{$eachInbound->pivot->description}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
@@ -69,7 +69,7 @@
                                         <div class="col-auto">
                                         <span class="bg-green text-white avatar">
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                 class="icon icon-tabler icon-tabler-brand-{{__('app.platform.android')}}"
+                                                 class="icon icon-tabler icon-tabler-brand-{{__('app.platforms.android')}}"
                                                  width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                                  stroke="currentColor" fill="none" stroke-linecap="round"
                                                  stroke-linejoin="round">
@@ -90,7 +90,7 @@
                                                 v2rayNG
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.android')}}
+                                                {{__('app.platforms.android')}}
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                                 v2rayN
                                             </div>
                                             <div class="text-info">
-                                                {{ __('app.platform.windows') }}
+                                                {{ __('app.platforms.windows') }}
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                                 FoXray
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.ios')}}
+                                                {{__('app.platforms.ios')}}
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@
                                                 V2Box
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.ios')}}
+                                                {{__('app.platforms.ios')}}
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@
                                                 FoXray
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.mac')}}
+                                                {{__('app.platforms.mac')}}
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                                 V2Box
                                             </div>
                                             <div class="text-info">
-                                                {{__('app.platform.mac')}}
+                                                {{__('app.platforms.mac')}}
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
         </div>
     </div>
 
-      
+
     <div class="modal" id="QRCodeModal" tabindex="-1">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -279,7 +279,7 @@
             </div>
         </div>
     </div>
-      
+
 
 
     @push('scripts')
@@ -292,18 +292,19 @@
             });
 
             $(document).on( 'click', '.qrcode-button', function(){
-            
+
                 makeCode($(this));
                 $('#QRCodeModal .copy-text').text($(this).closest('.copy-parent').find('.copy-text').text());
             });
 
-            function makeCode(element) {		
+            function makeCode(element) {
 
                 qrcode.makeCode(element.closest('.copy-parent').find('.copy-text').text());
             }
         </script>
-        @include('components.scripts.copy')
     @endpush
+
+    <x-scripts.copy/>
 
     @push('styles')
         <style>

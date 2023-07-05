@@ -8,7 +8,66 @@
 
         <div class="col-12">
             <div class="row row-cards">
-                <div class="col-sm-6 col-lg-3">
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">{{__('app.visits.visits')}}</div>
+                                <div class="ms-auto lh-1">
+                                    <span class="text-muted" href="#" data-bs-toggle="dropdown"
+                                          aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="h1 mb-0 me-2">{{collect($charts['user_visits'])->sum('count')}}</div>
+                            </div>
+                        </div>
+                        <div id="chart-users-visits" class="chart-sm"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">{{__('app.inbounds.inbounds')}}</div>
+                                <div class="ms-auto lh-1">
+                                    <span class="text-muted" href="#" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="h1 mb-0 me-2">{{collect($charts['added_inbounds_count'])->sum('count')}}</div>
+                            </div>
+                        </div>
+                        <div id="chart-inbounds" class="chart-sm"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">{{__('app.auth.users')}}</div>
+                                <div class="ms-auto lh-1">
+                                    <span class="text-muted" href="#" data-bs-toggle="dropdown"
+                                          aria-haspopup="true" aria-expanded="false">{{__('app.general.last_days',['count'=>7])}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="h1 mb-0 me-2">{{collect($charts['added_users_count'])->sum('count')}}</div>
+                            </div>
+                        </div>
+                        <div id="chart-users" class="chart-sm"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                </div>
+
+
+                <div class="col-sm-6 col-xl-3">
                     <div class="card card-sm">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -30,17 +89,18 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $userCounts['customers'] }} {{ __('app.auth.roles.customers') }}
+                                        {{ $cards['user_counts']['customers'] }} {{ __('app.auth.roles.customers') }}
                                     </div>
                                     <div class="text-muted">
-                                        {{ $userCounts['admins'] }} {{ __('app.auth.roles.admins') }}
+                                        {{ $cards['user_counts']['admins'] }} {{ __('app.auth.roles.admins') }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-3">
+
+                <div class="col-sm-6 col-xl-3">
                     <div class="card card-sm">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -56,10 +116,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{__('app.inbounds.inbounds_in_use', ['count' => $inboundCounts['inUse'] ])}}
+                                        {{__('app.inbounds.inbounds_in_use', ['count' => $cards['inbound_counts']['inUse'] ])}}
                                     </div>
                                     <div class="text-muted">
-                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $inboundCounts['notInUse'] ])}}
+                                        {{__('app.inbounds.inbounds_not_in_use', ['count' => $cards['inbound_counts']['notInUse'] ])}}
                                     </div>
                                 </div>
                             </div>
@@ -68,9 +128,293 @@
                 </div>
 
 
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-sm">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span class="bg-twitter text-white avatar">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="col">
+                                    <div class="font-weight-medium">
+                                        {{__('app.general.online_users',['count'=>$cards['online_user']])}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{{--                <div class="col-sm-6 col-xl-3">--}}
+{{--                    <div class="card card-sm">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="row align-items-center">--}}
+{{--                                <div class="col-auto">--}}
+{{--                                    <span class="bg-facebook text-white avatar">--}}
+{{--                                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"--}}
+{{--                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"--}}
+{{--                                            stroke-linecap="round" stroke-linejoin="round">--}}
+{{--                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                                            <path--}}
+{{--                                                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col">--}}
+{{--                                    <div class="font-weight-medium">--}}
+{{--                                        132 Likes--}}
+{{--                                    </div>--}}
+{{--                                    <div class="text-muted">--}}
+{{--                                        21 today--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+{{--                <div class="col-12">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <p class="mb-3">Using Storage <strong> {{$system_statics['usedDisk']}} GB </strong>of {{$system_statics['totalDisk']}} GB</p>--}}
+{{--                            <div class="progress progress-separated mb-3">--}}
+{{--                                <div class="progress-bar bg-primary" role="progressbar" style="width: 44%"--}}
+{{--                                    aria-label="Regular">--}}
+{{--                                </div>--}}
+{{--                                <div class="progress-bar bg-info" role="progressbar" style="width: 19%"--}}
+{{--                                    aria-label="System">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-auto d-flex align-items-center pe-2">--}}
+{{--                                    <span class="legend me-2 bg-primary"></span>--}}
+{{--                                    <span>Regular</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">915MB</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-auto d-flex align-items-center px-2">--}}
+{{--                                    <span class="legend me-2 bg-info"></span>--}}
+{{--                                    <span>System</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">415MB</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-auto d-flex align-items-center ps-2">--}}
+{{--                                    <span class="legend me-2"></span>--}}
+{{--                                    <span>Free</span>--}}
+{{--                                    <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">612MB</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
             </div>
         </div>
 
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-users-visits'), {
+                    chart: {
+                        type: "area",
+                        fontFamily: 'inherit',
+                        height: 40.0,
+                        sparkline: {
+                            enabled: true
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    fill: {
+                        opacity: .16,
+                        type: 'solid'
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "smooth",
+                    },
+                    series: [{
+                        name: "{{ __('app.visits.visits') }}",
+                        data: [
+                            @foreach( $charts['user_visits'] as $each )'{{$each['count']}}',@endforeach
+                        ],
+                    }],
+                    tooltip: {
+                        theme: 'dark'
+                    },
+                    grid: {
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        @foreach( $charts['user_visits'] as $each )'{{$each['date']}}',@endforeach
+                    ],
+                    colors: [tabler.getColor("primary")],
+                    legend: {
+                        show: false,
+                    },
+                })).render();
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-inbounds'), {
+                    chart: {
+                        type: "area",
+                        fontFamily: 'inherit',
+                        height: 40.0,
+                        sparkline: {
+                            enabled: true
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    fill: {
+                        opacity: .16,
+                        type: 'solid'
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "smooth",
+                    },
+                    series: [{
+                        name: "{{ __('app.inbounds.inbounds') }}",
+                        data: [
+                            @foreach( $charts['added_inbounds_count'] as $each )'{{$each['count']}}',@endforeach
+                        ]
+                    }],
+                    tooltip: {
+                        theme: 'dark'
+                    },
+                    grid: {
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        @foreach( $charts['added_inbounds_count'] as $each )'{{$each['date']}}',@endforeach
+                    ],
+                    colors: [tabler.getColor("primary")],
+                    legend: {
+                        show: false,
+                    },
+                })).render();
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                window.ApexCharts && (new ApexCharts(document.getElementById('chart-users'), {
+                    chart: {
+                        type: "area",
+                        fontFamily: 'inherit',
+                        height: 40.0,
+                        sparkline: {
+                            enabled: true
+                        },
+                        animations: {
+                            enabled: false
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    fill: {
+                        opacity: .16,
+                        type: 'solid'
+                    },
+                    stroke: {
+                        width: 2,
+                        lineCap: "round",
+                        curve: "smooth",
+                    },
+                    series: [{
+                        name: "{{ __('app.auth.users') }}",
+                        data: [
+                            @foreach( $charts['added_users_count'] as $each )'{{$each['count']}}',@endforeach
+                        ]
+                    }],
+                    tooltip: {
+                        theme: 'dark'
+                    },
+                    grid: {
+                        strokeDashArray: 4,
+                    },
+                    xaxis: {
+                        labels: {
+                            padding: 0,
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        type: 'datetime',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4
+                        },
+                    },
+                    labels: [
+                        @foreach( $charts['added_users_count'] as $each )'{{$each['date']}}',@endforeach
+                    ],
+                    colors: [tabler.getColor("primary")],
+                    legend: {
+                        show: false,
+                    },
+                })).render();
+            });
+        </script>
+    @endpush
 
 @endsection

@@ -6,14 +6,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
+use Shetabit\Visitor\Traits\Visitor;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Visitor;
 
     const ADMIN = 'admin';
 
@@ -65,7 +67,21 @@ class User extends Authenticatable
 
     public function inbounds(): BelongsToMany
     {
-        return $this->belongsToMany(Inbound::class, 'inbound_user')->using(InboundUser::class);
+        return $this->belongsToMany(Inbound::class, 'subscriptions')
+            ->using(Subscription::class)
+            ->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
+
+    }
+
+    public function activeSubscriptions(): BelongsToMany
+    {
+        return $this->inbounds()
+            ->wherePivot('end_date', '>', now());
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
     }
 
     public function hasRole(string $role): bool
@@ -86,7 +102,7 @@ class User extends Authenticatable
     protected function last_visit(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
+            set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
         );
     }
 }

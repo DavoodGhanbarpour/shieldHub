@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\CommaSeparatedPrice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AssignInboundsRequest extends FormRequest
@@ -21,6 +22,11 @@ class AssignInboundsRequest extends FormRequest
     {
         return [
             'inbounds' => ['array', 'nullable'],
+            'inbounds.*.inbound_id' => ['required', 'exists:inbounds,id'],
+            'inbounds.*.start_date' => ['required', 'date'],
+            'inbounds.*.end_date' => ['required','date','after_or_equal:start_date'],
+            'inbounds.*.subscription_price' => ['required', new CommaSeparatedPrice()],
+            'inbounds.*.description' => ['nullable','string'],
         ];
     }
 }

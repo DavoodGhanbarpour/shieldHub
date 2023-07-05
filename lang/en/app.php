@@ -3,10 +3,51 @@
 use App\Models\User;
 
 return [
+    'general' => [
+        'link' => 'Link',
+        'description' => 'Description',
+        'title' => 'Title',
+        'ip' => 'IP',
+        'port' => 'Port',
+        'date' => 'Date',
+        'quota' => 'Quota',
+        'debit' => 'Debit',
+        'credit' => 'Credit',
+        'total' => 'Total',
+        'remain' => 'Remain',
+        'days_remain' => ':count day(s) remains',
+        'name' => 'Name',
+        'email' => 'Email',
+        'email_address' => 'Email address',
+        'users_count' => 'Users count',
+        'start_date' => 'Start date',
+        'end_date' => 'End date',
+        'subscription_price' => 'Subscription price/day',
+        'history' => 'History',
+        'last_days' => 'Last :count day(s)',
+        'online_users' => 'Online :count user(s)',
+    ],
+    'reports' => [
+        'report' => 'Report',
+        'reports' => 'Reports',
+    ],
+    'visits' => [
+        'visit' => 'Visit',
+        'visits' => 'Visits',
+    ],
+    'messages' => [
+        'server_has_children' => 'Server has inbounds connected to it',
+    ],
     'login' => [
         'login_to_your_account' => 'Login to your account',
         'remember' => 'Remember me on this device',
         'sign_in' => 'Sign in',
+    ],
+    'passwords' => [
+        'password' => 'Password',
+        'show_password' => 'Show password',
+        'hide_password' => 'Hide password',
+        'generate_password' => 'Generate Password',
     ],
     'dashboard' => [
         'home' => 'Home',
@@ -19,13 +60,6 @@ return [
         'user' => 'User',
         'users' => 'Users',
         'role' => 'Role',
-        'name' => 'Name',
-        'email' => 'Email',
-        'email_address' => 'Email address',
-        'password' => 'Password',
-        'show_password' => 'Show password',
-        'hide_password' => 'Hide password',
-        'generate_password' => 'Generate Password',
         'roles' => [
             User::CUSTOMER => 'Customer',
             User::CUSTOMER.'s' => 'Customers',
@@ -39,20 +73,25 @@ return [
     'inbounds' => [
         'inbound' => 'Inbound',
         'inbounds' => 'Inbounds',
-        'link' => 'Link',
-        'description' => 'Description',
-        'title' => 'Title',
-        'ip' => 'IP',
-        'port' => 'Port',
         'assign_inbounds' => 'Assign Inbound(s) to :user',
-        'date' => 'Date',
         'available_inbounds' => 'Available Inbound(s) (VPN configs)',
         'inbounds_in_use' => ':count Inbound(s) active',
         'inbounds_not_in_use' => ':count Inbound(s) idle',
-        'quota' => 'Quota',
-        'days_remain' => ':count day(s) remains',
         'inbounds_clients' => 'V2ray clients',
-        'users_count' => 'Users count',
+        'inbounds_count' => 'Inbounds count',
+    ],
+    'subscriptions' => [
+        'subscription' => 'Subscription',
+        'subscriptions' => 'Subscriptions',
+    ],
+    'servers' => [
+        'server' => 'Server',
+        'servers' => 'Servers',
+    ],
+    'invoices' => [
+        'invoice' => 'Invoice',
+        'invoices' => 'Invoices',
+        'invoices_history' => 'Invoices history',
     ],
     'pageComponents' => [
         'new' => 'New',
@@ -66,8 +105,9 @@ return [
         'cancel' => 'Cancel',
         'copied' => 'Copied to clipboard',
         'not_copied' => 'Coping to clipboard failed',
+        'clearAll' => 'Clear all',
     ],
-    'platform' => [
+    'platforms' => [
         'android' => 'Android',
         'windows' => 'Windows',
         'linux' => 'Linux',
