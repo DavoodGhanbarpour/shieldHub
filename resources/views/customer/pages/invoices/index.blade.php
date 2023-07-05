@@ -67,4 +67,11 @@
     <x-scripts.copy/>
     <x-scripts.datatable-search/>
 
+    @push('styles')
+        <style>
+            .table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+                text-align: center !important;
+            }
+        </style>
+    @endpush
 @endsection

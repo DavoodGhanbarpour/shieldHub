@@ -22,6 +22,7 @@
     <link href="{{ asset('css/demo.min.css?1684106062') }}" rel="stylesheet"/>
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('libs/datatables/datatables.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     @stack('styles')
@@ -33,6 +34,9 @@
 
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
+        }
+        .dataTables_filter {
+            display: none;
         }
     </style>
 </head>
@@ -68,6 +72,7 @@
     <!-- Tabler Core -->
     <script src="{{ asset('js/tabler.min.js?1684106062') }}" defer></script>
     <script src="{{ asset('js/demo.min.js?1684106062') }}" defer></script>
+    <script src="{{ asset('libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('libs/select2/select2.js') }}"></script>
     <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
     <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
