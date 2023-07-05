@@ -54,16 +54,17 @@
                                 </td>
                             </tr>
                         @php
-                            $debits += $eachInvoice->debit;
-                            $credits += $eachInvoice->credit;
+                            $debits += $eachUser->invoices_sum_credit;
+                            $credits += $eachUser->invoices_sum_debit;
                         @endphp
                         @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="3"></td>
+                        <td colspan="2"></td>
                         <td class="text-center">{{addSeparator($credits)}}</td>
                         <td class="text-center">{{addSeparator($debits)}}</td>
+                        <td class="text-center">{{addSeparator($credits-$debits)}}</td>
                         <td></td>
                     </tr>
                     </tfoot>
