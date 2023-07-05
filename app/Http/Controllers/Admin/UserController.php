@@ -12,6 +12,9 @@ use App\Models\Inbound;
 use App\Models\Server;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -113,14 +116,18 @@ class UserController extends Controller
     }
 
 
-    public function invoices()
+    public function invoices(User $user)
     {
-
+        return view('', [
+            'invoices' => $user->invoices()
+        ]);
     }
 
-    public function subscriptions()
+    public function subscriptions(User $user)
     {
-
+        return view('', [
+            'subscriptions' => $user->inbounds()
+        ]);
     }
 
     public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
