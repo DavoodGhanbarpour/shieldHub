@@ -1,4 +1,4 @@
-<div class="form-selectgroup form-selectgroup-pills">
+<div class="form-selectgroup">
 
     <label class="form-selectgroup-item">
         <a class="text-decoration-none" href="{{route('admin.users.subscriptions', ['user' => $user->id])}}">

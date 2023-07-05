@@ -8,7 +8,7 @@
         @csrf
 
         <div class="card-header">
-            <div class="form-selectgroup form-selectgroup-pills">
+            <div class="form-selectgroup">
 
                 <label class="form-selectgroup-item showAll">
                     <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
