@@ -23,11 +23,12 @@ Route::name('users.')->prefix('users')->group(function () {
 });
 
 // Inbound Routes
-Route::resource('inbounds', InboundController::class);
 Route::name('inbounds.')->prefix('inbounds')->group(function () {
     Route::get('bulk-create', [InboundController::class, 'bulkCreate'])->name('bulk.create');
     Route::post('bulk-create', [InboundController::class, 'bulkStore'])->name('bulk.store');
 });
+Route::resource('inbounds', InboundController::class);
+
 
 // Server Routes
 Route::resource('servers', ServerController::class);
