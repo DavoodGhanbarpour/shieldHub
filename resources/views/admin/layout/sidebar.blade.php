@@ -169,7 +169,7 @@
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
 
-                <li class="nav-item">
+                <li class="nav-item{{ Route::is('admin.home') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.home') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -185,7 +185,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item{{ Route::is('admin.users.index') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.users.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users"
@@ -203,7 +204,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item{{ Route::is('admin.inbounds.index') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.inbounds.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-settings"
@@ -226,7 +228,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item{{ Route::is('admin.servers.index') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.servers.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-settings"
@@ -249,7 +252,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item{{ Route::is('admin.invoices.index') ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.invoices.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-settings"
@@ -272,7 +276,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item active dropdown">
+
+                <li class="nav-item{{Request::is('admin/reports/*') ? ' active' : '' }} dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /></svg>
@@ -284,7 +289,7 @@
                     <div class="dropdown-menu show">
                       <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{route('admin.reports.users.invoices')}}">
+                            <a class="dropdown-item{{Route::is('admin.reports.users.invoices') ? ' active' : '' }}" href="{{route('admin.reports.users.invoices')}}">
                                 Users Invoices
                             </a>
                         </div>
