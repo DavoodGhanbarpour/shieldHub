@@ -55,7 +55,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">{{__('app.general.remain')}}:</td>
-                            <td class="text-center" colspan="2">{{addSeparator($credits - $debits)}}</td>
+                            <td class="text-center" colspan="2">{{addSeparator(abs($credits - $debits))}}</td>
                         </tr>
                         <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
                     </tfoot>
