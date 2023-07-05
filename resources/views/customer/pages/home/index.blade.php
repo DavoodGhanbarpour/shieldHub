@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
+        <div class="col-md-12 col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{__('app.inbounds.inbounds_clients')}}</h3>
@@ -60,7 +60,7 @@
                     <div class="row row-cards">
 
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a download
                                href="https://github.com/2dust/v2rayNG/releases/download/1.8.5/v2rayNG_1.8.5.apk"
                                target="_blank" class="card card-sm social-media-card" role="button">
@@ -98,7 +98,7 @@
                             </a>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a href="https://s28.picofile.com/file/8462366668/v2ray_for_Windows.rar.html"
                                target="_blank" class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
@@ -130,7 +130,7 @@
                             </a>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a href="https://apps.apple.com/us/app/foxray/id6448898396?platform=iphone" target="_blank"
                                class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
@@ -161,7 +161,7 @@
                             </a>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a href="https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690?platform=iphone"
                                target="_blank" class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
@@ -192,7 +192,7 @@
                             </a>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a href="https://apps.apple.com/us/app/foxray/id6448898396?platform=mac" target="_blank"
                                class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
@@ -223,7 +223,7 @@
                             </a>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-md-6 col-lg-12">
                             <a href="https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690?platform=mac"
                                target="_blank" class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
