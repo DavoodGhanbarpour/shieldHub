@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('customer.pages.home.index', [
-            'inbounds' => auth()->user()->inbounds,
+            'inbounds' => auth()->user()->activeSubscriptions,
         ]);
     }
 }

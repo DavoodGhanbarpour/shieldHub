@@ -26,12 +26,12 @@
                                 <td class="sort-quota">
                                     {{
                                         __('app.general.days_remain',['count' =>
-                                            \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())
+                                            \Carbon\Carbon::parse($eachInbound->pivot->end_date)->diffInDays(\Carbon\Carbon::now())
                                         ])
                                     }}
                                 </td>
                                 <td class="sort-description">
-                                    {{$eachInbound->description}}
+                                    {{$eachInbound->pivot->description}}
                                 </td>
                                 <td class="copy-parent">
                                     <span class="d-none copy-text">{{$eachInbound->link}}</span>
