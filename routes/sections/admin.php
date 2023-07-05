@@ -15,20 +15,18 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 // User Routes
 Route::resource('users', UserController::class);
-Route::group(['prefix' => 'users'], function () {
-
-    Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
-    Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
-
-    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('users.invoices');
-    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('users.subscriptions');
+Route::name('users.')->prefix('users')->group(function () {
+    Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('inbounds');
+    Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('assignInbounds');
+    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('invoices');
+    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('subscriptions');
 });
 
 // Inbound Routes
 Route::resource('inbounds', InboundController::class);
-Route::group(['prefix' => 'inbounds'], function () {
-    Route::get('bulk-create', [InboundController::class, 'bulkCreate'])->name('inbounds.bulk.create');
-    Route::post('bulk-create', [InboundController::class, 'bulkStore'])->name('inbounds.bulk.store');
+Route::name('inbounds.')->prefix('inbounds')->group(function () {
+    Route::get('bulk-create', [InboundController::class, 'bulkCreate'])->name('bulk.create');
+    Route::post('bulk-create', [InboundController::class, 'bulkStore'])->name('bulk.store');
 });
 
 // Server Routes
@@ -38,8 +36,8 @@ Route::resource('servers', ServerController::class);
 Route::resource('invoices', InvoiceController::class);
 
 // Report Routes
-Route::group(['prefix' => 'reports'], function () {
-    Route::get('users/invoices', [ReportController::class, 'allUsers'])->name('reports.users.invoices');
+Route::name('reports.')->prefix('reports')->group(function () {
+    Route::get('users/invoices', [ReportController::class, 'allUsers'])->name('users.invoices');
 });
 
 
