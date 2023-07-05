@@ -48,11 +48,15 @@
                     @endforeach
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <td colspan="3">{{__('app.general.remain')}}:</td>
-                        <td class="text-center">{{addSeparator($credits)}}</td>
-                        <td class="text-center">{{addSeparator($debits)}}</td>
-                    </tr>
+                        <tr>
+                            <td colspan="3">{{__('app.general.total')}}:</td>
+                            <td class="text-center">{{addSeparator($credits)}}</td>
+                            <td class="text-center">{{addSeparator($debits)}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">{{__('app.general.remain')}}:</td>
+                            <td class="text-center" colspan="2">{{addSeparator($credits - $debits)}}</td>
+                        </tr>
                     </tfoot>
                 </x-tables.default>
             </div>
