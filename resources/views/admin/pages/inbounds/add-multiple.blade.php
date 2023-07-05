@@ -220,10 +220,15 @@
 
                 function getInbound(text)
                 {
-                    let link    = text;
-                    let server_id  = SERVERS_IPS[text.split('@')[1].split(':')[0]];
-                    let port    = text.split('@')[1].split(':')[1].split('?')[0];
-                    let title   = `${text.split('#')[1].split('|')[0]}|${text.split('#')[1].split('|')[1]}`;
+                    let link        = text;
+                    let server_id   = SERVERS_IPS[text.split('@')[1].split(':')[0]];
+                    let port        = text.split('@')[1].split(':')[1].split('?')[0];
+                    let title       = `${text.split('#')[1].split('|')[0]}|${text.split('#')[1].split('|')[1]}`;
+
+                    link        = (link != 'undefined' ? link : '' );
+                    server_id   = (server_id != 'undefined' ? server_id : '' );
+                    port        = (port != 'undefined' ? port : '' );
+                    title       = (title != 'undefined' ? title : '' );
 
                     return {link, server_id, port, title};
                 }
