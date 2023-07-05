@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form class="repeater card" action="{{ route('admin.inbounds.store') }}" method="POST">
+    <form class="repeater card" action="{{ route('admin.inbounds.bulk.store') }}" method="POST">
         @csrf
 
         <div class="card-header row">
@@ -51,7 +51,7 @@
 
         </div>
 
-        <div class="card-body" data-repeater-list="inboundsList">
+        <div class="card-body" data-repeater-list="inbounds">
 
 
 
@@ -65,7 +65,7 @@
                                 <input type="text" name="title" class="form-control" placeholder="{{__('app.general.title')}}">
                             </div>
                         </div>
-        
+
                         <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.servers.server')}}</label>
                             <div>
@@ -81,7 +81,7 @@
                                 </select>
                             </div>
                         </div>
-        
+
                         <div class="col-md-4 mb-3">
                             <label class="form-label required">{{__('app.general.ip') . ':' . __('app.general.port')}}</label>
                             <div class="input-group input-group-flat">

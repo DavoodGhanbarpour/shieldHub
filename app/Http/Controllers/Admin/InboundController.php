@@ -32,8 +32,8 @@ class InboundController extends Controller
 
     public function bulkStore(InboundBulkCreateRequest $request)
     {
-        $request->validated()->map(function ($eachInbound) {
-            dd($eachInbound);
+        collect($request->get('inbounds'))->map(function ($eachInbound) {
+            InboundFacade::upsert($eachInbound);
         });
         return redirect()->route('admin.inbounds.index');
     }
@@ -83,7 +83,8 @@ class InboundController extends Controller
      */
     public function update(InboundUpdateRequest $request, string $id)
     {
-        InboundFacade::upsert($request->validated(), $id);
+        $data = $request->validated();
+        InboundFacade::upsert($data, $id);
 
         return redirect()->route('admin.inbounds.index');
     }

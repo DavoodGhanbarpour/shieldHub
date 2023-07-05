@@ -21,7 +21,7 @@ class InboundStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'server' => ['integer', 'required', 'exists:users,id'],
+            'server_id' => ['integer', 'required', 'exists:users,id'],
             'title' => ['string', 'required'],
             'link' => ['string', 'required'],
             'port' => ['required', new NetworkPortRule()],
