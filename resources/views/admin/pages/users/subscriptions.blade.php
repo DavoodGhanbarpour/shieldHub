@@ -47,7 +47,7 @@
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
                         @foreach($subscriptions as $eachSubscription)
-                            @php $diffDayCount = \Carbon\Carbon::parse($eachSubscription->pivot->end_date)->diffInDays(now()) @endphp
+                            @php $diffDayCount = \Carbon\Carbon::parse($eachSubscription->pivot->start_date)->diffInDays($eachSubscription->pivot->end_date) @endphp
 
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
