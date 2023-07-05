@@ -10,7 +10,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
         $freeDisk   = getFreeStorageAsGB(storage_path());
         $totalDisk  = getFullStorageAsGB();
         $usedDisk   = $totalDisk - $freeDisk;
@@ -29,7 +28,7 @@ class DashboardController extends Controller
             'cards' => [
                 'user_counts' => DashboardFacade::getUserCounts(),
                 'inbound_counts' => DashboardFacade::getInboundCounts(),
-                'online_user' => User::online()->get()->first() ?: 0
+                'online_user' => User::online()->get()->count() ?: 0
             ]
         ]);
     }
