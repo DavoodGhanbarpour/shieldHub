@@ -34,7 +34,11 @@
                         </tr>
                     </thead>
                     <tbody class="table-tbody">
-                        @php $index = 1 @endphp
+                        @php
+                            $index = 1;
+                            $credits = 0;
+                            $debits = 0;
+                        @endphp
                         @foreach($users as $eachUser)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
@@ -49,8 +53,20 @@
                                     </div>
                                 </td>
                             </tr>
+                        @php
+                            $debits += $eachInvoice->debit;
+                            $credits += $eachInvoice->credit;
+                        @endphp
                         @endforeach
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td class="text-center">{{addSeparator($credits)}}</td>
+                        <td class="text-center">{{addSeparator($debits)}}</td>
+                        <td></td>
+                    </tr>
+                    </tfoot>
                 </x-tables.default>
             </div>
         </div>
