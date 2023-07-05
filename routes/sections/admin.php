@@ -20,8 +20,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('users.inbounds');
     Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('users.assignInbounds');
 
-    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('histories.invoices');
-    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('histories.subscriptions');
+    Route::get('{user}/invoices', [ReportController::class, 'allUsers'])->name('users.invoices');
+    Route::get('{user}/subscriptions', [ReportController::class, 'allUsers'])->name('users.subscriptions');
 });
 
 // Inbound Routes
