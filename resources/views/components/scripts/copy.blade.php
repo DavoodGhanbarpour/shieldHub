@@ -24,7 +24,7 @@
 
         $(document).on( 'hidden.bs.modal', '.modal', function(){
         
-            clipboard.container = document.getElementsByTagName('docy')[0]; 
+            clipboard.container = document.getElementsByTagName('body')[0]; 
         });
 
 
