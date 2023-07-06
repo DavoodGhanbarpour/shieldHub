@@ -126,6 +126,9 @@ body, button, input, select {
     max-width: 100%;
 }
 
+.events-off {
+    pointer-events: none;
+}
 
 
 .w-1 {

@@ -40,6 +40,10 @@
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <span class="dropdown-item d-xl-none text-muted events-off">
+                        {{auth()->user()->name}}
+                    </span>
+
                     <a href="?theme=dark" class="d-sm-none justify-content-between dropdown-item hide-theme-dark">
                         Enable dark mode
 
@@ -62,7 +66,6 @@
                                 d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
                     </a>
-
 
                     <a class="d-sm-none justify-content-between dropdown-item"
                         href="{{route('profile.locale.update', ['locale' => \App\Models\User::SUPPORTED_LANGUAGES['en']['key'], 'user' => auth()->user()->id])}}">
