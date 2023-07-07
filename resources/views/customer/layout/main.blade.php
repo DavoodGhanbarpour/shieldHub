@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>@yield('title')</title>
     <!-- CSS files -->
+    <link href="{{ asset('libs/select2/select2.css') }}" rel="stylesheet"/>
     @include('components.locale.main-styles')
 
     <link href="{{ asset('css/tabler-flags.min.css?1684106062') }}" rel="stylesheet"/>

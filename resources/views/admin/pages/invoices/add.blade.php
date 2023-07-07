@@ -13,7 +13,7 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.auth.user')}}</label>
                     <div>
-                        <select name="user_id" class="form-select" placeholder="{{__('app.auth.user')}}">
+                        <select name="user_id" class="form-select select2" placeholder="{{__('app.auth.user')}}">
                             @foreach($users as $eachUser)
                                 <option
                                     value="{{$eachUser->id}}">
