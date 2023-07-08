@@ -26,7 +26,7 @@
                                 <td class="sort-quota">
                                     {{
                                         __('app.general.days_remain',['count' =>
-                                            \Carbon\Carbon::parse($eachInbound->pivot->start_date)->diffInDays($eachInbound->pivot->end_date)
+                                            \Carbon\Carbon::now()->diffInDays($eachInbound->pivot->end_date)
                                         ])
                                     }}
                                 </td>
