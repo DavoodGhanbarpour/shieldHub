@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{env('APP_NAME')}} | @yield('title')</title>
     <!-- CSS files -->
+    <link href="{{ asset('libs/select2/select2.css') }}" rel="stylesheet"/>
     @include('components.locale.main-styles')
 
     <link href="{{ asset('css/tabler-flags.min.css?1684106062') }}" rel="stylesheet"/>
@@ -23,7 +24,6 @@
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet"/>
     <link href="{{ asset('libs/datatables/datatables.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('libs/select2/select2.css') }}" rel="stylesheet"/>
     <link href="{{ asset('libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"/>
     @stack('styles')
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>

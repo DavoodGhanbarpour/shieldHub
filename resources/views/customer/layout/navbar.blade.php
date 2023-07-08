@@ -12,7 +12,7 @@
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last">
-            <div class="d-none d-sm-flex align-items-center">
+            <div class="d-none d-md-flex align-items-center">
                 <div class="row">
                     <a class="w-auto px-0"
                         href="{{route('profile.locale.update', ['locale' => \App\Models\User::SUPPORTED_LANGUAGES['en']['key'], 'user' => auth()->user()->id])}}">
@@ -26,7 +26,7 @@
                     </a>
                 </div>
 
-                <x-buttons.theme-mode />
+                <x-buttons.theme-mode :class="'d-md-flex'"/>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
@@ -44,7 +44,7 @@
                         {{auth()->user()->name}}
                     </span>
 
-                    <a href="?theme=dark" class="d-sm-none justify-content-between dropdown-item hide-theme-dark">
+                    <a href="?theme=dark" class="d-md-none justify-content-between dropdown-item hide-theme-dark">
                         Enable dark mode
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -54,7 +54,7 @@
                             <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                         </svg>
                     </a>
-                    <a href="?theme=light" class="d-sm-none justify-content-between dropdown-item hide-theme-light">
+                    <a href="?theme=light" class="d-md-none justify-content-between dropdown-item hide-theme-light">
                         Enable light mode
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -67,12 +67,12 @@
                         </svg>
                     </a>
 
-                    <a class="d-sm-none justify-content-between dropdown-item"
+                    <a class="d-md-none justify-content-between dropdown-item"
                         href="{{route('profile.locale.update', ['locale' => \App\Models\User::SUPPORTED_LANGUAGES['en']['key'], 'user' => auth()->user()->id])}}">
                         English
                         <span class="flag btn flag-xs flag-country-gb" role="button"></span>
                     </a>
-                    <a class="d-sm-none justify-content-between dropdown-item"
+                    <a class="d-md-none justify-content-between dropdown-item"
                         href="{{route('profile.locale.update', ['locale' => \App\Models\User::SUPPORTED_LANGUAGES['fa']['key'], 'user' => auth()->user()->id])}}">
                         فارسی
                         <span class="flag btn flag-xs flag-country-ir" role="button"></span>
