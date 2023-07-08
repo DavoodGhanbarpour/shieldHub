@@ -10,14 +10,14 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.name')}}</label>
                     <div>
                         <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="{{__('app.general.name')}}">
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.general.email_address')}}</label>
                     <div>
                         <input type="email" name="email" class="form-control" aria-describedby="emailHelp"
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.passwords.password')}}</label>
                     <div class="input-group input-group-flat">
                         <input type="password" id="password" class="form-control" name="password"
@@ -47,13 +47,23 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">{{__('app.auth.role')}}</label>
                     <div>
                         <select class="form-select" name="role">
                             <option value="{{\App\Models\User::CUSTOMER}}">{{__('app.auth.roles.'.\App\Models\User::CUSTOMER)}}</option>
                             <option value="{{\App\Models\User::ADMIN}}">{{__('app.auth.roles.'.\App\Models\User::ADMIN)}}</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">Status</label>
+                    <div class="btn-group w-100"role="group">
+                        <input type="radio" class="btn-check" name="status" value="enable" id="enableStatus" autocomplete="off" checked>
+                        <label for="enableStatus" type="button" class="btn">Enable</label>
+                        <input type="radio" class="btn-check" name="status" value="disable" id="disableStatus" autocomplete="off">
+                        <label for="disableStatus" type="button" class="btn">Disable</label>
                     </div>
                 </div>
             </div>
