@@ -92,6 +92,10 @@ body, button, input, select {
     resize: none;
 }
 
+.btn-check + .btn:hover {
+    color: var(--tblr-btn-active-color);
+}
+
 
 
 .modal-2xl {
