@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationEvent;
 use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
@@ -42,6 +43,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        // event(new NotificationEvent('hello world'));
+        
         return view('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
