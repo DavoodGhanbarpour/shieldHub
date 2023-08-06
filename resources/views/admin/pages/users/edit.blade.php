@@ -67,9 +67,9 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">Status</label>
                     <div class="btn-group w-100"role="group">
-                        <input type="radio" class="btn-check" name="status" value="enable" id="enableStatus" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="status" value="{{\App\Enums\UserStatus::ENABLED->value}}" id="enableStatus" autocomplete="off" checked>
                         <label for="enableStatus" type="button" class="btn">Enable</label>
-                        <input type="radio" class="btn-check" name="status" value="disable" id="disableStatus" autocomplete="off">
+                        <input type="radio" class="btn-check" name="status" value="{{\App\Enums\UserStatus::DISABLED->value}}" id="disableStatus" autocomplete="off">
                         <label for="disableStatus" type="button" class="btn">Disable</label>
                     </div>
                 </div>
