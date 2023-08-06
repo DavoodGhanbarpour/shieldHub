@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'role' => User::CUSTOMER,
             'locale' => fake()->randomElement(array_column(User::SUPPORTED_LANGUAGES, 'key')),
             'email' => fake()->unique()->safeEmail(),
-            'status' => UserStatus::ENABLED,
+            'status' => UserStatus::ENABLED->value,
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
