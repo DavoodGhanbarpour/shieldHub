@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->after('role', function ($table){
-                $table->tinyInteger('status', false, true);
+            $table->after('role', function (Blueprint $table){
+                $table->tinyInteger('status', false, true)->default(0);
             });
         });
     }
