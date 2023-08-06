@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Invoice;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Shetabit\Visitor\Models\Visit;
 
 class ReportController extends Controller
 {
@@ -13,17 +12,17 @@ class ReportController extends Controller
     {
         return view('admin.pages.reports.users.invoices.index', [
             'users' => User::query()
-                ->withSum('invoices','debit')
-                ->withSum('invoices','credit')
+                ->withSum('invoices', 'debit')
+                ->withSum('invoices', 'credit')
                 ->withCount('activeSubscriptions')
                 ->get(),
         ]);
     }
 
-    public function speceficUser(User $user)
+    public function logs()
     {
-        return view('admin.pages.reports.users.invoices.index', [
-            'invoices' => Invoice::all()
+        return view('admin.pages.logs.login.index',[
+            'visits' => Visit::query()->whereNull('visitor_type')->get()
         ]);
     }
 }

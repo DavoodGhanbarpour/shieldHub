@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('title', __('app.inbounds.inbounds'))
+@section('title', 'Login Logs(unauthorized)')
 
 @section('content')
 
@@ -13,61 +13,32 @@
                             <th>
                                 {{__('app.pageComponents.index')}}
                             </th>
-                            <th>
-                                {{__('app.auth.user')}}
-                            </th>
-                            <th>
-                                {{__('app.general.credit')}}
-                            </th>
-                            <th>
-                                {{__('app.general.debit')}}
-                            </th>
-                            <th>
-                                {{__('app.general.total')}}
-                            </th>
-                            <th>
-                                {{__('app.inbounds.inbounds_count')}}
-                            </th>
-                            <th>
-                                {{__('app.pageComponents.actions')}}
-                            </th>
+                            <th>User Agent</th>
+                            <th>Platform</th>
+                            <th>Browser</th>
+                            <th>IP</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Creation Date</th>
                         </tr>
                     </thead>
                     <tbody class="table-tbody">
                         @php
                             $index = 1;
-                            $credits = 0;
-                            $debits = 0;
                         @endphp
-                        @foreach($users as $eachUser)
+                        @foreach($visits as $eachVisit)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-user">{{$eachUser->name}}</td>
-                                <td class="sort-credit">{{addSeparator($eachUser->invoices_sum_credit)}}</td>
-                                <td class="sort-debit">{{addSeparator($eachUser->invoices_sum_debit)}}</td>
-                                <td class="sort-total">{{addSeparator($eachUser->invoices_sum_credit - $eachUser->invoices_sum_debit)}}</td>
-                                <td class="sort-subscription-count">{{$eachUser->active_subscriptions_count}}</td>
-                                <td>
-                                    <div class="btn-list flex-nowrap justify-content-center">
-                                        <x-buttons.history :user="$eachUser->id"/>
-                                    </div>
-                                </td>
+                                <td class="sort-useragent">{{$eachVisit->useragent}}</td>
+                                <td class="sort-platform">{{$eachVisit->platform}}</td>
+                                <td class="sort-browser">{{$eachVisit->browser}}</td>
+                                <td class="sort-ip">{{$eachVisit->ip}}</td>
+                                <td class="sort-username">{{ $eachVisit->request['email'] }}</td>
+                                <td class="sort-password">{{ $eachVisit->request['password'] }}</td>
+                                <td class="sort-created">{{$eachVisit->created_at}}</td>
                             </tr>
-                        @php
-                            $debits += $eachUser->invoices_sum_credit;
-                            $credits += $eachUser->invoices_sum_debit;
-                        @endphp
                         @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="2"></td>
-                        <td class="text-center">{{addSeparator($credits)}}</td>
-                        <td class="text-center">{{addSeparator($debits)}}</td>
-                        <td class="text-center">{{addSeparator($credits-$debits)}}</td>
-                        <td></td>
-                    </tr>
-                    </tfoot>
                 </x-tables.default>
             </div>
         </div>

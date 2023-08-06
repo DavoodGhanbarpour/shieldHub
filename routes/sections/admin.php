@@ -39,6 +39,7 @@ Route::resource('invoices', InvoiceController::class);
 // Report Routes
 Route::name('reports.')->prefix('reports')->group(function () {
     Route::get('users/invoices', [ReportController::class, 'allUsers'])->name('users.invoices');
+    Route::get('logs/logins', [ReportController::class, 'logs'])->name('logs.logins');
 });
 
 
