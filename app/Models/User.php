@@ -46,6 +46,7 @@ class User extends Authenticatable
         'role',
         'locale',
         'last_visit',
+        'status',
     ];
 
     /**
