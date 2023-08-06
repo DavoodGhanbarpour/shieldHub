@@ -102,8 +102,8 @@ class InboundController extends Controller
 
     public function users(Inbound $inbound)
     {
-        return view('admin.pages.users.index', [
-            'users' => User::withCount('activeSubscriptions')->get(),
+        return view('admin.pages.inbounds.users', [
+            'users' => $inbound->activeSubscriptions()->withCount('inbounds')->get()
         ]);
     }
 }
