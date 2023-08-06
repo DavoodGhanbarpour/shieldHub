@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
 use App\Models\Inbound;
 use App\Models\Server;
+use App\Models\User;
 
 class InboundController extends Controller
 {
@@ -97,5 +98,12 @@ class InboundController extends Controller
         InboundFacade::delete($id);
 
         return redirect()->route('admin.inbounds.index');
+    }
+
+    public function users(Inbound $inbound)
+    {
+        return view('admin.pages.inbounds.users', [
+            'users' => $inbound->activeSubscriptions()->withCount('inbounds')->get()
+        ]);
     }
 }

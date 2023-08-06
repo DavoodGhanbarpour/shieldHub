@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,7 @@ class UserFactory extends Factory
             'role' => User::CUSTOMER,
             'locale' => fake()->randomElement(array_column(User::SUPPORTED_LANGUAGES, 'key')),
             'email' => fake()->unique()->safeEmail(),
+            'status' => UserStatus::ENABLED,
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),

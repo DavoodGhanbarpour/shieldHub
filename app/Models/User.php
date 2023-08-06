@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Roles;
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -91,12 +93,17 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return isset($this->role) && $this->role == self::ADMIN;
+        return isset($this->role) && $this->role == Roles::ADMIN;
     }
 
     public function isCustomer(): bool
     {
-        return isset($this->role) && $this->role == self::CUSTOMER;
+        return isset($this->role) && $this->role == Roles::CUSTOMER;
+    }
+
+    public function isDisabled(): bool
+    {
+        return isset($this->status) && $this->status == UserStatus::DISABLED;
     }
 
     protected function last_visit(): Attribute

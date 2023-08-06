@@ -57,8 +57,12 @@ if (! function_exists('getFullStorageAsGB')) {
 }
 
 if (! function_exists('abbreviation')) {
-    function abbreviation(string $string, int $length = 20): string
+    function abbreviation(?string $string, int $length = 20): string
     {
+        if(!isset($string)){
+            return '';
+        }
+
         if (strlen($string) >= $length) {
             return mb_substr($string, 0, $length) . '...';
         }
