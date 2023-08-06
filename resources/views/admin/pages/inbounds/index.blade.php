@@ -47,7 +47,7 @@
                         @foreach($inbounds as $eachInbound)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-title">{{$eachInbound->title}}</td>
+                                <td class="sort-title">{{abbreviation($eachInbound->title)}}</td>
                                 <td class="sort-ip">
                                     {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
