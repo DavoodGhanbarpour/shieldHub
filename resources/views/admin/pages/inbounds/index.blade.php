@@ -55,7 +55,7 @@
                                     {{$eachInbound->server->title}}
                                 </td>
                                 <td class="sort-description">
-                                    {{$eachInbound->description}}
+                                    {{abbreviation($eachInbound?->description)}}
                                 </td>
                                 <td class="sort-users-count">
                                     {{$eachInbound->active_subscriptions_count}}
@@ -66,8 +66,8 @@
                                     <div class="btn-list flex-nowrap justify-content-center">
 
                                         <a href="{{route('admin.inbounds.users', ['inbound' => $eachInbound->id])}}" class="btn btn-pink my-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" 
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
