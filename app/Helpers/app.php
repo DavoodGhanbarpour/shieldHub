@@ -37,7 +37,7 @@ if (! function_exists('removeSeparator')) {
 if (! function_exists('addSeparator')) {
     function addSeparator(?float $number): string
     {
-        return number_format($number,fmod($number, 2) == 0 ? 0 : 3);
+        return number_format($number,fmod($number, 1) == 0 ? 0 : 3);
     }
 }
 
