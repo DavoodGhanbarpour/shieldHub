@@ -23,8 +23,8 @@ enum UserStatus: string
     public static function toCSV()
     {
         return implode(',',[
-            UserStatus::ENABLED,
-            UserStatus::DISABLED,
+            UserStatus::ENABLED->value,
+            UserStatus::DISABLED->value,
         ]);
     }
 }

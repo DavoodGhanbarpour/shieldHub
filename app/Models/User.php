@@ -46,6 +46,7 @@ class User extends Authenticatable
         'role',
         'locale',
         'last_visit',
+        'status',
     ];
 
     /**
@@ -93,17 +94,17 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return isset($this->role) && $this->role == Roles::ADMIN;
+        return isset($this->role) && $this->role == Roles::ADMIN->value;
     }
 
     public function isCustomer(): bool
     {
-        return isset($this->role) && $this->role == Roles::CUSTOMER;
+        return isset($this->role) && $this->role == Roles::CUSTOMER->value;
     }
 
     public function isDisabled(): bool
     {
-        return isset($this->status) && $this->status == UserStatus::DISABLED;
+        return isset($this->status) && $this->status == UserStatus::DISABLED->value;
     }
 
     protected function last_visit(): Attribute

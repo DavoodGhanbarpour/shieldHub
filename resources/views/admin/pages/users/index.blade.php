@@ -30,6 +30,9 @@
                                 {{__('app.general.email')}}
                             </th>
                             <th>
+                                {{__('app.general.status')}}
+                            </th>
+                            <th>
                                 {{__('app.auth.role')}}
                             </th>
                             <th>
@@ -48,6 +51,7 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-name">{{$eachUser->name}}</td>
                                 <td class="sort-email">{{$eachUser->email}}</td>
+                                <td class="sort-status">{{\App\Enums\UserStatus::from($eachUser->status)->label()}}</td>
                                 <td class="sort-role">{{__('app.auth.roles.'.$eachUser->role)}}</td>
                                 <td class="sort-inbounds">{{$eachUser->active_subscriptions_count}}</td>
                                 <td class="sort-last-visit">{{$eachUser->last_visit}}</td>
