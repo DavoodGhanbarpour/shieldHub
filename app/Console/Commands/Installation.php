@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -75,6 +76,7 @@ class Installation extends Command
                 'email' => 'test@test.com',
                 'role' => User::ADMIN,
                 'password' => Hash::make($password),
+                'status' => UserStatus::ENABLED->value
             ]);
         }
 
@@ -84,6 +86,7 @@ class Installation extends Command
                 'email' => 'test2@test.com',
                 'role' => User::CUSTOMER,
                 'password' => Hash::make($password),
+                'status' => UserStatus::ENABLED->value
             ]);
         }
 
