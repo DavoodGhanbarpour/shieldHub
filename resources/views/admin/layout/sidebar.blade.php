@@ -351,10 +351,10 @@
                         Logs
                       </span>
                     </a>
-                    <div class="dropdown-menu{{Route::is('admin.reports.users.invoices') ? ' show' : '' }}">
+                    <div class="dropdown-menu{{Route::is('admin.reports.logs.logins') ? ' show' : '' }}">
                       <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item{{Route::is('admin.reports.users.invoices') ? ' active' : '' }}" href="{{route('admin.reports.users.invoices')}}">
+                            <a class="dropdown-item{{Route::is('admin.reports.logs.logins') ? ' active' : '' }}" href="{{route('admin.reports.logs.logins')}}">
                                 Login Log
                             </a>
                         </div>

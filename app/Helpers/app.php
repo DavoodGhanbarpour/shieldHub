@@ -37,7 +37,7 @@ if (! function_exists('removeSeparator')) {
 if (! function_exists('addSeparator')) {
     function addSeparator(?float $number): string
     {
-        return number_format($number,($number % 1 === 0) ? 0 : 3);
+        return number_format($number,fmod($number, 1) == 0 ? 0 : 3);
     }
 }
 
@@ -53,6 +53,16 @@ if (! function_exists('getFullStorageAsGB')) {
     function getFullStorageAsGB(string $dir = '/'): float
     {
         return round( ( disk_total_space($dir) ) / 1024 / 1024 / 1024, 2 );
+    }
+}
+
+if (! function_exists('abbreviation')) {
+    function abbreviation(string $string, int $length = 20): string
+    {
+        if (strlen($string) >= $length) {
+            return mb_substr($string, 0, $length) . '...';
+        }
+        return $string;
     }
 }
 

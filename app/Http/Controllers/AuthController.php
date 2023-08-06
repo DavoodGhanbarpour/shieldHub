@@ -31,7 +31,7 @@ class AuthController extends Controller
 
             return redirect()->route('customer.home');
         }
-        visitor()->visit();
+        visitor()->setVisitor(null)->visit();
         // TODO need a way to return a global format
         return back()->withErrors([
             __('auth.failed'),

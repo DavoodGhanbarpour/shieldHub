@@ -32,9 +32,6 @@
                                 {{__('app.servers.server')}}
                             </th>
                             <th>
-                                {{__('app.general.quota')}}
-                            </th>
-                            <th>
                                 {{__('app.general.description')}}
                             </th>
                             <th>
@@ -50,15 +47,12 @@
                         @foreach($inbounds as $eachInbound)
                             <tr>
                                 <td class="sort-index">{{$index++}}</td>
-                                <td class="sort-title">{{$eachInbound->title}}</td>
+                                <td class="sort-title">{{abbreviation($eachInbound->title)}}</td>
                                 <td class="sort-ip">
                                     {{$eachInbound->server->ip}}:<span class="text-muted">{{$eachInbound->port}}</span>
                                 </td>
                                 <td class="sort-server">
                                     {{$eachInbound->server->title}}
-                                </td>
-                                <td class="sort-quota">
-                                    {{ \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())  }}
                                 </td>
                                 <td class="sort-description">
                                     {{$eachInbound->description}}
