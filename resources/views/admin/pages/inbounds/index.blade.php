@@ -32,9 +32,6 @@
                                 {{__('app.servers.server')}}
                             </th>
                             <th>
-                                {{__('app.general.quota')}}
-                            </th>
-                            <th>
                                 {{__('app.general.description')}}
                             </th>
                             <th>
@@ -56,9 +53,6 @@
                                 </td>
                                 <td class="sort-server">
                                     {{$eachInbound->server->title}}
-                                </td>
-                                <td class="sort-quota">
-                                    {{ \Carbon\Carbon::parse($eachInbound->date)->diffInDays(\Carbon\Carbon::now())  }}
                                 </td>
                                 <td class="sort-description">
                                     {{$eachInbound->description}}
