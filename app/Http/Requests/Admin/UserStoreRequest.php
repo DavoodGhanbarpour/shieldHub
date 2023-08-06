@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\UserStatus;
 use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,6 +26,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'password' => ['required', new Password()],
             'role' => ['required', 'string'],
+            'status' => ['required', 'in:'.UserStatus::toCSV()],
         ];
     }
 }

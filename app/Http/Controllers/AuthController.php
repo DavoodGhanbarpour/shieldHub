@@ -21,6 +21,11 @@ class AuthController extends Controller
 
         if ($result) {
             $user = auth()->user();
+            if($user->isDisabled()){
+                return back()->withErrors([
+                    __('auth.failed'),
+                ]);
+            }
             UserFacade::setLocale($locale, $user->id);
             UserFacade::updateLastVisit($user->id);
             $user->visit();
