@@ -64,7 +64,7 @@
                                     {{addSeparator($eachSubscription->pivot->subscription_price)}}
                                 </td>
                                 <td class="sort-subscription-price">
-                                    {{addSeparator($eachSubscription->pivot->subscription_price * $diffDayCount)}}
+                                    {{addSeparator(round($eachSubscription->pivot->subscription_price * $diffDayCount))}}
                                 </td>
                                 <td class="sort-description">{{$eachSubscription->pivot->description}}</td>
                             </tr>
