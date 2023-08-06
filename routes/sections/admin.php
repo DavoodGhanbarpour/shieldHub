@@ -24,6 +24,7 @@ Route::name('users.')->prefix('users')->group(function () {
 
 // Inbound Routes
 Route::name('inbounds.')->prefix('inbounds')->group(function () {
+    Route::get('{inbound}/users', [InboundController::class, 'users'])->name('users');
     Route::get('bulk-create', [InboundController::class, 'bulkCreate'])->name('bulk.create');
     Route::post('bulk-create', [InboundController::class, 'bulkStore'])->name('bulk.store');
 });
