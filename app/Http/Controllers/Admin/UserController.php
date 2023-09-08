@@ -153,33 +153,33 @@ class UserController extends Controller
 
     public function renewSubscriptions(RenewSubscriptionsRequest $request)
     {
-        foreach ($request->validated('tableCheckbox') as $userId => $each){
+        foreach ($request->validated('tableCheckbox') as $userId => $each) {
             $user = User::find($userId);
-            if($user->isDisabled()){
+            if ($user->isDisabled()) {
                 continue;
             }
+            $user->inbounds()->orderBy('end_date', 'asc')->get()->groupBy('id')->map(function ($inbound) use ($user, $request) {
+                $lastInbound = $inbound->last();
+                if (is_null($lastInbound)) {
+                    return;
+                }
 
-            $lastInbound = $user->inbounds()->orderBy('start_date', 'desc')->limit(1)->first();
-            if(is_null($lastInbound)){
-                continue;
-            }
+                $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
+                if ($request->filled('date'))
+                    $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
+                else
+                    $endDate = $startDate->clone()->addDays($request->input('daysCount'));
 
-            $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
-            if($request->filled('date'))
-                $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
-            else
-                $endDate = $startDate->clone()
-                    ->addDays($request->input('daysCount'));
-
-            if($startDate->gte($endDate)){
-                continue;
-            }
-            $user->inbounds()->attach($lastInbound->id,[
-                'start_date' => $startDate->format('Y-m-d'),
-                'end_date' => $endDate->format('Y-m-d'),
-                'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
-            ]);
-            $this->deleteUserPastInvoices($user);
+                if ($startDate->gte($endDate)) {
+                    return;
+                }
+                $user->inbounds()->attach($lastInbound->id, [
+                    'start_date' => $startDate->format('Y-m-d'),
+                    'end_date' => $endDate->format('Y-m-d'),
+                    'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
+                ]);
+                $this->deleteUserPastInvoices($user);
+            });
         }
         return redirect()->route('admin.users.index');
     }
