@@ -7,6 +7,7 @@ use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
+use App\Http\Requests\Admin\RenewSubscriptionsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Inbound;
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function index()
     {
         // event(new NotificationEvent('hello world'));
-        
+
         return view('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
@@ -153,5 +154,14 @@ class UserController extends Controller
                 InvoiceFacade::sendDebit($inbound->pivot->id);
         });
         return redirect()->route('admin.users.index');
+    }
+
+    public function renewSubscriptions(RenewSubscriptionsRequest $request)
+    {
+        User::find(1)->inbounds()->orderBy('id', 'desc')->first()->dd();
+        dd($request->validated());
+        foreach ($request->validated('users') as $each){
+
+        }
     }
 }
