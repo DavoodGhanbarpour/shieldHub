@@ -48,28 +48,28 @@
                                 </div>
 
                                 <div class="tab-pane active show" id="daysCount">
-                                    <div class="form-selectgroup">
-                                        <label class="form-selectgroup-item">
+                                    <div class="form-selectgroup justify-content-between col-12">
+                                        <label class="form-selectgroup-item col">
                                             <input type="radio" name="daysCount" value="15" class="form-selectgroup-input">
                                             <span class="form-selectgroup-label">15</span>
                                         </label>
                 
-                                        <label class="form-selectgroup-item">
+                                        <label class="form-selectgroup-item col">
                                             <input type="radio" name="daysCount" value="30" class="form-selectgroup-input" checked="checked">
                                             <span class="form-selectgroup-label">30</span>
                                         </label>
                 
-                                        <label class="form-selectgroup-item">
+                                        <label class="form-selectgroup-item col">
                                             <input type="radio" name="daysCount" value="60" class="form-selectgroup-input">
                                             <span class="form-selectgroup-label">60</span>
                                         </label>
                 
-                                        <label class="form-selectgroup-item">
+                                        <label class="form-selectgroup-item col">
                                             <input type="radio" name="daysCount" value="120" class="form-selectgroup-input">
                                             <span class="form-selectgroup-label">120</span>
                                         </label>
                 
-                                        <label class="form-selectgroup-item">
+                                        <label class="form-selectgroup-item col">
                                             <input type="radio" name="daysCount" value="360" class="form-selectgroup-input">
                                             <span class="form-selectgroup-label">360</span>
                                         </label>
