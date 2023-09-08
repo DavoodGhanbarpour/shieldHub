@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\CommaSeparatedPrice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RenewSubscriptionsRequest extends FormRequest
@@ -14,8 +15,10 @@ class RenewSubscriptionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'users' => ['required', 'array'],
-            'users.*.id' => ['integer', 'required', 'exists:users,id']
+            'tableCheckbox' => ['required', 'array'],
+            'daysCount' => ['required_without:date', 'integer'],
+            'date' => ['required_without:daysCount', 'date'],
+            'price' => ['sometimes', new CommaSeparatedPrice()]
         ];
     }
 }

@@ -18,7 +18,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -148,21 +147,54 @@ class UserController extends Controller
 
         $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
 
+        $this->deleteUserPastInvoices($user);
+        return redirect()->route('admin.users.index');
+    }
+
+    public function renewSubscriptions(RenewSubscriptionsRequest $request)
+    {
+        foreach ($request->validated('tableCheckbox') as $userId => $each){
+            $user = User::find($userId);
+            if($user->isDisabled()){
+                continue;
+            }
+
+            $lastInbound = $user->inbounds()->orderBy('start_date', 'desc')->limit(1)->first();
+            if(is_null($lastInbound)){
+                continue;
+            }
+
+            $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
+            if($request->filled('date'))
+                $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
+            else
+                $endDate = $startDate->clone()
+                    ->addDays($request->input('daysCount'));
+
+            if($startDate->gte($endDate)){
+                continue;
+            }
+            $user->inbounds()->attach($lastInbound->id,[
+                'start_date' => $startDate->format('Y-m-d'),
+                'end_date' => $endDate->format('Y-m-d'),
+                'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
+            ]);
+            $this->deleteUserPastInvoices($user);
+        }
+        return redirect()->route('admin.users.index');
+    }
+    /**
+     * @param User $user
+     * @return void
+     * @internal
+     */
+    private function deleteUserPastInvoices(User $user): void
+    {
         InvoiceFacade::deletePreviousDebitInvoices($user->id);
 
         $user->inbounds->map(function ($inbound) {
             if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
                 InvoiceFacade::sendDebit($inbound->pivot->id);
         });
-        return redirect()->route('admin.users.index');
-    }
-
-    public function renewSubscriptions(Request $request)
-    {
-        // User::find(1)->inbounds()->orderBy('id', 'desc')->first()->dd();
-        dd($request);
-        foreach ($request->validated('users') as $each){
-
-        }
     }
 }
