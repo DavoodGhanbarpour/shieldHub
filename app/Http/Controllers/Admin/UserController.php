@@ -7,6 +7,7 @@ use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
+use App\Http\Requests\Admin\RenewSubscriptionsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Inbound;
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function index()
     {
         // event(new NotificationEvent('hello world'));
-        
+
         return view('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
@@ -146,12 +147,54 @@ class UserController extends Controller
 
         $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
 
+        $this->deleteUserPastInvoices($user);
+        return redirect()->route('admin.users.index');
+    }
+
+    public function renewSubscriptions(RenewSubscriptionsRequest $request)
+    {
+        foreach ($request->validated('tableCheckbox') as $userId => $each) {
+            $user = User::find($userId);
+            if ($user->isDisabled()) {
+                continue;
+            }
+            $user->inbounds()->orderBy('end_date', 'asc')->get()->groupBy('id')->map(function ($inbound) use ($user, $request) {
+                $lastInbound = $inbound->last();
+                if (is_null($lastInbound)) {
+                    return;
+                }
+
+                $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
+                if ($request->filled('date'))
+                    $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
+                else
+                    $endDate = $startDate->clone()->addDays($request->input('daysCount'));
+
+                if ($startDate->gte($endDate)) {
+                    return;
+                }
+                $user->inbounds()->attach($lastInbound->id, [
+                    'start_date' => $startDate->format('Y-m-d'),
+                    'end_date' => $endDate->format('Y-m-d'),
+                    'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
+                ]);
+                $this->deleteUserPastInvoices($user);
+            });
+        }
+        return redirect()->route('admin.users.index');
+    }
+    /**
+     * @param User $user
+     * @return void
+     * @internal
+     */
+    private function deleteUserPastInvoices(User $user): void
+    {
         InvoiceFacade::deletePreviousDebitInvoices($user->id);
 
         $user->inbounds->map(function ($inbound) {
             if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
                 InvoiceFacade::sendDebit($inbound->pivot->id);
         });
-        return redirect()->route('admin.users.index');
     }
 }

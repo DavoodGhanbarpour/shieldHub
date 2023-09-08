@@ -5,6 +5,7 @@
 @section('actions')
     <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
+            <x-buttons.renew/>
             <x-buttons.add :title="__('app.pageComponents.add') .' '. __('app.auth.user')"/>
         </div>
     </div>
@@ -14,6 +15,7 @@
 
     <div class="card">
         <div class="card-body">
+            
             <div id="table-default" class="table-responsive">
 
                 <x-tables.default>
@@ -47,7 +49,7 @@
                     <tbody class="table-tbody">
                         @php $index = 1 @endphp
                         @foreach($users as $eachUser)
-                            <tr>
+                            <tr data-id="{{$eachUser->id}}">
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-name">{{$eachUser->name}}</td>
                                 <td class="sort-email">{{$eachUser->email}}</td>
@@ -80,9 +82,41 @@
                 </x-tables.default>
 
             </div>
+            
+            <x-modals.renew/>
+
         </div>
     </div>
 
     <x-scripts.datatable-search/>
+    <x-scripts.table-checkbox/>
 
+    @push('scripts')
+        <script>
+            $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
+                $('#renewModal form #hiddenFormInputs').html('');
+                $('#renewModal form #hiddenFormInputs').append($('.table-checkbox:checked').clone());
+            });
+        </script>
+    @endpush
+
+    <script>
+
+        $(document).ready( function(){
+            setRenewModalHandlerStatus()
+        });
+        
+        $(document).on( 'change', '#checkAll, .table-checkbox', function(){
+            setRenewModalHandlerStatus()
+        });
+
+        function setRenewModalHandlerStatus() {
+            if ( $('.table-checkbox:checked').length == 0 )
+                $('[data-bs-target="#renewModal"]').addClass('disabled');
+            else
+                $('[data-bs-target="#renewModal"]').removeClass('disabled');
+        }
+
+    </script>
+    
 @endsection

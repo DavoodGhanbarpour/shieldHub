@@ -22,6 +22,10 @@ Route::name('users.')->prefix('users')->group(function () {
     Route::get('{user}/subscriptions', [UserController::class, 'subscriptions'])->name('subscriptions');
 });
 
+Route::name('subscriptions.')->prefix('subscriptions')->group(function (){
+    Route::post('renew', [UserController::class, 'renewSubscriptions'])->name('renew');
+});
+
 // Inbound Routes
 Route::name('inbounds.')->prefix('inbounds')->group(function () {
     Route::get('{inbound}/users', [InboundController::class, 'users'])->name('users');
