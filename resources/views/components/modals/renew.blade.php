@@ -1,6 +1,9 @@
 <div class="modal" id="renewModal" tabindex="-1">
     <div class="modal-dialog" role="document">
         <form action="{{ route('admin.subscriptions.renew') }}" method="POST">
+            @csrf
+            @method('POST')
+            
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
@@ -9,7 +12,7 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-header">
-                            <ul class="nav card-header-tabs p-0" data-bs-toggle="tabs">
+                            <ul class="nav card-header-tabs p-0" id="renewTabs" data-bs-toggle="tabs">
                                 <li class="nav-item col justify-content-center d-flex">
                                     <a href="#daysCount" class="nav-link active" data-bs-toggle="tab">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-days-counter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -39,7 +42,7 @@
                         </div>
                         
                         <div class="card-body">
-                            <div class="tab-content">
+                            <div class="tab-content" id="renewTabPanes">
                                 <div class="tab-pane" id="date">
                                     <input type="text" name="date" class="form-control datepicker" placeholder="{{__('app.general.date')}}">
                                 </div>
@@ -77,12 +80,12 @@
                     </div>
 
                     <div class="my-3">
-                        <label class="form-label">Manuel Price</label>
+                        <label class="form-label">Manual Price</label>
                         <div class="input-group">
                             <span class="input-group-text">
-                                <input class="form-check-input m-0" id="manuelPriceCheckbox" type="checkbox">
+                                <input class="form-check-input m-0" id="manualPriceCheckbox" type="checkbox">
                             </span>
-                            <input type="text" class="form-control number_format" disabled id="manuelPriceInput" autocomplete="off">
+                            <input type="text" class="form-control number_format" name="price" disabled id="manualPriceInput" autocomplete="off">
                         </div>
                     </div>
                     <div class="d-none" id="hiddenFormInputs"></div>
@@ -109,13 +112,32 @@
 
 @push('scripts')
     <script>
-        $(document).on( 'change', '#manuelPriceCheckbox', function(){
-            $('#manuelPriceInput').prop('disabled', !($(this).is(':checked')));
+        $(document).ready( function(){
+        
+            setTabsStatus();
+        });
+        
+        $(document).on( 'change', '#manualPriceCheckbox', function(){
+            $('#manualPriceInput').prop('disabled', !($(this).is(':checked')));
         });
 
         $(document).on( 'click', '#submitButton', function(){
         
             $(this).closest('form')[0].submit();
         });
+
+        $(document).on( 'click', '#renewTabs .nav-link', function(){
+        
+            setTabsStatus($(this));
+        });
+
+        function setTabsStatus(element = null) {
+
+            if ( element == null ) 
+                element = $('#renewTabs .nav-link.active');
+
+            $('#renewTabPanes').find('input, select').prop('disabled', true);
+            $(element.attr('href')).find('input, select').prop('disabled', false);
+        }
     </script>
 @endpush

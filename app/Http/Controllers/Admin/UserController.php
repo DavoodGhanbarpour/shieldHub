@@ -18,6 +18,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -156,10 +157,10 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function renewSubscriptions(RenewSubscriptionsRequest $request)
+    public function renewSubscriptions(Request $request)
     {
-        User::find(1)->inbounds()->orderBy('id', 'desc')->first()->dd();
-        dd($request->validated());
+        // User::find(1)->inbounds()->orderBy('id', 'desc')->first()->dd();
+        dd($request);
         foreach ($request->validated('users') as $each){
 
         }

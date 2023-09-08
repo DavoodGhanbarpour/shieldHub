@@ -94,11 +94,29 @@
     @push('scripts')
         <script>
             $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
-            
                 $('#renewModal form #hiddenFormInputs').html('');
                 $('#renewModal form #hiddenFormInputs').append($('.table-checkbox:checked').clone());
             });
         </script>
     @endpush
+
+    <script>
+
+        $(document).ready( function(){
+            setRenewModalHandlerStatus()
+        });
+        
+        $(document).on( 'change', '#checkAll, .table-checkbox', function(){
+            setRenewModalHandlerStatus()
+        });
+
+        function setRenewModalHandlerStatus() {
+            if ( $('.table-checkbox:checked').length == 0 )
+                $('[data-bs-target="#renewModal"]').addClass('disabled');
+            else
+                $('[data-bs-target="#renewModal"]').removeClass('disabled');
+        }
+
+    </script>
     
 @endsection
