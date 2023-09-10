@@ -31,7 +31,7 @@
                                 {{__('app.general.end_date')}}
                             </th>
                             <th>
-                                {{__('app.general.remains')}}
+                                {{__('app.general.remain')}}
                             </th>
                             <th>
                                 {{__('app.general.subscription_price')}}

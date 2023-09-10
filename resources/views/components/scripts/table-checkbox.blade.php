@@ -7,11 +7,24 @@
                                 <input class="form-check-input table-checkbox m-0 align-middle" type="checkbox" aria-label="Select invoice">
                             </td>`;
 
-        $('table thead tr:first').prepend(thCheckbox);
-        $('table tbody tr').prepend(tdCheckbox);
-        $('table tbody tr').each(function() {
-            $(this).find('.table-checkbox:first').attr('name', `tableCheckbox[${$(this).data('id')}]`);
+        $('.tableCheckbox thead tr:first').prepend(thCheckbox);
+        $('.tableCheckbox tbody tr').prepend(tdCheckbox);
+        $('.tableCheckbox tbody tr').each(function() {
+            if ( $(this).data('id') != undefined && $(this).data('id') )
+                $(this).find('.table-checkbox:first').attr('name', `tableCheckbox[${$(this).data('id')}]`);
         });
+    });
+
+    $(document).on( 'click', '.tableCheckbox.checkboxTrigger tbody tr', function(e){
+    
+        if ( $(e.target).is($('input[type=checkbox]')) 
+            || $(e.target).is($('button')) 
+            || $(e.target).is($('a')) 
+            || $(e.target).is($('svg'))
+            || $(e.target).is($('path')) )
+            return;
+
+        $(this).find('.table-checkbox:first').prop('checked', !$(this).find('.table-checkbox:first').is(':checked')).trigger('change');
     });
 
     $(document).on( 'change', '.table-checkbox', function(){

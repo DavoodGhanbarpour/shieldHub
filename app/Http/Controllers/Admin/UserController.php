@@ -119,6 +119,27 @@ class UserController extends Controller
         ]);
     }
 
+    public function inbounds2(User $user)
+    {
+        $result = [];
+        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
+            $result[$key] = $each;
+            $result[$key]->subscription_data = $each->activeSubscriptions()
+                ->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))
+                ->first()
+                ?->pivot ?: null;
+        }
+
+        return view('admin.pages.users.inbounds2', [
+            'user' => $user,
+            'inbounds' =>
+                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
+            'servers' => Server::all(),
+            'invoices' => $user->invoices,
+            'subscriptions' => $user->inbounds,
+        ]);
+    }
+
 
     public function invoices(User $user)
     {
