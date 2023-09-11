@@ -18,7 +18,7 @@
             
             <div id="table-default" class="table-responsive">
 
-                <x-tables.default>
+                <x-tables.default :class="'tableCheckbox'">
 
                     <thead>
                         <tr>
