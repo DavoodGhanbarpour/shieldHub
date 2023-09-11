@@ -2,6 +2,9 @@
 
 @section('title', __('app.inbounds.assign_inbounds',['user' => $user->name]))
 
+@section('head')
+    <meta name="_token" content="{{csrf_token()}}">
+@endsection
 @section('content')
 
     <form action="{{ route('admin.users.assignInbounds', ['user' => $user->id]) }}" method="POST">
@@ -42,9 +45,6 @@
                                             {{__('app.general.port')}}
                                         </th>
                                         <th>
-                                            {{__('app.general.description')}}
-                                        </th>
-                                        <th>
                                             {{__('app.general.users_count')}}
                                         </th>
                                         <th>
@@ -57,12 +57,9 @@
                                     @foreach($inbounds as $eachInbound)
                                         <tr data-id="{{$eachInbound->id}}" class="inbound-card-parent target-id-{{$eachInbound->server_id}}" role="button">
                                             <td class="sort-index">{{$index++}}</td>
-                                            <td class="sort-title">{{abbreviation($eachInbound->title)}}</td>
+                                            <td class="sort-title title">{{abbreviation($eachInbound->title)}}</td>
                                             <td class="sort-ip">
                                                 {{$eachInbound->port}}
-                                            </td>
-                                            <td class="sort-description">
-                                                {{abbreviation($eachInbound?->description)}}
                                             </td>
                                             <td class="sort-users-count">
                                                 {{$eachInbound->active_subscriptions_count}}
@@ -269,14 +266,137 @@
             </div>
         </div>
 
+        <div class="modal" id="subscriptionsModal" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Subscriptions Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="btn-group w-100" role="group">
+                            <input data-target="#separatelyForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="separately" autocomplete="off" checked="">
+                            <label for="separately" type="button" class="btn">Separately</label>
+
+                            <input data-target="#asOneForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="asOne" autocomplete="off">
+                            <label for="asOne" type="button" class="btn">As One</label>
+                        </div>
+                        <hr class="my-4 mx-0">
+
+                        <div id="separatelyForm" class="suscription-form mb-3">
+                        </div>
+                            
+                        <div id="asOneForm" class="row suscription-form">
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">{{__('app.general.start_date')}}</label>
+                                <div>
+                                    <input type="text"
+                                        name="start_date"
+                                        class="form-control datepicker"
+                                        placeholder="{{__('app.general.start_date')}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">{{__('app.general.end_date')}}</label>
+                                <div>
+                                    <input type="text"
+                                        name="end_date"
+                                        class="form-control datepicker"
+                                        placeholder="{{__('app.general.end_date')}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">{{__('app.general.subscription_price')}}</label>
+                                <div>
+                                    <input type="text"
+                                        name="subscription_price"
+                                        class="form-control number_format"
+                                        placeholder="{{__('app.general.subscription_price')}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">{{__('app.general.description')}}</label>
+                                <div>
+                                    <textarea name="description" rows="1" class="form-control resize-none"
+                                        placeholder="{{__('app.general.description')}}"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                        <x-buttons.submit/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
+
+    
+    <div class="card mb-3 d-none" id="separatelyFormSample">
+        <div class="card-header">
+            <strong class="formTitle">
+            </strong>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">{{__('app.general.start_date')}}</label>
+                    <div>
+                        <input type="text"
+                            name="start_date"
+                            class="form-control datepicker"
+                            placeholder="{{__('app.general.start_date')}}">
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">{{__('app.general.end_date')}}</label>
+                    <div>
+                        <input type="text"
+                            name="end_date"
+                            class="form-control datepicker"
+                            placeholder="{{__('app.general.end_date')}}">
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label required">{{__('app.general.subscription_price')}}</label>
+                    <div>
+                        <input type="text"
+                            name="subscription_price"
+                            class="form-control number_format"
+                            placeholder="{{__('app.general.subscription_price')}}">
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">{{__('app.general.description')}}</label>
+                    <div>
+                        <textarea name="description" rows="1" class="form-control resize-none"
+                            placeholder="{{__('app.general.description')}}"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <x-scripts.copy/>
     <x-scripts.datatable-search :searchCol="'col-md-8'">
         <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none" 
             data-select-type="one-select" role="group" aria-label="Basic example">
-            <a href="#" class="btn btn-info px-2 w-60">
-                ثبت
+            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-60">
+                Submit
             </a>
 
             <a href="#" class="btn pe-none btn-secondary px-2 w-40">
@@ -290,8 +410,8 @@
 
         <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none"
             data-select-type="multi-select" role="group" aria-label="Basic example">
-            <a href="#" class="btn btn-info px-2 w-60">
-                ثبت
+            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-60">
+                Submit
             </a>
 
             <a href="#" class="btn pe-none btn-secondary px-2 w-40">
@@ -366,6 +486,60 @@
                     $('[data-select-type="multi-select"]').removeClass('d-none');
             });
 
+            $(document).on( 'shown.bs.modal', '#subscriptionsModal', function(){
+            
+                setSuscriptionForm();
+                $(".datepicker").pDatepicker({calendarType: 'gregorian', format: 'L', autoClose: true});
+                setSuscriptionFormStatus();
+            });
+
+            $(document).on( 'change', '.subscriptionFillType', function(){
+        
+                setSuscriptionFormStatus();
+            });
+
+            function setSuscriptionForm() {
+
+                $('#separatelyForm').html('');
+                $('.table-checkbox:checked').each(function(){
+                    const id = $(this).attr('data-id');
+                    const title = $(this).closest('tr').find('.title').text();
+                    const form = $('#separatelyFormSample').clone().attr('id', '').attr('data-id', id).removeClass('d-none');
+                    form.find('.formTitle').text(title);
+                    $('#separatelyForm').append(form);
+                });
+            }
+            
+            function setSuscriptionFormStatus() {
+
+                let element = $($('.subscriptionFillType:checked').data('target'));
+                $('.suscription-form').addClass('d-none');
+                element.removeClass('d-none');
+
+                $('.suscription-form').find('input, select').prop('disabled', true);
+                element.find('input, select').prop('disabled', false);
+            }
+            
+            $(document).on( 'click', '#subscriptionsModal #submitButton', function(){
+            
+                const TOKEN = $('meta[name="_token"]').attr('content');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    }
+                });
+
+                $.ajax({
+                    type:'POST',
+                    url:'',
+                    data: {
+                        _token: TOKEN,
+                    },
+                    success:function(data) {
+                        console.log('data', data);
+                    }
+                });
+            });
             
             function setInboundStatus(element) {
 

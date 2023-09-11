@@ -11,7 +11,10 @@
         $('.tableCheckbox tbody tr').prepend(tdCheckbox);
         $('.tableCheckbox tbody tr').each(function() {
             if ( $(this).data('id') != undefined && $(this).data('id') )
+            {
+                $(this).find('.table-checkbox:first').attr('data-id', $(this).data('id'));
                 $(this).find('.table-checkbox:first').attr('name', `tableCheckbox[${$(this).data('id')}]`);
+            }
         });
     });
 
