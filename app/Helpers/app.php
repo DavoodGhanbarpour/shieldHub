@@ -73,7 +73,7 @@ if (! function_exists('abbreviation')) {
 if (! function_exists('returnJsonInsteadView')) {
     function makeJsonInsteadView(string $viewName, array $data, int $code = 200)
     {
-        if(request()->acceptsJson()){
+        if(request()->wantsJson()){
             return response()->json($data, $code);
         }
         else{
