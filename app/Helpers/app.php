@@ -70,3 +70,15 @@ if (! function_exists('abbreviation')) {
     }
 }
 
+if (! function_exists('returnJsonInsteadView')) {
+    function makeJsonInsteadView(string $viewName, array $data, int $code = 200)
+    {
+        if(request()->acceptsJson()){
+            return response()->json($data, $code);
+        }
+        else{
+            return view($viewName, $data);
+        }
+    }
+}
+

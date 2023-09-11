@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         // event(new NotificationEvent('hello world'));
 
-        return view('admin.pages.users.index', [
+        return makeJsonInsteadView('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
     }
@@ -122,7 +122,7 @@ class UserController extends Controller
 
     public function invoices(User $user)
     {
-        return view('admin.pages.users.invoices', [
+        return makeJsonInsteadView('admin.pages.users.invoices', [
             'invoices' => $user->invoices,
             'user' => $user
         ]);
@@ -130,7 +130,7 @@ class UserController extends Controller
 
     public function subscriptions(User $user)
     {
-        return view('admin.pages.users.subscriptions', [
+        return makeJsonInsteadView('admin.pages.users.subscriptions', [
             'subscriptions' => $user->inbounds,
             'user' => $user
         ]);
