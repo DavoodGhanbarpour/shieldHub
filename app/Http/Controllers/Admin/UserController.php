@@ -142,6 +142,7 @@ class UserController extends Controller
             $result[$key]['inbound']['id'] = $each->id;
             $result[$key]['inbound']['title'] = $each->title;
             $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['port'] = $each->port;
             $result[$key]['inbound']['activeSubscriptions'] = $each->active_subscriptions_count;
             $result[$key]['inbound']['description'] = $each->description;
             $result[$key]['inbound']['isAttachedToUser'] = in_array($each->id, $userInbounds);
@@ -151,7 +152,6 @@ class UserController extends Controller
             $result[$key]['server']['id'] = $each->server->id;
             $result[$key]['server']['title'] = $each->server->title;
             $result[$key]['server']['ip'] = $each->server->ip;
-            $result[$key]['server']['port'] = $each->server->port;
         }
         return response()->json([
             'inbounds' => $result,
