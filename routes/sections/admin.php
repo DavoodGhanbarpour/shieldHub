@@ -20,7 +20,9 @@ Route::name('users.')->prefix('users')->group(function () {
     Route::get('{user}/inbounds/json', [UserController::class, 'inboundsJson'])->name('inbounds.json');
     Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('assignInbounds');
     Route::get('{user}/invoices', [UserController::class, 'invoices'])->name('invoices');
+    Route::get('{user}/invoices/json', [UserController::class, 'invoicesJson'])->name('invoices.json');
     Route::get('{user}/subscriptions', [UserController::class, 'subscriptions'])->name('subscriptions');
+    Route::get('{user}/subscriptions/json', [UserController::class, 'subscriptionsJson'])->name('subscriptions.json');
 });
 
 Route::name('subscriptions.')->prefix('subscriptions')->group(function (){

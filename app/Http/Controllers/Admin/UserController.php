@@ -137,9 +137,25 @@ class UserController extends Controller
         ]);
     }
 
+    public function invoicesJson(User $user)
+    {
+        return response()->json([
+            'invoices' => $user->invoices,
+            'user' => $user
+        ]);
+    }
+
     public function subscriptions(User $user)
     {
         return view('admin.pages.users.subscriptions', [
+            'subscriptions' => $user->inbounds,
+            'user' => $user
+        ]);
+    }
+
+    public function subscriptionsJson(User $user)
+    {
+        return response()->json([
             'subscriptions' => $user->inbounds,
             'user' => $user
         ]);
