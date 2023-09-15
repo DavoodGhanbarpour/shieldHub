@@ -153,7 +153,7 @@ class UserController extends Controller
             $result[$key]['server']['port'] = $each->server->ip;
         }
         return response()->json([
-            'inbounds' => $this->usersInbounds($user),
+            'inbounds' => $result,
             'servers' => Server::all()
         ]);
     }
