@@ -134,8 +134,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function inboundsJson(User $user)
+    public function inboundsJson(User $user): JsonResponse
     {
+        $result = [];
+        $userInbounds = $user->inbounds()->pluck('inbound_id')->toArray();
+        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
+            $result[$key]['inbound']['id'] = $each->id;
+            $result[$key]['inbound']['title'] = $each->title;
+            $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['activeSubscriptions'] = $each->active_subscriptions_count;
+            $result[$key]['inbound']['description'] = $each->description;
+            $result[$key]['inbound']['isAttachedToUser'] = in_array($each->id, $userInbounds);
+            $result[$key]['inbound']['defaultStartDate'] = $each->server->start_date;
+            $result[$key]['inbound']['defaultEndDate'] = $each->server->end_date;
+            $result[$key]['inbound']['defaultPrice'] = $each->server->subscription_price;
+            $result[$key]['server']['title'] = $each->server->ip;
+            $result[$key]['server']['ip'] = $each->server->ip;
+            $result[$key]['server']['port'] = $each->server->ip;
+        }
         return response()->json([
             'inbounds' => $this->usersInbounds($user),
             'servers' => Server::all()
@@ -150,7 +166,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function invoicesJson(User $user)
+    public function invoicesJson(User $user): JsonResponse
     {
         return response()->json([
             'invoices' => $user->invoices,
@@ -166,7 +182,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function subscriptionsJson(User $user)
+    public function subscriptionsJson(User $user): JsonResponse
     {
         return response()->json([
             'subscriptions' => $user->inbounds,
