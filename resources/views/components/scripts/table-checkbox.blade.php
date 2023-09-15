@@ -22,6 +22,7 @@
             if ( $(this).data('id') != undefined && $(this).data('id') )
             {
                 $(this).find('.table-checkbox:first').attr('data-id', $(this).data('id'));
+                $(this).find('.table-checkbox:first').addClass($(this).data('class'));
                 $(this).find('.table-checkbox:first').attr('name', `tableCheckbox[${$(this).data('id')}]`);
             }
         });

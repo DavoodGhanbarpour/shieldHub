@@ -7,7 +7,7 @@
     <form action="{{ route('admin.users.assignInbounds', ['user' => $user->id]) }}" method="POST">
         @csrf
         <div class="row">
-            <div class="col-md-5 ps-0">
+            <div class="col-md-4 ps-0">
                 <div class="card h-75vh">
 
                     <div class="card-header">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="col-md-7 mt-2 mt-md-0 pe-1 ps-0">
+            <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
                 <div class="card h-37vh mb-2">
 
                     <div class="card-body overflow-auto">
@@ -326,8 +326,30 @@
                 $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
             });
 
+            function validateSelectedInbounds() {
+                
+                if ( $('.table-checkbox.isAttachedToUser:checked').length )
+                    toastr.error('Some of the selected inbounds are already attached to user and cannot attach again!');
+                
+                $('.table-checkbox.isAttachedToUser:checked').prop('checked', false);
+                $('.table-checkbox:not(".isAttachedToUser"):first').trigger('change');
+            }
+
+            function isAttachedToUser(checkbox) {
+
+                if ( checkbox.hasClass('isAttachedToUser') && checkbox.is(':checked') ) {
+                    toastr.error('This inbounds is already attached to user and cannot attach again!');
+                    checkbox.prop('checked', false).trigger('change');
+                    return true;
+                }
+                return false;
+            }
+            
             $(document).on( 'change', '.table-checkbox, #checkAll', function(){
             
+                if ( isAttachedToUser($(this)) )
+                    return;
+
                 let count = $('.table-checkbox:checked').length;
                 $('#countDisplay').text((count == $('.table-checkbox').length) ? 'All' : count);
                 $('.subscriptionSubmitButton').addClass('d-none');
@@ -340,6 +362,7 @@
 
             $(document).on( 'shown.bs.modal', '#subscriptionsModal', function(){
             
+                validateSelectedInbounds();
                 setSuscriptionForm();
                 $(".datepicker").pDatepicker({calendarType: 'gregorian', format: 'L', autoClose: true});
                 setSuscriptionFormStatus();
@@ -382,8 +405,8 @@
             async function setInboundsTableData() {
 
                 const {inbounds, servers} = await getInbounds();
-                setServers(servers);
                 setInbounds(inbounds);
+                setServers(servers);
             }
             
             async function getInbounds() {
@@ -423,17 +446,14 @@
                 inbounds.forEach(inbound => {
                     
                     $('.inboundsTable tbody').append(`
-                        <tr data-id="${inbound?.id}" class="inbound-card-parent target-id-${inbound?.server_id}" role="button">
+                        <tr data-id="${inbound?.inbound?.id}" class="inbound-card-parent target-id-${inbound?.server?.id}" role="button"
+                            data-class="${inbound?.inbound?.isAttachedToUser ? 'isAttachedToUser' : ''}">
                             <td class="sort-index">${index++}</td>
-                            <td class="sort-title title">${inbound?.title}</td>
-                            <td class="sort-ip">
-                                ${inbound?.port}
-                            </td>
-                            <td class="sort-users-count">
-                                ${inbound?.active_subscriptions_count}
-                            </td>
+                            <td class="sort-title title">${inbound?.inbound?.title}</td>
+                            <td class="sort-ip">${inbound?.inbound?.port}</td>
+                            <td class="sort-users-count">${inbound?.inbound?.activeSubscriptions}</td>
                             <td class="copy-parent">
-                                <span class="d-none copy-text">${inbound?.link}</span>
+                                <span class="d-none copy-text">${inbound?.inbound?.link}</span>
 
                                 <div class="btn-list flex-nowrap justify-content-center">
                                     <a href="#" class="btn btn-secondary copy-button my-1 px-2">
@@ -458,6 +478,7 @@
             async function setSubscriptionsTableData() {
 
                 const {subscriptions} = await getSubscriptions();
+                console.log('subscriptions', subscriptions);
                 setSubscriptions(subscriptions);
             }
             
@@ -473,25 +494,40 @@
 
             function setSubscriptions(subscriptions) {
 
+                console.log('subscriptions', subscriptions);
                 let index = 1;
                 subscriptions.forEach(subscription => {
                     
+                    let deleteButton = '';
+                    if ( subscription.is_active )
+                        deleteButton = `
+                        <a href="#" data-id="${subscription?.id}" class="btn btn-danger subscriptionDelete my-1 px-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 7l16 0"></path>
+                                <path d="M10 11l0 6"></path>
+                                <path d="M14 11l0 6"></path>
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                            </svg>
+                        </a>`;
+
                     $('.subscriptionsTable tbody').append(`
                         <tr>
                             <td class="sort-index">${index++}</td>
-                            <td class="sort-title">${subscription?.title}</td>
+                            <td class="sort-title">${subscription?.inbound?.title}</td>
                             <td class="sort-server-title">
                                 ${subscription?.server?.title}
                                 <br>
-                                ${subscription?.server?.ip}:<span class="text-muted">${subscription?.port}</span>
+                                ${subscription?.server?.ip}:<span class="text-muted">${subscription?.inbound?.port}</span>
                             </td>
-                            <td class="sort-start-date">${subscription.pivot?.start_date}</td>
-                            <td class="sort-end-date">${subscription?.pivot?.end_date}</td>
-                            <td class="sort-diff">0000</td>
+                            <td class="sort-start-date">${subscription?.start_date}</td>
+                            <td class="sort-end-date">${subscription?.end_date}</td>
+                            <td class="sort-diff">${subscription?.remaining_days}</td>
                             <td class="sort-subscription-price">
-                                0000
+                                ${number_format(subscription?.total_price)}
                             </td>
-                            <td class="sort-description">${subscription?.pivot?.description}</td>
+                            <td class="sort-description">${subscription?.pivot?.description || ''}</td>
                             <td class="copy-parent">
                                 <span class="d-none copy-text">${subscription?.link}</span>
 
@@ -504,16 +540,7 @@
                                         </svg>
                                     </a>
 
-                                    <a href="#" data-id="${subscription?.id}" class="btn btn-danger subscriptionDelete my-1 px-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M4 7l16 0"></path>
-                                            <path d="M10 11l0 6"></path>
-                                            <path d="M14 11l0 6"></path>
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                        </svg>
-                                    </a>
+                                    ${deleteButton}
                                 </div>
                             </td>
                         </tr>
@@ -549,7 +576,7 @@
                         <tr>
                             <td class="sort-index">${index++}</td>
                             <td class="sort-date">${invoice?.date}</td>
-                            <td class="sort-description">${invoice?.description}</td>
+                            <td class="sort-description">${invoice?.description || ''}</td>
                             <td class="sort-credit">${number_format(invoice?.credit)}</td>
                             <td class="sort-debit">${number_format(invoice?.debit)}</td>
                             <td>
