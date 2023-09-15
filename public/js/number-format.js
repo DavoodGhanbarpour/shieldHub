@@ -12,7 +12,6 @@ function number_format(number, thousands_sep) {
     if ( !parts[0].toString().length && parts[0].toString().length )
         parts[0] = '0';
 
-    console.log('parts', parts);
     return parts.join('.');
 }
 
