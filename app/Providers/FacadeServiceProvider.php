@@ -18,9 +18,8 @@ class FacadeServiceProvider extends ServiceProvider
     public function register(): void
     {
         app()->singleton('DashboardFacade', DashboardRepository::class);
-        app()->singleton('UserFacade', UserRepository::class);
+//        app()->singleton('UserFacade', UserRepository::class);
         app()->singleton('InboundFacade', InboundRepository::class);
-        app()->singleton('AuthFacade', AuthRepository::class);
         app()->singleton('AuthFacade', AuthRepository::class);
         app()->singleton('ServerFacade', ServerRepository::class);
         app()->singleton('InvoiceFacade', InvoiceRepository::class);

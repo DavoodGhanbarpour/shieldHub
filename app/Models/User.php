@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\DTOs\InboundDTO;
+use App\DTOs\RenewSubscriptionDTO;
 use App\Enums\Roles;
 use App\Enums\UserStatus;
+use App\Exceptions\NotInSupportedLanguagesListException;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,9 +14,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
+use Throwable;
 
+/**
+ * @author Davood Ghanbarpour <ghanbarpour.davood@gmail.com>
+ * @method static User find($id)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Visitor;
@@ -107,10 +115,106 @@ class User extends Authenticatable
         return isset($this->status) && $this->status == UserStatus::DISABLED->value;
     }
 
+    public function createSubscription(InboundDTO $inbound): void
+    {
+        if (!$this->hasSubscription($inbound->start_date, $inbound->end_date)) {
+            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray());
+            $subscription = $this->inbounds()->get()?->first()?->pivot;
+            $debitPrice = $subscription->subscription_price * Carbon::parse($subscription->start_date)
+                    ->diffInDays($subscription->end_date);
+
+            $this->invoices()->create([
+                'debit' => round($debitPrice),
+                'user_id' => $subscription->user_id,
+                'subscription_id' => $subscription->id,
+                'date' => now(),
+            ]);
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function deleteSubscription($subscriptionId): void
+    {
+        $this->activeSubscriptions()->wherePivot('id', $subscriptionId)->getModel()->deleteOrFail();
+        $this->invoices()->where('id', $subscriptionId)->getModel()->deleteOrFail();
+    }
+
+    public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO)
+    {
+        $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO){
+            $lastInbound = $inbound->last();
+            if (is_null($lastInbound)) {
+                return;
+            }
+
+            $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
+            if (isset($renewSubscriptionDTO->date))
+                $endDate = Carbon::parse($renewSubscriptionDTO->date);
+            else
+                $endDate = $startDate->clone()->addDays($renewSubscriptionDTO->day_count);
+
+            if ($startDate->gte($endDate)) {
+                return;
+            }
+
+            $this->createSubscription(new InboundDTO([
+                'inbound_id' => $lastInbound->id,
+                'start_date' => $startDate->format('Y-m-d'),
+                'end_date' => $endDate->format('Y-m-d'),
+                'subscription_price' => removeSeparator(
+                    $renewSubscriptionDTO->subscription_price ?? $lastInbound->pivot->subscription_price
+                ),
+            ]));
+        };
+
+        $this->inbounds()
+            ->orderBy('end_date')
+            ->get()
+            ->groupBy('id')
+        ->map($subscriptionRenewMaker);
+    }
+
+    public function hasSubscription($dateFrom, $dateTo): bool
+    {
+        return $this->inbounds()
+            ->wherePivot('start_date', '>=', $dateFrom)
+            ->wherePivot('end_date', '<=', $dateTo)
+            ->exists();
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function setLocale(string $locale): bool
+    {
+        throw_if(
+            ! in_array($locale, array_column(User::SUPPORTED_LANGUAGES, 'key')),
+            new NotInSupportedLanguagesListException("Provided language {$locale} is not supported")
+        );
+
+        return $this->update(['locale' => $locale]);
+    }
+
+    public function updateVisitTime(): bool
+    {
+        return $this->update([
+            'last_visit' => now(),
+        ]);
+    }
+
     protected function last_visit(): Attribute
     {
         return Attribute::make(
             set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
+        );
+    }
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn(string $value) => Hash::make($value)
         );
     }
 }

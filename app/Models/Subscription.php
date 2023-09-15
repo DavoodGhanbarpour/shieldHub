@@ -13,7 +13,6 @@ class Subscription extends Pivot
 
     protected $table = 'subscriptions';
 
-
     /**
      * Indicates if the IDs are auto-incrementing.
      *
