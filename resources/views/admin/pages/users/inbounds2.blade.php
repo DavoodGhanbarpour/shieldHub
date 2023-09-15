@@ -2,9 +2,6 @@
 
 @section('title', __('app.inbounds.assign_inbounds',['user' => $user->name]))
 
-@section('head')
-    <meta name="_token" content="{{csrf_token()}}">
-@endsection
 @section('content')
 
     <form action="{{ route('admin.users.assignInbounds', ['user' => $user->id]) }}" method="POST">
@@ -14,20 +11,7 @@
                 <div class="card h-75vh">
 
                     <div class="card-header">
-                        <div class="form-selectgroup">
-
-                            <label class="form-selectgroup-item showAll">
-                                <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
-                                <span class="form-selectgroup-label">All</span>
-                            </label>
-
-                            @foreach ($servers as $server)
-                                <label class="form-selectgroup-item" data-target-item="{{$server->id}}">
-                                    <input type="radio" name="servers" value="HTML" class="form-selectgroup-input">
-                                    <span class="form-selectgroup-label">{{$server->title}} | {{$server->ip}}</span>
-                                </label>
-                            @endforeach
-
+                        <div id="servers" class="form-selectgroup">
                         </div>
                     </div>
                     <div class="card-body overflow-auto">
@@ -53,32 +37,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-tbody">
-                                    @php $index = 1 @endphp
-                                    @foreach($inbounds as $eachInbound)
-                                        <tr data-id="{{$eachInbound->id}}" class="inbound-card-parent target-id-{{$eachInbound->server_id}}" role="button">
-                                            <td class="sort-index">{{$index++}}</td>
-                                            <td class="sort-title title">{{abbreviation($eachInbound->title)}}</td>
-                                            <td class="sort-ip">
-                                                {{$eachInbound->port}}
-                                            </td>
-                                            <td class="sort-users-count">
-                                                {{$eachInbound->active_subscriptions_count}}
-                                            </td>
-                                            <td class="copy-parent">
-                                                <span class="d-none copy-text">{{$eachInbound->link}}</span>
-
-                                                <div class="btn-list flex-nowrap justify-content-center">
-                                                    <a href="#" class="btn btn-secondary copy-button my-1 px-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
-                                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                 </tbody>
                             </x-tables.default>
                         </div>
@@ -125,51 +83,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-tbody">
-                                    @php $index = 1 @endphp
-                                    @foreach($subscriptions as $eachSubscription)
-                                        @php $diffDayCount = \Carbon\Carbon::parse($eachSubscription->pivot->start_date)->diffInDays($eachSubscription->pivot->end_date) @endphp
-            
-                                        <tr>
-                                            <td class="sort-index">{{$index++}}</td>
-                                            <td class="sort-title">{{$eachSubscription->title}}</td>
-                                            <td class="sort-server-title">
-                                                {{$eachSubscription->server->title}}
-                                                <br>
-                                                {{$eachSubscription->server->ip}}:<span class="text-muted">{{$eachSubscription->port}}</span>
-                                            </td>
-                                            <td class="sort-start-date">{{$eachSubscription->pivot->start_date}}</td>
-                                            <td class="sort-end-date">{{$eachSubscription->pivot->end_date}}</td>
-                                            <td class="sort-diff">{{$diffDayCount}}</td>
-                                            <td class="sort-subscription-price">
-                                                {{addSeparator(round($eachSubscription->pivot->subscription_price * $diffDayCount))}}
-                                            </td>
-                                            <td class="sort-description">{{$eachSubscription->pivot->description}}</td>
-                                            <td class="copy-parent">
-                                                <span class="d-none copy-text">{{$eachSubscription->link}}</span>
-
-                                                <div class="btn-list flex-nowrap justify-content-center">
-                                                    <a href="#" class="btn btn-secondary copy-button my-1 px-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
-                                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
-                                                        </svg>
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-danger delete_button my-1 px-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M4 7l16 0"></path>
-                                                            <path d="M10 11l0 6"></path>
-                                                            <path d="M14 11l0 6"></path>
-                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                 </tbody>
                             </x-tables.default>
                         </div>
@@ -205,58 +118,17 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-tbody">
-                                    @php
-                                        $index = 1;
-                                        $credits = 0;
-                                        $debits = 0;
-                                    @endphp
-                                    @foreach($invoices as $eachInvoice)
-                                        <tr>
-                                            <td class="sort-index">{{$index++}}</td>
-                                            <td class="sort-date">{{$eachInvoice->date}}</td>
-                                            <td class="sort-description">{{$eachInvoice->description}}</td>
-                                            <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
-                                            <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
-                                            <td>
-                                                <div class="btn-list flex-nowrap justify-content-center">
-                                                    <a href="{{ route('admin.invoices.edit', ['invoice' => $eachInvoice->id]) }}" target="blank" class="btn btn-primary my-1 px-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
-                                                            <path d="M13.5 6.5l4 4"></path>
-                                                        </svg>
-                                                    </a>
-                                                    
-                                                    <a href="#" data-id="{{$eachInvoice->id}}" class="btn btn-danger delete_button my-1 px-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M4 7l16 0"></path>
-                                                            <path d="M10 11l0 6"></path>
-                                                            <path d="M14 11l0 6"></path>
-                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @php
-                                            $debits += $eachInvoice->debit;
-                                            $credits += $eachInvoice->credit;
-                                        @endphp
-                                    @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="3">{{__('app.general.total')}}:</td>
-                                        <td class="text-center">{{addSeparator($credits)}}</td>
-                                        <td class="text-center">{{addSeparator($debits)}}</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">{{__('app.general.remain')}}:</td>
-                                        <td class="text-center" colspan="2">{{addSeparator(abs($credits - $debits))}}</td>
-                                    </tr>
-                                    <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
+                                        <td class="text-center" colspan="2"></td>
+                                    </tr> --}}
                                 </tfoot>
                             </x-tables.default>
                         </div>
@@ -433,17 +305,14 @@
         <script>
             $(document).ready(function () {
 
-                setInboundsStatus();
+                setTablesData();
             });
 
-            $(document).on('click', '.inbound-card .card-body', function (e) {
-
-                if ($(e.target).is('div.copy-button'))
-                    return;
-
-                $(this).closest('.inbound-card').toggleClass('card-active');
-                setInboundStatus($(this).closest('.inbound-card'));
-            });
+            function setTablesData() {
+                setInboundsTableData();
+                setSubscriptionsTableData();
+                setInvoicesTableData();
+            }
 
             $(document).on( 'click', '.form-selectgroup-item', function(){
 
@@ -455,23 +324,6 @@
 
                 $('.inbound-card-parent').addClass('d-none');
                 $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
-            });
-            
-            $(document).on( 'click', '.delete_button', function(){
-            
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'error',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // $(this).closest('form').find('.submit_button').click();
-                    }
-                })
             });
 
             $(document).on( 'change', '.table-checkbox, #checkAll', function(){
@@ -522,70 +374,229 @@
             
             $(document).on( 'click', '#subscriptionsModal #submitButton', function(){
             
-                setInboundsTableData();
+                setTablesData();
             });
-            
-            function setInboundStatus(element) {
-
-                element.find('.inbound-checkbox').prop('checked', element.hasClass('card-active'));
-                element.find('.inbound-checkbox').prop('disabled', !element.hasClass('card-active'));
-                element.find('select, input, textarea').prop('disabled', !element.hasClass('card-active'));
-
-                if ( element.hasClass('card-active') )
-                    element.find('.card-footer').collapse('show');
-                else
-                    element.find('.card-footer').collapse('hide');
-            }
-
-            function setInboundsStatus() {
-
-                $('.inbound-card').each(function () {
-                    setInboundStatus($(this));
-                })
-            }
 
 
-
-
+        /* Inbounds begin */
             async function setInboundsTableData() {
 
-                // let inbounds = getInbounds().then(function () {
-
-                //     console.log('inbounds', inbounds);
-                // });
-                let inbounds = await getInbounds()
+                const {inbounds, servers} = await getInbounds();
+                setServers(servers);
+                setInbounds(inbounds);
             }
-
+            
             async function getInbounds() {
 
-                const TOKEN = $('meta[name="_token"]').attr('content');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': TOKEN,
-                        'accept': 'application/json'
-                    }
+                try {
+                    const result = await axios.get('{{route("admin.users.inbounds.json", ["user" => $user->id])}}');
+                    return result.data;
+                } catch (error) {
+                    console.log('getInbounds error', error);
+                }
+            }
+            
+            const serversContainer = $('#servers');
+            function setServers(servers) {
+
+                serversContainer.html('');
+                serversContainer.append(`
+                    <label class="form-selectgroup-item showAll">
+                        <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
+                        <span class="form-selectgroup-label">All</span>
+                    </label>`);
+
+                servers.forEach(server => {
+                    
+                    serversContainer.append(`
+                        <label class="form-selectgroup-item" data-target-item="${server.id}">
+                            <input type="radio" name="servers" value="HTML" class="form-selectgroup-input">
+                            <span class="form-selectgroup-label">${server.title} | ${server.ip}</span>
+                        </label>`);
                 });
+            }
 
-                $.ajax({
-                    type: 'POST',
-                    url: '{{route("admin.inbounds.index")}}',
-                    contenttype: 'application/json',
-                    data: {
-                        _token: TOKEN,
-                    },
-                    success:function(data) {
-                        console.log('data', data);
-                    }
+            function setInbounds(inbounds) {
+
+                resetDatatable($('#datatable'));
+                let index = 1;
+                inbounds.forEach(inbound => {
+                    
+                    $('.inboundsTable tbody').append(`
+                        <tr data-id="${inbound?.id}" class="inbound-card-parent target-id-${inbound?.server_id}" role="button">
+                            <td class="sort-index">${index++}</td>
+                            <td class="sort-title title">${inbound?.title}</td>
+                            <td class="sort-ip">
+                                ${inbound?.port}
+                            </td>
+                            <td class="sort-users-count">
+                                ${inbound?.active_subscriptions_count}
+                            </td>
+                            <td class="copy-parent">
+                                <span class="d-none copy-text">${inbound?.link}</span>
+
+                                <div class="btn-list flex-nowrap justify-content-center">
+                                    <a href="#" class="btn btn-secondary copy-button my-1 px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                });
+                setTableCheckbox();
+                initializeDatatable($('#datatable'));
+            }
+        /* Inbounds end */
+
+
+        /* Subscriptions begin */
+            async function setSubscriptionsTableData() {
+
+                const {subscriptions} = await getSubscriptions();
+                setSubscriptions(subscriptions);
+            }
+            
+            async function getSubscriptions() {
+
+                try {
+                    const result = await axios.get('{{route("admin.users.subscriptions.json", ["user" => $user->id])}}');
+                    return result.data;
+                } catch (error) {
+                    console.log('getSubscriptions error', error);
+                }
+            }
+
+            function setSubscriptions(subscriptions) {
+
+                let index = 1;
+                subscriptions.forEach(subscription => {
+                    
+                    $('.subscriptionsTable tbody').append(`
+                        <tr>
+                            <td class="sort-index">${index++}</td>
+                            <td class="sort-title">${subscription?.title}</td>
+                            <td class="sort-server-title">
+                                ${subscription?.server?.title}
+                                <br>
+                                ${subscription?.server?.ip}:<span class="text-muted">${subscription?.port}</span>
+                            </td>
+                            <td class="sort-start-date">${subscription.pivot?.start_date}</td>
+                            <td class="sort-end-date">${subscription?.pivot?.end_date}</td>
+                            <td class="sort-diff">0000</td>
+                            <td class="sort-subscription-price">
+                                0000
+                            </td>
+                            <td class="sort-description">${subscription?.pivot?.description}</td>
+                            <td class="copy-parent">
+                                <span class="d-none copy-text">${subscription?.link}</span>
+
+                                <div class="btn-list flex-nowrap justify-content-center">
+                                    <a href="#" class="btn btn-secondary copy-button my-1 px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                                        </svg>
+                                    </a>
+
+                                    <a href="#" data-id="${subscription?.id}" class="btn btn-danger subscriptionDelete my-1 px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 7l16 0"></path>
+                                            <path d="M10 11l0 6"></path>
+                                            <path d="M14 11l0 6"></path>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
                 });
             }
+        /* Subscriptions end */
 
-            function setSubscriptionsTableData() {
 
+        /* Invoices begin */
+            async function setInvoicesTableData() {
+
+                const {invoices} = await getInvoices();
+                setInvoices(invoices);
+            }
+            
+            async function getInvoices() {
+
+                try {
+                    const result = await axios.get('{{route("admin.users.invoices.json", ["user" => $user->id])}}');
+                    return result.data;
+                } catch (error) {
+                    console.log('getInvoices error', error);
+                }
             }
 
-            function setInvoicesTableData() {
+            function setInvoices(invoices) {
 
+                let index = 1;
+                invoices.forEach(invoice => {
+                    
+                    $('.invoicesTable tbody').append(`
+                        <tr>
+                            <td class="sort-index">${index++}</td>
+                            <td class="sort-date">${invoice?.date}</td>
+                            <td class="sort-description">${invoice?.description}</td>
+                            <td class="sort-credit">${number_format(invoice?.credit)}</td>
+                            <td class="sort-debit">${number_format(invoice?.debit)}</td>
+                            <td>
+                                <div class="btn-list flex-nowrap justify-content-center">
+                                    <a href="#" target="blank" class="btn btn-primary my-1 px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+                                            <path d="M13.5 6.5l4 4"></path>
+                                        </svg>
+                                    </a>
+                                    
+                                    <a href="#" data-id="${invoice?.id}" class="btn btn-danger delete_button my-1 px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 7l16 0"></path>
+                                            <path d="M10 11l0 6"></path>
+                                            <path d="M14 11l0 6"></path>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                });
             }
+        /* Invoices end */
+
+
+            $(document).on( 'click', '.delete_button', function(){
+            
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'error',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // $(this).closest('form').find('.submit_button').click();
+                    }
+                })
+            });
 
         </script>
     @endpush

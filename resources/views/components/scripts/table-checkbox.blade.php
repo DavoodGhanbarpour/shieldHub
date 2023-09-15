@@ -1,14 +1,23 @@
 <script>
     $(document).ready(function () {
-        const thCheckbox = `<th class="w-1">
-                                <input id="checkAll" class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices">
-                            </th>`;
-        const tdCheckbox = `<td>
-                                <input class="form-check-input table-checkbox m-0 align-middle" type="checkbox" aria-label="Select invoice">
-                            </td>`;
 
-        $('.tableCheckbox thead tr:first').prepend(thCheckbox);
-        $('.tableCheckbox tbody tr').prepend(tdCheckbox);
+        setTableCheckbox();
+    });
+    
+    const TH_CHECKBOX = `<th class="w-1">
+                            <input id="checkAll" class="form-check-input m-0 align-middle" type="checkbox">
+                        </th>`;
+    const TD_CHECKBOX = `<td>
+                            <input class="form-check-input table-checkbox m-0 align-middle" type="checkbox">
+                        </td>`;
+
+    function setTableCheckbox() {
+
+        $('th #checkAll').closest('th').remove();
+        $('td .table-checkbox').closest('td').remove();
+        
+        $('.tableCheckbox thead tr:first').prepend(TH_CHECKBOX);
+        $('.tableCheckbox tbody tr').prepend(TD_CHECKBOX);
         $('.tableCheckbox tbody tr').each(function() {
             if ( $(this).data('id') != undefined && $(this).data('id') )
             {
@@ -16,7 +25,7 @@
                 $(this).find('.table-checkbox:first').attr('name', `tableCheckbox[${$(this).data('id')}]`);
             }
         });
-    });
+    }
 
     $(document).on( 'click', '.tableCheckbox.checkboxTrigger tbody tr', function(e){
     

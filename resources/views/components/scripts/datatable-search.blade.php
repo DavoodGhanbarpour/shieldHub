@@ -1,4 +1,5 @@
 @php
+    $tableContainer = isset($tableContainer) ? $tableContainer : 'table-default';
     $datatable      = isset($datatable) ? $datatable : '#datatable';
     $searchCol      = isset($searchCol) ? $searchCol : 'col-md-3';
     $slot           = isset($slot) ? $slot : '';
@@ -22,13 +23,25 @@
             </div> 
             {{$slot}}
         </div>`;
+        $('#{{$tableContainer}}').prepend(ribbon);
 
-        $('#table-default').prepend(ribbon);
+        initializeDatatable($('{{$datatable}}'));
+    });
 
-        if ( !$('{{$datatable}}').length )
+    function resetDatatable(table) {
+
+        if ( !table.length )
             return;
 
-        datatable = $('{{$datatable}}').DataTable({
+        table.dataTable().fnDestroy();
+    }
+
+    function initializeDatatable(table) {
+
+        if ( !table.length )
+            return;
+
+        datatable = table.DataTable({
             stateSave: true,
             paging: false,
             info: false,
@@ -51,7 +64,7 @@
 
             datatable.search($(this).val()).draw();
         });
-    });
+    }
 </script>
 
 @push('styles')

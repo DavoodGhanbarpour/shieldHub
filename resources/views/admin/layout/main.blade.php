@@ -84,6 +84,7 @@
     <script src="{{ asset('libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('libs/clipboard-js/clipboard.min.js') }}"></script>
     <script src="{{ asset('libs/qrcodejs/qrcode.js') }}"></script>
+    <script src="{{ asset('libs/axios/axios.min.js') }}"></script>
     <script src="{{ asset('js/number-format.js') }}" defer></script>
 
     <script>
