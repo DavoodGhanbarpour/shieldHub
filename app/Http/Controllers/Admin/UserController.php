@@ -142,6 +142,7 @@ class UserController extends Controller
             $result[$key]['inbound']['id'] = $each->id;
             $result[$key]['inbound']['title'] = $each->title;
             $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['port'] = $each->port;
             $result[$key]['inbound']['activeSubscriptions'] = $each->active_subscriptions_count;
             $result[$key]['inbound']['description'] = $each->description;
             $result[$key]['inbound']['isAttachedToUser'] = in_array($each->id, $userInbounds);
