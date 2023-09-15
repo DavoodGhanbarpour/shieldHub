@@ -121,6 +121,11 @@ class UserController extends Controller
         ]);
     }
 
+    public function inbounds2()
+    {
+        return view('admin.pages.users.inbounds2');
+    }
+
     public function inboundsJson(User $user)
     {
         return response()->json([

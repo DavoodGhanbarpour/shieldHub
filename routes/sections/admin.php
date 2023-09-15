@@ -17,6 +17,7 @@ Route::group(['prefix' => 'dashboard'], function () {
 Route::resource('users', UserController::class);
 Route::name('users.')->prefix('users')->group(function () {
     Route::get('{user}/inbounds', [UserController::class, 'inbounds'])->name('inbounds');
+    Route::get('{user}/inbounds2', [UserController::class, 'inbounds2'])->name('inbounds2');
     Route::get('{user}/inbounds/json', [UserController::class, 'inboundsJson'])->name('inbounds.json');
     Route::post('{user}/inbounds', [UserController::class, 'assignInbounds'])->name('assignInbounds');
     Route::get('{user}/invoices', [UserController::class, 'invoices'])->name('invoices');
