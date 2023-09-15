@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body overflow-auto">
                         <div id="table-default" class="table-responsive">
-                            <x-tables.default :class="'tableCheckbox checkboxTrigger'">
+                            <x-tables.default :class="'tableCheckbox checkboxTrigger inboundsTable'">
                                 <thead> 
                                     <tr>
                                         <th>
@@ -92,7 +92,7 @@
 
                     <div class="card-body overflow-auto">
                         <div id="table-default" class="table-responsive">
-                            <x-tables.default>
+                            <x-tables.default :class="'subscriptionsTable'">
                                 <thead>
                                     <tr>
                                         <th>
@@ -181,7 +181,7 @@
 
                     <div class="card-body overflow-auto">
                         <div id="table-default" class="table-responsive">
-                            <x-tables.default>
+                            <x-tables.default :class="'invoicesTable'">
                                 <thead>
                                     <tr>
                                         <th>
@@ -332,7 +332,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                        <x-buttons.submit/>
+                        <x-buttons.submit :type="'button'"/>
                     </div>
                 </div>
             </div>
@@ -395,12 +395,12 @@
     <x-scripts.datatable-search :searchCol="'col-md-8'">
         <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none" 
             data-select-type="one-select" role="group" aria-label="Basic example">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-60">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
                 Submit
             </a>
 
-            <a href="#" class="btn pe-none btn-secondary px-2 w-40">
-                <strong class="me-1">1</strong>
+            <a href="#" class="btn pe-none btn-secondary px-2 w-35">
+                <strong class="me-2">1</strong>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M5 12l5 5l10 -10"></path>
@@ -410,12 +410,12 @@
 
         <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none"
             data-select-type="multi-select" role="group" aria-label="Basic example">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-60">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
                 Submit
             </a>
 
-            <a href="#" class="btn pe-none btn-secondary px-2 w-40">
-                <strong class="me-1" id="countDisplay">2</strong>
+            <a href="#" class="btn pe-none btn-secondary px-2 w-35">
+                <strong class="me-2" id="countDisplay">2</strong>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M7 12l5 5l10 -10"></path>
@@ -522,23 +522,7 @@
             
             $(document).on( 'click', '#subscriptionsModal #submitButton', function(){
             
-                const TOKEN = $('meta[name="_token"]').attr('content');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': TOKEN
-                    }
-                });
-
-                $.ajax({
-                    type:'POST',
-                    url:'',
-                    data: {
-                        _token: TOKEN,
-                    },
-                    success:function(data) {
-                        console.log('data', data);
-                    }
-                });
+                setInboundsTableData();
             });
             
             function setInboundStatus(element) {
@@ -558,6 +542,49 @@
                 $('.inbound-card').each(function () {
                     setInboundStatus($(this));
                 })
+            }
+
+
+
+
+            async function setInboundsTableData() {
+
+                // let inbounds = getInbounds().then(function () {
+
+                //     console.log('inbounds', inbounds);
+                // });
+                let inbounds = await getInbounds()
+            }
+
+            async function getInbounds() {
+
+                const TOKEN = $('meta[name="_token"]').attr('content');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN,
+                        'accept': 'application/json'
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("admin.inbounds.index")}}',
+                    contenttype: 'application/json',
+                    data: {
+                        _token: TOKEN,
+                    },
+                    success:function(data) {
+                        console.log('data', data);
+                    }
+                });
+            }
+
+            function setSubscriptionsTableData() {
+
+            }
+
+            function setInvoicesTableData() {
+
             }
 
         </script>
