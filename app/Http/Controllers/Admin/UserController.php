@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\NotificationEvent;
 use App\Facades\InvoiceFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
@@ -14,9 +13,6 @@ use App\Models\Inbound;
 use App\Models\Server;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -46,7 +42,7 @@ class UserController extends Controller
     {
         // event(new NotificationEvent('hello world'));
 
-        return makeJsonInsteadView('admin.pages.users.index', [
+        return view('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
     }
@@ -100,7 +96,7 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function inbounds(User $user)
+    private function usersInbounds(User $user): array
     {
         $result = [];
         foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
@@ -110,40 +106,32 @@ class UserController extends Controller
                 ->first()
                 ?->pivot ?: null;
         }
+        return $result;
+    }
 
+    public function inbounds(User $user)
+    {
         return view('admin.pages.users.inbounds', [
             'user' => $user,
             'inbounds' =>
-                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
+                collect(
+                    $this->usersInbounds($user)
+                )->sortBy('subscription_data', SORT_REGULAR, true),
             'servers' => Server::all()
         ]);
     }
 
-    public function inbounds2(User $user)
+    public function inboundsJson(User $user)
     {
-        $result = [];
-        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
-            $result[$key] = $each;
-            $result[$key]->subscription_data = $each->activeSubscriptions()
-                ->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))
-                ->first()
-                ?->pivot ?: null;
-        }
-
-        return view('admin.pages.users.inbounds2', [
-            'user' => $user,
-            'inbounds' =>
-                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
-            'servers' => Server::all(),
-            'invoices' => $user->invoices,
-            'subscriptions' => $user->inbounds,
+        return response()->json([
+            'inbounds' => $this->usersInbounds($user),
+            'servers' => Server::all()
         ]);
     }
 
-
     public function invoices(User $user)
     {
-        return makeJsonInsteadView('admin.pages.users.invoices', [
+        return view('admin.pages.users.invoices', [
             'invoices' => $user->invoices,
             'user' => $user
         ]);
@@ -151,7 +139,7 @@ class UserController extends Controller
 
     public function subscriptions(User $user)
     {
-        return makeJsonInsteadView('admin.pages.users.subscriptions', [
+        return view('admin.pages.users.subscriptions', [
             'subscriptions' => $user->inbounds,
             'user' => $user
         ]);
@@ -204,6 +192,7 @@ class UserController extends Controller
         }
         return redirect()->route('admin.users.index');
     }
+
     /**
      * @param User $user
      * @return void
