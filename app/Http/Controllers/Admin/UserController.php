@@ -148,9 +148,9 @@ class UserController extends Controller
             $result[$key]['inbound']['defaultStartDate'] = $each->server->start_date;
             $result[$key]['inbound']['defaultEndDate'] = $each->server->end_date;
             $result[$key]['inbound']['defaultPrice'] = $each->server->subscription_price;
-            $result[$key]['server']['title'] = $each->server->ip;
+            $result[$key]['server']['title'] = $each->server->title;
             $result[$key]['server']['ip'] = $each->server->ip;
-            $result[$key]['server']['port'] = $each->server->ip;
+            $result[$key]['server']['port'] = $each->server->port;
         }
         return response()->json([
             'inbounds' => $result,
