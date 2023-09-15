@@ -185,8 +185,27 @@ class UserController extends Controller
 
     public function subscriptionsJson(User $user): JsonResponse
     {
+        $result = [];
+        foreach ($user->inbounds()->with('server')->get() as $key => $each){
+            $result[$key]['is_active'] = Carbon::parse($each->pivot->end_date)
+                ->gte(now());
+            $result[$key]['subscription_id'] = $each->pivot->id;
+            $result[$key]['start_date'] = $each->pivot->start_date;
+            $result[$key]['end_date'] = $each->pivot->end_date;
+            $result[$key]['description'] = $each->pivot->description;
+            $result[$key]['subscription_price'] = $each->pivot->subscription_price;
+            $result[$key]['remaining_days'] = Carbon::parse($each->pivot->start_date)
+                    ->diffInDays($each->pivot->end_date) ?? 0;
+
+            $result[$key]['inbound']['title'] = $each->title;
+            $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['port'] = $each->port;
+            $result[$key]['inbound']['id'] = $each->id;
+            $result[$key]['server']['title'] = $each->server->title;
+            $result[$key]['server']['ip'] = $each->server->ip;
+        }
         return response()->json([
-            'subscriptions' => $user->inbounds,
+            'subscriptions' => $result,
             'user' => $user
         ]);
     }
