@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTOs\InboundDTO;
+use App\DTOs\RenewSubscriptionDTO;
 use App\Facades\InvoiceFacade;
-use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\RenewSubscriptionsRequest;
@@ -11,9 +12,16 @@ use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Inbound;
 use App\Models\Server;
+use App\Models\Subscription;
 use App\Models\User;
+use App\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use Throwable;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class UserController extends Controller
 {
@@ -30,8 +38,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        UserFacade::upsert($request->validated());
-
+        User::create($request->validated());
         return redirect()->route('admin.users.index');
     }
 
@@ -40,8 +47,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // event(new NotificationEvent('hello world'));
-
         return view('admin.pages.users.index', [
             'users' => User::withCount('activeSubscriptions')->get(),
         ]);
@@ -70,7 +75,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        if (UserFacade::isEmailUnique($request->get('email'), [$user->email])) {
+        if (UserService::isEmailUnique($request->get('email'), [$user->email])) {
             return back()->withErrors([
                 __('validation.exists', ['attribute' => $request->get('email')]),
             ]);
@@ -81,17 +86,18 @@ class UserController extends Controller
             unset($inputs['password']);
         }
 
-        UserFacade::upsert($inputs, $user->id);
+        $user->update($inputs);
 
         return redirect()->route('admin.users.index');
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws Throwable
      */
-    public function destroy(int $id)
+    public function destroy(User $user)
     {
-        UserFacade::delete($id);
+        $user->deleteOrFail();
 
         return redirect()->route('admin.users.index');
     }
@@ -168,7 +174,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws ValidationException
+     */
+    public function attachInbounds(AssignInboundsRequest $request, User $user): JsonResponse
     {
         $data = collect($request->get('inbounds'))->map(function ($item, $key) {
             if ($item['subscription_price']) {
@@ -176,58 +187,33 @@ class UserController extends Controller
             }
             return $item;
         });
-
-        $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
-
-        $this->deleteUserPastInvoices($user);
-        return redirect()->route('admin.users.index');
-    }
-
-    public function renewSubscriptions(RenewSubscriptionsRequest $request)
-    {
-        foreach ($request->validated('tableCheckbox') as $userId => $each) {
-            $user = User::find($userId);
-            if ($user->isDisabled()) {
-                continue;
-            }
-            $user->inbounds()->orderBy('end_date', 'asc')->get()->groupBy('id')->map(function ($inbound) use ($user, $request) {
-                $lastInbound = $inbound->last();
-                if (is_null($lastInbound)) {
-                    return;
-                }
-
-                $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
-                if ($request->filled('date'))
-                    $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
-                else
-                    $endDate = $startDate->clone()->addDays($request->input('daysCount'));
-
-                if ($startDate->gte($endDate)) {
-                    return;
-                }
-                $user->inbounds()->attach($lastInbound->id, [
-                    'start_date' => $startDate->format('Y-m-d'),
-                    'end_date' => $endDate->format('Y-m-d'),
-                    'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
-                ]);
-                $this->deleteUserPastInvoices($user);
-            });
-        }
-        return redirect()->route('admin.users.index');
+        $user->createSubscription(new InboundDTO($data->first()));
+        return response()->json();
     }
 
     /**
-     * @param User $user
-     * @return void
-     * @internal
+     * @throws Throwable
      */
-    private function deleteUserPastInvoices(User $user): void
+    public function detachInbounds(Subscription $subscription, User $user): JsonResponse
     {
-        InvoiceFacade::deletePreviousDebitInvoices($user->id);
+        $user->deleteSubscription($subscription->id);
+        return response()->json();
+    }
 
-        $user->inbounds->map(function ($inbound) {
-            if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
-                InvoiceFacade::sendDebit($inbound->pivot->id);
-        });
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws ValidationException
+     */
+    public function renewSubscriptions(RenewSubscriptionsRequest $request): RedirectResponse
+    {
+        foreach ($request->validated('tableCheckbox') as $userId => $each) {
+            User::find($userId)->renewSubscription(new RenewSubscriptionDTO([
+                'day_count' => $request->input('daysCount'),
+                'date' => $request->input('date'),
+                'price' => $request->input('price'),
+            ]));
+        }
+        return redirect()->route('admin.users.index');
     }
 }

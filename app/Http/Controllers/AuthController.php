@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Facades\AuthFacade;
-use App\Facades\UserFacade;
 use App\Http\Requests\AuthenticateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,8 +25,8 @@ class AuthController extends Controller
                     __('auth.failed'),
                 ]);
             }
-            UserFacade::setLocale($locale, $user->id);
-            UserFacade::updateLastVisit($user->id);
+            $user->setLocale($locale);
+            $user->updateVisitTime();
             $user->visit();
 
             if ($user->isAdmin()) {
