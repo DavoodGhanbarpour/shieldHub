@@ -204,7 +204,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                        <x-buttons.submit :type="'button'"/>
+                        <x-buttons.submit data-bs-dismiss="modal" :type="'button'"/>
                     </div>
                 </div>
             </div>
@@ -308,10 +308,11 @@
                 setTablesData();
             });
 
-            function setTablesData() {
-                setInboundsTableData();
-                setSubscriptionsTableData();
-                setInvoicesTableData();
+            async function setTablesData() {
+                await setInboundsTableData();
+                await setSubscriptionsTableData();
+                await setInvoicesTableData();
+                setSeletedInboundsHandler();
             }
 
             $(document).on( 'click', '.form-selectgroup-item', function(){
@@ -350,6 +351,11 @@
                 if ( isAttachedToUser($(this)) )
                     return;
 
+                setSeletedInboundsHandler();
+            });
+
+            function setSeletedInboundsHandler() {
+                
                 let count = $('.table-checkbox:checked').length;
                 $('#countDisplay').text((count == $('.table-checkbox').length) ? 'All' : count);
                 $('.subscriptionSubmitButton').addClass('d-none');
@@ -358,7 +364,7 @@
 
                 else if ( count > 1 )
                     $('[data-select-type="multi-select"]').removeClass('d-none');
-            });
+            }
 
             $(document).on( 'shown.bs.modal', '#subscriptionsModal', function(){
             
@@ -399,8 +405,7 @@
             
                 setTablesData();
             });
-
-
+            
         /* Inbounds begin */
             async function setInboundsTableData() {
 
@@ -441,6 +446,7 @@
 
             function setInbounds(inbounds) {
 
+                $('.inboundsTable tbody').html('');
                 resetDatatable($('#datatable'));
                 let index = 1;
                 inbounds.forEach(inbound => {
@@ -494,7 +500,7 @@
 
             function setSubscriptions(subscriptions) {
 
-                console.log('subscriptions', subscriptions);
+                $('.subscriptionsTable tbody').html('');
                 let index = 1;
                 subscriptions.forEach(subscription => {
                     
@@ -569,6 +575,8 @@
 
             function setInvoices(invoices) {
 
+                $('.invoicesTable tbody').html('');
+                $('.invoicesTable tfoot').html('');
                 let index = 1;
                 invoices.forEach(invoice => {
                     
