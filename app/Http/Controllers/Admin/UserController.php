@@ -151,7 +151,6 @@ class UserController extends Controller
             $result[$key]['server']['id'] = $each->server->id;
             $result[$key]['server']['title'] = $each->server->title;
             $result[$key]['server']['ip'] = $each->server->ip;
-            $result[$key]['server']['port'] = $each->server->port;
         }
         return response()->json([
             'inbounds' => $result,
