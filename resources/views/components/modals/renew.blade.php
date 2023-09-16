@@ -1,8 +1,13 @@
+@php
+    $action     = isset($action) ? $action : route('admin.subscriptions.renew');
+    $type       = isset($type) ? $type : 'submit';
+    $method     = isset($method) ? $method : 'POST';
+@endphp
 <div class="modal" id="renewModal" tabindex="-1">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('admin.subscriptions.renew') }}" method="POST">
+        <form action="{{$action}}" method="{{$method}}">
             @csrf
-            @method('POST')
+            @method($method)
             
             <div class="modal-content">
                 <div class="modal-header">
@@ -69,7 +74,7 @@
                             <div class="card-body">
                                 <div class="tab-content" id="renewTabPanes">
                                     <div class="tab-pane" id="date">
-                                        <input type="text" name="date" class="form-control datepicker" placeholder="{{__('app.general.date')}}">
+                                        <input type="text" name="end_date" class="form-control datepicker" placeholder="{{__('app.general.date')}}">
                                     </div>
     
                                     <div class="tab-pane active show" id="daysCount">
@@ -110,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                    <x-buttons.submit/>
+                    <x-buttons.submit :type="$type"/>
                 </div>
             </div>
         </form>

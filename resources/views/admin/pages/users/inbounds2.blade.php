@@ -4,214 +4,218 @@
 
 @section('content')
 
-    <form action="{{ route('admin.users.assignInbounds', ['user' => $user->id]) }}" method="POST">
-        @csrf
-        <div class="row">
-            <div class="col-md-4 ps-0">
-                <div class="card h-75vh">
+    <div class="row">
+        <div class="col-md-4 ps-0">
+            <div class="card h-75vh">
 
-                    <div class="card-header">
-                        <div id="servers" class="form-selectgroup">
-                        </div>
+                <div class="card-header">
+                    <div id="servers" class="form-selectgroup">
                     </div>
-                    <div class="card-body overflow-auto">
-                        <div id="table-default" class="table-responsive">
-                            <x-tables.default :class="'tableCheckbox checkboxTrigger inboundsTable'">
-                                <thead> 
-                                    <tr>
-                                        <th>
-                                            {{__('app.pageComponents.index')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.title')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.port')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.users_count')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.pageComponents.actions')}}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-tbody">
-                                </tbody>
-                            </x-tables.default>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-
-            <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
-                <div class="card h-37vh mb-2">
-
-                    <div class="card-body overflow-auto">
-                        <div id="table-default" class="table-responsive">
-                            <x-tables.default :class="'subscriptionsTable'">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            {{__('app.pageComponents.index')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.title')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.servers.server')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.start_date')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.end_date')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.remain')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.total')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.description')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.pageComponents.actions')}}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-tbody">
-                                </tbody>
-                            </x-tables.default>
-                        </div>
+                <div class="card-body overflow-auto">
+                    <div id="table-default" class="table-responsive">
+                        <x-tables.default :class="'tableCheckbox checkboxTrigger inboundsTable'">
+                            <thead> 
+                                <tr>
+                                    <th>
+                                        {{__('app.pageComponents.index')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.title')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.port')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.users_count')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.pageComponents.actions')}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody">
+                            </tbody>
+                        </x-tables.default>
                     </div>
-
                 </div>
 
-                <div class="card h-37vh">
-
-                    <div class="card-body overflow-auto">
-                        <div id="table-default" class="table-responsive">
-                            <x-tables.default :class="'invoicesTable'">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            {{__('app.pageComponents.index')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.date')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.description')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.credit')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.general.debit')}}
-                                        </th>
-                                        <th>
-                                            {{__('app.pageComponents.actions')}}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-tbody">
-                                </tbody>
-                                <tfoot>
-                                    {{-- <tr>
-                                        <td colspan="3">{{__('app.general.total')}}:</td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">{{__('app.general.remain')}}:</td>
-                                        <td class="text-center" colspan="2"></td>
-                                    </tr> --}}
-                                </tfoot>
-                            </x-tables.default>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
 
-        <div class="modal" id="subscriptionsModal" tabindex="-1">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Subscriptions Information</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+        
+        <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
+            <div class="card h-37vh mb-2">
+                <div class="card-header">
+                        <div class="btn-list">
+                            <x-buttons.renew/>
+                        </div>
+                </div>
+
+                <div class="card-body overflow-auto">
+                    <div id="table-default" class="table-responsive">
+                        <x-tables.default :class="'tableCheckbox subscriptionsTable'">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {{__('app.pageComponents.index')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.title')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.servers.server')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.start_date')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.end_date')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.remain')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.total')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.description')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.pageComponents.actions')}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody">
+                            </tbody>
+                        </x-tables.default>
                     </div>
-                    <div class="modal-body">
+                    
+                    <x-modals.renew :action="'javascript:void(0);'" :type="'button'"/>
+                </div>
 
-                        <div class="btn-group w-100" role="group">
-                            <input data-target="#separatelyForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="separately" autocomplete="off" checked="">
-                            <label for="separately" type="button" class="btn">Separately</label>
+            </div>
 
-                            <input data-target="#asOneForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="asOne" autocomplete="off">
-                            <label for="asOne" type="button" class="btn">As One</label>
-                        </div>
-                        <hr class="my-4 mx-0">
+            <div class="card h-37vh">
 
-                        <div id="separatelyForm" class="suscription-form mb-3">
-                        </div>
-                            
-                        <div id="asOneForm" class="row suscription-form">
+                <div class="card-body overflow-auto">
+                    <div id="table-default" class="table-responsive">
+                        <x-tables.default :class="'invoicesTable'">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {{__('app.pageComponents.index')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.date')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.description')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.credit')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.general.debit')}}
+                                    </th>
+                                    <th>
+                                        {{__('app.pageComponents.actions')}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody">
+                            </tbody>
+                            <tfoot>
+                                {{-- <tr>
+                                    <td colspan="3">{{__('app.general.total')}}:</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">{{__('app.general.remain')}}:</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr> --}}
+                            </tfoot>
+                        </x-tables.default>
+                    </div>
+                </div>
 
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label required">{{__('app.general.start_date')}}</label>
-                                <div>
-                                    <input type="text"
-                                        name="start_date"
-                                        class="form-control datepicker"
-                                        placeholder="{{__('app.general.start_date')}}">
-                                </div>
-                            </div>
+            </div>
+        </div>
+    </div>
 
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label required">{{__('app.general.end_date')}}</label>
-                                <div>
-                                    <input type="text"
-                                        name="end_date"
-                                        class="form-control datepicker"
-                                        placeholder="{{__('app.general.end_date')}}">
-                                </div>
-                            </div>
+    <div class="modal" id="subscriptionsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subscriptions Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label required">{{__('app.general.subscription_price')}}</label>
-                                <div>
-                                    <input type="text"
-                                        name="subscription_price"
-                                        class="form-control number_format"
-                                        placeholder="{{__('app.general.subscription_price')}}">
-                                </div>
-                            </div>
+                    <div class="btn-group w-100" role="group">
+                        <input data-target="#separatelyForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="separately" autocomplete="off" checked="">
+                        <label for="separately" type="button" class="btn">Separately</label>
 
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label">{{__('app.general.description')}}</label>
-                                <div>
-                                    <textarea name="description" rows="1" class="form-control resize-none"
-                                        placeholder="{{__('app.general.description')}}"></textarea>
-                                </div>
-                            </div>
+                        <input data-target="#asOneForm" type="radio" class="btn-check subscriptionFillType" name="btn-radio-basic" id="asOne" autocomplete="off">
+                        <label for="asOne" type="button" class="btn">As One</label>
+                    </div>
+                    <hr class="my-4 mx-0">
 
-                        </div>
+                    <div id="separatelyForm" class="suscription-form mb-3">
+                    </div>
                         
+                    <div id="asOneForm" class="row suscription-form">
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label required">{{__('app.general.start_date')}}</label>
+                            <div>
+                                <input type="text"
+                                    name="start_date"
+                                    class="form-control datepicker"
+                                    placeholder="{{__('app.general.start_date')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label required">{{__('app.general.end_date')}}</label>
+                            <div>
+                                <input type="text"
+                                    name="end_date"
+                                    class="form-control datepicker"
+                                    placeholder="{{__('app.general.end_date')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label required">{{__('app.general.subscription_price')}}</label>
+                            <div>
+                                <input type="text"
+                                    name="subscription_price"
+                                    class="form-control number_format"
+                                    placeholder="{{__('app.general.subscription_price')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{__('app.general.description')}}</label>
+                            <div>
+                                <textarea name="description" rows="1" class="form-control resize-none"
+                                    placeholder="{{__('app.general.description')}}"></textarea>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                        <x-buttons.submit data-bs-dismiss="modal" :type="'button'"/>
-                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    <x-buttons.submit data-bs-dismiss="modal" :type="'button'"/>
                 </div>
             </div>
         </div>
-
-    </form>
-
+    </div>
     
     <div class="card mb-3 d-none" id="separatelyFormSample">
         <div class="card-header">
@@ -313,9 +317,10 @@
                 await setSubscriptionsTableData();
                 await setInvoicesTableData();
                 setSeletedInboundsHandler();
+                setAllTablesCheckbox();
             }
 
-            $(document).on( 'click', '.form-selectgroup-item', function(){
+            $(document).on( 'click', '.server-select', function(){
 
                 if ( $(this).hasClass('showAll') ) {
 
@@ -329,11 +334,11 @@
 
             function validateSelectedInbounds() {
                 
-                if ( $('.table-checkbox.isAttachedToUser:checked').length )
+                if ( $('.inboundsTable .table-checkbox.isAttachedToUser:checked').length )
                     toastr.error('Some of the selected inbounds are already attached to user and cannot attach again!');
                 
-                $('.table-checkbox.isAttachedToUser:checked').prop('checked', false);
-                $('.table-checkbox:not(".isAttachedToUser"):first').trigger('change');
+                $('.inboundsTable .table-checkbox.isAttachedToUser:checked').prop('checked', false);
+                $('.inboundsTable .table-checkbox:not(".isAttachedToUser"):first').trigger('change');
             }
 
             function isAttachedToUser(checkbox) {
@@ -346,7 +351,7 @@
                 return false;
             }
             
-            $(document).on( 'change', '.table-checkbox, #checkAll', function(){
+            $(document).on( 'change', '.inboundsTable .table-checkbox, .inboundsTable .checkAll', function(){
             
                 if ( isAttachedToUser($(this)) )
                     return;
@@ -356,8 +361,8 @@
 
             function setSeletedInboundsHandler() {
                 
-                let count = $('.table-checkbox:checked').length;
-                $('#countDisplay').text((count == $('.table-checkbox').length) ? 'All' : count);
+                let count = $('.inboundsTable .table-checkbox:checked').length;
+                $('#countDisplay').text((count == $('.inboundsTable .table-checkbox').length) ? 'All' : count);
                 $('.subscriptionSubmitButton').addClass('d-none');
                 if ( count == 1 )
                     $('[data-select-type="one-select"]').removeClass('d-none');
@@ -382,7 +387,7 @@
             function setSuscriptionForm() {
 
                 $('#separatelyForm').html('');
-                $('.table-checkbox:checked').each(function(){
+                $('.inboundsTable .table-checkbox:checked').each(function(){
                     const id = $(this).attr('data-id');
                     const title = $(this).closest('tr').find('.title').text();
                     const form = $('#separatelyFormSample').clone().attr('id', '').attr('data-id', id).removeClass('d-none');
@@ -429,7 +434,7 @@
 
                 serversContainer.html('');
                 serversContainer.append(`
-                    <label class="form-selectgroup-item showAll">
+                    <label class="form-selectgroup-item server-select showAll">
                         <input type="radio" name="servers" value="HTML" class="form-selectgroup-input" checked="checked">
                         <span class="form-selectgroup-label">All</span>
                     </label>`);
@@ -437,7 +442,7 @@
                 servers.forEach(server => {
                     
                     serversContainer.append(`
-                        <label class="form-selectgroup-item" data-target-item="${server.id}">
+                        <label class="form-selectgroup-item server-select" data-target-item="${server.id}">
                             <input type="radio" name="servers" value="HTML" class="form-selectgroup-input">
                             <span class="form-selectgroup-label">${server.title} | ${server.ip}</span>
                         </label>`);
@@ -474,7 +479,7 @@
                         </tr>
                     `);
                 });
-                setTableCheckbox();
+                setAllTablesCheckbox();
                 initializeDatatable($('#datatable'));
             }
         /* Inbounds end */
@@ -484,7 +489,6 @@
             async function setSubscriptionsTableData() {
 
                 const {subscriptions} = await getSubscriptions();
-                console.log('subscriptions', subscriptions);
                 setSubscriptions(subscriptions);
             }
             
@@ -616,6 +620,7 @@
         /* Invoices end */
 
 
+
             $(document).on( 'click', '.delete_button', function(){
             
                 Swal.fire({
@@ -633,8 +638,40 @@
                 })
             });
 
+
+            
+            $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
+                $('#renewModal #hiddenFormInputs').html('');
+                $('#renewModal #hiddenFormInputs').append($('.subscriptionsTable .table-checkbox:checked').clone());
+            });
+
         </script>
     @endpush
+
+    <script>
+
+        $(document).ready( function(){
+            setRenewModalHandlerStatus()
+        });
+        
+        $(document).on( 'change', '.subscriptionsTable .checkAll, .subscriptionsTable .table-checkbox', function(){
+            setRenewModalHandlerStatus()
+        });
+
+        function setRenewModalHandlerStatus() {
+            if ( $('.subscriptionsTable .table-checkbox:checked').length == 0 )
+                $('[data-bs-target="#renewModal"]').addClass('disabled');
+            else
+                $('[data-bs-target="#renewModal"]').removeClass('disabled');
+        }
+
+
+        $(document).on( 'click', '#renewModal #submitButton', function(e){
+        
+            e.preventDefault();
+        });
+
+    </script>
 
     @push('styles')
         <style>

@@ -1,24 +1,32 @@
 <script>
     $(document).ready(function () {
 
-        setTableCheckbox();
+        setAllTablesCheckbox();
     });
     
     const TH_CHECKBOX = `<th class="w-1">
-                            <input id="checkAll" class="form-check-input m-0 align-middle" type="checkbox">
+                            <input class="checkAll form-check-input m-0 align-middle" type="checkbox">
                         </th>`;
     const TD_CHECKBOX = `<td>
                             <input class="form-check-input table-checkbox m-0 align-middle" type="checkbox">
                         </td>`;
 
-    function setTableCheckbox() {
-
-        $('th #checkAll').closest('th').remove();
-        $('td .table-checkbox').closest('td').remove();
+    function setAllTablesCheckbox() {
         
-        $('.tableCheckbox thead tr:first').prepend(TH_CHECKBOX);
-        $('.tableCheckbox tbody tr').prepend(TD_CHECKBOX);
-        $('.tableCheckbox tbody tr').each(function() {
+        $('.tableCheckbox').each(function(){
+
+            setTableCheckbox($(this));
+        })
+    }
+    
+    function setTableCheckbox(table) {
+
+        table.find('th .checkAll').closest('th').remove();
+        table.find('td .table-checkbox').closest('td').remove();
+        
+        table.find('thead tr:first').prepend(TH_CHECKBOX);
+        table.find('tbody tr').prepend(TD_CHECKBOX);
+        table.find('tbody tr').each(function() {
             if ( $(this).data('id') != undefined && $(this).data('id') )
             {
                 $(this).find('.table-checkbox:first').attr('data-id', $(this).data('id'));
@@ -42,31 +50,31 @@
 
     $(document).on( 'change', '.table-checkbox', function(){
     
-        setCheckAllStatus();
+        setCheckAllStatus($(this).closest('.tableCheckbox'));
     });
 
-    $(document).on( 'change', '#checkAll', function(){
+    $(document).on( 'change', '.checkAll', function(){
     
-        setCheckboxesStatus();
+        setCheckboxesStatus($(this).closest('.tableCheckbox'));
     });
 
-    function setCheckAllStatus() {
+    function setCheckAllStatus(table) {
         
-        $('#checkAll').prop('indeterminate', false);
-        $('#checkAll').prop('checked', false);
-        if ( $('.table-checkbox:not(:checked)').length == 0 )
-            $('#checkAll').prop('checked', true);
+        table.find('.checkAll').prop('indeterminate', false);
+        table.find('.checkAll').prop('checked', false);
+        if ( table.find('.table-checkbox:not(:checked)').length == 0 )
+            table.find('.checkAll').prop('checked', true);
 
-        else if ( $('.table-checkbox:checked').length == 0 )
-            $('#checkAll').prop('checked', false);
+        else if ( table.find('.table-checkbox:checked').length == 0 )
+            table.find('.checkAll').prop('checked', false);
         
         else
-            $('#checkAll').prop('indeterminate', true);
+            table.find('.checkAll').prop('indeterminate', true);
     }
 
-    function setCheckboxesStatus() {
+    function setCheckboxesStatus(table) {
         
-        $('.table-checkbox').prop('checked', $('#checkAll').is(':checked'));
+        table.find('.table-checkbox').prop('checked', table.find('.checkAll').is(':checked'));
     }
 
 </script>

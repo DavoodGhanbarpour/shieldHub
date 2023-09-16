@@ -25,11 +25,10 @@
         </div>`;
         $('#{{$tableContainer}}').prepend(ribbon);
 
-        if ( setTableCheckbox != undefined && 
-            typeof setTableCheckbox != 'undefined' && 
-            typeof setTableCheckbox == 'function' &&
-            $('{{$datatable}}').hasClass('tableCheckbox') ) {
-                setTableCheckbox();
+        if ( setAllTablesCheckbox != undefined && 
+            typeof setAllTablesCheckbox != 'undefined' && 
+            typeof setAllTablesCheckbox == 'function' ) {
+                setAllTablesCheckbox();
             }
         
         initializeDatatable($('{{$datatable}}'));

@@ -106,7 +106,7 @@
             setRenewModalHandlerStatus()
         });
         
-        $(document).on( 'change', '#checkAll, .table-checkbox', function(){
+        $(document).on( 'change', '.checkAll, .table-checkbox', function(){
             setRenewModalHandlerStatus()
         });
 
