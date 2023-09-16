@@ -344,7 +344,7 @@
             function isAttachedToUser(checkbox) {
 
                 if ( checkbox.hasClass('isAttachedToUser') && checkbox.is(':checked') ) {
-                    toastr.error('This inbounds is already attached to user and cannot attach again!');
+                    toastr.error('This inbound is already attached to user and cannot attach again!');
                     checkbox.prop('checked', false).trigger('change');
                     return true;
                 }
