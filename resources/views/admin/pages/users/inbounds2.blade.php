@@ -17,19 +17,19 @@
                         <x-tables.default :class="'tableCheckbox justVisiblesMode checkboxTrigger inboundsTable'">
                             <thead> 
                                 <tr>
-                                    <th>
+                                    <th class="w-10">
                                         {{__('app.pageComponents.index')}}
                                     </th>
-                                    <th>
+                                    <th class="w-43">
                                         {{__('app.general.title')}}
                                     </th>
-                                    <th>
+                                    <th class="w-15">
                                         {{__('app.general.port')}}
                                     </th>
-                                    <th>
+                                    <th class="w-15">
                                         {{__('app.general.users_count')}}
                                     </th>
-                                    <th>
+                                    <th class="w-12">
                                         {{__('app.pageComponents.actions')}}
                                     </th>
                                 </tr>
@@ -58,31 +58,31 @@
                         <x-tables.default :class="'tableCheckbox subscriptionsTable'">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="w-4">
                                         {{__('app.pageComponents.index')}}
                                     </th>
-                                    <th>
+                                    <th class="w-15">
                                         {{__('app.general.title')}}
                                     </th>
-                                    <th>
+                                    <th class="w-15">
                                         {{__('app.servers.server')}}
                                     </th>
-                                    <th>
+                                    <th class="w-9">
                                         {{__('app.general.start_date')}}
                                     </th>
-                                    <th>
+                                    <th class="w-9">
                                         {{__('app.general.end_date')}}
                                     </th>
-                                    <th>
+                                    <th class="w-6">
                                         {{__('app.general.remain')}}
                                     </th>
-                                    <th>
+                                    <th class="w-7">
                                         {{__('app.general.total')}}
                                     </th>
-                                    <th>
+                                    <th class="w-20">
                                         {{__('app.general.description')}}
                                     </th>
-                                    <th>
+                                    <th class="w-11">
                                         {{__('app.pageComponents.actions')}}
                                     </th>
                                 </tr>
@@ -104,22 +104,22 @@
                         <x-tables.default :class="'invoicesTable'">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="w-6">
                                         {{__('app.pageComponents.index')}}
                                     </th>
-                                    <th>
+                                    <th class="w-15">
                                         {{__('app.general.date')}}
                                     </th>
-                                    <th>
+                                    <th class="w-44">
                                         {{__('app.general.description')}}
                                     </th>
-                                    <th>
+                                    <th class="w-12">
                                         {{__('app.general.credit')}}
                                     </th>
-                                    <th>
+                                    <th class="w-12">
                                         {{__('app.general.debit')}}
                                     </th>
-                                    <th>
+                                    <th class="w-11">
                                         {{__('app.pageComponents.actions')}}
                                     </th>
                                 </tr>
