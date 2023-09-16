@@ -25,6 +25,13 @@
         </div>`;
         $('#{{$tableContainer}}').prepend(ribbon);
 
+        if ( setTableCheckbox != undefined && 
+            typeof setTableCheckbox != 'undefined' && 
+            typeof setTableCheckbox == 'function' &&
+            $('{{$datatable}}').hasClass('tableCheckbox') ) {
+                setTableCheckbox();
+            }
+        
         initializeDatatable($('{{$datatable}}'));
     });
 
