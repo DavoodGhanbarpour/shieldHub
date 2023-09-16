@@ -46,7 +46,7 @@
         
         
         <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
-            <div class="card h-37vh mb-2">
+            <div class="card h-40vh mb-2">
                 <div class="card-header">
                         <div class="btn-list">
                             <x-buttons.renew/>
@@ -97,7 +97,7 @@
 
             </div>
 
-            <div class="card h-37vh">
+            <div class="card h-34vh">
 
                 <div class="card-body overflow-auto">
                     <div id="table-default" class="table-responsive">
@@ -704,8 +704,12 @@
                 height: 75vh;
             }
 
-            .h-37vh {
-                height: 37vh;
+            .h-40vh {
+                height: 40vh;
+            }
+
+            .h-34vh {
+                height: 34vh;
             }
 
             table.dataTable thead > tr > th.sorting::before, table.dataTable thead > tr > th.sorting_asc::before, table.dataTable thead > tr > th.sorting_desc::before, table.dataTable thead > tr > th.sorting_asc_disabled::before, table.dataTable thead > tr > th.sorting_desc_disabled::before, table.dataTable thead > tr > td.sorting::before, table.dataTable thead > tr > td.sorting_asc::before, table.dataTable thead > tr > td.sorting_desc::before, table.dataTable thead > tr > td.sorting_asc_disabled::before, table.dataTable thead > tr > td.sorting_desc_disabled::before, 
