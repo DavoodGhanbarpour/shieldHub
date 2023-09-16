@@ -74,7 +74,11 @@
 
     function setCheckboxesStatus(table) {
         
-        table.find('.table-checkbox').prop('checked', table.find('.checkAll').is(':checked'));
+        let visibleCondition = '';
+        if ( table.hasClass('justVisiblesMode') )
+            visibleCondition = ':visible';
+        
+        table.find(`.table-checkbox${visibleCondition}`).prop('checked', table.find('.checkAll').is(':checked'));
     }
 
 </script>

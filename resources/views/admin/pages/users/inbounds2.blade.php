@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body overflow-auto">
                     <div id="table-default" class="table-responsive">
-                        <x-tables.default :class="'tableCheckbox checkboxTrigger inboundsTable'">
+                        <x-tables.default :class="'tableCheckbox justVisiblesMode checkboxTrigger inboundsTable'">
                             <thead> 
                                 <tr>
                                     <th>
@@ -374,6 +374,12 @@
             $(document).on( 'shown.bs.modal', '#subscriptionsModal', function(){
             
                 validateSelectedInbounds();
+                if ( $('.inboundsTable .table-checkbox:checked').length == 0 ) {
+
+                    $('#subscriptionsModal').modal('hide');
+                    return;
+                }
+                
                 setSuscriptionForm();
                 $(".datepicker").pDatepicker({calendarType: 'gregorian', format: 'L', autoClose: true});
                 setSuscriptionFormStatus();
