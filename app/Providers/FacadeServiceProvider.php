@@ -19,10 +19,10 @@ class FacadeServiceProvider extends ServiceProvider
     {
         app()->singleton('DashboardFacade', DashboardRepository::class);
 //        app()->singleton('UserFacade', UserRepository::class);
-        app()->singleton('InboundFacade', InboundRepository::class);
-        app()->singleton('AuthFacade', AuthRepository::class);
-        app()->singleton('ServerFacade', ServerRepository::class);
-        app()->singleton('InvoiceFacade', InvoiceRepository::class);
+//        app()->singleton('InboundFacade', InboundRepository::class);
+//        app()->singleton('AuthFacade', AuthRepository::class);
+//        app()->singleton('ServerFacade', ServerRepository::class);
+//        app()->singleton('InvoiceFacade', InvoiceRepository::class);
     }
 
     /**

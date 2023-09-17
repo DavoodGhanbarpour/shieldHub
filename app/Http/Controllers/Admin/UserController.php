@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\DTOs\InboundDTO;
 use App\DTOs\RenewSubscriptionDTO;
-use App\Facades\InvoiceFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
 use App\Http\Requests\Admin\RenewSubscriptionsRequest;
@@ -102,7 +101,7 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    private function usersInbounds(User $user): array
+    public function inbounds(User $user)
     {
         $result = [];
         foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
@@ -112,17 +111,10 @@ class UserController extends Controller
                 ->first()
                 ?->pivot ?: null;
         }
-        return $result;
-    }
-
-    public function inbounds(User $user)
-    {
         return view('admin.pages.users.inbounds', [
             'user' => $user,
             'inbounds' =>
-                collect(
-                    $this->usersInbounds($user)
-                )->sortBy('subscription_data', SORT_REGULAR, true),
+                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
             'servers' => Server::all()
         ]);
     }
@@ -186,7 +178,7 @@ class UserController extends Controller
     public function subscriptionsJson(User $user): JsonResponse
     {
         $result = [];
-        foreach ($user->inbounds()->with('server')->get() as $key => $each){
+        foreach ($user->inbounds()->with('server')->get() as $key => $each) {
             $result[$key]['is_active'] = Carbon::parse($each->pivot->end_date)
                 ->gte(now());
             $result[$key]['subscription_id'] = $each->pivot->id;

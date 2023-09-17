@@ -36,7 +36,7 @@ class ServerController extends Controller
     {
         $data = $request->validated();
         $data['subscription_price'] = removeSeparator($data['subscription_price']);
-        ServerFacade::upsert($data);
+        Server::create($data);
         return redirect()->route('admin.servers.index');
     }
 
@@ -63,25 +63,25 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServerUpdateRequest $request, string $id): RedirectResponse
+    public function update(ServerUpdateRequest $request, Server $server): RedirectResponse
     {
         $data = $request->validated();
         $data['subscription_price'] = removeSeparator($data['subscription_price']);
-        ServerFacade::upsert($data, $id);
+        $server->update($data);
         return redirect()->route('admin.servers.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Server $server): RedirectResponse
     {
         if (Server::withCount('inbounds')->first()->inbounds_count) {
             return redirect()->back()->withErrors([
                 __('app.messages.server_has_children')
             ]);
         }
-        ServerFacade::delete($id);
+        $server->deleteOrFail();
         return redirect()->route('admin.servers.index');
     }
 }
