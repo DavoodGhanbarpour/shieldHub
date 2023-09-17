@@ -18,6 +18,7 @@
             
             <div id="table-default" class="table-responsive">
 
+                <x-ribbon.default/>
                 <x-tables.default :class="'tableCheckbox'">
 
                     <thead>
@@ -88,7 +89,7 @@
         </div>
     </div>
 
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
     <x-scripts.table-checkbox/>
 
     @push('scripts')

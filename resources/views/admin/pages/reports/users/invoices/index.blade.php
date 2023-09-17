@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                         <tr>
@@ -74,6 +75,6 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
 
 @endsection

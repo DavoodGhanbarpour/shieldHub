@@ -9,12 +9,46 @@
             <div class="card h-75vh">
 
                 <div class="card-header">
-                    <div id="servers" class="form-selectgroup">
+                    <div class="row">
+                        <x-ribbon.default :searchID="'inboundsSearch'" :searchCol="'col-md-8'">
+                            <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none" 
+                                data-select-type="one-select" role="group" aria-label="Basic example">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
+                                    Submit
+                                </a>
+
+                                <a href="#" class="btn pe-none btn-secondary px-2 w-35">
+                                    <strong class="me-2">1</strong>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M5 12l5 5l10 -10"></path>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none"
+                                data-select-type="multi-select" role="group" aria-label="Basic example">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
+                                    Submit
+                                </a>
+
+                                <a href="#" class="btn pe-none btn-secondary px-2 w-35">
+                                    <strong class="me-2" id="countDisplay">2</strong>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M7 12l5 5l10 -10"></path>
+                                        <path d="M2 12l5 5m5 -5l5 -5"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </x-ribbon.default>
+
+                        <div id="servers" class="form-selectgroup"></div>
                     </div>
                 </div>
                 <div class="card-body overflow-auto">
-                    <div id="table-default" class="table-responsive">
-                        <x-tables.default :class="'tableCheckbox justVisiblesMode checkboxTrigger inboundsTable'">
+                    <div id="inbounds-table-container" class="table-responsive">
+                        <x-tables.default :id="'inboundsTable'" :class="'tableCheckbox justVisiblesMode checkboxTrigger inboundsTable'">
                             <thead> 
                                 <tr>
                                     <th class="w-10">
@@ -47,15 +81,23 @@
         
         <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
             <div class="card h-40vh mb-2">
-                <div class="card-header">
-                        <div class="btn-list">
-                            <x-buttons.renew/>
+                <div class="card-header pb-0">
+                    <div class="col-12">
+                        <div class="row">
+
+                            <x-ribbon.default :searchID="'subscriptionsSearch'" :containerClass="'justify-content-between'" :searchCol="'col-md-4'">
+                                <li>
+                                    <x-buttons.renew/>
+                                </li>
+                            </x-ribbon.default>
+
                         </div>
+                    </div>
                 </div>
 
                 <div class="card-body overflow-auto">
-                    <div id="table-default" class="table-responsive">
-                        <x-tables.default :class="'tableCheckbox subscriptionsTable'">
+                    <div id="subscriptions-table-container" class="table-responsive">
+                        <x-tables.default :id="'subscriptionsTable'" :class="'tableCheckbox subscriptionsTable'">
                             <thead>
                                 <tr>
                                     <th class="w-4">
@@ -268,41 +310,11 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search :searchCol="'col-md-8'">
-        <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none" 
-            data-select-type="one-select" role="group" aria-label="Basic example">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
-                Submit
-            </a>
 
-            <a href="#" class="btn pe-none btn-secondary px-2 w-35">
-                <strong class="me-2">1</strong>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-            </a>
-        </div>
-
-        <div class="btn-group input-icon mb-3 col-md-4 d-flex justify-content-end subscriptionSubmitButton d-none"
-            data-select-type="multi-select" role="group" aria-label="Basic example">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionsModal" class="btn btn-info px-2 w-65">
-                Submit
-            </a>
-
-            <a href="#" class="btn pe-none btn-secondary px-2 w-35">
-                <strong class="me-2" id="countDisplay">2</strong>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M7 12l5 5l10 -10"></path>
-                    <path d="M2 12l5 5m5 -5l5 -5"></path>
-                </svg>
-            </a>
-        </div>
-    </x-scripts.datatable-search>
+    <x-scripts.datatable :datatable="'#inboundsTable'" :search="'#inboundsSearch'"/>
+    <x-scripts.datatable :datatable="'#subscriptionsTable'" :search="'#subscriptionsSearch'"/>
     <x-scripts.table-checkbox/>
     <x-libs.pwt-datepicker/>
-
 
     @push('scripts')
 
@@ -458,7 +470,7 @@
             function setInbounds(inbounds) {
 
                 $('.inboundsTable tbody').html('');
-                resetDatatable($('#datatable'));
+                resetDatatable($('#inboundsTable'));
                 let index = 1;
                 inbounds.forEach(inbound => {
                     
@@ -485,9 +497,10 @@
                         </tr>
                     `);
                 });
-                setAllTablesCheckbox();
-                initializeDatatable($('#datatable'));
+                setTableCheckbox($('#inboundsTable'));
+                initializeDatatable($('#inboundsTable'), '#inboundsSearch');
             }
+
         /* Inbounds end */
 
 
@@ -511,6 +524,7 @@
             function setSubscriptions(subscriptions) {
 
                 $('.subscriptionsTable tbody').html('');
+                resetDatatable($('#subscriptionsTable'));
                 let index = 1;
                 subscriptions.forEach(subscription => {
                     
@@ -562,6 +576,8 @@
                         </tr>
                     `);
                 });
+                setTableCheckbox($('#subscriptionsTable'));
+                initializeDatatable($('#subscriptionsTable'), '#subscriptionsSearch');
             }
         /* Subscriptions end */
 
@@ -625,8 +641,6 @@
             }
         /* Invoices end */
 
-
-
             $(document).on( 'click', '.delete_button', function(){
             
                 Swal.fire({
@@ -643,8 +657,6 @@
                     }
                 })
             });
-
-
             
             $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
                 $('#renewModal #hiddenFormInputs').html('');
