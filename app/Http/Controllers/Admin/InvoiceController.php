@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Facades\InvoiceFacade;
-use App\Facades\ServerFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InvoiceStoreRequest;
 use App\Http\Requests\Admin\InvoiceUpdateRequest;
 use App\Models\Invoice;
-use App\Models\Server;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
@@ -41,7 +37,7 @@ class InvoiceController extends Controller
     {
         $data = $request->validated();
         $data['credit'] = removeSeparator($data['credit']);
-        InvoiceFacade::upsert($data);
+        Invoice::create($data);
         return redirect()->route('admin.invoices.index');
     }
 
@@ -69,11 +65,11 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(InvoiceUpdateRequest $request, string $id)
+    public function update(InvoiceUpdateRequest $request, Invoice $invoice)
     {
         $data = $request->validated();
         $data['credit'] = removeSeparator($data['credit']);
-        InvoiceFacade::upsert($data, $id);
+        $invoice->update($data);
         return redirect()->route('admin.invoices.index');
 
     }
@@ -81,9 +77,9 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Invoice $invoice)
     {
-        InvoiceFacade::delete($id);
+        $invoice->deleteOrFail();
         return redirect()->route('admin.invoices.index');
     }
 }
