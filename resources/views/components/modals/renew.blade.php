@@ -144,7 +144,7 @@
             $($(this).data('target')).prop('disabled', !($(this).is(':checked')));
         });
 
-        $(document).on( 'click', '#submitButton', function(){
+        $(document).on( 'click', '#renewModal #submitButton', function(){
         
             $(this).closest('form')[0].submit();
         });

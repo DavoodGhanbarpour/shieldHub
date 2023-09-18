@@ -1,5 +1,9 @@
 @extends('admin.layout.main')
 
+@section('head')
+    <meta name="_token" content="{{csrf_token()}}">
+@endsection
+
 @section('title', __('app.inbounds.assign_inbounds',['user' => $user->name]))
 
 @section('content')
@@ -259,7 +263,7 @@
         </div>
     </div>
     
-    <div class="card mb-3 d-none" id="separatelyFormSample">
+    <div class="card mb-3 d-none inboundItem" id="separatelyFormSample">
         <div class="card-header">
             <strong class="formTitle">
             </strong>
@@ -318,9 +322,12 @@
 
     @push('scripts')
 
-        <script>
+    <script>
             $(document).ready(function () {
 
+                const TOKEN = $('meta[name="_token"]').attr('content');
+                axios.defaults.headers.common['X-Requested-With']   = 'XMLHttpRequest';
+                axios.defaults.headers.common['X-CSRF-TOKEN']       = TOKEN;
                 setTablesData();
             });
 
@@ -393,7 +400,7 @@
                 }
                 
                 setSuscriptionForm();
-                $(".datepicker").pDatepicker({calendarType: 'gregorian', format: 'L', autoClose: true});
+                $(".datepicker").pDatepicker({calendarType: 'gregorian', format: 'L', autoClose: true, initialValue: false});
                 setSuscriptionFormStatus();
             });
 
@@ -406,10 +413,18 @@
 
                 $('#separatelyForm').html('');
                 $('.inboundsTable .table-checkbox:checked').each(function(){
-                    const id = $(this).attr('data-id');
-                    const title = $(this).closest('tr').find('.title').text();
-                    const form = $('#separatelyFormSample').clone().attr('id', '').attr('data-id', id).removeClass('d-none');
+                    const id        = $(this).attr('data-id');
+                    const title     = $(this).closest('tr').find('.title').text();
+                    const form      = $('#separatelyFormSample').clone().removeAttr('id').attr('data-id', id).removeClass('d-none');
+                    const startDate = $(this).closest('tr').data('default-start-date');
+                    const endDate   = $(this).closest('tr').data('default-end-date');
+                    const price     = $(this).closest('tr').data('default-price');
+
+                    form.find('input[name="start_date"]').val(startDate.replaceAll('-', '/'));
+                    form.find('input[name="end_date"]').val(endDate.replaceAll('-', '/'));
+                    form.find('input[name="subscription_price"]').val(number_format(price));
                     form.find('.formTitle').text(title);
+
                     $('#separatelyForm').append(form);
                 });
             }
@@ -426,8 +441,67 @@
             
             $(document).on( 'click', '#subscriptionsModal #submitButton', function(){
             
-                setTablesData();
+                attachInboundsHandler();
             });
+
+            async function attachInboundsHandler() {
+                
+                await attachInbounds();
+                setTablesData();
+            }
+            async function attachInbounds() {
+
+                try {
+                    
+
+                    const result = await axios.post(
+                        '{{route("admin.users.inbounds.create", ["user" => $user->id])}}', {
+                            inbounds: await getSelectedInbounds(),
+                        }
+                    );
+
+                    return true;
+                } catch (error) {
+
+                    console.log('attachInbounds error', error);
+                    return false;
+                }
+            }
+
+            function getSelectedInbounds() {
+
+                const inbounds = {};
+                if ( isSeparately() ) {
+                    
+                    $('#separatelyForm .inboundItem').each(function(){
+                        
+                        const inputs = {};
+                        $(this).find('input, select, textarea').each(function(){
+                            inputs[$(this).attr('name')] = $(this).val();
+                        });
+                        inputs['inbound_id'] = $(this).data('id');
+                        inbounds[$(this).data('id')] = inputs;
+                    })
+                } else {
+                    
+                    const inputs = {};
+                    $('#asOneForm').find('input, select, textarea').each(function(){
+                        inputs[$(this).attr('name')] = $(this).val();
+                    });
+                    $('#separatelyForm .inboundItem').each(function(){
+                        inputs['inbound_id'] = $(this).data('id');
+                        inbounds[$(this).data('id')] = inputs;
+                    })
+                }
+
+                return inbounds;
+            }
+
+            function isSeparately() {
+
+                return $('#separately').is(':checked');
+            }
+            
             
         /* Inbounds begin */
             async function setInboundsTableData() {
@@ -475,8 +549,12 @@
                 inbounds.forEach(inbound => {
                     
                     $('.inboundsTable tbody').append(`
-                        <tr data-id="${inbound?.inbound?.id}" class="inbound-card-parent target-id-${inbound?.server?.id}" role="button"
-                            data-class="${inbound?.inbound?.isAttachedToUser ? 'isAttachedToUser' : ''}">
+                        <tr data-id="${inbound?.inbound?.id}" 
+                            data-default-start-date="${inbound?.inbound?.defaultStartDate}" 
+                            data-default-end-date="${inbound?.inbound?.defaultEndDate}" 
+                            data-default-price="${inbound?.inbound?.defaultPrice}" 
+                            data-class="${inbound?.inbound?.isAttachedToUser ? 'isAttachedToUser' : ''}"
+                            class="inbound-card-parent target-id-${inbound?.server?.id}" role="button">
                             <td class="sort-index">${index++}</td>
                             <td class="sort-title title">${inbound?.inbound?.title}</td>
                             <td class="sort-ip">${inbound?.inbound?.port}</td>
@@ -531,7 +609,7 @@
                     let deleteButton = '';
                     if ( subscription.is_active )
                         deleteButton = `
-                        <a href="#" data-id="${subscription?.id}" class="btn btn-danger subscriptionDelete my-1 px-2">
+                        <a href="#" data-id="${subscription?.inbound?.id}" class="btn btn-danger subscriptionDelete my-1 px-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash mx-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M4 7l16 0"></path>
@@ -641,7 +719,7 @@
             }
         /* Invoices end */
 
-            $(document).on( 'click', '.delete_button', function(){
+            $(document).on( 'click', '.subscriptionDelete', function(){
             
                 Swal.fire({
                     title: 'Are you sure?',
@@ -653,10 +731,16 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // $(this).closest('form').find('.submit_button').click();
+                        detachInbound($(this).data('id'));
                     }
                 })
             });
+            
+            async function detachInbound(subscription) {
+                
+                const result = await axios.delete(`/admin/users/{{$user->id}}/inbounds/${subscription}`);
+                setTablesData();
+            }
             
             $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
                 $('#renewModal #hiddenFormInputs').html('');
@@ -669,6 +753,7 @@
     <script>
 
         $(document).ready( function(){
+
             setRenewModalHandlerStatus()
         });
         
