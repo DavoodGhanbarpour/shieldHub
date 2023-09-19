@@ -12,8 +12,8 @@ class ReportController extends Controller
     {
         return view('admin.pages.reports.users.invoices.index', [
             'users' => User::query()
-                ->withSum('invoices', 'debit')
                 ->withSum('invoices', 'credit')
+                ->withSum('inbounds as inbounds_sum_debit', 'subscriptions.subscription_price')
                 ->withCount('activeSubscriptions')
                 ->get(),
         ]);
