@@ -484,21 +484,21 @@
                     
                     $('#separatelyForm .inboundItem').each(function(){
                         
-                        const inputs = {};
+                        var inputs = {};
                         $(this).find('input, select, textarea').each(function(){
                             inputs[$(this).attr('name')] = $(this).val();
                         });
-                        inputs['inbound_id'] = $(this).data('id');
+                        inputs = {...inputs, inbound_id: $(this).data('id')};
                         inbounds[$(this).data('id')] = inputs;
                     })
                 } else {
                     
-                    const inputs = {};
+                    var inputs = {};
                     $('#asOneForm').find('input, select, textarea').each(function(){
                         inputs[$(this).attr('name')] = $(this).val();
                     });
                     $('#separatelyForm .inboundItem').each(function(){
-                        inputs['inbound_id'] = $(this).data('id');
+                        inputs = {...inputs, inbound_id: $(this).data('id')};
                         inbounds[$(this).data('id')] = inputs;
                     })
                 }
