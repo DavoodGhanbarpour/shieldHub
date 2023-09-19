@@ -28,7 +28,7 @@
         if ( !table.length )
             return;
 
-        table.dataTable().fnDestroy();
+        table.DataTable().clear().destroy();
     }
 
     function initializeDatatable(table, searchSelector) {
