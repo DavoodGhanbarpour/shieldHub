@@ -635,7 +635,7 @@
                             <td class="sort-subscription-price">
                                 ${number_format(subscription?.total_price)}
                             </td>
-                            <td class="sort-description">${subscription?.pivot?.description || ''}</td>
+                            <td class="sort-description">${subscription?.description || ''}</td>
                             <td class="copy-parent">
                                 <span class="d-none copy-text">${subscription?.link}</span>
 
