@@ -601,7 +601,7 @@
 
             function setSubscriptions(subscriptions) {
 
-                $('.subscriptionsTable tbody').html('');
+                $('#subscriptionsTable tbody').html('');
                 resetDatatable($('#subscriptionsTable'));
                 let index = 1;
                 subscriptions.forEach(subscription => {
@@ -736,11 +736,11 @@
                 })
             });
             
-            const DETACH_ROUTE = '{{route("admin.users.inbounds.delete", ["user" => $user->id, "subscription" => "1230123"])}}'
+            const DETACH_ROUTE = '{{route("admin.users.inbounds.delete", ["user" => $user->id, "subscription" => "SUBSCRIPTION_ID"])}}'
             
             async function detachInbound(subscription) {
                 
-                const result = await axios.delete(DETACH_ROUTE.replaceAll("1230123", subscription));
+                const result = await axios.delete(DETACH_ROUTE.replaceAll("SUBSCRIPTION_ID", subscription));
                 setTablesData();
             }
             
@@ -769,7 +769,6 @@
             else
                 $('[data-bs-target="#renewModal"]').removeClass('disabled');
         }
-
 
         $(document).on( 'click', '#renewModal #submitButton', function(e){
         
