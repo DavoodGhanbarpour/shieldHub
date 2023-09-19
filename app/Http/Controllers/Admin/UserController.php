@@ -184,7 +184,7 @@ class UserController extends Controller
     /**
      * @throws Throwable
      */
-    public function detachInbounds(Subscription $subscription, User $user): JsonResponse
+    public function detachInbounds(User $user, Subscription $subscription): JsonResponse
     {
         $user->deleteSubscription($subscription->id);
         return response()->json(['status' => 'success']);

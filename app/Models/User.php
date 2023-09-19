@@ -102,8 +102,7 @@ class User extends Authenticatable
      */
     public function deleteSubscription($subscriptionId): void
     {
-        $this->activeSubscriptions()->wherePivot('id', $subscriptionId)->getModel()->deleteOrFail();
-        $this->invoices()->where('id', $subscriptionId)->getModel()->deleteOrFail();
+        $this->activeSubscriptions()->detach($subscriptionId);
     }
 
     public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO)
