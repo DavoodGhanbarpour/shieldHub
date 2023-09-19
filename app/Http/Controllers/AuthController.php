@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\AuthFacade;
 use App\Http\Requests\AuthenticateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
