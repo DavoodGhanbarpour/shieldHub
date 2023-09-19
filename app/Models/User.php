@@ -117,11 +117,14 @@ class User extends Authenticatable
 
     public function createSubscription(InboundDTO $inbound): void
     {
-        if (!$this->hasSubscription($inbound->start_date, $inbound->end_date)) {
-            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray());
-            $subscription = $this->inbounds()->get()?->first()?->pivot;
-            $debitPrice = $subscription->subscription_price * Carbon::parse($subscription->start_date)
-                    ->diffInDays($subscription->end_date);
+        if (!$this->hasSubscription($inbound)) {
+            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now(), 'updated_at' => now()]);
+            $subscription = $this->inbounds()
+                ->where('inbounds.id', $inbound->inbound_id)
+                ->orderByPivot('id')
+                ->get()?->first()?->pivot;
+            $debitPrice = $inbound->subscription_price * (Carbon::parse($inbound->start_date)
+                    ->diffInDays($inbound->end_date));
 
             $this->invoices()->create([
                 'debit' => round($debitPrice),
@@ -176,11 +179,12 @@ class User extends Authenticatable
         ->map($subscriptionRenewMaker);
     }
 
-    public function hasSubscription($dateFrom, $dateTo): bool
+    public function hasSubscription(InboundDTO $inboundDTO): bool
     {
         return $this->inbounds()
-            ->wherePivot('start_date', '>=', $dateFrom)
-            ->wherePivot('end_date', '<=', $dateTo)
+            ->where('inbounds.id', $inboundDTO->inbound_id)
+            ->wherePivot('start_date', '>=', $inboundDTO->start_date)
+            ->wherePivot('end_date', '<=', $inboundDTO->end_date)
             ->exists();
     }
 

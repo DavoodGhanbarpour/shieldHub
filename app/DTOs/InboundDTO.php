@@ -18,7 +18,7 @@ class InboundDTO extends ValidatedDTO
     protected function rules(): array
     {
         return [
-            'inbound_id' => ['required', 'exists:inbounds,id'],
+            'inbound_id' => ['required', 'integer', 'exists:inbounds,id'],
             'subscription_price' => ['required', new CommaSeparatedPrice()],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
