@@ -12,6 +12,7 @@ class Subscription extends Pivot
     use HasFactory;
 
     protected $table = 'subscriptions';
+    public $timestamps = true;
 
     /**
      * Indicates if the IDs are auto-incrementing.

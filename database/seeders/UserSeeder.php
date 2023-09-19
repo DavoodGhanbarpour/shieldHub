@@ -26,6 +26,8 @@ class UserSeeder extends Seeder
                 'subscription_price' => fake()->numberBetween('0'),
                 'start_date' => fake()->date(),
                 'end_date' => Carbon::parse(fake()->date())->addMonth(1),
+                'created_at' => now(),
+                'updated_at' => now(),
             ])
             ->count(10)
             ->create();

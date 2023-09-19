@@ -31,63 +31,38 @@ class User extends Authenticatable
 
     const CUSTOMER = 'customer';
 
-    const SUPPORTED_LANGUAGES = [
-        'en' => [
-            'dir' => 'ltr',
-            'key' => 'en',
-        ],
-        'fa' => [
-            'dir' => 'rtl',
-            'key' => 'fa',
-        ],
-    ];
+    const SUPPORTED_LANGUAGES = ['en' => ['dir' => 'ltr', 'key' => 'en',], 'fa' => ['dir' => 'rtl', 'key' => 'fa',],];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-        'locale',
-        'last_visit',
-        'status',
-    ];
+    protected $fillable = ['name', 'email', 'password', 'role', 'locale', 'last_visit', 'status',];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token',];
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = ['email_verified_at' => 'datetime',];
 
     public function inbounds(): BelongsToMany
     {
-        return $this->belongsToMany(Inbound::class, 'subscriptions')
-            ->using(Subscription::class)
-            ->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
+        return $this->belongsToMany(Inbound::class, 'subscriptions')->using(Subscription::class)->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
 
     }
 
     public function activeSubscriptions(): BelongsToMany
     {
-        return $this->inbounds()
-            ->wherePivot('end_date', '>', now());
+        return $this->inbounds()->wherePivot('end_date', '>', now());
     }
 
     public function invoices(): HasMany
@@ -119,19 +94,6 @@ class User extends Authenticatable
     {
         if (!$this->hasSubscription($inbound)) {
             $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now(), 'updated_at' => now()]);
-            $subscription = $this->inbounds()
-                ->where('inbounds.id', $inbound->inbound_id)
-                ->orderByPivot('id')
-                ->get()?->first()?->pivot;
-            $debitPrice = $inbound->subscription_price * (Carbon::parse($inbound->start_date)
-                    ->diffInDays($inbound->end_date));
-
-            $this->invoices()->create([
-                'debit' => round($debitPrice),
-                'user_id' => $subscription->user_id,
-                'subscription_id' => $subscription->id,
-                'date' => now(),
-            ]);
         }
     }
 
@@ -146,37 +108,24 @@ class User extends Authenticatable
 
     public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO)
     {
-        $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO){
+        $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO) {
             $lastInbound = $inbound->last();
             if (is_null($lastInbound)) {
                 return;
             }
 
             $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
-            if (isset($renewSubscriptionDTO->date))
-                $endDate = Carbon::parse($renewSubscriptionDTO->date);
-            else
+            if (isset($renewSubscriptionDTO->date)) $endDate = Carbon::parse($renewSubscriptionDTO->date); else
                 $endDate = $startDate->clone()->addDays($renewSubscriptionDTO->day_count);
 
             if ($startDate->gte($endDate)) {
                 return;
             }
 
-            $this->createSubscription(new InboundDTO([
-                'inbound_id' => $lastInbound->id,
-                'start_date' => $startDate->format('Y-m-d'),
-                'end_date' => $endDate->format('Y-m-d'),
-                'subscription_price' => removeSeparator(
-                    $renewSubscriptionDTO->subscription_price ?? $lastInbound->pivot->subscription_price
-                ),
-            ]));
+            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d'), 'end_date' => $endDate->format('Y-m-d'), 'subscription_price' => removeSeparator($renewSubscriptionDTO->subscription_price ?? $lastInbound->pivot->subscription_price),]));
         };
 
-        $this->inbounds()
-            ->orderBy('end_date')
-            ->get()
-            ->groupBy('id')
-        ->map($subscriptionRenewMaker);
+        $this->inbounds()->orderBy('end_date')->get()->groupBy('id')->map($subscriptionRenewMaker);
     }
 
     public function hasSubscription(InboundDTO $inboundDTO): bool
@@ -193,32 +142,23 @@ class User extends Authenticatable
      */
     public function setLocale(string $locale): bool
     {
-        throw_if(
-            ! in_array($locale, array_column(User::SUPPORTED_LANGUAGES, 'key')),
-            new NotInSupportedLanguagesListException("Provided language {$locale} is not supported")
-        );
+        throw_if(!in_array($locale, array_column(User::SUPPORTED_LANGUAGES, 'key')), new NotInSupportedLanguagesListException("Provided language {$locale} is not supported"));
 
         return $this->update(['locale' => $locale]);
     }
 
     public function updateVisitTime(): bool
     {
-        return $this->update([
-            'last_visit' => now(),
-        ]);
+        return $this->update(['last_visit' => now(),]);
     }
 
     protected function last_visit(): Attribute
     {
-        return Attribute::make(
-            set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s')
-        );
+        return Attribute::make(set: fn(string $value) => Carbon::parse($value)->format('Y-m-d H:i:s'));
     }
 
     protected function password(): Attribute
     {
-        return Attribute::make(
-            set: fn(string $value) => Hash::make($value)
-        );
+        return Attribute::make(set: fn(string $value) => Hash::make($value));
     }
 }
