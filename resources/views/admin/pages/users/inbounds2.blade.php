@@ -449,18 +449,27 @@
                 await attachInbounds();
                 setTablesData();
             }
+
             async function attachInbounds() {
 
                 try {
-                    
-
                     const result = await axios.post(
                         '{{route("admin.users.inbounds.create", ["user" => $user->id])}}', {
                             inbounds: await getSelectedInbounds(),
                         }
-                    );
+                    ).then(function(response){
 
-                    return true;
+                        if ( response.data.status != 'success' ) {
+
+                            toastr.error('Subscription(s) adding failed!');
+                        } else {
+                            toastr.success('Subscription(s) added successfully');
+                        }
+                    }).catch(function(error) {
+                        toastr.error('Subscription(s) adding failed!');
+                        toastr.error(error);
+                    });
+
                 } catch (error) {
 
                     console.log('attachInbounds error', error);
@@ -732,6 +741,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         detachInbound($(this).data('id'));
+                        setTablesData();
                     }
                 })
             });
@@ -740,8 +750,22 @@
             
             async function detachInbound(subscription) {
                 
-                const result = await axios.delete(DETACH_ROUTE.replaceAll("SUBSCRIPTION_ID", subscription));
-                setTablesData();
+                const result = await axios.delete(
+                    DETACH_ROUTE.replaceAll("SUBSCRIPTION_ID", subscription)
+                ).then(function(response){
+
+                    if ( response.data.status != 'success' ) {
+
+                        toastr.error('Subscription deletion failed!');
+                    } else {
+                        toastr.success('Subscription deleted successfully');
+                    }
+                }).catch(function(error) {
+                    
+                    toastr.error('Subscription deletion failed!');
+                    console.log(error);
+                });
+                return;
             }
             
             $(document).on( 'click', '[data-bs-target="#renewModal"]', function(){
