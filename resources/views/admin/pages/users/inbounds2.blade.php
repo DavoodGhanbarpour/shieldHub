@@ -736,9 +736,11 @@
                 })
             });
             
+            const DETACH_ROUTE = '{{route("admin.users.inbounds.delete", ["user" => $user->id, "subscription" => "1230123"])}}'
+            
             async function detachInbound(subscription) {
                 
-                const result = await axios.delete(`/admin/users/{{$user->id}}/inbounds/${subscription}`);
+                const result = await axios.delete(DETACH_ROUTE.replaceAll("1230123", subscription));
                 setTablesData();
             }
             
