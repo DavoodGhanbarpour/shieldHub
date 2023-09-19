@@ -466,8 +466,8 @@
                             toastr.success('Subscription(s) added successfully');
                         }
                     }).catch(function(error) {
+                        toastr.error(error?.response?.data?.message);
                         toastr.error('Subscription(s) adding failed!');
-                        toastr.error(error);
                     });
 
                 } catch (error) {
@@ -762,8 +762,8 @@
                     }
                 }).catch(function(error) {
                     
+                    toastr.error(error?.response?.data?.message);
                     toastr.error('Subscription deletion failed!');
-                    console.log(error);
                 });
                 return;
             }
