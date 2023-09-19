@@ -111,7 +111,7 @@ class UserController extends Controller
                 ->first()
                 ?->pivot ?: null;
         }
-        return view('admin.pages.users.inbounds', [
+        return view('admin.pages.users.inbounds2', [
             'user' => $user,
             'inbounds' =>
                 collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
