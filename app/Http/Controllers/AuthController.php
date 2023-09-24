@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function authenticate(AuthenticateRequest $request, string $locale): RedirectResponse
     {
-        $credentials = ['email' => $request->input('email'), 'password' => $request->input('password')];
+        $credentials = ['email' => $request->get('email'), 'password' => $request->get('password')];
         $callable = function (User $user) {
             return !$user->isDisabled();
         };
