@@ -17,11 +17,12 @@ class ServerFactory extends Factory
      */
     public function definition(): array
     {
+        $date = fake()->date();
         return [
             'title' => fake()->text('10'),
             'ip' => fake()->ipv4(),
             'start_date' => fake()->date(),
-            'end_date' => Carbon::parse(fake()->date())->addMonth(1),
+            'end_date' => Carbon::parse($date)->addMonth(),
             'description' => fake()->text('50'),
             'subscription_price' => fake()->numberBetween('0'),
         ];
