@@ -50,7 +50,7 @@
                         <div id="servers" class="form-selectgroup"></div>
                     </div>
                 </div>
-                <div class="card-body overflow-auto">
+                <div class="card-body overflow-auto pt-0">
                     <div id="inbounds-table-container" class="table-responsive">
                         <x-tables.default :id="'inboundsTable'" :class="'tableCheckbox justVisiblesMode checkboxTrigger inboundsTable'">
                             <thead> 
@@ -84,7 +84,7 @@
         
         
         <div class="col-md-8 mt-2 mt-md-0 pe-1 ps-0">
-            <div class="card h-40vh mb-2">
+            <div class="card h-37vh mb-2">
                 <div class="card-header pb-0">
                     <div class="col-12">
                         <div class="row">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="card-body overflow-auto">
+                <div class="card-body overflow-auto pt-0">
                     <div id="subscriptions-table-container" class="table-responsive">
                         <x-tables.default :id="'subscriptionsTable'" :class="'tableCheckbox subscriptionsTable'">
                             <thead>
@@ -143,11 +143,25 @@
 
             </div>
 
-            <div class="card h-34vh">
+            <div class="card h-37vh">
 
-                <div class="card-body overflow-auto">
+                <div class="card-header pb-0">
+                    <div class="col-12">
+                        <div class="row">
+
+                            <x-ribbon.default :searchID="'invoicesSearch'" :containerClass="'justify-content-between'" :searchCol="'col-md-4'">
+                                <li>
+                                    <x-buttons.add :link="route('admin.invoices.create', ['userID' => $user->id])" :target="'_blank'" :title="__('app.pageComponents.add') .' '. __('app.invoices.invoice')"/>
+                                </li>
+                            </x-ribbon.default>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body overflow-auto pt-0">
                     <div id="table-default" class="table-responsive">
-                        <x-tables.default :class="'invoicesTable'">
+                        <x-tables.default :id="'invoicesTable'" :class="'invoicesTable'">
                             <thead>
                                 <tr>
                                     <th class="w-6">
@@ -317,6 +331,7 @@
 
     <x-scripts.datatable :datatable="'#inboundsTable'" :search="'#inboundsSearch'"/>
     <x-scripts.datatable :datatable="'#subscriptionsTable'" :search="'#subscriptionsSearch'"/>
+    <x-scripts.datatable :datatable="'#invoicesTable'" :search="'#invoicesSearch'"/>
     <x-scripts.table-checkbox/>
     <x-libs.pwt-datepicker/>
 
@@ -688,8 +703,10 @@
 
             function setInvoices(invoices) {
 
-                $('.invoicesTable tbody').html('');
-                $('.invoicesTable tfoot').html('');
+                
+                $('#invoicesTable tbody').html('');
+                $('#invoicesTable tfoot').html('');
+                resetDatatable($('#invoicesTable'));
                 let index = 1;
                 invoices.forEach(invoice => {
                     
@@ -725,6 +742,7 @@
                         </tr>
                     `);
                 });
+                initializeDatatable($('#invoicesTable'), '#invoicesSearch');
             }
         /* Invoices end */
 
@@ -832,12 +850,8 @@
                 height: 75vh;
             }
 
-            .h-40vh {
-                height: 40vh;
-            }
-
-            .h-34vh {
-                height: 34vh;
+            .h-37vh {
+                height: 37vh;
             }
 
             table.dataTable thead > tr > th.sorting::before, table.dataTable thead > tr > th.sorting_asc::before, table.dataTable thead > tr > th.sorting_desc::before, table.dataTable thead > tr > th.sorting_asc_disabled::before, table.dataTable thead > tr > th.sorting_desc_disabled::before, table.dataTable thead > tr > td.sorting::before, table.dataTable thead > tr > td.sorting_asc::before, table.dataTable thead > tr > td.sorting_desc::before, table.dataTable thead > tr > td.sorting_asc_disabled::before, table.dataTable thead > tr > td.sorting_desc_disabled::before, 

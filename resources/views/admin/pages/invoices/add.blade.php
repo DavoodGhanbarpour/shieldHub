@@ -16,6 +16,9 @@
                         <select name="user_id" class="form-select select2" placeholder="{{__('app.auth.user')}}">
                             @foreach($users as $eachUser)
                                 <option
+                                    @if(isset($_GET['userID']) && ($eachUser->id == $_GET['userID']))
+                                        {{'selected'}}
+                                    @endif
                                     value="{{$eachUser->id}}">
                                     {{$eachUser->name}}
                                 </option>
