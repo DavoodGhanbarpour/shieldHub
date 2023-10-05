@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Throwable;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @author Davood Ghanbarpour <ghanbarpour.davood@gmail.com>
@@ -97,6 +98,23 @@ class User extends Authenticatable
         }
     }
 
+    public function debits(): Collection
+    {
+        return $this->inbounds()
+            ->selectRaw('( `subscriptions`.`subscription_price` * DATEDIFF(end_date, start_date) ) as debit')
+            ->withPivot([
+                'end_date',
+                'start_date',
+                'created_at',
+            ])
+            ->get();
+    }
+
+    public function credits()
+    {
+        return $this->invoices()->get();
+    }
+
     /**
      * @throws Throwable
      */
@@ -105,7 +123,7 @@ class User extends Authenticatable
         $this->activeSubscriptions()->detach($subscriptionId);
     }
 
-    public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO)
+    public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO): void
     {
         $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO) {
             $lastInbound = $inbound->last();

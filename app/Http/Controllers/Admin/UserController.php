@@ -139,7 +139,23 @@ class UserController extends Controller
 
     public function invoicesJson(User $user): JsonResponse
     {
-        return response()->json(['invoices' => $user->invoices, 'user' => $user]);
+        $debits = [];
+        $credits = [];
+        foreach ($user->credits() as $key => $each){
+            $credits[$key]['description'] = $each->description;
+            $credits[$key]['debit'] = 0;
+            $credits[$key]['credit'] = $each->credit;
+            $credits[$key]['created_at'] = $each->date;
+        }
+
+        foreach ($user->debits() as $key => $each){
+            $debits[$key]['description'] = $each->description;
+            $debits[$key]['debit'] = $each->debit;
+            $debits[$key]['credit'] = 0;
+            $debits[$key]['created_at'] = $each->created_at;
+        }
+
+        return response()->json(['invoices' => array_merge($debits, $credits), 'user' => $user]);
     }
 
     public function subscriptions(User $user)
