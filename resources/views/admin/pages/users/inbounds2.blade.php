@@ -716,8 +716,13 @@
                 $('#invoicesTable tfoot').html('');
                 resetDatatable($('#invoicesTable'));
                 let index = 1;
+                let credits = 0;
+                let debits = 0;
                 invoices.forEach(invoice => {
                     
+                    credits += (invoice?.credit ?? 0);
+                    debits += (invoice?.debit ?? 0);
+
                     $('.invoicesTable tbody').append(`
                         <tr>
                             <td class="sort-index">${index++}</td>
@@ -754,16 +759,16 @@
                 $('#invoicesTable tfoot').append(`
                     <tr>
                         <td colspan="3">{{__('app.general.total')}}:</td>
-                        <td class="text-center">${number_format(100000)}</td>
-                        <td class="text-center">${number_format(250000)}</td>
+                        <td class="text-center">${number_format(credits)}</td>
+                        <td class="text-center">${number_format(debits)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td colspan="3">{{__('app.general.remain')}}:</td>
-                        <td class="text-center" colspan="2">${number_format(150000)}</td>
+                        <td class="text-center" colspan="2">${number_format(credits - debits)}</td>
                         <td></td>
                     </tr>
-                    ${getInvoicesFooter(100000 - 250000)}
+                    ${getInvoicesFooter(credits - debits)}
                 `);
                 initializeDatatable($('#invoicesTable'), '#invoicesSearch');
             }
