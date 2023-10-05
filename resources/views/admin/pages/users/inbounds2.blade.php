@@ -4,6 +4,14 @@
     <meta name="_token" content="{{csrf_token()}}">
 @endsection
 
+@section('actions')
+    <div class="col-auto ms-auto d-print-none">
+        <div class="btn-list">
+            <x-buttons.refresh/>
+        </div>
+    </div>
+@endsection
+
 @section('title', __('app.inbounds.assign_inbounds',['user' => $user->name]))
 
 @section('content')
@@ -187,7 +195,7 @@
                             <tbody class="table-tbody">
                             </tbody>
                             <tfoot>
-                                {{-- <tr>
+                                <tr>
                                     <td colspan="3">{{__('app.general.total')}}:</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
@@ -195,7 +203,7 @@
                                 <tr>
                                     <td colspan="3">{{__('app.general.remain')}}:</td>
                                     <td class="text-center" colspan="2"></td>
-                                </tr> --}}
+                                </tr>
                             </tfoot>
                         </x-tables.default>
                     </div>
@@ -366,6 +374,7 @@
                 $(`.target-id-${$(this).data('target-item')}`).removeClass('d-none');
             });
 
+            $(document).on( 'click', '#refreshButton', setTablesData);
             function validateSelectedInbounds() {
                 
                 if ( $('.inboundsTable .table-checkbox.isAttachedToUser:checked').length )
@@ -702,7 +711,6 @@
             }
 
             function setInvoices(invoices) {
-
                 
                 $('#invoicesTable tbody').html('');
                 $('#invoicesTable tfoot').html('');
@@ -713,7 +721,7 @@
                     $('.invoicesTable tbody').append(`
                         <tr>
                             <td class="sort-index">${index++}</td>
-                            <td class="sort-date">${invoice?.date}</td>
+                            <td class="sort-date">${invoice?.created_at}</td>
                             <td class="sort-description">${invoice?.description || ''}</td>
                             <td class="sort-credit">${number_format(invoice?.credit)}</td>
                             <td class="sort-debit">${number_format(invoice?.debit)}</td>
@@ -742,7 +750,47 @@
                         </tr>
                     `);
                 });
+
+                $('#invoicesTable tfoot').append(`
+                    <tr>
+                        <td colspan="3">{{__('app.general.total')}}:</td>
+                        <td class="text-center">${number_format(100000)}</td>
+                        <td class="text-center">${number_format(250000)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">{{__('app.general.remain')}}:</td>
+                        <td class="text-center" colspan="2">${number_format(150000)}</td>
+                        <td></td>
+                    </tr>
+                    ${getInvoicesFooter(100000 - 250000)}
+                `);
                 initializeDatatable($('#invoicesTable'), '#invoicesSearch');
+            }
+
+            function getInvoicesFooter(price) {
+
+                let firstPrice = price;
+                price = number_format(Math.abs(price));
+                let title = "{{__('app.general.you_dont_have_credit_or_debt')}}";
+                let bgClass = "";
+
+                if ( firstPrice < 0 )
+                {
+                    title = `Your account has (<span class='fw-bold'>${price}</span>) debt`;
+                    bgClass = 'text-danger';
+                }
+                else if ( firstPrice > 0 )
+                {
+                    title = `Your account has (<span class='fw-bold'>${price}</span>) credit`;
+                    bgClass = 'text-success';
+                }
+
+                return `<tr class="${bgClass}">
+                            <td colspan="6">
+                                ${title}.
+                            </td>
+                        </tr>`;
             }
         /* Invoices end */
 
