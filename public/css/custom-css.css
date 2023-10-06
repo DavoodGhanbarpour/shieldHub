@@ -437,7 +437,7 @@ body, button, input, select {
 }
 
 .table-loading tr {
-    animation: placeholder-glow 2s ease-in-out infinite;
+    animation: placeholder-glow 1s ease-in-out infinite;
     background-color: currentColor !important;
     border-radius: var(--tblr-border-radius);
     opacity: 0.2;

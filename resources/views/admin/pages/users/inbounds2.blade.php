@@ -358,11 +358,20 @@
 
                 if ( status ) {
                     
+                    const tempRows = (tableID) => {
+                        return Array((20 - $(`#${tableID} tbody tr`).length)).fill('<tr class="odd loading-tr"><td colspan="100%">&nbsp;</td></tr>');
+                    }
+
+                    $('#inboundsTable tbody').append(tempRows('inboundsTable'));
+                    $('#subscriptionsTable tbody').append(tempRows('subscriptionsTable'));
+                    $('#invoicesTable tbody').append(tempRows('invoicesTable'));
+
                     $('#inboundsTable, #subscriptionsTable, #invoicesTable').addClass('table-loading');
                 } else {
 
                     setTimeout(() => {
                         
+                        $('#inboundsTable, #subscriptionsTable, #invoicesTable').find('.loading-tr').remove();
                         $('#inboundsTable, #subscriptionsTable, #invoicesTable').removeClass('table-loading');
                     }, 500);
                 }
@@ -374,7 +383,6 @@
                 await setInboundsTableData();
                 await setSubscriptionsTableData();
                 await setInvoicesTableData();
-                
                 setLoading(false);
                 setSeletedInboundsHandler();
                 setAllTablesCheckbox();
