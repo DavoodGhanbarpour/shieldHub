@@ -214,7 +214,32 @@ class UserController extends Controller
     public function renewSubscriptions(RenewSubscriptionsRequest $request): RedirectResponse
     {
         foreach ($request->validated('tableCheckbox') as $userId => $each) {
-            User::find($userId)->renewSubscription(new RenewSubscriptionDTO(['day_count' => $request->input('daysCount'), 'date' => $request->input('date'), 'price' => $request->input('price'),]));
+            User::find($userId)
+                ->renewSubscription(new RenewSubscriptionDTO([
+                    'day_count' => $request->input('daysCount'),
+                    'date' => $request->input('date'),
+                    'price' => $request->input('price'),
+                    ])
+                );
+        }
+        return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws ValidationException
+     */
+    public function renewSubscriptionsById(Inbound $inbound,RenewSubscriptionsRequest $request): RedirectResponse
+    {
+        foreach ($request->validated('tableCheckbox') as $userId => $each) {
+            User::find($userId)
+                ->renewSubscriptionById($inbound,new RenewSubscriptionDTO([
+                        'day_count' => $request->input('daysCount'),
+                        'date' => $request->input('date'),
+                        'price' => $request->input('price'),
+                    ])
+                );
         }
         return redirect()->route('admin.users.index');
     }
