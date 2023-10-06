@@ -6,6 +6,7 @@ use App\DTOs\InboundDTO;
 use App\DTOs\RenewSubscriptionDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
+use App\Http\Requests\Admin\RenewSubscriptionsByInboundsId;
 use App\Http\Requests\Admin\RenewSubscriptionsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
@@ -230,16 +231,15 @@ class UserController extends Controller
      * @throws MissingCastTypeException
      * @throws ValidationException
      */
-    public function renewSubscriptionsById(Inbound $inbound,RenewSubscriptionsRequest $request): RedirectResponse
+    public function renewSubscriptionsById(User $user, RenewSubscriptionsByInboundsId $request): RedirectResponse
     {
-        foreach ($request->validated('tableCheckbox') as $userId => $each) {
-            User::find($userId)
-                ->renewSubscriptionById($inbound,new RenewSubscriptionDTO([
-                        'day_count' => $request->input('daysCount'),
-                        'date' => $request->input('date'),
-                        'price' => $request->input('price'),
-                    ])
-                );
+        foreach ($request->validated('inbounds') as $eachId) {
+            $user->renewSubscriptionById(Inbound::find($eachId),new RenewSubscriptionDTO([
+                    'day_count' => $request->input('daysCount'),
+                    'date' => $request->input('date'),
+                    'price' => $request->input('price'),
+                ])
+            );
         }
         return redirect()->route('admin.users.index');
     }

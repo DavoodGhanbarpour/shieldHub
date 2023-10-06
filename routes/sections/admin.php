@@ -30,7 +30,7 @@ Route::name('users.')->prefix('users')->group(function () {
 
 Route::name('subscriptions.')->prefix('subscriptions')->group(function (){
     Route::post('renew', [UserController::class, 'renewSubscriptions'])->name('renew');
-    Route::post('renew/{inbound}', [UserController::class, 'renewSubscriptionsById'])->name('renew.one');
+    Route::post('renew/{user}', [UserController::class, 'renewSubscriptionsById'])->name('renew.one');
 });
 
 // Inbound Routes
