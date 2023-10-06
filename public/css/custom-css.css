@@ -435,3 +435,10 @@ body, button, input, select {
 .w-100 {
     width: 100% !important;
 }
+
+.table-loading tr {
+    animation: placeholder-glow 2s ease-in-out infinite;
+    background-color: currentColor !important;
+    border-radius: var(--tblr-border-radius);
+    opacity: 0.2;
+}

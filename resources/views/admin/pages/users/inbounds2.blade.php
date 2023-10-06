@@ -354,10 +354,28 @@
                 setTablesData();
             });
 
+            function setLoading(status = true) {
+
+                if ( status ) {
+                    
+                    $('#inboundsTable, #subscriptionsTable, #invoicesTable').addClass('table-loading');
+                } else {
+
+                    setTimeout(() => {
+                        
+                        $('#inboundsTable, #subscriptionsTable, #invoicesTable').removeClass('table-loading');
+                    }, 500);
+                }
+            }
+
             async function setTablesData() {
+                
+                setLoading(true);
                 await setInboundsTableData();
                 await setSubscriptionsTableData();
                 await setInvoicesTableData();
+                
+                setLoading(false);
                 setSeletedInboundsHandler();
                 setAllTablesCheckbox();
             }
