@@ -701,7 +701,7 @@
                             </td>
                             <td class="sort-description">${subscription?.description || ''}</td>
                             <td class="copy-parent">
-                                <span class="d-none copy-text">${subscription?.link}</span>
+                                <span class="d-none copy-text">${subscription?.inbound?.link}</span>
 
                                 <div class="btn-list flex-nowrap justify-content-center">
                                     <a href="#" class="btn btn-secondary copy-button my-1 px-2">
