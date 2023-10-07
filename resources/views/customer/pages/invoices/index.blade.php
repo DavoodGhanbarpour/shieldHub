@@ -34,13 +34,9 @@
                     @foreach($invoices as $eachInvoice)
                         <tr>
                             <td class="sort-index">{{$index++}}</td>
-                            <td class="sort-date">{{isset($eachInvoice['date'])?convertDate($eachInvoice['date']):''}}</td>
+                            <td class="sort-date">{{isset($eachInvoice['date']) ? convertDate($eachInvoice['date']) : ''}}</td>
                             <td class="sort-description">{{$eachInvoice['description']}}</td>
                             <td class="sort-price">
-                                <script>
-                                    console.log('credit: ' + '{{$eachInvoice['credit']}}');
-                                    console.log('debit: ' + '{{$eachInvoice['debit']}}');
-                                </script>
                                 @if ($eachInvoice['credit'] > 0)
                                     <strong class="text-success">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
