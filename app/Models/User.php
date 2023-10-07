@@ -101,7 +101,7 @@ class User extends Authenticatable
     public function debits(): Collection
     {
         return $this->inbounds()
-            ->selectRaw('( `subscriptions`.`subscription_price` * DATEDIFF(end_date, start_date) ) as debit')
+            ->selectRaw('ROUND( `subscriptions`.`subscription_price` * DATEDIFF(end_date, start_date) ) as debit')
             ->withPivot([
                 'end_date',
                 'start_date',
