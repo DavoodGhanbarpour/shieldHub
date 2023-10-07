@@ -56,7 +56,7 @@
                             </tr>
                         @php
                             $debits += $eachUser->inbounds_sum_debit;
-                            $credits += $eachUser->invoices_sum_debit;
+                            $credits += $eachUser->invoices_sum_credit;
                         @endphp
                         @endforeach
                     </tbody>
