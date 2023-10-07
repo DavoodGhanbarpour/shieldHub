@@ -216,12 +216,12 @@ class UserController extends Controller
     {
         foreach ($request->validated('tableCheckbox') as $userId => $each) {
             User::find($userId)
-                ->renewSubscription(new RenewSubscriptionDTO([
+                ->renewSubscription([
                     'day_count' => $request->input('daysCount'),
-                    'date' => $request->input('date'),
+                    'start_date' => $request->input('start_date'),
+                    'end_date' => $request->input('end_date'),
                     'price' => $request->input('price'),
-                    ])
-                );
+                ]);
         }
         return redirect()->route('admin.users.index');
     }
