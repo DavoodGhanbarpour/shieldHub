@@ -17,7 +17,8 @@ class RenewSubscriptionsRequest extends FormRequest
         return [
             'tableCheckbox' => ['required', 'array'],
             'daysCount' => ['required_without:date', 'integer'],
-            'date' => ['required_without:daysCount', 'date'],
+            'start_date' => ['sometimes', 'date'],
+            'end_date' => ['required_without:daysCount', 'date'],
             'price' => ['sometimes', new CommaSeparatedPrice()]
         ];
     }

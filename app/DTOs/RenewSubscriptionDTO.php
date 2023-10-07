@@ -8,17 +8,14 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class RenewSubscriptionDTO extends ValidatedDTO
 {
-    public ?string $date;
+    public ?string $start_date;
+    public ?string $end_date;
     public ?int $day_count;
     public ?float $price;
 
     protected function rules(): array
     {
-        return [
-            'price' => ['sometimes', new CommaSeparatedPrice()],
-            'date' => ['required_without:day_count', 'date'],
-            'day_count' => ['required_without:date', 'integer'],
-        ];
+        return [];
     }
 
     protected function defaults(): array

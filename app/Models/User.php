@@ -132,36 +132,42 @@ class User extends Authenticatable
             }
 
             $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
-            if (isset($renewSubscriptionDTO->date)) $endDate = Carbon::parse($renewSubscriptionDTO->date); else
+            if (isset($renewSubscriptionDTO->end_date)) $endDate = Carbon::parse($renewSubscriptionDTO->end_date); else
                 $endDate = $startDate->clone()->addDays($renewSubscriptionDTO->day_count);
 
             if ($startDate->gte($endDate)) {
                 return;
             }
 
-            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d'), 'end_date' => $endDate->format('Y-m-d'), 'subscription_price' => removeSeparator($renewSubscriptionDTO->subscription_price ?? $lastInbound->pivot->subscription_price),]));
+            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d H:i:s'), 'end_date' => $endDate->format('Y-m-d H:i:s'), 'subscription_price' => removeSeparator($renewSubscriptionDTO->price ?? $lastInbound->pivot->subscription_price),]));
         };
 
         $this->inbounds()->find($inboundModel->id)->map($subscriptionRenewMaker);
     }
 
-    public function renewSubscription(RenewSubscriptionDTO $renewSubscriptionDTO): void
+    public function renewSubscription(array $renewSubscriptionArray): void
     {
-        $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO) {
+        $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionArray) {
             $lastInbound = $inbound->last();
             if (is_null($lastInbound)) {
                 return;
             }
 
-            $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
-            if (isset($renewSubscriptionDTO->date)) $endDate = Carbon::parse($renewSubscriptionDTO->date); else
-                $endDate = $startDate->clone()->addDays($renewSubscriptionDTO->day_count);
+            if(isset($renewSubscriptionArray['start_date'])){
+                $startDate = Carbon::parse($renewSubscriptionArray['start_date']);
+            }else{
+                $startDate = Carbon::parse(lastInbound->pivot->end_date)->addDay();
+            }
+            if (isset($renewSubscriptionArray['end_date'])) 
+                $endDate = Carbon::parse($renewSubscriptionArray['end_date']); 
+            else
+                $endDate = $startDate->clone()->addDays($renewSubscriptionArray['day_count']);
 
             if ($startDate->gte($endDate)) {
                 return;
             }
 
-            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d'), 'end_date' => $endDate->format('Y-m-d'), 'subscription_price' => removeSeparator($renewSubscriptionDTO->subscription_price ?? $lastInbound->pivot->subscription_price),]));
+            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d'), 'end_date' => $endDate->format('Y-m-d'), 'subscription_price' => removeSeparator($renewSubscriptionArray['price'] ?? $lastInbound->pivot->subscription_price),]));
         };
 
         $this->inbounds()->orderBy('end_date')->get()->groupBy('id')->map($subscriptionRenewMaker);
