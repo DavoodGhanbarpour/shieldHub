@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                         <tr>
@@ -44,8 +45,8 @@
                                 <td class="sort-index">{{$index++}}</td>
                                 <td class="sort-user">{{$eachUser->name}}</td>
                                 <td class="sort-credit">{{addSeparator($eachUser->invoices_sum_credit)}}</td>
-                                <td class="sort-debit">{{addSeparator($eachUser->invoices_sum_debit)}}</td>
-                                <td class="sort-total">{{addSeparator($eachUser->invoices_sum_credit - $eachUser->invoices_sum_debit)}}</td>
+                                <td class="sort-debit">{{addSeparator($eachUser->inbounds_sum_debit)}}</td>
+                                <td class="sort-total">{{addSeparator($eachUser->invoices_sum_credit - $eachUser->inbounds_sum_debit)}}</td>
                                 <td class="sort-subscription-count">{{$eachUser->active_subscriptions_count}}</td>
                                 <td>
                                     <div class="btn-list flex-nowrap justify-content-center">
@@ -54,7 +55,7 @@
                                 </td>
                             </tr>
                         @php
-                            $debits += $eachUser->invoices_sum_credit;
+                            $debits += $eachUser->inbounds_sum_debit;
                             $credits += $eachUser->invoices_sum_debit;
                         @endphp
                         @endforeach
@@ -74,6 +75,6 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
 
 @endsection

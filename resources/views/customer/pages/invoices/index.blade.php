@@ -7,23 +7,21 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                     <tr>
-                        <th>
+                        <th class="w-10">
                             {{__('app.pageComponents.index')}}
                         </th>
-                        <th>
+                        <th class="w-20">
                             {{__('app.general.date')}}
                         </th>
-                        <th>
+                        <th class="w-50">
                             {{__('app.general.description')}}
                         </th>
-                        <th>
-                            {{__('app.general.credit')}}
-                        </th>
-                        <th>
-                            {{__('app.general.debit')}}
+                        <th class="w-20">
+                            {{__('app.general.price')}}
                         </th>
                     </tr>
                     </thead>
@@ -36,36 +34,38 @@
                     @foreach($invoices as $eachInvoice)
                         <tr>
                             <td class="sort-index">{{$index++}}</td>
-                            <td class="sort-date">{{convertDate($eachInvoice->date)}}</td>
-                            <td class="sort-description">{{$eachInvoice->description}}</td>
-                            <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
-                            <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
+                            <td class="sort-date">{{isset($eachInvoice['date']) ? convertDate($eachInvoice['date']) : ''}}</td>
+                            <td class="sort-description">{{$eachInvoice['description']}}</td>
+                            <td class="sort-price">
+                                @if ($eachInvoice['credit'] > 0)
+                                    <strong class="text-success">
+                                        +
+                                        {{addSeparator($eachInvoice['credit'])}}
+                                    </strong>
+                                @else
+                                    <strong class="text-danger">
+                                        -
+                                        {{addSeparator($eachInvoice['debit'])}}
+                                    </strong>
+                                @endif
+                            </td>
                         </tr>
                         @php
-                            $debits += $eachInvoice->debit;
-                            $credits += $eachInvoice->credit
+                            $debits += $eachInvoice['debit'];
+                            $credits += $eachInvoice['credit']
                         @endphp
                     @endforeach
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colspan="3">{{__('app.general.total')}}:</td>
-                            <td class="text-center">{{addSeparator($credits)}}</td>
-                            <td class="text-center">{{addSeparator($debits)}}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">{{__('app.general.remain')}}:</td>
-                            <td class="text-center" colspan="2">{{addSeparator(abs($credits - $debits))}}</td>
-                        </tr>
-                        <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
+                        <x-general.remaining :colspan="4" :price="($credits - $debits)"/>
                     </tfoot>
                 </x-tables.default>
             </div>
         </div>
     </div>
 
+    <x-scripts.datatable/>
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
 
     @push('styles')
         <style>

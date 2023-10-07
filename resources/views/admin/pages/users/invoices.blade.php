@@ -12,6 +12,7 @@
 
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                     <tr>
@@ -68,12 +69,14 @@
                             <td colspan="3">{{__('app.general.total')}}:</td>
                             <td class="text-center">{{addSeparator($credits)}}</td>
                             <td class="text-center">{{addSeparator($debits)}}</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="3">{{__('app.general.remain')}}:</td>
                             <td class="text-center" colspan="2">{{addSeparator(abs($credits - $debits))}}</td>
+                            <td></td>
                         </tr>
-                        <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
+                        <x-general.remaining :colspan="6" :price="($credits - $debits)"/>
                     </tfoot>
                 </x-tables.default>
             </div>
@@ -82,6 +85,6 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
 
 @endsection

@@ -12,6 +12,7 @@
 
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                         <tr>
@@ -31,7 +32,7 @@
                                 {{__('app.general.end_date')}}
                             </th>
                             <th>
-                                {{__('app.general.remains')}}
+                                {{__('app.general.remain')}}
                             </th>
                             <th>
                                 {{__('app.general.subscription_price')}}
@@ -77,6 +78,6 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
 
 @endsection

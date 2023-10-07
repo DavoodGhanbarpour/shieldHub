@@ -1,5 +1,5 @@
 function number_format(number, thousands_sep) {
-    if (typeof number == 'undefined' || !number.length)
+    if (number == undefined || !number.toString().length)
         return number;
     
     if ( isNaN(number_unformat(number)) )

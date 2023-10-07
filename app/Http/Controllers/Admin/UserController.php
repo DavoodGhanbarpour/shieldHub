@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\NotificationEvent;
-use App\Facades\InvoiceFacade;
-use App\Facades\UserFacade;
+use App\DTOs\InboundDTO;
+use App\DTOs\RenewSubscriptionDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AssignInboundsRequest;
+use App\Http\Requests\Admin\RenewSubscriptionsByInboundsId;
 use App\Http\Requests\Admin\RenewSubscriptionsRequest;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Inbound;
 use App\Models\Server;
+use App\Models\Subscription;
 use App\Models\User;
+use App\Services\UserService;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use Throwable;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class UserController extends Controller
 {
@@ -34,8 +38,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        UserFacade::upsert($request->validated());
-
+        User::create($request->validated());
         return redirect()->route('admin.users.index');
     }
 
@@ -44,11 +47,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        // event(new NotificationEvent('hello world'));
-
-        return view('admin.pages.users.index', [
-            'users' => User::withCount('activeSubscriptions')->get(),
-        ]);
+        return view('admin.pages.users.index', ['users' => User::withCount('activeSubscriptions')->get(),]);
     }
 
     /**
@@ -64,9 +63,7 @@ class UserController extends Controller
      */
     public function edit(int $id)
     {
-        return view('admin.pages.users.edit', [
-            'user' => User::findOrFail($id),
-        ]);
+        return view('admin.pages.users.edit', ['user' => User::findOrFail($id),]);
     }
 
     /**
@@ -74,10 +71,8 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        if (UserFacade::isEmailUnique($request->get('email'), [$user->email])) {
-            return back()->withErrors([
-                __('validation.exists', ['attribute' => $request->get('email')]),
-            ]);
+        if (UserService::isEmailUnique($request->get('email'), [$user->email])) {
+            return back()->withErrors([__('validation.exists', ['attribute' => $request->get('email')]),]);
         }
 
         $inputs = $request->validated();
@@ -85,17 +80,18 @@ class UserController extends Controller
             unset($inputs['password']);
         }
 
-        UserFacade::upsert($inputs, $user->id);
+        $user->update($inputs);
 
         return redirect()->route('admin.users.index');
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws Throwable
      */
-    public function destroy(int $id)
+    public function destroy(User $user)
     {
-        UserFacade::delete($id);
+        $user->deleteOrFail();
 
         return redirect()->route('admin.users.index');
     }
@@ -105,96 +101,146 @@ class UserController extends Controller
         $result = [];
         foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
             $result[$key] = $each;
-            $result[$key]->subscription_data = $each->activeSubscriptions()
-                ->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))
-                ->first()
-                ?->pivot ?: null;
+            $result[$key]->subscription_data = $each->activeSubscriptions()->whereIn('inbound_id', $user->activeSubscriptions()->pluck('inbound_id'))->first()?->pivot ?: null;
         }
-
-        return view('admin.pages.users.inbounds', [
-            'user' => $user,
-            'inbounds' =>
-                collect($result)->sortBy('subscription_data', SORT_REGULAR, true),
-            'servers' => Server::all()
-        ]);
+        return view('admin.pages.users.inbounds2', ['user' => $user, 'inbounds' => collect($result)->sortBy('subscription_data', SORT_REGULAR, true), 'servers' => Server::all()]);
     }
 
+    public function inbounds2(User $user)
+    {
+        return view('admin.pages.users.inbounds2', ['user' => $user]);
+    }
+
+    public function inboundsJson(User $user): JsonResponse
+    {
+        $result = [];
+        $userInbounds = $user->inbounds()->pluck('inbound_id')->toArray();
+        foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
+            $result[$key]['inbound']['id'] = $each->id;
+            $result[$key]['inbound']['title'] = $each->title;
+            $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['port'] = $each->port;
+            $result[$key]['inbound']['activeSubscriptions'] = $each->active_subscriptions_count;
+            $result[$key]['inbound']['description'] = $each->description;
+            $result[$key]['inbound']['isAttachedToUser'] = in_array($each->id, $userInbounds);
+            $result[$key]['inbound']['defaultStartDate'] = $each->server->start_date;
+            $result[$key]['inbound']['defaultEndDate'] = $each->server->end_date;
+            $result[$key]['inbound']['defaultPrice'] = $each->server->subscription_price;
+            $result[$key]['server']['id'] = $each->server->id;
+            $result[$key]['server']['title'] = $each->server->title;
+            $result[$key]['server']['ip'] = $each->server->ip;
+        }
+        return response()->json(['inbounds' => $result, 'servers' => Server::all()]);
+    }
 
     public function invoices(User $user)
     {
-        return view('admin.pages.users.invoices', [
-            'invoices' => $user->invoices,
-            'user' => $user
-        ]);
+        return view('admin.pages.users.invoices', ['invoices' => $user->invoices, 'user' => $user]);
+    }
+
+    public function invoicesJson(User $user): JsonResponse
+    {
+        $debits = [];
+        $credits = [];
+        foreach ($user->credits() as $key => $each){
+            $credits[$key]['description'] = $each->description;
+            $credits[$key]['debit'] = 0;
+            $credits[$key]['credit'] = $each->credit;
+            $credits[$key]['created_at'] = $each->date;
+        }
+
+        foreach ($user->debits() as $key => $each){
+            $debits[$key]['description'] = $each->description;
+            $debits[$key]['debit'] = $each->debit;
+            $debits[$key]['credit'] = 0;
+            $debits[$key]['created_at'] = $each->created_at;
+        }
+
+        return response()->json(['invoices' => array_merge($debits, $credits), 'user' => $user]);
     }
 
     public function subscriptions(User $user)
     {
-        return view('admin.pages.users.subscriptions', [
-            'subscriptions' => $user->inbounds,
-            'user' => $user
-        ]);
+        return view('admin.pages.users.subscriptions', ['subscriptions' => $user->inbounds, 'user' => $user]);
     }
 
-    public function assignInbounds(AssignInboundsRequest $request, User $user): RedirectResponse
+    public function subscriptionsJson(User $user): JsonResponse
     {
-        $data = collect($request->get('inbounds'))->map(function ($item, $key) {
+        $result = [];
+        foreach ($user->inbounds()->with('server')->get() as $key => $each) {
+            $result[$key]['is_active'] = Carbon::parse($each->pivot->end_date)->gte(now());
+            $result[$key]['subscription_id'] = $each->pivot->id;
+            $result[$key]['start_date'] = $each->pivot->start_date;
+            $result[$key]['end_date'] = $each->pivot->end_date;
+            $result[$key]['description'] = $each->pivot->description;
+            $result[$key]['subscription_price'] = $each->pivot->subscription_price;
+            $result[$key]['remaining_days'] = Carbon::parse($each->pivot->start_date)->diffInDays($each->pivot->end_date) ?? 0;
+            $result[$key]['total_price'] = round($result[$key]['subscription_price'] * $result[$key]['remaining_days']);
+
+            $result[$key]['inbound']['title'] = $each->title;
+            $result[$key]['inbound']['link'] = $each->link;
+            $result[$key]['inbound']['port'] = $each->port;
+            $result[$key]['inbound']['id'] = $each->id;
+            $result[$key]['server']['title'] = $each->server->title;
+            $result[$key]['server']['ip'] = $each->server->ip;
+        }
+        return response()->json(['subscriptions' => $result, 'user' => $user]);
+    }
+
+    public function attachInbounds(AssignInboundsRequest $request, User $user): JsonResponse
+    {
+        collect($request->get('inbounds'))->map(function ($item, $key) use ($user) {
             if ($item['subscription_price']) {
                 $item['subscription_price'] = removeSeparator($item['subscription_price']);
             }
-            return $item;
+            $user->createSubscription(new InboundDTO($item));
         });
-
-        $user->inbounds()->with('activeSubscriptions')->sync($data ?: []);
-
-        $this->deleteUserPastInvoices($user);
-        return redirect()->route('admin.users.index');
+        return response()->json(['status' => 'success']);
     }
 
-    public function renewSubscriptions(RenewSubscriptionsRequest $request)
+    /**
+     * @throws Throwable
+     */
+    public function detachInbounds(User $user, Subscription $subscription): JsonResponse
+    {
+        $user->deleteSubscription($subscription->id);
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws ValidationException
+     */
+    public function renewSubscriptions(RenewSubscriptionsRequest $request): RedirectResponse
     {
         foreach ($request->validated('tableCheckbox') as $userId => $each) {
-            $user = User::find($userId);
-            if ($user->isDisabled()) {
-                continue;
-            }
-            $user->inbounds()->orderBy('end_date', 'asc')->get()->groupBy('id')->map(function ($inbound) use ($user, $request) {
-                $lastInbound = $inbound->last();
-                if (is_null($lastInbound)) {
-                    return;
-                }
-
-                $startDate = \Illuminate\Support\Carbon::parse($lastInbound->pivot->end_date)->addDay();
-                if ($request->filled('date'))
-                    $endDate = \Illuminate\Support\Carbon::parse($request->input('date'));
-                else
-                    $endDate = $startDate->clone()->addDays($request->input('daysCount'));
-
-                if ($startDate->gte($endDate)) {
-                    return;
-                }
-                $user->inbounds()->attach($lastInbound->id, [
-                    'start_date' => $startDate->format('Y-m-d'),
-                    'end_date' => $endDate->format('Y-m-d'),
-                    'subscription_price' => removeSeparator($request->input('price') ?? $lastInbound->pivot->subscription_price)
+            User::find($userId)
+                ->renewSubscription([
+                    'day_count' => $request->input('daysCount'),
+                    'start_date' => $request->input('start_date'),
+                    'end_date' => $request->input('end_date'),
+                    'price' => $request->input('price'),
                 ]);
-                $this->deleteUserPastInvoices($user);
-            });
         }
         return redirect()->route('admin.users.index');
     }
-    /**
-     * @param User $user
-     * @return void
-     * @internal
-     */
-    private function deleteUserPastInvoices(User $user): void
-    {
-        InvoiceFacade::deletePreviousDebitInvoices($user->id);
 
-        $user->inbounds->map(function ($inbound) {
-            if (Carbon::parse($inbound->pivot->end_date)->gte(now()))
-                InvoiceFacade::sendDebit($inbound->pivot->id);
-        });
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws ValidationException
+     */
+    public function renewSubscriptionsById(User $user, RenewSubscriptionsByInboundsId $request): RedirectResponse
+    {
+        foreach ($request->validated('inbounds') as $eachId) {
+            $user->renewSubscriptionById(Inbound::find($eachId),new RenewSubscriptionDTO([
+                    'day_count' => $request->input('daysCount'),
+                    'date' => $request->input('date'),
+                    'price' => $request->input('price'),
+                ])
+            );
+        }
+        return redirect()->route('admin.users.index');
     }
 }

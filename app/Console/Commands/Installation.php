@@ -75,7 +75,7 @@ class Installation extends Command
                 'name' => 'test',
                 'email' => 'test@test.com',
                 'role' => User::ADMIN,
-                'password' => Hash::make($password),
+                'password' => $password,
                 'status' => UserStatus::ENABLED->value
             ]);
         }
@@ -85,7 +85,7 @@ class Installation extends Command
                 'name' => 'test2',
                 'email' => 'test2@test.com',
                 'role' => User::CUSTOMER,
-                'password' => Hash::make($password),
+                'password' => $password,
                 'status' => UserStatus::ENABLED->value
             ]);
         }

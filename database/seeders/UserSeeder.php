@@ -21,11 +21,14 @@ class UserSeeder extends Seeder
                 ->create())
             ->create();
 
+        $date = fake()->date();
         User::factory()
             ->hasAttached($inbounds, [
                 'subscription_price' => fake()->numberBetween('0'),
-                'start_date' => fake()->date(),
-                'end_date' => Carbon::parse(fake()->date())->addMonth(1),
+                'start_date' => $date,
+                'end_date' => Carbon::parse($date)->addMonth(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ])
             ->count(10)
             ->create();

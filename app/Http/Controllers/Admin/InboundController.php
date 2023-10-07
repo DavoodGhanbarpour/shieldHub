@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Facades\InboundFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InboundBulkCreateRequest;
 use App\Http\Requests\Admin\InboundStoreRequest;
 use App\Http\Requests\Admin\InboundUpdateRequest;
 use App\Models\Inbound;
 use App\Models\Server;
-use App\Models\User;
 
 class InboundController extends Controller
 {
@@ -34,7 +32,7 @@ class InboundController extends Controller
     public function bulkStore(InboundBulkCreateRequest $request)
     {
         collect($request->get('inbounds'))->map(function ($eachInbound) {
-            InboundFacade::upsert($eachInbound);
+            Inbound::create($eachInbound);
         });
         return redirect()->route('admin.inbounds.index');
     }
@@ -44,7 +42,7 @@ class InboundController extends Controller
      */
     public function store(InboundStoreRequest $request)
     {
-        InboundFacade::upsert($request->validated());
+        Inbound::create($request->validated());
 
         return redirect()->route('admin.inbounds.index');
     }
@@ -82,21 +80,18 @@ class InboundController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(InboundUpdateRequest $request, string $id)
+    public function update(InboundUpdateRequest $request, Inbound $inbound)
     {
-        $data = $request->validated();
-        InboundFacade::upsert($data, $id);
-
+        $inbound->update($request->validated());
         return redirect()->route('admin.inbounds.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Inbound $inbound)
     {
-        InboundFacade::delete($id);
-
+        $inbound->deleteOrFail();
         return redirect()->route('admin.inbounds.index');
     }
 

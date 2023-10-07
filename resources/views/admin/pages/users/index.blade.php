@@ -18,7 +18,8 @@
             
             <div id="table-default" class="table-responsive">
 
-                <x-tables.default>
+                <x-ribbon.default/>
+                <x-tables.default :class="'tableCheckbox'">
 
                     <thead>
                         <tr>
@@ -88,7 +89,7 @@
         </div>
     </div>
 
-    <x-scripts.datatable-search/>
+    <x-scripts.datatable/>
     <x-scripts.table-checkbox/>
 
     @push('scripts')
@@ -106,7 +107,7 @@
             setRenewModalHandlerStatus()
         });
         
-        $(document).on( 'change', '#checkAll, .table-checkbox', function(){
+        $(document).on( 'change', '.checkAll, .table-checkbox', function(){
             setRenewModalHandlerStatus()
         });
 
