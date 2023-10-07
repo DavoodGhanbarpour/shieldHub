@@ -153,7 +153,11 @@ class User extends Authenticatable
                 return;
             }
 
-            $startDate = Carbon::parse($renewSubscriptionArray['start_date'] ?? $lastInbound->pivot->end_date)->addDay();
+            if(isset($renewSubscriptionArray['start_date'])){
+                $startDate = Carbon::parse($renewSubscriptionArray['start_date']);
+            }else{
+                $startDate = Carbon::parse(lastInbound->pivot->end_date)->addDay();
+            }
             if (isset($renewSubscriptionArray['end_date'])) 
                 $endDate = Carbon::parse($renewSubscriptionArray['end_date']); 
             else
