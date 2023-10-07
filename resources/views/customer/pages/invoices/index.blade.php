@@ -34,21 +34,21 @@
                     @foreach($invoices as $eachInvoice)
                         <tr>
                             <td class="sort-index">{{$index++}}</td>
-                            <td class="sort-date">{{convertDate($eachInvoice->date)}}</td>
-                            <td class="sort-description">{{$eachInvoice->description}}</td>
+                            <td class="sort-date">{{isset($eachInvoice['date'])?convertDate($eachInvoice['date']):''}}</td>
+                            <td class="sort-description">{{$eachInvoice['description']}}</td>
                             <td class="sort-price">
                                 <script>
-                                    console.log('credit: ' + '{{$eachInvoice->credit}}');
-                                    console.log('debit: ' + '{{$eachInvoice->debit}}');
+                                    console.log('credit: ' + '{{$eachInvoice['credit']}}');
+                                    console.log('debit: ' + '{{$eachInvoice['debit']}}');
                                 </script>
-                                @if ($eachInvoice->credit > 0)
+                                @if ($eachInvoice['credit'] > 0)
                                     <strong class="text-success">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M12 5l0 14"></path>
                                             <path d="M5 12l14 0"></path>
                                         </svg>
-                                        {{addSeparator($eachInvoice->credit)}}
+                                        {{addSeparator($eachInvoice['credit'])}}
                                     </strong>
                                 @else
                                     <strong class="text-danger">
@@ -56,14 +56,14 @@
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M5 12l14 0"></path>
                                         </svg>
-                                        {{addSeparator($eachInvoice->debit)}}
+                                        {{addSeparator($eachInvoice['debit'])}}
                                     </strong>
                                 @endif
                             </td>
                         </tr>
                         @php
-                            $debits += $eachInvoice->debit;
-                            $credits += $eachInvoice->credit
+                            $debits += $eachInvoice['debit'];
+                            $credits += $eachInvoice['credit']
                         @endphp
                     @endforeach
                     </tbody>
