@@ -11,16 +11,16 @@
                 <x-tables.default>
                     <thead>
                     <tr>
-                        <th>
+                        <th class="w-10">
                             {{__('app.pageComponents.index')}}
                         </th>
-                        <th>
+                        <th class="w-20">
                             {{__('app.general.date')}}
                         </th>
-                        <th>
+                        <th class="w-50">
                             {{__('app.general.description')}}
                         </th>
-                        <th>
+                        <th class="w-20">
                             {{__('app.general.price')}}
                         </th>
                     </tr>
@@ -39,19 +39,12 @@
                             <td class="sort-price">
                                 @if ($eachInvoice['credit'] > 0)
                                     <strong class="text-success">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M12 5l0 14"></path>
-                                            <path d="M5 12l14 0"></path>
-                                        </svg>
+                                        +
                                         {{addSeparator($eachInvoice['credit'])}}
                                     </strong>
                                 @else
                                     <strong class="text-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M5 12l14 0"></path>
-                                        </svg>
+                                        -
                                         {{addSeparator($eachInvoice['debit'])}}
                                     </strong>
                                 @endif
@@ -64,13 +57,14 @@
                     @endforeach
                     </tbody>
                     <tfoot>
-                        <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
+                        <x-general.remaining :colspan="4" :price="($credits - $debits)"/>
                     </tfoot>
                 </x-tables.default>
             </div>
         </div>
     </div>
 
+    <x-scripts.datatable/>
     <x-scripts.copy/>
 
     @push('styles')
