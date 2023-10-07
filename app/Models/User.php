@@ -94,14 +94,14 @@ class User extends Authenticatable
     public function createSubscription(InboundDTO $inbound): void
     {
         if (!$this->hasSubscription($inbound)) {
-            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now(), 'updated_at' => now()]);
+            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now()->format('Y-m-d'), 'updated_at' => now()->format('Y-m-d')]);
         }
     }
 
     public function debits(): Collection
     {
         return $this->inbounds()
-            ->selectRaw('( `subscriptions`.`subscription_price` * DATEDIFF(end_date, start_date) ) as debit')
+            ->selectRaw('ROUND( `subscriptions`.`subscription_price` * DATEDIFF(end_date, start_date) ) as debit')
             ->withPivot([
                 'end_date',
                 'start_date',
