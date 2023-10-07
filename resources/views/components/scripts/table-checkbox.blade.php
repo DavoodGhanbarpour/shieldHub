@@ -1,3 +1,10 @@
+@push('styles')
+    <style>
+        .checkboxTrigger tbody tr {
+            cursor: pointer;
+        }
+    </style>
+@endpush
 <script>
     $(document).ready(function () {
 

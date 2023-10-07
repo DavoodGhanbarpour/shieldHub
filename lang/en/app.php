@@ -12,6 +12,7 @@ return [
         'date' => 'Date',
         'quota' => 'Quota',
         'debit' => 'Debit',
+        'price' => 'Price',
         'credit' => 'Credit',
         'total' => 'Total',
         'remain' => 'Remaining',

@@ -109,7 +109,7 @@
 
                 <div class="card-body overflow-auto pt-0">
                     <div id="subscriptions-table-container" class="table-responsive">
-                        <x-tables.default :id="'subscriptionsTable'" :class="'tableCheckbox subscriptionsTable'">
+                        <x-tables.default :id="'subscriptionsTable'" :class="'tableCheckbox checkboxTrigger  subscriptionsTable'">
                             <thead>
                                 <tr>
                                     <th class="w-4">
@@ -359,7 +359,7 @@
                 if ( status ) {
                     
                     const tempRows = (tableID) => {
-                        return Array((20 - $(`#${tableID} tbody tr`).length)).fill('<tr class="odd loading-tr"><td colspan="100%">&nbsp;</td></tr>');
+                        return Array((20 - $(`#${tableID} tbody tr`).length)).fill('<tr class="odd loading-tr"><td colspan="100%">&nbsp;<br>&nbsp;</td></tr>');
                     }
 
                     $('#inboundsTable tbody').append(tempRows('inboundsTable'));
@@ -383,9 +383,10 @@
                 await setInboundsTableData();
                 await setSubscriptionsTableData();
                 await setInvoicesTableData();
-                setLoading(false);
                 setSeletedInboundsHandler();
                 setAllTablesCheckbox();
+                setRenewModalHandlerStatus();
+                setLoading(false);
             }
 
             $(document).on( 'click', '.server-select', function(){
@@ -401,6 +402,7 @@
             });
 
             $(document).on( 'click', '#refreshButton', setTablesData);
+            
             function validateSelectedInbounds() {
                 
                 if ( $('.inboundsTable .table-checkbox.isAttachedToUser:checked').length )
@@ -613,7 +615,7 @@
                             data-default-end-date="${inbound?.inbound?.defaultEndDate}" 
                             data-default-price="${inbound?.inbound?.defaultPrice}" 
                             data-class="${inbound?.inbound?.isAttachedToUser ? 'isAttachedToUser' : ''}"
-                            class="inbound-card-parent target-id-${inbound?.server?.id}" role="button">
+                            class="inbound-card-parent target-id-${inbound?.server?.id}">
                             <td class="sort-index">${index++}</td>
                             <td class="sort-title title">${inbound?.inbound?.title}</td>
                             <td class="sort-ip">${inbound?.inbound?.port}</td>

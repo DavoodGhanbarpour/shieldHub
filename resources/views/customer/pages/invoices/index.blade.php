@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div id="table-default" class="table-responsive">
+                <x-ribbon.default/>
                 <x-tables.default>
                     <thead>
                     <tr>
@@ -20,10 +21,7 @@
                             {{__('app.general.description')}}
                         </th>
                         <th>
-                            {{__('app.general.credit')}}
-                        </th>
-                        <th>
-                            {{__('app.general.debit')}}
+                            {{__('app.general.price')}}
                         </th>
                     </tr>
                     </thead>
@@ -38,8 +36,30 @@
                             <td class="sort-index">{{$index++}}</td>
                             <td class="sort-date">{{convertDate($eachInvoice->date)}}</td>
                             <td class="sort-description">{{$eachInvoice->description}}</td>
-                            <td class="sort-credit">{{addSeparator($eachInvoice->credit)}}</td>
-                            <td class="sort-debit">{{addSeparator($eachInvoice->debit)}}</td>
+                            <td class="sort-price">
+                                <script>
+                                    console.log('credit: ' + '{{$eachInvoice->credit}}');
+                                    console.log('debit: ' + '{{$eachInvoice->debit}}');
+                                </script>
+                                @if ($eachInvoice->credit > 0)
+                                    <strong class="text-success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 5l0 14"></path>
+                                            <path d="M5 12l14 0"></path>
+                                        </svg>
+                                        {{addSeparator($eachInvoice->credit)}}
+                                    </strong>
+                                @else
+                                    <strong class="text-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M5 12l14 0"></path>
+                                        </svg>
+                                        {{addSeparator($eachInvoice->debit)}}
+                                    </strong>
+                                @endif
+                            </td>
                         </tr>
                         @php
                             $debits += $eachInvoice->debit;
@@ -48,15 +68,6 @@
                     @endforeach
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colspan="3">{{__('app.general.total')}}:</td>
-                            <td class="text-center">{{addSeparator($credits)}}</td>
-                            <td class="text-center">{{addSeparator($debits)}}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">{{__('app.general.remain')}}:</td>
-                            <td class="text-center" colspan="2">{{addSeparator(abs($credits - $debits))}}</td>
-                        </tr>
                         <x-general.remaining :colspan="5" :price="($credits - $debits)"/>
                     </tfoot>
                 </x-tables.default>
@@ -65,7 +76,6 @@
     </div>
 
     <x-scripts.copy/>
-    <x-scripts.datatable-search/>
 
     @push('styles')
         <style>
