@@ -359,6 +359,9 @@
                 if ( status ) {
                     
                     const tempRows = (tableID) => {
+                        if ( $(`#${tableID} tbody tr`).length >= 20 )
+                            return '';
+
                         return Array((20 - $(`#${tableID} tbody tr`).length)).fill('<tr class="odd loading-tr"><td colspan="100%">&nbsp;<br>&nbsp;</td></tr>');
                     }
 
