@@ -94,7 +94,7 @@ class User extends Authenticatable
     public function createSubscription(InboundDTO $inbound): void
     {
         if (!$this->hasSubscription($inbound)) {
-            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now(), 'updated_at' => now()]);
+            $this->inbounds()->attach($inbound->inbound_id, $inbound->toArray() + ['created_at' => now()->format('Y-m-d'), 'updated_at' => now()->format('Y-m-d')]);
         }
     }
 

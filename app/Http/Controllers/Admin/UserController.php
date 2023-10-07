@@ -175,7 +175,7 @@ class UserController extends Controller
             $result[$key]['description'] = $each->pivot->description;
             $result[$key]['subscription_price'] = $each->pivot->subscription_price;
             $result[$key]['remaining_days'] = Carbon::parse($each->pivot->start_date)->diffInDays($each->pivot->end_date) ?? 0;
-            $result[$key]['total_price'] = $result[$key]['subscription_price'] * $result[$key]['remaining_days'];
+            $result[$key]['total_price'] = round($result[$key]['subscription_price'] * $result[$key]['remaining_days']);
 
             $result[$key]['inbound']['title'] = $each->title;
             $result[$key]['inbound']['link'] = $each->link;
