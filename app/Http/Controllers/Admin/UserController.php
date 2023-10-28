@@ -203,14 +203,13 @@ class UserController extends Controller
      */
     public function detachInbounds(User $user, Subscription $subscription): JsonResponse
     {
-        $user->deleteSubscription($subscription->id);
-        return response()->json(['status' => 'success']);
+        $result = $user->inbounds()->detach($subscription->id);
+        return response()->json(['status' => 'success', 'result' => $result]);
     }
 
     /**
-     * @throws CastTargetException
-     * @throws MissingCastTypeException
-     * @throws ValidationException
+     * @param RenewSubscriptionsRequest $request
+     * @return RedirectResponse
      */
     public function renewSubscriptions(RenewSubscriptionsRequest $request): RedirectResponse
     {
