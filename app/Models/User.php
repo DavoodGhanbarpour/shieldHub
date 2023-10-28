@@ -120,7 +120,7 @@ class User extends Authenticatable
      */
     public function deleteSubscription($subscriptionId): void
     {
-        $this->activeSubscriptions()->detach($subscriptionId);
+        $this->inbounds()->detach($subscriptionId);
     }
 
     public function renewSubscriptionById(Inbound $inboundModel, RenewSubscriptionDTO $renewSubscriptionDTO): void
@@ -158,8 +158,8 @@ class User extends Authenticatable
             }else{
                 $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
             }
-            if (isset($renewSubscriptionArray['end_date'])) 
-                $endDate = Carbon::parse($renewSubscriptionArray['end_date']); 
+            if (isset($renewSubscriptionArray['end_date']))
+                $endDate = Carbon::parse($renewSubscriptionArray['end_date']);
             else
                 $endDate = $startDate->clone()->addDays($renewSubscriptionArray['day_count']);
 
