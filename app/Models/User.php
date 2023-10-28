@@ -115,14 +115,6 @@ class User extends Authenticatable
         return $this->invoices()->get();
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function deleteSubscription($subscriptionId): void
-    {
-        $this->inbounds()->detach($subscriptionId);
-    }
-
     public function renewSubscriptionById(Inbound $inboundModel, RenewSubscriptionDTO $renewSubscriptionDTO): void
     {
         $subscriptionRenewMaker = function ($inbound) use ($renewSubscriptionDTO) {
