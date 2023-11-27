@@ -8,6 +8,7 @@ use App\Enums\Roles;
 use App\Enums\UserStatus;
 use App\Exceptions\NotInSupportedLanguagesListException;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +19,6 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Throwable;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @author Davood Ghanbarpour <ghanbarpour.davood@gmail.com>
@@ -151,9 +151,9 @@ class User extends Authenticatable
                 return;
             }
 
-            if(isset($renewSubscriptionArray['start_date'])){
+            if (isset($renewSubscriptionArray['start_date'])) {
                 $startDate = Carbon::parse($renewSubscriptionArray['start_date']);
-            }else{
+            } else {
                 $startDate = Carbon::parse($lastInbound->pivot->end_date)->addDay();
             }
             if (isset($renewSubscriptionArray['end_date']))
