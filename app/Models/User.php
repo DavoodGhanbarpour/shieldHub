@@ -131,7 +131,13 @@ class User extends Authenticatable
                 return;
             }
 
-            $this->createSubscription(new InboundDTO(['inbound_id' => $lastInbound->id, 'start_date' => $startDate->format('Y-m-d H:i:s'), 'end_date' => $endDate->format('Y-m-d H:i:s'), 'subscription_price' => removeSeparator($renewSubscriptionDTO->price ?? $lastInbound->pivot->subscription_price),]));
+            $this->createSubscription(new InboundDTO([
+                'inbound_id' => $lastInbound->id,
+                'description' => $lastInbound->description,
+                'start_date' => $startDate->format('Y-m-d H:i:s'),
+                'end_date' => $endDate->format('Y-m-d H:i:s'),
+                'subscription_price' => removeSeparator($renewSubscriptionDTO->price ?? $lastInbound->pivot->subscription_price),
+            ]));
         };
 
         $this->inbounds()->find($inboundModel->id)->map($subscriptionRenewMaker);
