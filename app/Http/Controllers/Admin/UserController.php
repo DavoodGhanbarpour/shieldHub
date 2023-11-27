@@ -114,7 +114,7 @@ class UserController extends Controller
     public function inboundsJson(User $user): JsonResponse
     {
         $result = [];
-        $userInbounds = $user->inbounds()->pluck('inbound_id')->toArray();
+        $userInbounds = $user->activeSubscriptions()->pluck('inbound_id')->toArray();
         foreach (Inbound::withCount('activeSubscriptions')->with('server')->get() as $key => $each) {
             $result[$key]['inbound']['id'] = $each->id;
             $result[$key]['inbound']['title'] = $each->title;
