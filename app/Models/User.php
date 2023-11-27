@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Throwable;
@@ -57,7 +58,8 @@ class User extends Authenticatable
 
     public function inbounds(): BelongsToMany
     {
-        return $this->belongsToMany(Inbound::class, 'subscriptions')->using(Subscription::class)->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
+        return $this->belongsToMany(Inbound::class, 'subscriptions')
+            ->using(Subscription::class)->withPivot('id', 'subscription_price', 'start_date', 'end_date', 'description');
 
     }
 
@@ -133,7 +135,7 @@ class User extends Authenticatable
 
             $this->createSubscription(new InboundDTO([
                 'inbound_id' => $lastInbound->id,
-                'description' => $lastInbound->description,
+                'description' => $lastInbound?->pivot?->description ?: '',
                 'start_date' => $startDate->format('Y-m-d H:i:s'),
                 'end_date' => $endDate->format('Y-m-d H:i:s'),
                 'subscription_price' => removeSeparator($renewSubscriptionDTO->price ?? $lastInbound->pivot->subscription_price),
@@ -167,7 +169,7 @@ class User extends Authenticatable
 
             $this->createSubscription(new InboundDTO([
                 'inbound_id' => $lastInbound->id,
-                'description' => $lastInbound->description,
+                'description' => $lastInbound?->pivot?->description ?: '',
                 'start_date' => $startDate->format('Y-m-d'),
                 'end_date' => $endDate->format('Y-m-d'),
                 'subscription_price' => removeSeparator($renewSubscriptionArray['price'] ?? $lastInbound->pivot->subscription_price),
