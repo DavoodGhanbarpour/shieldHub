@@ -26,7 +26,7 @@ class ServerUpdateRequest extends FormRequest
             'title' => ['string', 'required'],
             'start_date' => ['date', 'required'],
             'end_date' => ['date', 'required'],
-            'ip' => ['ipv4', 'required'],
+            'ip' => ['required'],
             'description' => ['string','nullable'],
             'subscription_price' => ['max:10', 'required', new CommaSeparatedPrice()],
         ];
