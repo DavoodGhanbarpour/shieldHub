@@ -288,7 +288,8 @@
             var qrcode = new QRCode(document.getElementById("QRCodeDisplay"), {
                 width : 200,
                 height : 200,
-                useSVG: true
+                useSVG: true,
+                correctLevel : QRCode.CorrectLevel.L
             });
 
             $(document).on( 'click', '.qrcode-button', function(){
