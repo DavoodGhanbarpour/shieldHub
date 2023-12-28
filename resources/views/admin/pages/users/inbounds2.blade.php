@@ -842,8 +842,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        detachInbound($(this).data('id'));
-                        setTablesData();
+                        detachInbound($(this).data('id')).then(setTablesData);
                     }
                 })
             });
