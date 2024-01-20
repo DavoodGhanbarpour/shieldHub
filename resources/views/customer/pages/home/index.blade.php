@@ -62,7 +62,7 @@
 
                         <div class="col-md-6 col-lg-12">
                             <a download
-                               href="https://github.com/2dust/v2rayNG/releases/download/1.8.5/v2rayNG_1.8.5.apk"
+                               href="https://github.com/2dust/v2rayNG/releases/download/1.8.14/v2rayNG_1.8.14.apk"
                                target="_blank" class="card card-sm social-media-card" role="button">
                                 <div class="card-body">
                                     <div class="row align-items-center">
